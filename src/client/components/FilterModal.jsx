@@ -7,7 +7,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
   if (!open) return null;
   const labelStyle = {
     fontFamily: fontBody,
-    fontSize: 12,
+    fontSize: "var(--font-size-xs)",
     fontWeight: 600,
     color: colors.foreground,
     margin: "0 0 var(--space-8)",
@@ -54,7 +54,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 18,
+            fontSize: "var(--font-size-lg)",
             color: colors.foreground,
             margin: "0 0 var(--space-18)",
           }}
@@ -76,7 +76,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.foreground,
               minWidth: 74,
@@ -100,7 +100,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
                 background: draft.minRating === r ? gradientKira : colors.muted,
                 color: draft.minRating === r ? colors.primaryForeground : colors.foreground,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 600,
                 cursor: "pointer",
                 display: "flex",
@@ -133,7 +133,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.foreground,
               minWidth: 56,
@@ -162,7 +162,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
                 background: draft.mode === key ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                 color: colors.foreground,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 600,
                 cursor: "pointer",
               }}
@@ -196,7 +196,9 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
                 cursor: "pointer",
               }}
             >
-              <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground }}>{label}</span>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground }}>
+                {label}
+              </span>
               {draft.sort === key && <CheckCircle2 size={16} color={colors.primary} />}
             </button>
           ))}

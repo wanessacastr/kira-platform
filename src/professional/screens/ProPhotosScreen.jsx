@@ -15,7 +15,7 @@ export default function ProPhotosScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ProPhotosScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -58,12 +58,14 @@ export default function ProPhotosScreen() {
           }}
         >
           <ImagePlus size={26} color={colors.mutedForeground} />
-          <span style={{ fontSize: 13, fontWeight: 600, color: colors.primary, fontFamily: fontBody }}>
+          <span
+            style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: colors.primary, fontFamily: fontBody }}
+          >
             Adicionar fotos
           </span>
           <span
             style={{
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.mutedForeground,
               fontFamily: fontBody,
               textAlign: "center",
@@ -75,7 +77,7 @@ export default function ProPhotosScreen() {
         {pErrors.workPhotos && (
           <p
             style={{
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.destructive,
               fontFamily: fontBody,
               margin: "-var(--space-8) 0 var(--space-10)",
@@ -89,7 +91,7 @@ export default function ProPhotosScreen() {
           <div>
             <p
               style={{
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
                 margin: "0 0 var(--space-8)",

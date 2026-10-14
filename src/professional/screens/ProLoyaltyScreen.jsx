@@ -15,7 +15,7 @@ export default function ProLoyaltyScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ProLoyaltyScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -66,7 +66,7 @@ export default function ProLoyaltyScreen() {
             style={{
               flex: 1,
               fontFamily: fontBody,
-              fontSize: 13,
+              fontSize: "var(--font-size-sm)",
               color: colors.foreground,
               fontWeight: 600,
             }}
@@ -78,7 +78,7 @@ export default function ProLoyaltyScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             fontWeight: 600,
             color: colors.foreground,
             margin: "0 0 var(--space-8)",
@@ -99,7 +99,7 @@ export default function ProLoyaltyScreen() {
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.foreground,
               minWidth: 60,
@@ -113,7 +113,7 @@ export default function ProLoyaltyScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             fontWeight: 600,
             color: colors.foreground,
             margin: "0 0 var(--space-8)",
@@ -134,7 +134,7 @@ export default function ProLoyaltyScreen() {
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.foreground,
               minWidth: 44,

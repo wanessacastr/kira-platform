@@ -15,7 +15,7 @@ export default function ClientCouponsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ClientCouponsScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -43,7 +43,7 @@ export default function ClientCouponsScreen() {
               color: colors.primaryForeground,
               fontFamily: fontBody,
               fontWeight: 700,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               cursor: "pointer",
             }}
           >
@@ -61,7 +61,9 @@ export default function ClientCouponsScreen() {
           }}
         >
           <Gift size={30} color={colors.mutedForeground} />
-          <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>
+          <p
+            style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground, margin: 0 }}
+          >
             Nenhum cupom ativo no momento.
           </p>
         </div>

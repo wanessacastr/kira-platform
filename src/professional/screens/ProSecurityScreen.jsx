@@ -21,7 +21,7 @@ export default function ProSecurityScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -31,7 +31,7 @@ export default function ProSecurityScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -79,7 +79,7 @@ export default function ProSecurityScreen() {
                 style={{
                   fontFamily: fontBody,
                   fontWeight: 700,
-                  fontSize: 14,
+                  fontSize: "var(--font-size-md)",
                   color: colors.foreground,
                   margin: 0,
                 }}
@@ -93,7 +93,7 @@ export default function ProSecurityScreen() {
                     alignItems: "center",
                     gap: "var(--space-4)",
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     color: colors.primary,
                     marginTop: "var(--space-2)",
@@ -137,7 +137,7 @@ export default function ProSecurityScreen() {
                   <p
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 12,
+                      fontSize: "var(--font-size-xs)",
                       fontWeight: 600,
                       color: colors.foreground,
                       margin: 0,
@@ -148,7 +148,7 @@ export default function ProSecurityScreen() {
                   <p
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 10,
+                      fontSize: "var(--font-size-xs)",
                       color: colors.mutedForeground,
                       margin: 0,
                     }}
@@ -168,7 +168,7 @@ export default function ProSecurityScreen() {
                 background: gradientKira,
                 color: colors.primaryForeground,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
               }}
             >
@@ -182,7 +182,7 @@ export default function ProSecurityScreen() {
                 background: colors.muted,
                 color: colors.foreground,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 cursor: "pointer",
               }}
@@ -196,7 +196,7 @@ export default function ProSecurityScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-10)",
           }}
@@ -206,7 +206,7 @@ export default function ProSecurityScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-14)",
           }}

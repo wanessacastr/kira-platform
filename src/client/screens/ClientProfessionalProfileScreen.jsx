@@ -97,7 +97,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 20,
+              fontSize: "var(--font-size-xl)",
               color: colors.foreground,
               margin: "var(--space-12) 0 var(--space-2)",
             }}
@@ -107,7 +107,7 @@ export default function ClientProfessionalProfileScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 13,
+              fontSize: "var(--font-size-sm)",
               color: colors.mutedForeground,
               margin: "0 0 var(--space-6)",
             }}
@@ -121,7 +121,7 @@ export default function ClientProfessionalProfileScreen() {
                 alignItems: "center",
                 gap: "var(--space-4)",
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 color: colors.primary,
                 margin: "0 0 var(--space-10)",
@@ -139,7 +139,7 @@ export default function ClientProfessionalProfileScreen() {
                 alignItems: "center",
                 gap: "var(--space-4)",
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.foreground,
                 fontWeight: 600,
               }}
@@ -153,7 +153,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-6)",
             }}
@@ -163,7 +163,7 @@ export default function ClientProfessionalProfileScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 13,
+              fontSize: "var(--font-size-sm)",
               color: colors.mutedForeground,
               margin: "0 0 var(--space-18)",
             }}
@@ -175,7 +175,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-10)",
             }}
@@ -202,19 +202,23 @@ export default function ClientProfessionalProfileScreen() {
                   <span
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 13,
+                      fontSize: "var(--font-size-sm)",
                       color: colors.foreground,
                       display: "block",
                     }}
                   >
                     {s}
                   </span>
-                  <span style={{ fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground }}>≈ 45 min</span>
+                  <span
+                    style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}
+                  >
+                    ≈ 45 min
+                  </span>
                 </div>
                 <span
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 13,
+                    fontSize: "var(--font-size-sm)",
                     fontWeight: 700,
                     color: colors.primary,
                   }}
@@ -229,7 +233,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-10)",
             }}
@@ -258,7 +262,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-10)",
             }}
@@ -281,14 +285,14 @@ export default function ClientProfessionalProfileScreen() {
             <span
               style={{
                 fontFamily: fontBody,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 color: colors.foreground,
                 fontWeight: 700,
               }}
             >
               {pro.rating}
             </span>
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
               com base em {pro.reviews} avaliações
             </span>
           </div>
@@ -322,7 +326,7 @@ export default function ClientProfessionalProfileScreen() {
                     <span
                       style={{
                         fontFamily: fontBody,
-                        fontSize: 12,
+                        fontSize: "var(--font-size-xs)",
                         fontWeight: 700,
                         color: colors.foreground,
                       }}
@@ -334,7 +338,7 @@ export default function ClientProfessionalProfileScreen() {
                   <p
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 12,
+                      fontSize: "var(--font-size-xs)",
                       color: colors.mutedForeground,
                       margin: 0,
                     }}
@@ -350,7 +354,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-10)",
             }}
@@ -371,13 +375,13 @@ export default function ClientProfessionalProfileScreen() {
           >
             <MapPin size={16} color={colors.primary} />
             <div>
-              <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground, margin: 0 }}>
+              <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground, margin: 0 }}>
                 {extras.address}
               </p>
               <p
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   margin: "var(--space-1) 0 0",
                 }}
@@ -391,7 +395,7 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-10)",
             }}
@@ -410,7 +414,7 @@ export default function ClientProfessionalProfileScreen() {
             }}
           >
             <Clock size={16} color={colors.primary} />
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground }}>
               Próximo horário: {nextSlots}
             </span>
           </div>

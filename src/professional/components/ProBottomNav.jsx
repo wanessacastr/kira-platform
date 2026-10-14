@@ -52,7 +52,7 @@ export const ProBottomNav = ({ active, onNavigate }) => (
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 9.5,
+              fontSize: "var(--font-size-xs)",
               fontWeight: isActive ? 700 : 500,
               color: isActive ? colors.primary : colors.mutedForeground,
               whiteSpace: "nowrap",

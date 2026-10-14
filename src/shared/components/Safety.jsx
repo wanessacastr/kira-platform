@@ -91,7 +91,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 13,
+              fontSize: "var(--font-size-sm)",
               fontWeight: 700,
               color: colors.destructive,
             }}
@@ -113,7 +113,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
             color: "var(--color-background)",
             fontFamily: fontBody,
             fontWeight: 700,
-            fontSize: 14,
+            fontSize: "var(--font-size-md)",
             textDecoration: "none",
             marginBottom: "var(--space-10)",
           }}
@@ -136,7 +136,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
             color: colors.foreground,
             fontFamily: fontBody,
             fontWeight: 600,
-            fontSize: 13,
+            fontSize: "var(--font-size-sm)",
             cursor: "pointer",
             marginBottom: "var(--space-18)",
           }}
@@ -148,7 +148,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.mutedForeground,
               margin: "0 0 var(--space-10)",
             }}
@@ -169,7 +169,11 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
                     color={colors.mutedForeground}
                     style={{ marginTop: "var(--space-1)", flexShrink: 0 }}
                   />
-                  <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>{item.text}</span>
+                  <span
+                    style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}
+                  >
+                    {item.text}
+                  </span>
                 </div>
               );
             })}
@@ -185,7 +189,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
             border: "none",
             color: colors.mutedForeground,
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             marginTop: "var(--space-16)",
             cursor: "pointer",
           }}
@@ -268,7 +272,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 14,
+                fontSize: "var(--font-size-md)",
                 fontWeight: 700,
                 color: colors.foreground,
                 margin: "0 0 var(--space-6)",
@@ -279,7 +283,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: "0 0 var(--space-18)",
               }}
@@ -302,7 +306,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 style={{
                   fontFamily: fontDisplay,
                   fontWeight: 700,
-                  fontSize: 17,
+                  fontSize: "var(--font-size-lg)",
                   color: colors.foreground,
                   margin: 0,
                 }}
@@ -360,7 +364,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 color={colors.destructive}
                 style={{ flexShrink: 0, marginTop: "var(--space-1)" }}
               />
-              <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.destructive }}>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.destructive }}>
                 Em caso de risco imediato, ligue 190 antes de qualquer outra coisa.
               </span>
             </div>
@@ -368,7 +372,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 10,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: "0 0 var(--space-14)",
               }}
@@ -387,7 +391,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 color: "var(--color-background)",
                 fontFamily: fontBody,
                 fontWeight: 700,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 cursor: "pointer",
               }}
             >
@@ -423,7 +427,7 @@ export const ReportButton = ({ agendamentoId, papel }) => {
           color: colors.destructive,
           fontFamily: fontBody,
           fontWeight: 600,
-          fontSize: 13,
+          fontSize: "var(--font-size-sm)",
           cursor: "pointer",
         }}
       >

@@ -22,7 +22,7 @@ export default function ProFinanceScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -32,7 +32,7 @@ export default function ProFinanceScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -70,7 +70,7 @@ export default function ProFinanceScreen() {
               style={{
                 fontFamily: fontDisplay,
                 fontWeight: 700,
-                fontSize: 15,
+                fontSize: "var(--font-size-base)",
                 color: colors.foreground,
                 margin: 0,
               }}
@@ -102,7 +102,7 @@ export default function ProFinanceScreen() {
                     border: "none",
                     cursor: "pointer",
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     background: financePeriod === p.key ? colors.card : "transparent",
                     color: financePeriod === p.key ? colors.primary : colors.mutedForeground,
@@ -123,7 +123,7 @@ export default function ProFinanceScreen() {
               marginTop: "var(--space-12)",
             }}
           >
-            <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
               {financeRevenueSel !== null
                 ? `${financeData[financeRevenueSel].label} · R$ ${financeData[financeRevenueSel].value.toLocaleString("pt-BR")}`
                 : "Toque em uma barra para ver o valor"}
@@ -131,7 +131,7 @@ export default function ProFinanceScreen() {
             <span
               style={{
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 color: colors.foreground,
               }}
@@ -145,7 +145,7 @@ export default function ProFinanceScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-10)",
           }}
@@ -161,7 +161,7 @@ export default function ProFinanceScreen() {
                 borderRadius: "var(--radius-pill)",
                 background: colors.muted,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 600,
                 color: colors.foreground,
               }}
@@ -175,7 +175,7 @@ export default function ProFinanceScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-10)",
           }}
@@ -202,7 +202,7 @@ export default function ProFinanceScreen() {
                 <p
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 12,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 600,
                     color: colors.foreground,
                     margin: 0,
@@ -213,7 +213,7 @@ export default function ProFinanceScreen() {
                 <p
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     color: colors.mutedForeground,
                     margin: "var(--space-1) 0 0",
                   }}
@@ -224,7 +224,7 @@ export default function ProFinanceScreen() {
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 13,
+                  fontSize: "var(--font-size-sm)",
                   fontWeight: 700,
                   color: colors.primary,
                 }}

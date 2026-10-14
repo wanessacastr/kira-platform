@@ -14,7 +14,7 @@ export default function SignupScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 26,
+            fontSize: "var(--font-size-3xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -24,7 +24,7 @@ export default function SignupScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 13,
+            fontSize: "var(--font-size-sm)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-24)",
           }}
@@ -84,21 +84,23 @@ export default function SignupScreen() {
               <span
                 style={{
                   fontWeight: 600,
-                  fontSize: 13,
+                  fontSize: "var(--font-size-sm)",
                   color: colors.foreground,
                   fontFamily: fontBody,
                 }}
               >
                 {label}
               </span>
-              <span style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody }}>{desc}</span>
+              <span style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody }}>
+                {desc}
+              </span>
             </button>
           ))}
         </div>
         <p
           style={{
             textAlign: "center",
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             fontFamily: fontBody,
           }}

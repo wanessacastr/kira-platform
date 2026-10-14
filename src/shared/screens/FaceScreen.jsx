@@ -25,7 +25,7 @@ export default function FaceScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: 0,
           }}
@@ -35,7 +35,7 @@ export default function FaceScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             textAlign: "center",
             margin: 0,
@@ -87,7 +87,7 @@ export default function FaceScreen() {
               <span
                 style={{
                   fontFamily: fontDisplay,
-                  fontSize: 15,
+                  fontSize: "var(--font-size-base)",
                   fontWeight: 700,
                   color: colors.foreground,
                 }}
@@ -98,7 +98,9 @@ export default function FaceScreen() {
           )}
         </div>
         {faceStatus === "scanning" && (
-          <p style={{ fontSize: 12, color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}>
+          <p
+            style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}
+          >
             Analisando rosto… {faceProgress}%
           </p>
         )}
@@ -108,7 +110,7 @@ export default function FaceScreen() {
         </div>
         <p
           style={{
-            fontSize: 10,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             fontFamily: fontBody,
             textAlign: "center",

@@ -48,7 +48,7 @@ export default function ClientSearchScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "0 0 var(--space-14)",
           }}
@@ -132,7 +132,7 @@ export default function ClientSearchScreen() {
                 style={{
                   textAlign: "center",
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   margin: "var(--space-14) 0 0",
                 }}

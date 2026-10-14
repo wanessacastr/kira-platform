@@ -15,7 +15,7 @@ export default function ProTermsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ProTermsScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -57,7 +57,7 @@ export default function ProTermsScreen() {
               >
                 {pForm[key] && <Check size={12} color={colors.primaryForeground} />}
               </span>
-              <span style={{ fontSize: 13, color: colors.foreground, fontFamily: fontBody }}>
+              <span style={{ fontSize: "var(--font-size-sm)", color: colors.foreground, fontFamily: fontBody }}>
                 Aceito {key === "termsUse" ? "os" : "a"}{" "}
                 <span style={{ color: colors.primary, fontWeight: 600 }}>{label}</span>
               </span>
@@ -65,7 +65,7 @@ export default function ProTermsScreen() {
             {pErrors[key] && (
               <p
                 style={{
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.destructive,
                   fontFamily: fontBody,
                   margin: "var(--space-4) 0 0 var(--space-28)",

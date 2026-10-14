@@ -45,7 +45,7 @@ export default function ClientProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 17,
+              fontSize: "var(--font-size-lg)",
               color: colors.primaryForeground,
               margin: 0,
             }}
@@ -55,7 +55,7 @@ export default function ClientProfileScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.primaryForeground,
               opacity: 0.85,
               margin: "var(--space-2) 0 0",
@@ -94,7 +94,7 @@ export default function ClientProfileScreen() {
             background: "hsl(var(--destructive-hsl) / 0.06)",
             color: colors.destructive,
             fontWeight: 700,
-            fontSize: 13,
+            fontSize: "var(--font-size-sm)",
             fontFamily: fontBody,
             cursor: "pointer",
             display: "flex",

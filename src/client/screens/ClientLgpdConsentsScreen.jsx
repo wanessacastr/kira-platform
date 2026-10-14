@@ -15,7 +15,7 @@ export default function ClientLgpdConsentsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ClientLgpdConsentsScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -52,13 +52,15 @@ export default function ClientLgpdConsentsScreen() {
               ) : (
                 <XCircle size={16} color={colors.mutedForeground} />
               )}
-              <span style={{ flex: 1, fontFamily: fontBody, fontSize: 13, color: colors.foreground }}>
+              <span
+                style={{ flex: 1, fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.foreground }}
+              >
                 {item.label}
               </span>
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: item.accepted ? colors.primary : colors.mutedForeground,
                 }}

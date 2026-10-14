@@ -29,7 +29,7 @@ export const CalendarHeader = ({ monthDate, onPrev, onNext, canGoPrev }) => (
       style={{
         fontFamily: fontDisplay,
         fontWeight: 700,
-        fontSize: 15,
+        fontSize: "var(--font-size-base)",
         color: colors.foreground,
         textTransform: "capitalize",
       }}
@@ -77,7 +77,7 @@ export const CalendarDay = ({ cell, selected, onClick }) => {
         opacity: !cell.inMonth ? 0.35 : cell.unavailable ? 0.5 : 1,
         textDecoration: cell.unavailable && cell.inMonth ? "line-through" : "none",
         fontFamily: fontBody,
-        fontSize: 13,
+        fontSize: "var(--font-size-sm)",
         fontWeight: selected ? 700 : 500,
         cursor: disabled ? "default" : "pointer",
         display: "flex",
@@ -126,7 +126,7 @@ export const CalendarMonth = ({ monthDate, selectedDate, today, monthKey, onSele
             style={{
               textAlign: "center",
               fontFamily: fontBody,
-              fontSize: 10,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 700,
               color: colors.mutedForeground,
             }}
@@ -166,7 +166,7 @@ export const TimeSlotButton = ({ time, selected, onClick }) => (
       background: selected ? gradientKira : colors.card,
       color: selected ? colors.primaryForeground : colors.foreground,
       fontFamily: fontBody,
-      fontSize: 12,
+      fontSize: "var(--font-size-xs)",
       fontWeight: selected ? 700 : 500,
       cursor: "pointer",
       transition: "background 0.2s ease, transform 0.15s ease",
@@ -197,11 +197,11 @@ export const EmptySchedule = () => (
       textAlign: "center",
     }}
   >
-    <span style={{ fontSize: 28 }}>📅</span>
+    <span style={{ fontSize: "var(--font-size-3xl)" }}>📅</span>
     <p
       style={{
         fontFamily: fontBody,
-        fontSize: 13,
+        fontSize: "var(--font-size-sm)",
         color: colors.foreground,
         fontWeight: 600,
         margin: 0,
@@ -209,7 +209,9 @@ export const EmptySchedule = () => (
     >
       Nenhum horário disponível nesta data.
     </p>
-    <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>Escolha outro dia.</p>
+    <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}>
+      Escolha outro dia.
+    </p>
   </div>
 );
 

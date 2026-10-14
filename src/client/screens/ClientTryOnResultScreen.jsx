@@ -27,7 +27,7 @@ export default function ClientTryOnResultScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -37,7 +37,7 @@ export default function ClientTryOnResultScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -49,7 +49,7 @@ export default function ClientTryOnResultScreen() {
           <div style={{ flex: 1 }}>
             <p
               style={{
-                fontSize: 10,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
                 margin: "0 0 var(--space-4)",
@@ -67,7 +67,7 @@ export default function ClientTryOnResultScreen() {
           <div style={{ flex: 1 }}>
             <p
               style={{
-                fontSize: 10,
+                fontSize: "var(--font-size-xs)",
                 color: colors.primary,
                 fontWeight: 700,
                 fontFamily: fontBody,
@@ -116,7 +116,7 @@ export default function ClientTryOnResultScreen() {
           }}
         >
           <Sparkles size={16} color={colors.primary} />
-          <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+          <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
             Prévia gerada por nossa inteligência artificial. O resultado real pode variar conforme o profissional.
           </span>
         </div>
@@ -129,7 +129,7 @@ export default function ClientTryOnResultScreen() {
               <p
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 12,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   textAlign: "center",
                   margin: "0 0 var(--space-12)",
@@ -145,7 +145,7 @@ export default function ClientTryOnResultScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 textAlign: "center",
                 margin: "var(--space-24) 0",
@@ -159,7 +159,7 @@ export default function ClientTryOnResultScreen() {
                 style={{
                   fontFamily: fontDisplay,
                   fontWeight: 700,
-                  fontSize: 16,
+                  fontSize: "var(--font-size-base)",
                   color: colors.foreground,
                   margin: "0 0 var(--space-12)",
                 }}

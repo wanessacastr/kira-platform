@@ -71,7 +71,7 @@ export default function ClientSchedulingScreen() {
               style={{
                 fontFamily: fontDisplay,
                 fontWeight: 700,
-                fontSize: 20,
+                fontSize: "var(--font-size-xl)",
                 color: colors.foreground,
                 margin: 0,
               }}
@@ -81,7 +81,7 @@ export default function ClientSchedulingScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: 0,
               }}
@@ -109,7 +109,7 @@ export default function ClientSchedulingScreen() {
               style={{
                 fontFamily: fontDisplay,
                 fontWeight: 700,
-                fontSize: 20,
+                fontSize: "var(--font-size-xl)",
                 color: colors.foreground,
                 margin: "var(--space-4) 0 var(--space-4)",
               }}
@@ -119,7 +119,7 @@ export default function ClientSchedulingScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: "0 0 var(--space-18)",
               }}
@@ -149,7 +149,7 @@ export default function ClientSchedulingScreen() {
                   style={{
                     fontFamily: fontDisplay,
                     fontWeight: 700,
-                    fontSize: 15,
+                    fontSize: "var(--font-size-base)",
                     color: colors.foreground,
                     margin: "0 0 var(--space-10)",
                   }}
@@ -168,7 +168,7 @@ export default function ClientSchedulingScreen() {
                     <p
                       style={{
                         fontFamily: fontBody,
-                        fontSize: 11,
+                        fontSize: "var(--font-size-xs)",
                         color: colors.mutedForeground,
                         textAlign: "center",
                         margin: "var(--space-14) 0 0",

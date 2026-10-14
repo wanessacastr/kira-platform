@@ -27,7 +27,7 @@ export default function ClientAgendaDetailScreen() {
               style={{
                 fontFamily: fontBody,
                 fontWeight: 700,
-                fontSize: 15,
+                fontSize: "var(--font-size-base)",
                 color: colors.foreground,
                 margin: 0,
               }}
@@ -37,7 +37,7 @@ export default function ClientAgendaDetailScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: 0,
               }}
@@ -68,11 +68,13 @@ export default function ClientAgendaDetailScreen() {
             ["Pagamento", appointment.payment],
           ].map(([label, value]) => (
             <div key={label} style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>{label}</span>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                {label}
+              </span>
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 12,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: colors.foreground,
                 }}
@@ -90,11 +92,13 @@ export default function ClientAgendaDetailScreen() {
               borderTop: `1px solid ${colors.border}`,
             }}
           >
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>Status</span>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+              Status
+            </span>
             <span
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 color: appointment.status === "cancelado" ? colors.destructive : colors.primary,
               }}
@@ -126,7 +130,7 @@ export default function ClientAgendaDetailScreen() {
                 background: "transparent",
                 color: colors.destructive,
                 fontWeight: 600,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 fontFamily: fontBody,
                 cursor: "pointer",
                 display: "flex",

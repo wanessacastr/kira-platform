@@ -48,7 +48,7 @@ export default function SplashScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 96,
+              fontSize: "var(--font-size-hero)",
               lineHeight: 1,
               color: colors.primaryForeground,
               margin: 0,
@@ -60,7 +60,7 @@ export default function SplashScreen() {
           <p
             style={{
               fontFamily: fontDisplay,
-              fontSize: 32,
+              fontSize: "var(--font-size-4xl)",
               color: colors.primaryForeground,
               margin: 0,
               textShadow: "var(--text-shadow-sm)",
@@ -71,7 +71,7 @@ export default function SplashScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.primaryForeground,
               opacity: 0.9,
               letterSpacing: "0.2em",
@@ -93,7 +93,7 @@ export default function SplashScreen() {
               background: "hsl(var(--white-hsl) / 0.95)",
               color: colors.foreground,
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: "var(--font-size-md)",
               fontFamily: fontBody,
               cursor: "pointer",
               boxShadow: "var(--shadow-card-glow)",
@@ -111,7 +111,7 @@ export default function SplashScreen() {
               background: "hsl(var(--primary-hsl) / 0.3)",
               color: colors.primaryForeground,
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: "var(--font-size-md)",
               fontFamily: fontBody,
               cursor: "pointer",
             }}

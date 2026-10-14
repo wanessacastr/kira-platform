@@ -13,12 +13,14 @@ export default function ProHomeScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>Olá,</p>
+        <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}>
+          Olá,
+        </p>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-2) 0 var(--space-18)",
           }}
@@ -65,14 +67,16 @@ export default function ProHomeScreen() {
               style={{
                 fontFamily: fontDisplay,
                 fontWeight: 700,
-                fontSize: 15,
+                fontSize: "var(--font-size-base)",
                 color: colors.foreground,
                 margin: 0,
               }}
             >
               Faturamento semanal
             </h2>
-            <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: colors.primary }}>
+            <span
+              style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", fontWeight: 700, color: colors.primary }}
+            >
               +{proDashboardStats.revenueDelta}%
             </span>
           </div>
@@ -91,7 +95,7 @@ export default function ProHomeScreen() {
               marginTop: "var(--space-12)",
             }}
           >
-            <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
               {proHomeRevenueSel !== null
                 ? `${proWeeklyRevenue[proHomeRevenueSel].label} · R$ ${proWeeklyRevenue[proHomeRevenueSel].value.toLocaleString("pt-BR")}`
                 : "Toque em um dia para ver o valor"}
@@ -99,7 +103,7 @@ export default function ProHomeScreen() {
             <span
               style={{
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 color: colors.primary,
                 display: "flex",
@@ -124,7 +128,7 @@ export default function ProHomeScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 16,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: 0,
             }}
@@ -134,7 +138,7 @@ export default function ProHomeScreen() {
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.primary,
               cursor: "pointer",
@@ -179,7 +183,7 @@ export default function ProHomeScreen() {
                   style={{
                     fontFamily: fontBody,
                     fontWeight: 700,
-                    fontSize: 13,
+                    fontSize: "var(--font-size-sm)",
                     color: colors.foreground,
                     margin: 0,
                   }}
@@ -189,7 +193,7 @@ export default function ProHomeScreen() {
                 <p
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     color: colors.mutedForeground,
                     margin: "var(--space-1) 0 0",
                   }}
@@ -236,7 +240,7 @@ export default function ProHomeScreen() {
               style={{
                 fontFamily: fontBody,
                 fontWeight: 700,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 color: colors.foreground,
                 margin: 0,
               }}
@@ -246,7 +250,7 @@ export default function ProHomeScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: "var(--space-1) 0 0",
               }}

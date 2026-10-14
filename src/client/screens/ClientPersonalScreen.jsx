@@ -30,7 +30,7 @@ export default function ClientPersonalScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -40,7 +40,7 @@ export default function ClientPersonalScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -111,7 +111,7 @@ export default function ClientPersonalScreen() {
           />
           <span
             style={{
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.primary,
               fontWeight: 600,
               fontFamily: fontBody,
@@ -122,7 +122,9 @@ export default function ClientPersonalScreen() {
             {cForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
           </span>
           {cErrors.photo && (
-            <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: 0 }}>{cErrors.photo}</p>
+            <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+              {cErrors.photo}
+            </p>
           )}
         </div>
 

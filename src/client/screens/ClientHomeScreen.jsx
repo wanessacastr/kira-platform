@@ -45,7 +45,7 @@ export default function ClientHomeScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 color: colors.mutedForeground,
                 margin: 0,
               }}
@@ -56,7 +56,7 @@ export default function ClientHomeScreen() {
               style={{
                 fontFamily: fontDisplay,
                 fontWeight: 700,
-                fontSize: 21,
+                fontSize: "var(--font-size-xl)",
                 color: colors.foreground,
                 margin: "var(--space-2) 0 0",
               }}
@@ -109,7 +109,7 @@ export default function ClientHomeScreen() {
           onClick={() => setScreen("clientSearch")}
         >
           <Search size={16} color={colors.mutedForeground} />
-          <span style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground }}>
+          <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground }}>
             Buscar profissional ou serviço
           </span>
         </div>
@@ -212,7 +212,7 @@ export default function ClientHomeScreen() {
                 <span
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     color: colors.foreground,
                   }}
@@ -252,7 +252,7 @@ export default function ClientHomeScreen() {
                       style={{
                         fontFamily: fontBody,
                         fontWeight: 700,
-                        fontSize: 11,
+                        fontSize: "var(--font-size-xs)",
                         color: colors.foreground,
                         margin: 0,
                       }}
@@ -265,7 +265,7 @@ export default function ClientHomeScreen() {
                         alignItems: "center",
                         gap: "var(--space-6)",
                         fontFamily: fontBody,
-                        fontSize: 10,
+                        fontSize: "var(--font-size-xs)",
                         color: colors.mutedForeground,
                       }}
                     >
@@ -286,7 +286,7 @@ export default function ClientHomeScreen() {
                       background: gradientKira,
                       color: colors.primaryForeground,
                       fontFamily: fontBody,
-                      fontSize: 10,
+                      fontSize: "var(--font-size-xs)",
                       fontWeight: 700,
                       cursor: "pointer",
                       flexShrink: 0,
@@ -304,7 +304,7 @@ export default function ClientHomeScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 16,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-12)",
           }}
@@ -359,7 +359,7 @@ export default function ClientHomeScreen() {
                         style={{
                           fontFamily: fontBody,
                           fontWeight: 700,
-                          fontSize: 12,
+                          fontSize: "var(--font-size-xs)",
                           color: colors.foreground,
                           margin: 0,
                         }}
@@ -369,7 +369,7 @@ export default function ClientHomeScreen() {
                       <p
                         style={{
                           fontFamily: fontBody,
-                          fontSize: 10,
+                          fontSize: "var(--font-size-xs)",
                           color: colors.mutedForeground,
                           margin: "var(--space-1) 0 var(--space-4)",
                         }}
@@ -383,7 +383,7 @@ export default function ClientHomeScreen() {
                             alignItems: "center",
                             gap: "var(--space-2)",
                             fontFamily: fontBody,
-                            fontSize: 10,
+                            fontSize: "var(--font-size-xs)",
                             color: colors.mutedForeground,
                           }}
                         >
@@ -395,7 +395,7 @@ export default function ClientHomeScreen() {
                             alignItems: "center",
                             gap: "var(--space-2)",
                             fontFamily: fontBody,
-                            fontSize: 10,
+                            fontSize: "var(--font-size-xs)",
                             color: colors.mutedForeground,
                           }}
                         >
@@ -411,7 +411,7 @@ export default function ClientHomeScreen() {
                 style={{
                   fontFamily: fontDisplay,
                   fontWeight: 700,
-                  fontSize: 16,
+                  fontSize: "var(--font-size-base)",
                   color: colors.foreground,
                   margin: "0 0 var(--space-4)",
                 }}
@@ -421,7 +421,7 @@ export default function ClientHomeScreen() {
               <p
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 12,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   margin: "0 0 var(--space-14)",
                 }}
@@ -438,7 +438,7 @@ export default function ClientHomeScreen() {
                 <p
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 12,
+                    fontSize: "var(--font-size-xs)",
                     color: colors.mutedForeground,
                     margin: "var(--space-12) 0 var(--space-24)",
                     textAlign: "center",
@@ -506,7 +506,7 @@ export default function ClientHomeScreen() {
               style={{
                 fontFamily: fontBody,
                 fontWeight: 700,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 color: colors.foreground,
                 margin: 0,
               }}
@@ -516,7 +516,7 @@ export default function ClientHomeScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 margin: "var(--space-1) 0 0",
               }}

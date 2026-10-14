@@ -15,7 +15,7 @@ export default function ClientPrivacyDataScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ClientPrivacyDataScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -49,11 +49,13 @@ export default function ClientPrivacyDataScreen() {
                 borderBottom: i === arr.length - 1 ? "none" : `1px solid ${colors.border}`,
               }}
             >
-              <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>{label}</span>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                {label}
+              </span>
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 12,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: colors.foreground,
                   textAlign: "right",

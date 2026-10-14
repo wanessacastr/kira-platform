@@ -25,7 +25,7 @@ export default function ProAnalyticsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -35,7 +35,7 @@ export default function ProAnalyticsScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-4)",
           }}
@@ -63,7 +63,7 @@ export default function ProAnalyticsScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
               margin: "0 0 var(--space-14)",
             }}
@@ -78,7 +78,7 @@ export default function ProAnalyticsScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.mutedForeground,
               margin: "var(--space-12) 0 0",
             }}
@@ -93,7 +93,7 @@ export default function ProAnalyticsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-10)",
           }}
@@ -128,7 +128,7 @@ export default function ProAnalyticsScreen() {
                 <span
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 12,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     color: colors.foreground,
                   }}
@@ -141,7 +141,7 @@ export default function ProAnalyticsScreen() {
                     alignItems: "center",
                     gap: "var(--space-4)",
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     color: colors.mutedForeground,
                   }}
                 >
@@ -174,7 +174,7 @@ export default function ProAnalyticsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-10)",
           }}
@@ -187,7 +187,7 @@ export default function ProAnalyticsScreen() {
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: colors.foreground,
                   width: 34,
@@ -220,7 +220,7 @@ export default function ProAnalyticsScreen() {
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   width: 32,
                   textAlign: "right",
@@ -286,7 +286,7 @@ export default function ProAnalyticsScreen() {
                     style={{
                       fontFamily: fontDisplay,
                       fontWeight: 700,
-                      fontSize: 17,
+                      fontSize: "var(--font-size-lg)",
                       color: colors.foreground,
                       margin: 0,
                     }}
@@ -310,7 +310,7 @@ export default function ProAnalyticsScreen() {
                 <p
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 12,
+                    fontSize: "var(--font-size-xs)",
                     color: colors.mutedForeground,
                     margin: "0 0 var(--space-16)",
                   }}
@@ -322,7 +322,7 @@ export default function ProAnalyticsScreen() {
                 <p
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     color: colors.mutedForeground,
                     textTransform: "uppercase",
@@ -365,7 +365,7 @@ export default function ProAnalyticsScreen() {
                           style={{
                             fontFamily: fontBody,
                             fontWeight: 700,
-                            fontSize: 12,
+                            fontSize: "var(--font-size-xs)",
                             color: colors.foreground,
                             margin: 0,
                           }}
@@ -375,7 +375,7 @@ export default function ProAnalyticsScreen() {
                         <p
                           style={{
                             fontFamily: fontBody,
-                            fontSize: 11,
+                            fontSize: "var(--font-size-xs)",
                             color: colors.mutedForeground,
                             margin: "var(--space-1) 0 0",
                           }}
@@ -386,7 +386,7 @@ export default function ProAnalyticsScreen() {
                       <span
                         style={{
                           fontFamily: fontBody,
-                          fontSize: 12,
+                          fontSize: "var(--font-size-xs)",
                           fontWeight: 700,
                           color: colors.primary,
                           flexShrink: 0,

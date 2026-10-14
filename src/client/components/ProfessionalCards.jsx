@@ -30,7 +30,7 @@ export const ProfessionalCard = ({ pro, onClick }) => (
         style={{
           fontFamily: fontBody,
           fontWeight: 700,
-          fontSize: 13,
+          fontSize: "var(--font-size-sm)",
           color: colors.foreground,
           margin: 0,
         }}
@@ -40,7 +40,7 @@ export const ProfessionalCard = ({ pro, onClick }) => (
       <p
         style={{
           fontFamily: fontBody,
-          fontSize: 11,
+          fontSize: "var(--font-size-xs)",
           color: colors.mutedForeground,
           margin: "var(--space-1) 0 var(--space-4)",
         }}
@@ -54,7 +54,7 @@ export const ProfessionalCard = ({ pro, onClick }) => (
             alignItems: "center",
             gap: "var(--space-3)",
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
           }}
         >
@@ -67,7 +67,7 @@ export const ProfessionalCard = ({ pro, onClick }) => (
             alignItems: "center",
             gap: "var(--space-2)",
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
           }}
         >
@@ -78,8 +78,12 @@ export const ProfessionalCard = ({ pro, onClick }) => (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "var(--space-4)", flexShrink: 0 }}
     >
-      <span style={{ fontFamily: fontBody, fontSize: 9, color: colors.mutedForeground }}>a partir de</span>
-      <span style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: colors.primary }}>R$ {pro.price}</span>
+      <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+        a partir de
+      </span>
+      <span style={{ fontFamily: fontBody, fontWeight: 700, fontSize: "var(--font-size-md)", color: colors.primary }}>
+        R$ {pro.price}
+      </span>
     </div>
     <ChevronRight size={18} color={colors.mutedForeground} style={{ flexShrink: 0 }} />
   </button>
@@ -96,7 +100,7 @@ export const CompatibilityBadge = ({ value }) => (
       background: gradientKira,
       color: colors.primaryForeground,
       fontFamily: fontBody,
-      fontSize: 11,
+      fontSize: "var(--font-size-xs)",
       fontWeight: 700,
     }}
   >
@@ -131,7 +135,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
             style={{
               fontFamily: fontBody,
               fontWeight: 700,
-              fontSize: 14,
+              fontSize: "var(--font-size-md)",
               color: colors.foreground,
               margin: 0,
             }}
@@ -141,7 +145,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.mutedForeground,
               margin: "var(--space-1) 0 var(--space-5)",
             }}
@@ -163,7 +167,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
                 alignItems: "center",
                 gap: "var(--space-3)",
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
               }}
             >
@@ -171,7 +175,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)", flexWrap: "wrap" }}>
-            <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
               R$ {pro.price} — R$ {pro.price + 70}
             </span>
             <span
@@ -180,7 +184,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
                 alignItems: "center",
                 gap: "var(--space-2)",
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
               }}
             >
@@ -193,7 +197,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
               alignItems: "center",
               gap: "var(--space-4)",
               fontFamily: fontBody,
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.primary,
               fontWeight: 600,
               marginTop: "var(--space-4)",
@@ -282,7 +286,7 @@ export const RankingCard = ({ pro, rank, onClick }) => {
             justifyContent: "center",
             fontFamily: fontBody,
             fontWeight: 700,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             flexShrink: 0,
             ...medal,
           }}
@@ -299,7 +303,7 @@ export const RankingCard = ({ pro, rank, onClick }) => {
             justifyContent: "center",
             fontFamily: fontBody,
             fontWeight: 700,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             flexShrink: 0,
           }}
@@ -317,7 +321,7 @@ export const RankingCard = ({ pro, rank, onClick }) => {
           style={{
             fontFamily: fontBody,
             fontWeight: 700,
-            fontSize: 13,
+            fontSize: "var(--font-size-sm)",
             color: colors.foreground,
             margin: 0,
           }}
@@ -327,7 +331,7 @@ export const RankingCard = ({ pro, rank, onClick }) => {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "var(--space-1) 0 var(--space-4)",
           }}
@@ -336,7 +340,7 @@ export const RankingCard = ({ pro, rank, onClick }) => {
         </p>
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-6)" }}>
           <RatingStars value={pro.rating} size={10} />
-          <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+          <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
             {pro.rating} ({pro.reviews})
           </span>
         </div>
@@ -380,7 +384,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
             style={{
               fontFamily: fontBody,
               fontWeight: 700,
-              fontSize: 13,
+              fontSize: "var(--font-size-sm)",
               color: colors.foreground,
               margin: 0,
             }}
@@ -390,7 +394,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.mutedForeground,
               margin: "var(--space-1) 0 0",
             }}
@@ -398,12 +402,14 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
             {pro.role}
           </p>
         </div>
-        <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: status.color }}>{status.label}</span>
+        <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", fontWeight: 700, color: status.color }}>
+          {status.label}
+        </span>
       </div>
       <p
         style={{
           fontFamily: fontBody,
-          fontSize: 13,
+          fontSize: "var(--font-size-sm)",
           fontWeight: 600,
           color: colors.foreground,
           margin: 0,
@@ -418,7 +424,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
             alignItems: "center",
             gap: "var(--space-4)",
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
           }}
         >
@@ -430,7 +436,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
             alignItems: "center",
             gap: "var(--space-4)",
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
           }}
         >
@@ -438,13 +444,13 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 700, color: colors.primary }}>
+        <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", fontWeight: 700, color: colors.primary }}>
           R$ {appointment.price.toFixed(2)}
         </span>
         <span
           style={{
             fontFamily: fontBody,
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             fontWeight: 600,
             color: colors.primary,
             display: "flex",

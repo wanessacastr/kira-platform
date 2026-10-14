@@ -31,7 +31,7 @@ export default function HomeScreen() {
       <p
         style={{
           fontFamily: fontDisplay,
-          fontSize: 20,
+          fontSize: "var(--font-size-xl)",
           fontWeight: 700,
           color: colors.foreground,
           margin: 0,
@@ -42,7 +42,7 @@ export default function HomeScreen() {
       <p
         style={{
           fontFamily: fontBody,
-          fontSize: 12,
+          fontSize: "var(--font-size-xs)",
           color: colors.mutedForeground,
           textAlign: "center",
           margin: 0,

@@ -90,7 +90,7 @@ export const EmptyState = ({ onClear }) => (
     >
       <SearchX size={30} color={colors.mutedForeground} />
     </div>
-    <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>
+    <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground, margin: 0 }}>
       Nenhum profissional encontrado.
     </p>
     <div style={{ width: "100%", maxWidth: 220 }}>
@@ -124,7 +124,9 @@ export const ErrorState = ({ onRetry, message = "Não foi possível carregar os 
     >
       <AlertCircle size={30} color={colors.destructive} />
     </div>
-    <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>{message}</p>
+    <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground, margin: 0 }}>
+      {message}
+    </p>
     <div style={{ width: "100%", maxWidth: 220 }}>
       <PrimaryButton onClick={onRetry}>Tentar novamente</PrimaryButton>
     </div>

@@ -17,10 +17,16 @@ export const ProStatCard = ({ label, value, icon: Icon }) => (
     }}
   >
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-      <span style={{ fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground }}>{label}</span>
+      <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+        {label}
+      </span>
       {Icon && <Icon size={13} color={colors.primary} />}
     </div>
-    <span style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 17, color: colors.foreground }}>{value}</span>
+    <span
+      style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: "var(--font-size-lg)", color: colors.foreground }}
+    >
+      {value}
+    </span>
   </div>
 );
 
@@ -67,7 +73,7 @@ export const RevenueBarChart = ({ data, selectedIndex, onSelect }) => {
             <span
               style={{
                 fontFamily: fontBody,
-                fontSize: 10,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: isSelected ? 700 : 400,
                 color: isSelected ? colors.primary : colors.mutedForeground,
               }}

@@ -18,7 +18,7 @@ export default function ClientTryOnReferenceScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -28,7 +28,7 @@ export default function ClientTryOnReferenceScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -64,7 +64,7 @@ export default function ClientTryOnReferenceScreen() {
           ) : (
             <>
               <Wand2 size={30} color={colors.mutedForeground} />
-              <span style={{ fontSize: 12, color: colors.mutedForeground, fontFamily: fontBody }}>
+              <span style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody }}>
                 Enviar foto de referência
               </span>
             </>

@@ -22,7 +22,7 @@ export default function LoginScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 26,
+            fontSize: "var(--font-size-3xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -32,7 +32,7 @@ export default function LoginScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 13,
+            fontSize: "var(--font-size-sm)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-24)",
           }}
@@ -78,7 +78,7 @@ export default function LoginScreen() {
         <p
           style={{
             textAlign: "center",
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             fontFamily: fontBody,
             marginTop: "var(--space-20)",

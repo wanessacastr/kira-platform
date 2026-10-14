@@ -15,7 +15,7 @@ export default function ProServicesScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ProServicesScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -75,7 +75,7 @@ export default function ProServicesScreen() {
         {pErrors.services && (
           <p
             style={{
-              fontSize: 11,
+              fontSize: "var(--font-size-xs)",
               color: colors.destructive,
               fontFamily: fontBody,
               margin: "0 0 var(--space-10)",
@@ -89,7 +89,7 @@ export default function ProServicesScreen() {
           <div>
             <p
               style={{
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
                 margin: "0 0 var(--space-8)",
@@ -113,7 +113,7 @@ export default function ProServicesScreen() {
                 <div>
                   <p
                     style={{
-                      fontSize: 12,
+                      fontSize: "var(--font-size-xs)",
                       fontWeight: 600,
                       color: colors.foreground,
                       fontFamily: fontBody,
@@ -124,7 +124,7 @@ export default function ProServicesScreen() {
                   </p>
                   <p
                     style={{
-                      fontSize: 10,
+                      fontSize: "var(--font-size-xs)",
                       color: colors.mutedForeground,
                       fontFamily: fontBody,
                       margin: 0,
@@ -136,7 +136,7 @@ export default function ProServicesScreen() {
                 <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)" }}>
                   <span
                     style={{
-                      fontSize: 12,
+                      fontSize: "var(--font-size-xs)",
                       fontWeight: 700,
                       color: colors.primary,
                       fontFamily: fontBody,

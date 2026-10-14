@@ -35,7 +35,7 @@ export default function ClientDoneScreen() {
         style={{
           fontFamily: fontDisplay,
           fontWeight: 700,
-          fontSize: 22,
+          fontSize: "var(--font-size-2xl)",
           color: colors.foreground,
           margin: 0,
         }}
@@ -45,7 +45,7 @@ export default function ClientDoneScreen() {
       <p
         style={{
           fontFamily: fontBody,
-          fontSize: 12,
+          fontSize: "var(--font-size-xs)",
           color: colors.mutedForeground,
           textAlign: "center",
           margin: 0,

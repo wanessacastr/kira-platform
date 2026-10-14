@@ -15,7 +15,7 @@ export default function ProLocationScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ProLocationScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -61,7 +61,7 @@ export default function ProLocationScreen() {
           {pLocationStatus === "idle" && (
             <p
               style={{
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
                 margin: 0,
@@ -73,7 +73,7 @@ export default function ProLocationScreen() {
           {pLocationStatus === "loading" && (
             <p
               style={{
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
                 margin: 0,
@@ -89,7 +89,7 @@ export default function ProLocationScreen() {
             <div>
               <p
                 style={{
-                  fontSize: 12,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: colors.primary,
                   fontFamily: fontBody,
@@ -104,7 +104,7 @@ export default function ProLocationScreen() {
               </p>
               <p
                 style={{
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   fontFamily: fontBody,
                   margin: 0,
@@ -118,7 +118,7 @@ export default function ProLocationScreen() {
             <div>
               <p
                 style={{
-                  fontSize: 12,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: colors.destructive,
                   fontFamily: fontBody,
@@ -133,7 +133,7 @@ export default function ProLocationScreen() {
               </p>
               <p
                 style={{
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   color: colors.mutedForeground,
                   fontFamily: fontBody,
                   margin: 0,

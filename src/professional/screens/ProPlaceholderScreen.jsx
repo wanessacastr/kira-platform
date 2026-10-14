@@ -43,7 +43,7 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 18,
+            fontSize: "var(--font-size-lg)",
             color: colors.foreground,
             margin: 0,
           }}
@@ -53,7 +53,7 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: 0,
             maxWidth: 240,

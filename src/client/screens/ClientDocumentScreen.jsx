@@ -14,7 +14,7 @@ export default function ClientDocumentScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -24,7 +24,7 @@ export default function ClientDocumentScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -47,7 +47,7 @@ export default function ClientDocumentScreen() {
         />
         <p
           style={{
-            fontSize: 11,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             fontFamily: fontBody,
             textAlign: "center",

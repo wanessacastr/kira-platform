@@ -122,7 +122,7 @@ function Prototype() {
             >
               <span
                 style={{
-                  fontSize: 10,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 700,
                   color: colors.mutedForeground,
                   fontFamily: fontBody,
@@ -142,7 +142,7 @@ function Prototype() {
                     border: `1px solid ${screen === key ? colors.primary : colors.border}`,
                     background: screen === key ? "hsl(var(--primary-hsl) / 0.1)" : colors.card,
                     color: screen === key ? colors.primary : colors.mutedForeground,
-                    fontSize: 10,
+                    fontSize: "var(--font-size-xs)",
                     fontFamily: fontBody,
                     cursor: "pointer",
                   }}

@@ -29,7 +29,7 @@ export default function ProPersonalScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -39,7 +39,7 @@ export default function ProPersonalScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -110,7 +110,7 @@ export default function ProPersonalScreen() {
           />
           <span
             style={{
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.primary,
               fontWeight: 600,
               fontFamily: fontBody,
@@ -121,7 +121,9 @@ export default function ProPersonalScreen() {
             {pForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
           </span>
           {pErrors.photo && (
-            <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: 0 }}>{pErrors.photo}</p>
+            <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+              {pErrors.photo}
+            </p>
           )}
         </div>
 
@@ -147,7 +149,7 @@ export default function ProPersonalScreen() {
                 background: pForm.documentType === type ? gradientKira : colors.muted,
                 color: pForm.documentType === type ? colors.primaryForeground : colors.mutedForeground,
                 fontWeight: 600,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 fontFamily: fontBody,
                 cursor: "pointer",
               }}

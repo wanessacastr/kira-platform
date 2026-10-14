@@ -19,7 +19,7 @@ export default function ClientProfileEditScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -29,7 +29,7 @@ export default function ClientProfileEditScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -143,7 +143,7 @@ export default function ClientProfileEditScreen() {
           }}
         >
           <MapPin size={15} color={colors.mutedForeground} />
-          <span style={{ flex: 1, fontFamily: fontBody, fontSize: 12, color: colors.foreground }}>
+          <span style={{ flex: 1, fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground }}>
             {cForm.street ? `${cForm.street}, ${cForm.city}` : "Adicionar endereço"}
           </span>
           <ChevronRight size={15} color={colors.mutedForeground} />
@@ -162,7 +162,9 @@ export default function ClientProfileEditScreen() {
             }}
           >
             <CheckCircle2 size={15} color={colors.primary} />
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.primary, fontWeight: 600 }}>
+            <span
+              style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.primary, fontWeight: 600 }}
+            >
               Perfil atualizado!
             </span>
           </div>

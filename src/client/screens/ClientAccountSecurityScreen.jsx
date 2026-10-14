@@ -18,7 +18,7 @@ export default function ClientAccountSecurityScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -28,7 +28,7 @@ export default function ClientAccountSecurityScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -65,7 +65,7 @@ export default function ClientAccountSecurityScreen() {
           {verified ? (
             <p
               style={{
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 fontWeight: 700,
                 color: colors.primary,
                 fontFamily: fontBody,
@@ -80,7 +80,7 @@ export default function ClientAccountSecurityScreen() {
           ) : (
             <p
               style={{
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 fontWeight: 700,
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
@@ -93,7 +93,9 @@ export default function ClientAccountSecurityScreen() {
               <Clock size={16} /> Verificação pendente
             </p>
           )}
-          <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}>
+          <p
+            style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}
+          >
             {verified ? "Selfie e documento confirmados." : "Conclua a selfie e o documento para verificar sua conta."}
           </p>
         </div>
@@ -122,13 +124,15 @@ export default function ClientAccountSecurityScreen() {
               ) : (
                 <XCircle size={16} color={colors.mutedForeground} />
               )}
-              <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground, flex: 1 }}>
+              <span
+                style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground, flex: 1 }}
+              >
                 {item.label}
               </span>
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: item.done ? colors.primary : colors.mutedForeground,
                 }}

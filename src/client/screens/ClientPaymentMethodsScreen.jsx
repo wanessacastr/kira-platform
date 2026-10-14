@@ -15,7 +15,7 @@ export default function ClientPaymentMethodsScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -25,7 +25,7 @@ export default function ClientPaymentMethodsScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -55,7 +55,9 @@ export default function ClientPaymentMethodsScreen() {
           >
             <CreditCard size={26} color={colors.mutedForeground} />
           </div>
-          <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>
+          <p
+            style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground, margin: 0 }}
+          >
             Nenhuma forma de pagamento cadastrada ainda.
           </p>
         </div>

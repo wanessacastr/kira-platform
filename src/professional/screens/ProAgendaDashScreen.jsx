@@ -29,7 +29,7 @@ export default function ProAgendaDashScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "0 0 var(--space-4)",
           }}
@@ -39,7 +39,7 @@ export default function ProAgendaDashScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-4)",
           }}
@@ -67,7 +67,7 @@ export default function ProAgendaDashScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
             margin: "0 0 var(--space-10)",
           }}
@@ -89,7 +89,7 @@ export default function ProAgendaDashScreen() {
             <p
               style={{
                 fontFamily: fontBody,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 color: colors.mutedForeground,
                 margin: 0,
               }}
@@ -131,7 +131,7 @@ export default function ProAgendaDashScreen() {
                     style={{
                       fontFamily: fontBody,
                       fontWeight: 700,
-                      fontSize: 13,
+                      fontSize: "var(--font-size-sm)",
                       color: colors.foreground,
                       margin: 0,
                     }}
@@ -141,7 +141,7 @@ export default function ProAgendaDashScreen() {
                   <p
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 11,
+                      fontSize: "var(--font-size-xs)",
                       color: colors.mutedForeground,
                       margin: "var(--space-1) 0 0",
                     }}
@@ -152,7 +152,7 @@ export default function ProAgendaDashScreen() {
                 <span
                   style={{
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     color: a.status === "confirmado" ? colors.primary : colors.accent,
                   }}

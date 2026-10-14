@@ -9,7 +9,7 @@ export const inputStyle = (hasError) => ({
   background: colors.muted,
   color: colors.foreground,
   fontFamily: fontBody,
-  fontSize: 14,
+  fontSize: "var(--font-size-md)",
   border: `1px solid ${hasError ? colors.destructive : colors.border}`,
   outline: "none",
   boxSizing: "border-box",
@@ -18,9 +18,15 @@ export const inputStyle = (hasError) => ({
 
 export const Field = ({ label, error, children }) => (
   <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)", marginBottom: "var(--space-14)" }}>
-    <label style={{ fontSize: 12, fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}>{label}</label>
+    <label style={{ fontSize: "var(--font-size-xs)", fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}>
+      {label}
+    </label>
     {children}
-    {error && <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: 0 }}>{error}</p>}
+    {error && (
+      <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+        {error}
+      </p>
+    )}
   </div>
 );
 
@@ -37,7 +43,7 @@ export const PrimaryButton = ({ children, onClick, disabled, pill, type = "butto
       background: gradientKira,
       color: colors.primaryForeground,
       fontWeight: 600,
-      fontSize: 14,
+      fontSize: "var(--font-size-md)",
       fontFamily: fontBody,
       cursor: disabled ? "not-allowed" : "pointer",
       opacity: disabled ? 0.4 : 1,
@@ -60,7 +66,7 @@ export const SecondaryButton = ({ children, onClick }) => (
       background: colors.muted,
       color: colors.primary,
       fontWeight: 600,
-      fontSize: 13,
+      fontSize: "var(--font-size-sm)",
       fontFamily: fontBody,
       cursor: "pointer",
       display: "flex",
@@ -77,7 +83,7 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
   <div style={{ marginBottom: "var(--space-14)" }}>
     <label
       style={{
-        fontSize: 12,
+        fontSize: "var(--font-size-xs)",
         fontWeight: 500,
         color: colors.foreground,
         fontFamily: fontBody,
@@ -109,7 +115,9 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
       ) : (
         <>
           <Camera size={26} color={colors.mutedForeground} />
-          <span style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody }}>Toque para enviar</span>
+          <span style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody }}>
+            Toque para enviar
+          </span>
         </>
       )}
     </div>
@@ -123,7 +131,7 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
     {error && (
       <p
         style={{
-          fontSize: 11,
+          fontSize: "var(--font-size-xs)",
           color: colors.destructive,
           fontFamily: fontBody,
           margin: "var(--space-4) 0 0",
@@ -199,7 +207,7 @@ export const SearchBar = ({ value, onChange, onFilterClick }) => (
           outline: "none",
           background: "transparent",
           fontFamily: fontBody,
-          fontSize: 13,
+          fontSize: "var(--font-size-sm)",
           color: colors.foreground,
         }}
       />
@@ -237,7 +245,7 @@ export const CategoryChip = ({ label, active, onClick }) => (
       color: active ? colors.primaryForeground : colors.foreground,
       fontFamily: fontBody,
       fontWeight: 600,
-      fontSize: 12,
+      fontSize: "var(--font-size-xs)",
       cursor: "pointer",
       flexShrink: 0,
     }}
@@ -251,7 +259,7 @@ export const ProfileSection = ({ title, children }) => (
     <p
       style={{
         fontFamily: fontBody,
-        fontSize: 11,
+        fontSize: "var(--font-size-xs)",
         fontWeight: 700,
         color: colors.mutedForeground,
         letterSpacing: "0.06em",
@@ -308,7 +316,7 @@ export const ProfileMenuRow = ({ icon: Icon, label, onClick, destructive, last }
       style={{
         flex: 1,
         fontFamily: fontBody,
-        fontSize: 13,
+        fontSize: "var(--font-size-sm)",
         color: destructive ? colors.destructive : colors.foreground,
         fontWeight: destructive ? 600 : 500,
       }}

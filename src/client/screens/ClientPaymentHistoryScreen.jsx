@@ -18,7 +18,7 @@ export default function ClientPaymentHistoryScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
             margin: "var(--space-4) 0 var(--space-4)",
           }}
@@ -28,7 +28,7 @@ export default function ClientPaymentHistoryScreen() {
         <p
           style={{
             fontFamily: fontBody,
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             margin: "0 0 var(--space-18)",
           }}
@@ -63,7 +63,7 @@ export default function ClientPaymentHistoryScreen() {
                     <p
                       style={{
                         fontFamily: fontBody,
-                        fontSize: 12,
+                        fontSize: "var(--font-size-xs)",
                         fontWeight: 600,
                         color: colors.foreground,
                         margin: 0,
@@ -74,7 +74,7 @@ export default function ClientPaymentHistoryScreen() {
                     <p
                       style={{
                         fontFamily: fontBody,
-                        fontSize: 11,
+                        fontSize: "var(--font-size-xs)",
                         color: colors.mutedForeground,
                         margin: "var(--space-1) 0 0",
                       }}
@@ -85,7 +85,7 @@ export default function ClientPaymentHistoryScreen() {
                   <span
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 13,
+                      fontSize: "var(--font-size-sm)",
                       fontWeight: 700,
                       color: colors.primary,
                     }}
