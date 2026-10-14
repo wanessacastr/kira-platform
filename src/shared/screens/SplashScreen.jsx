@@ -13,7 +13,7 @@ export default function SplashScreen() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "0 24px",
+        padding: "0 var(--space-24)",
         overflow: "hidden",
       }}
     >
@@ -40,10 +40,10 @@ export default function SplashScreen() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 40,
+          gap: "var(--space-40)",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-12)" }}>
           <h1
             style={{
               fontFamily: fontDisplay,
@@ -52,7 +52,7 @@ export default function SplashScreen() {
               lineHeight: 1,
               color: colors.primaryForeground,
               margin: 0,
-              textShadow: "0 4px 12px hsl(var(--black-hsl) / 0.15)",
+              textShadow: "var(--text-shadow-md)",
             }}
           >
             K
@@ -63,7 +63,7 @@ export default function SplashScreen() {
               fontSize: 32,
               color: colors.primaryForeground,
               margin: 0,
-              textShadow: "0 4px 12px hsl(var(--black-hsl) / 0.12)",
+              textShadow: "var(--text-shadow-sm)",
             }}
           >
             Kira
@@ -76,19 +76,19 @@ export default function SplashScreen() {
               opacity: 0.9,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              marginTop: 8,
+              marginTop: "var(--space-8)",
             }}
           >
             Beleza com confiança
           </p>
         </div>
-        <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: "var(--space-12)" }}>
           <button
             onClick={() => setScreen("login")}
             style={{
               width: "100%",
-              padding: 16,
-              borderRadius: 999,
+              padding: "var(--space-16)",
+              borderRadius: "var(--radius-pill)",
               border: "none",
               background: "hsl(var(--white-hsl) / 0.95)",
               color: colors.foreground,
@@ -96,7 +96,7 @@ export default function SplashScreen() {
               fontSize: 14,
               fontFamily: fontBody,
               cursor: "pointer",
-              boxShadow: "0 4px 20px -4px hsl(var(--primary-hsl) / 0.2)",
+              boxShadow: "var(--shadow-card-glow)",
             }}
           >
             Entrar
@@ -105,8 +105,8 @@ export default function SplashScreen() {
             onClick={() => setScreen("signup")}
             style={{
               width: "100%",
-              padding: 16,
-              borderRadius: 999,
+              padding: "var(--space-16)",
+              borderRadius: "var(--radius-pill)",
               border: "none",
               background: "hsl(var(--primary-hsl) / 0.3)",
               color: colors.primaryForeground,

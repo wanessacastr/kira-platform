@@ -43,20 +43,27 @@ export default function ClientSearchScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientHome")} />
-      <div style={{ padding: "0 24px 12px" }}>
+      <div style={{ padding: "0 var(--space-24) var(--space-12)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "0 0 14px",
+            margin: "0 0 var(--space-14)",
           }}
         >
           Buscar
         </h1>
         <SearchBar value={searchQuery} onChange={setSearchQuery} onFilterClick={openFilterModal} />
-        <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "14px 0 4px" }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--space-8)",
+            overflowX: "auto",
+            padding: "var(--space-14) 0 var(--space-4)",
+          }}
+        >
           {categoryOptions.map((c) => (
             <CategoryChip
               key={c.id}
@@ -74,11 +81,21 @@ export default function ClientSearchScreen() {
         onTouchStart={handlePullStart}
         onTouchMove={handlePullMove}
         onTouchEnd={handlePullEnd}
-        style={{ flex: 1, overflowY: "auto", padding: "8px 24px 24px", position: "relative" }}
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          padding: "var(--space-8) var(--space-24) var(--space-24)",
+          position: "relative",
+        }}
       >
         {(pullDistance > 0 || refreshing) && (
           <div
-            style={{ display: "flex", justifyContent: "center", padding: 8, height: refreshing ? 32 : pullDistance }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "var(--space-8)",
+              height: refreshing ? 32 : pullDistance,
+            }}
           >
             <Loader2
               size={18}
@@ -97,7 +114,7 @@ export default function ClientSearchScreen() {
           <EmptyState onClear={clearFilters} />
         ) : (
           <>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
               {filteredProfessionals.slice(0, visibleCount).map((pro) => (
                 <ProfessionalCard
                   key={pro.id}
@@ -117,7 +134,7 @@ export default function ClientSearchScreen() {
                   fontFamily: fontBody,
                   fontSize: 11,
                   color: colors.mutedForeground,
-                  margin: "14px 0 0",
+                  margin: "var(--space-14) 0 0",
                 }}
               >
                 Carregando mais…

@@ -14,8 +14,8 @@ export default function ProDoneScreen() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 16,
-        padding: 24,
+        gap: "var(--space-16)",
+        padding: "var(--space-24)",
       }}
     >
       <div
@@ -31,10 +31,26 @@ export default function ProDoneScreen() {
       >
         <Check size={32} color={colors.primaryForeground} />
       </div>
-      <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 22, color: colors.foreground, margin: 0 }}>
+      <h1
+        style={{
+          fontFamily: fontDisplay,
+          fontWeight: 700,
+          fontSize: 22,
+          color: colors.foreground,
+          margin: 0,
+        }}
+      >
         Cadastro concluído!
       </h1>
-      <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, textAlign: "center", margin: 0 }}>
+      <p
+        style={{
+          fontFamily: fontBody,
+          fontSize: 12,
+          color: colors.mutedForeground,
+          textAlign: "center",
+          margin: 0,
+        }}
+      >
         O perfil profissional foi criado com sucesso.
       </p>
       <div style={{ width: "100%", maxWidth: 280 }}>

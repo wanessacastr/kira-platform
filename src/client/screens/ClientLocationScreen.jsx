@@ -10,19 +10,26 @@ export default function ClientLocationScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={3} />
       <Header onBack={() => setScreen("clientAddress")} />
-      <div style={{ flex: 1, padding: "0 24px 32px" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Localização
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Isso nos ajuda a encontrar profissionais perto de você.
         </p>
         <div
@@ -30,12 +37,12 @@ export default function ClientLocationScreen() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 12,
-            padding: 22,
-            borderRadius: 16,
+            gap: "var(--space-12)",
+            padding: "var(--space-22)",
+            borderRadius: "var(--radius-2xl)",
             border: `1px solid ${colors.border}`,
             textAlign: "center",
-            marginBottom: 16,
+            marginBottom: "var(--space-16)",
           }}
         >
           <div
@@ -52,7 +59,14 @@ export default function ClientLocationScreen() {
             <MapPin size={22} color={colors.primaryForeground} />
           </div>
           {cLocationStatus === "idle" && (
-            <p style={{ fontSize: 12, color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}>
+            <p
+              style={{
+                fontSize: 12,
+                color: colors.mutedForeground,
+                fontFamily: fontBody,
+                margin: 0,
+              }}
+            >
               Ative sua localização para encontrarmos profissionais mais próximos de você.
             </p>
           )}
@@ -65,7 +79,7 @@ export default function ClientLocationScreen() {
                 margin: 0,
                 display: "flex",
                 alignItems: "center",
-                gap: 6,
+                gap: "var(--space-6)",
               }}
             >
               <Loader2 size={14} /> Obtendo localização…
@@ -81,14 +95,21 @@ export default function ClientLocationScreen() {
                   fontFamily: fontBody,
                   display: "flex",
                   alignItems: "center",
-                  gap: 6,
+                  gap: "var(--space-6)",
                   justifyContent: "center",
-                  margin: "0 0 2px",
+                  margin: "0 0 var(--space-2)",
                 }}
               >
                 <CheckCircle2 size={16} /> Localização ativada
               </p>
-              <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}>
+              <p
+                style={{
+                  fontSize: 11,
+                  color: colors.mutedForeground,
+                  fontFamily: fontBody,
+                  margin: 0,
+                }}
+              >
                 Lat {cForm.latitude?.toFixed(4)}, Long {cForm.longitude?.toFixed(4)}
               </p>
             </div>
@@ -103,14 +124,21 @@ export default function ClientLocationScreen() {
                   fontFamily: fontBody,
                   display: "flex",
                   alignItems: "center",
-                  gap: 6,
+                  gap: "var(--space-6)",
                   justifyContent: "center",
-                  margin: "0 0 2px",
+                  margin: "0 0 var(--space-2)",
                 }}
               >
                 <AlertCircle size={16} /> Não foi possível ativar
               </p>
-              <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}>
+              <p
+                style={{
+                  fontSize: 11,
+                  color: colors.mutedForeground,
+                  fontFamily: fontBody,
+                  margin: 0,
+                }}
+              >
                 Você pode ativar depois, nas configurações.
               </p>
             </div>

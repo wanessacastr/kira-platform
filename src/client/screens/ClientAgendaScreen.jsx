@@ -15,30 +15,37 @@ export default function ClientAgendaScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientHome")} />
-      <div style={{ padding: "0 24px 4px" }}>
+      <div style={{ padding: "0 var(--space-24) var(--space-4)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "0 0 4px",
+            margin: "0 0 var(--space-4)",
           }}
         >
           Minha agenda
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 16px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-16)",
+          }}
+        >
           Seus próximos momentos de beleza
         </p>
-        <div style={{ display: "flex", gap: 8 }}>
+        <div style={{ display: "flex", gap: "var(--space-8)" }}>
           {appointmentTabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setAgendaTab(t.id)}
               style={{
                 flex: 1,
-                padding: "9px 8px",
-                borderRadius: 12,
+                padding: "var(--space-9) var(--space-8)",
+                borderRadius: "var(--radius-lg)",
                 border: "none",
                 background: agendaTab === t.id ? gradientKira : colors.muted,
                 color: agendaTab === t.id ? colors.primaryForeground : colors.mutedForeground,
@@ -53,25 +60,32 @@ export default function ClientAgendaScreen() {
           ))}
         </div>
       </div>
-      <div style={{ flex: 1, overflowY: "auto", padding: "16px 24px 24px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "var(--space-16) var(--space-24) var(--space-24)" }}>
         {filtered.length === 0 ? (
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 10,
-              padding: "48px 24px",
+              gap: "var(--space-10)",
+              padding: "var(--space-48) var(--space-24)",
               textAlign: "center",
             }}
           >
             <Calendar size={30} color={colors.mutedForeground} />
-            <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontSize: 13,
+                color: colors.mutedForeground,
+                margin: 0,
+              }}
+            >
               Nenhum agendamento aqui ainda.
             </p>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
             {filtered.map((a) => {
               const pro = mockProfessionals.find((p) => p.id === a.proId) || mockProfessionals[0];
               return (

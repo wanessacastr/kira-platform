@@ -12,10 +12,10 @@ function Prototype() {
     width: 390,
     minHeight: 780,
     background: colors.background,
-    borderRadius: 32,
+    borderRadius: "var(--radius-phone)",
     overflow: "hidden",
     position: "relative",
-    boxShadow: "0 12px 40px hsl(var(--black-hsl) / 0.18)",
+    boxShadow: "var(--shadow-phone)",
     fontFamily: fontBody,
     display: "flex",
     flexDirection: "column",
@@ -29,7 +29,7 @@ function Prototype() {
     alignItems: "flex-start",
     justifyContent: "center",
     background: "var(--color-page)",
-    padding: "32px 12px",
+    padding: "var(--space-32) var(--space-12)",
     colorScheme: "light",
   };
 
@@ -110,13 +110,16 @@ function Prototype() {
           "body, html { margin: 0; padding: 0; } .spin { animation: kiraspin 1s linear infinite; } @keyframes kiraspin { to { transform: rotate(360deg); } }"
         }
       </style>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-16)" }}>
         <div style={phoneFrame} data-testid="phone-frame">
           <Screen />
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 390 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", maxWidth: 390 }}>
           {navGroups.map((group) => (
-            <div key={group.label} style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
+            <div
+              key={group.label}
+              style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-6)", alignItems: "center" }}
+            >
               <span
                 style={{
                   fontSize: 10,
@@ -134,8 +137,8 @@ function Prototype() {
                   data-testid="screen-shortcut"
                   onClick={() => setScreen(key)}
                   style={{
-                    padding: "5px 10px",
-                    borderRadius: 999,
+                    padding: "var(--space-5) var(--space-10)",
+                    borderRadius: "var(--radius-pill)",
                     border: `1px solid ${screen === key ? colors.primary : colors.border}`,
                     background: screen === key ? "hsl(var(--primary-hsl) / 0.1)" : colors.card,
                     color: screen === key ? colors.primary : colors.mutedForeground,

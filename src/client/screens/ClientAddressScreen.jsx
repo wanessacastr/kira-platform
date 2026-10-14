@@ -22,19 +22,26 @@ export default function ClientAddressScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={2} />
       <Header onBack={() => setScreen("clientPersonal")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Endereço
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Onde você quer receber os profissionais?
         </p>
         <Field label="CEP" error={cErrors.cep}>
@@ -64,7 +71,7 @@ export default function ClientAddressScreen() {
             style={inputStyle(cErrors.street)}
           />
         </Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-10)" }}>
           <Field label="Número" error={cErrors.number}>
             <input
               value={cForm.number}
@@ -90,7 +97,7 @@ export default function ClientAddressScreen() {
             style={inputStyle(cErrors.neighborhood)}
           />
         </Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-10)" }}>
           <Field label="Cidade" error={cErrors.city}>
             <input
               value={cForm.city}

@@ -24,23 +24,38 @@ export default function ProPersonalScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={1} />
       <Header onBack={() => setScreen("signup")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Cadastro de profissional
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Complete seus dados para começar a atender clientes.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--space-10)",
+            marginBottom: "var(--space-18)",
+          }}
+        >
           <div style={{ position: "relative" }}>
             <div
               style={{
@@ -94,7 +109,13 @@ export default function ProPersonalScreen() {
             onChange={(e) => handlePhoto(e.target.files?.[0], (v) => setPField("photo", v))}
           />
           <span
-            style={{ fontSize: 12, color: colors.primary, fontWeight: 600, fontFamily: fontBody, cursor: "pointer" }}
+            style={{
+              fontSize: 12,
+              color: colors.primary,
+              fontWeight: 600,
+              fontFamily: fontBody,
+              cursor: "pointer",
+            }}
             onClick={() => pFileInputRef.current?.click()}
           >
             {pForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
@@ -113,15 +134,15 @@ export default function ProPersonalScreen() {
           />
         </Field>
 
-        <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
+        <div style={{ display: "flex", gap: "var(--space-6)", marginBottom: "var(--space-12)" }}>
           {["cpf", "cnpj"].map((type) => (
             <button
               key={type}
               onClick={() => setPField("documentType", type)}
               style={{
                 flex: 1,
-                padding: 10,
-                borderRadius: 10,
+                padding: "var(--space-10)",
+                borderRadius: "var(--radius-md)",
                 border: "none",
                 background: pForm.documentType === type ? gradientKira : colors.muted,
                 color: pForm.documentType === type ? colors.primaryForeground : colors.mutedForeground,

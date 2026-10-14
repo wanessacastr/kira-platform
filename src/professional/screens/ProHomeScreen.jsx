@@ -12,7 +12,7 @@ export default function ProHomeScreen() {
   const { goToProTab, pForm, proHomeRevenueSel, setProHomeRevenueSel, setScreen } = useKira();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
-      <div style={{ padding: "20px 24px 4px" }}>
+      <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
         <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>Olá,</p>
         <h1
           style={{
@@ -20,15 +20,15 @@ export default function ProHomeScreen() {
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "2px 0 18px",
+            margin: "var(--space-2) 0 var(--space-18)",
           }}
         >
           {pForm.name ? pForm.name.split(" ")[0] : "Profissional"}{" "}
           <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primary }} />
         </h1>
       </div>
-      <div style={{ flex: 1, overflowY: "auto", padding: "0 24px 24px" }}>
-        <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>
+        <div style={{ display: "flex", gap: "var(--space-10)", marginBottom: "var(--space-20)" }}>
           <ProStatCard label="Clientes hoje" value={proDashboardStats.clientsToday} icon={User} />
           <ProStatCard
             label="Receita"
@@ -46,15 +46,30 @@ export default function ProHomeScreen() {
             width: "100%",
             textAlign: "left",
             border: `1px solid ${colors.border}`,
-            borderRadius: 18,
+            borderRadius: "var(--radius-3xl)",
             background: colors.card,
-            padding: 16,
-            marginBottom: 22,
+            padding: "var(--space-16)",
+            marginBottom: "var(--space-22)",
             cursor: "pointer",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 14 }}>
-            <h2 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 15, color: colors.foreground, margin: 0 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "var(--space-14)",
+            }}
+          >
+            <h2
+              style={{
+                fontFamily: fontDisplay,
+                fontWeight: 700,
+                fontSize: 15,
+                color: colors.foreground,
+                margin: 0,
+              }}
+            >
               Faturamento semanal
             </h2>
             <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: colors.primary }}>
@@ -68,7 +83,14 @@ export default function ProHomeScreen() {
               setProHomeRevenueSel(i);
             }}
           />
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 12 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginTop: "var(--space-12)",
+            }}
+          >
             <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
               {proHomeRevenueSel !== null
                 ? `${proWeeklyRevenue[proHomeRevenueSel].label} · R$ ${proWeeklyRevenue[proHomeRevenueSel].value.toLocaleString("pt-BR")}`
@@ -82,7 +104,7 @@ export default function ProHomeScreen() {
                 color: colors.primary,
                 display: "flex",
                 alignItems: "center",
-                gap: 2,
+                gap: "var(--space-2)",
               }}
             >
               Ver gestão financeira <ChevronRight size={13} />
@@ -90,27 +112,50 @@ export default function ProHomeScreen() {
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-          <h2 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 16, color: colors.foreground, margin: 0 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "var(--space-12)",
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: fontDisplay,
+              fontWeight: 700,
+              fontSize: 16,
+              color: colors.foreground,
+              margin: 0,
+            }}
+          >
             Próximos atendimentos
           </h2>
           <span
-            style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, color: colors.primary, cursor: "pointer" }}
+            style={{
+              fontFamily: fontBody,
+              fontSize: 12,
+              fontWeight: 600,
+              color: colors.primary,
+              cursor: "pointer",
+            }}
             onClick={() => setScreen("proAgendaDash")}
           >
             Ver agenda
           </span>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 22 }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)", marginBottom: "var(--space-22)" }}
+        >
           {proUpcomingMock.map((a) => (
             <div
               key={a.id}
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 12,
-                padding: 12,
-                borderRadius: 16,
+                gap: "var(--space-12)",
+                padding: "var(--space-12)",
+                borderRadius: "var(--radius-2xl)",
                 border: `1px solid ${colors.border}`,
                 background: colors.card,
               }}
@@ -119,7 +164,7 @@ export default function ProHomeScreen() {
                 style={{
                   width: 40,
                   height: 40,
-                  borderRadius: 12,
+                  borderRadius: "var(--radius-lg)",
                   background: colors.muted,
                   display: "flex",
                   alignItems: "center",
@@ -130,10 +175,25 @@ export default function ProHomeScreen() {
                 <User size={17} color={colors.mutedForeground} />
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+                <p
+                  style={{
+                    fontFamily: fontBody,
+                    fontWeight: 700,
+                    fontSize: 13,
+                    color: colors.foreground,
+                    margin: 0,
+                  }}
+                >
                   {a.client}
                 </p>
-                <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>
+                <p
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: 11,
+                    color: colors.mutedForeground,
+                    margin: "var(--space-1) 0 0",
+                  }}
+                >
                   {a.time} · {a.service}
                 </p>
               </div>
@@ -148,9 +208,9 @@ export default function ProHomeScreen() {
             width: "100%",
             display: "flex",
             alignItems: "center",
-            gap: 12,
-            padding: 14,
-            borderRadius: 16,
+            gap: "var(--space-12)",
+            padding: "var(--space-14)",
+            borderRadius: "var(--radius-2xl)",
             border: "none",
             background: "hsl(var(--primary-hsl) / 0.08)",
             cursor: "pointer",
@@ -161,7 +221,7 @@ export default function ProHomeScreen() {
             style={{
               width: 40,
               height: 40,
-              borderRadius: 12,
+              borderRadius: "var(--radius-lg)",
               background: gradientKira,
               display: "flex",
               alignItems: "center",
@@ -172,10 +232,25 @@ export default function ProHomeScreen() {
             <ShieldCheck size={18} color={colors.primaryForeground} />
           </div>
           <div style={{ flex: 1 }}>
-            <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontWeight: 700,
+                fontSize: 13,
+                color: colors.foreground,
+                margin: 0,
+              }}
+            >
               Perfil verificado
             </p>
-            <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontSize: 11,
+                color: colors.mutedForeground,
+                margin: "var(--space-1) 0 0",
+              }}
+            >
               Veja seu selo de confiança e segurança
             </p>
           </div>

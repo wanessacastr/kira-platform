@@ -10,9 +10,9 @@ export const ProfessionalCard = ({ pro, onClick }) => (
     style={{
       display: "flex",
       alignItems: "center",
-      gap: 12,
-      padding: 12,
-      borderRadius: 16,
+      gap: "var(--space-12)",
+      padding: "var(--space-12)",
+      borderRadius: "var(--radius-2xl)",
       border: `1px solid ${colors.border}`,
       background: colors.card,
       width: "100%",
@@ -23,21 +23,36 @@ export const ProfessionalCard = ({ pro, onClick }) => (
     <img
       src={pro.photo}
       alt={pro.name}
-      style={{ width: 56, height: 56, borderRadius: 14, objectFit: "cover", flexShrink: 0 }}
+      style={{ width: 56, height: 56, borderRadius: "var(--radius-xl)", objectFit: "cover", flexShrink: 0 }}
     />
     <div style={{ flex: 1, minWidth: 0 }}>
-      <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+      <p
+        style={{
+          fontFamily: fontBody,
+          fontWeight: 700,
+          fontSize: 13,
+          color: colors.foreground,
+          margin: 0,
+        }}
+      >
         {pro.name}
       </p>
-      <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 4px" }}>
+      <p
+        style={{
+          fontFamily: fontBody,
+          fontSize: 11,
+          color: colors.mutedForeground,
+          margin: "var(--space-1) 0 var(--space-4)",
+        }}
+      >
         {pro.role}
       </p>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)", flexWrap: "wrap" }}>
         <span
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 3,
+            gap: "var(--space-3)",
             fontFamily: fontBody,
             fontSize: 11,
             color: colors.mutedForeground,
@@ -50,7 +65,7 @@ export const ProfessionalCard = ({ pro, onClick }) => (
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 2,
+            gap: "var(--space-2)",
             fontFamily: fontBody,
             fontSize: 11,
             color: colors.mutedForeground,
@@ -60,7 +75,9 @@ export const ProfessionalCard = ({ pro, onClick }) => (
         </span>
       </div>
     </div>
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "var(--space-4)", flexShrink: 0 }}
+    >
       <span style={{ fontFamily: fontBody, fontSize: 9, color: colors.mutedForeground }}>a partir de</span>
       <span style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: colors.primary }}>R$ {pro.price}</span>
     </div>
@@ -73,9 +90,9 @@ export const CompatibilityBadge = ({ value }) => (
     style={{
       display: "inline-flex",
       alignItems: "center",
-      gap: 4,
-      padding: "4px 10px",
-      borderRadius: 999,
+      gap: "var(--space-4)",
+      padding: "var(--space-4) var(--space-10)",
+      borderRadius: "var(--radius-pill)",
       background: gradientKira,
       color: colors.primaryForeground,
       fontFamily: fontBody,
@@ -93,35 +110,58 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
     <div
       onClick={onViewProfile}
       style={{
-        borderRadius: 18,
+        borderRadius: "var(--radius-3xl)",
         border: `1px solid ${colors.border}`,
         background: colors.card,
         overflow: "hidden",
         cursor: "pointer",
       }}
     >
-      <div style={{ padding: "12px 14px 0" }}>
+      <div style={{ padding: "var(--space-12) var(--space-14) 0" }}>
         <CompatibilityBadge value={pro.compatibility} />
       </div>
-      <div style={{ display: "flex", gap: 12, padding: 14 }}>
+      <div style={{ display: "flex", gap: "var(--space-12)", padding: "var(--space-14)" }}>
         <img
           src={pro.photo}
           alt={pro.name}
-          style={{ width: 64, height: 64, borderRadius: 16, objectFit: "cover", flexShrink: 0 }}
+          style={{ width: 64, height: 64, borderRadius: "var(--radius-2xl)", objectFit: "cover", flexShrink: 0 }}
         />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: colors.foreground, margin: 0 }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontWeight: 700,
+              fontSize: 14,
+              color: colors.foreground,
+              margin: 0,
+            }}
+          >
             {pro.name}
           </p>
-          <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "1px 0 5px" }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: 12,
+              color: colors.mutedForeground,
+              margin: "var(--space-1) 0 var(--space-5)",
+            }}
+          >
             {pro.role}
           </p>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 4 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-8)",
+              flexWrap: "wrap",
+              marginBottom: "var(--space-4)",
+            }}
+          >
             <span
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 3,
+                gap: "var(--space-3)",
                 fontFamily: fontBody,
                 fontSize: 11,
                 color: colors.mutedForeground,
@@ -130,7 +170,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
               <Star size={11} color={colors.accent} fill={colors.accent} /> {pro.rating} ({pro.reviews} avaliações)
             </span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)", flexWrap: "wrap" }}>
             <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
               R$ {pro.price} — R$ {pro.price + 70}
             </span>
@@ -138,7 +178,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 2,
+                gap: "var(--space-2)",
                 fontFamily: fontBody,
                 fontSize: 11,
                 color: colors.mutedForeground,
@@ -151,12 +191,12 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 4,
+              gap: "var(--space-4)",
               fontFamily: fontBody,
               fontSize: 11,
               color: colors.primary,
               fontWeight: 600,
-              marginTop: 4,
+              marginTop: "var(--space-4)",
             }}
           >
             <Clock size={11} /> Disponível {extras.nextSlot.toLowerCase()}
@@ -164,18 +204,18 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
         </div>
       </div>
       {extras.portfolio.length > 0 && (
-        <div style={{ display: "flex", gap: 6, padding: "0 14px 14px" }}>
+        <div style={{ display: "flex", gap: "var(--space-6)", padding: "0 var(--space-14) var(--space-14)" }}>
           {extras.portfolio.map((photo, i) => (
             <img
               key={i}
               src={photo}
               alt={`Trabalho de ${pro.name}`}
-              style={{ width: 56, height: 56, borderRadius: 10, objectFit: "cover" }}
+              style={{ width: 56, height: 56, borderRadius: "var(--radius-md)", objectFit: "cover" }}
             />
           ))}
         </div>
       )}
-      <div style={{ padding: "0 14px 14px" }}>
+      <div style={{ padding: "0 var(--space-14) var(--space-14)" }}>
         <SecondaryButton onClick={onViewProfile}>Ver perfil</SecondaryButton>
       </div>
     </div>
@@ -185,7 +225,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
 export const RatingStars = ({ value, size = 12 }) => {
   const rounded = Math.round(value);
   return (
-    <span style={{ display: "inline-flex", alignItems: "center", gap: 1 }}>
+    <span style={{ display: "inline-flex", alignItems: "center", gap: "var(--space-1)" }}>
       {Array.from({ length: 5 }).map((_, i) => (
         <Star key={i} size={size} color={colors.accent} fill={i < rounded ? colors.accent : "none"} />
       ))}
@@ -220,15 +260,15 @@ export const RankingCard = ({ pro, rank, onClick }) => {
       style={{
         display: "flex",
         alignItems: "center",
-        gap: 12,
-        padding: 12,
-        borderRadius: 16,
+        gap: "var(--space-12)",
+        padding: "var(--space-12)",
+        borderRadius: "var(--radius-2xl)",
         width: "100%",
         textAlign: "left",
         cursor: "pointer",
         border: `1px solid ${medal ? "transparent" : colors.border}`,
         background: medal ? "hsl(var(--primary-hsl) / 0.06)" : colors.card,
-        boxShadow: medal ? "0 2px 14px -6px hsl(var(--primary-hsl) / 0.35)" : "none",
+        boxShadow: medal ? "var(--shadow-medal)" : "none",
       }}
     >
       {medal ? (
@@ -270,16 +310,31 @@ export const RankingCard = ({ pro, rank, onClick }) => {
       <img
         src={pro.photo}
         alt={pro.name}
-        style={{ width: 52, height: 52, borderRadius: 14, objectFit: "cover", flexShrink: 0 }}
+        style={{ width: 52, height: 52, borderRadius: "var(--radius-xl)", objectFit: "cover", flexShrink: 0 }}
       />
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontWeight: 700,
+            fontSize: 13,
+            color: colors.foreground,
+            margin: 0,
+          }}
+        >
           {pro.name}
         </p>
-        <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 4px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 11,
+            color: colors.mutedForeground,
+            margin: "var(--space-1) 0 var(--space-4)",
+          }}
+        >
           {pro.role}
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-6)" }}>
           <RatingStars value={pro.rating} size={10} />
           <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
             {pro.rating} ({pro.reviews})
@@ -304,9 +359,9 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 10,
-        padding: 14,
-        borderRadius: 16,
+        gap: "var(--space-10)",
+        padding: "var(--space-14)",
+        borderRadius: "var(--radius-2xl)",
         border: `1px solid ${colors.border}`,
         background: colors.card,
         width: "100%",
@@ -314,31 +369,54 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
         cursor: "pointer",
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-12)" }}>
         <img
           src={pro.photo}
           alt={pro.name}
-          style={{ width: 48, height: 48, borderRadius: 12, objectFit: "cover", flexShrink: 0 }}
+          style={{ width: 48, height: 48, borderRadius: "var(--radius-lg)", objectFit: "cover", flexShrink: 0 }}
         />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontWeight: 700,
+              fontSize: 13,
+              color: colors.foreground,
+              margin: 0,
+            }}
+          >
             {pro.name}
           </p>
-          <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: 11,
+              color: colors.mutedForeground,
+              margin: "var(--space-1) 0 0",
+            }}
+          >
             {pro.role}
           </p>
         </div>
         <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: status.color }}>{status.label}</span>
       </div>
-      <p style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 600, color: colors.foreground, margin: 0 }}>
+      <p
+        style={{
+          fontFamily: fontBody,
+          fontSize: 13,
+          fontWeight: 600,
+          color: colors.foreground,
+          margin: 0,
+        }}
+      >
         {appointment.service}
       </p>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", flexWrap: "wrap" }}>
         <span
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 4,
+            gap: "var(--space-4)",
             fontFamily: fontBody,
             fontSize: 11,
             color: colors.mutedForeground,
@@ -350,7 +428,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 4,
+            gap: "var(--space-4)",
             fontFamily: fontBody,
             fontSize: 11,
             color: colors.mutedForeground,
@@ -371,7 +449,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
             color: colors.primary,
             display: "flex",
             alignItems: "center",
-            gap: 2,
+            gap: "var(--space-2)",
           }}
         >
           Ver detalhes <ChevronRight size={13} />

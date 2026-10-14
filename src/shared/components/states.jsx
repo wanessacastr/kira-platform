@@ -8,9 +8,9 @@ export const SkeletonCard = () => (
     style={{
       display: "flex",
       alignItems: "center",
-      gap: 12,
-      padding: 12,
-      borderRadius: 16,
+      gap: "var(--space-12)",
+      padding: "var(--space-12)",
+      borderRadius: "var(--radius-2xl)",
       border: `1px solid ${colors.border}`,
       background: colors.card,
     }}
@@ -19,17 +19,17 @@ export const SkeletonCard = () => (
       style={{
         width: 56,
         height: 56,
-        borderRadius: 14,
+        borderRadius: "var(--radius-xl)",
         background: colors.muted,
         animation: "kiraPulse 1.2s ease-in-out infinite",
       }}
     />
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 6 }}>
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "var(--space-6)" }}>
       <div
         style={{
           width: "55%",
           height: 11,
-          borderRadius: 6,
+          borderRadius: "var(--radius-xs)",
           background: colors.muted,
           animation: "kiraPulse 1.2s ease-in-out infinite",
         }}
@@ -38,7 +38,7 @@ export const SkeletonCard = () => (
         style={{
           width: "35%",
           height: 9,
-          borderRadius: 6,
+          borderRadius: "var(--radius-xs)",
           background: colors.muted,
           animation: "kiraPulse 1.2s ease-in-out infinite",
         }}
@@ -47,7 +47,7 @@ export const SkeletonCard = () => (
         style={{
           width: "45%",
           height: 9,
-          borderRadius: 6,
+          borderRadius: "var(--radius-xs)",
           background: colors.muted,
           animation: "kiraPulse 1.2s ease-in-out infinite",
         }}
@@ -57,7 +57,7 @@ export const SkeletonCard = () => (
 );
 
 export const SkeletonLoading = ({ count = 5 }) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+  <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
     <style>{"@keyframes kiraPulse { 0%, 100% { opacity: .55 } 50% { opacity: 1 } }"}</style>
     {Array.from({ length: count }).map((_, i) => (
       <SkeletonCard key={i} />
@@ -72,8 +72,8 @@ export const EmptyState = ({ onClear }) => (
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: 14,
-      padding: "48px 24px",
+      gap: "var(--space-14)",
+      padding: "var(--space-48) var(--space-24)",
       textAlign: "center",
     }}
   >
@@ -106,8 +106,8 @@ export const ErrorState = ({ onRetry, message = "Não foi possível carregar os 
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: 14,
-      padding: "48px 24px",
+      gap: "var(--space-14)",
+      padding: "var(--space-48) var(--space-24)",
       textAlign: "center",
     }}
   >

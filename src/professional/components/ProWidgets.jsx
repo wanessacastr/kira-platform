@@ -9,9 +9,9 @@ export const ProStatCard = ({ label, value, icon: Icon }) => (
       flex: 1,
       display: "flex",
       flexDirection: "column",
-      gap: 6,
-      padding: 14,
-      borderRadius: 16,
+      gap: "var(--space-6)",
+      padding: "var(--space-14)",
+      borderRadius: "var(--radius-2xl)",
       border: `1px solid ${colors.border}`,
       background: colors.card,
     }}
@@ -32,7 +32,7 @@ export const RevenueBarChart = ({ data, selectedIndex, onSelect }) => {
   const max = Math.max(...data.map((d) => d.value));
   const peakIndex = data.reduce((best, d, i, arr) => (d.value > arr[best].value ? i : best), 0);
   return (
-    <div style={{ display: "flex", alignItems: "flex-end", gap: 8, height: 90 }}>
+    <div style={{ display: "flex", alignItems: "flex-end", gap: "var(--space-8)", height: 90 }}>
       {data.map((d, i) => {
         const isSelected = selectedIndex === i;
         const isPeak = i === peakIndex;
@@ -48,7 +48,7 @@ export const RevenueBarChart = ({ data, selectedIndex, onSelect }) => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 6,
+              gap: "var(--space-6)",
               background: "none",
               border: "none",
               padding: 0,
@@ -58,7 +58,7 @@ export const RevenueBarChart = ({ data, selectedIndex, onSelect }) => {
             <div
               style={{
                 width: "100%",
-                borderRadius: 8,
+                borderRadius: "var(--radius-sm)",
                 height: `${Math.max(10, (d.value / max) * 74)}px`,
                 background: isPeak || isSelected ? gradientKira : colors.muted,
                 boxShadow: isSelected ? `0 0 0 2px ${colors.primary}` : "none",

@@ -10,7 +10,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
     fontSize: 12,
     fontWeight: 600,
     color: colors.foreground,
-    margin: "0 0 8px",
+    margin: "0 0 var(--space-8)",
   };
   return (
     <div
@@ -34,28 +34,36 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
           maxWidth: 380,
           background: colors.card,
           borderRadius: "24px 24px 0 0",
-          padding: "20px 24px 28px",
+          padding: "var(--space-20) var(--space-24) var(--space-28)",
           maxHeight: "85%",
           overflowY: "auto",
           transform: mounted ? "translateY(0)" : "translateY(24px)",
           transition: "transform 0.25s ease",
         }}
       >
-        <div style={{ width: 40, height: 4, borderRadius: 2, background: colors.border, margin: "0 auto 16px" }} />
+        <div
+          style={{
+            width: 40,
+            height: 4,
+            borderRadius: "var(--radius-2xs)",
+            background: colors.border,
+            margin: "0 auto var(--space-16)",
+          }}
+        />
         <h2
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 18,
             color: colors.foreground,
-            margin: "0 0 18px",
+            margin: "0 0 var(--space-18)",
           }}
         >
           Filtros
         </h2>
 
         <p style={labelStyle}>Faixa de preço</p>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-18)" }}>
           <input
             type="range"
             min={0}
@@ -80,14 +88,14 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
         </div>
 
         <p style={labelStyle}>Avaliação mínima</p>
-        <div style={{ display: "flex", gap: 8, marginBottom: 18, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "var(--space-8)", marginBottom: "var(--space-18)", flexWrap: "wrap" }}>
           {[0, 3, 4, 4.5].map((r) => (
             <button
               key={r}
               onClick={() => setDraft((d) => ({ ...d, minRating: r }))}
               style={{
-                padding: "8px 12px",
-                borderRadius: 999,
+                padding: "var(--space-8) var(--space-12)",
+                borderRadius: "var(--radius-pill)",
                 border: "none",
                 background: draft.minRating === r ? gradientKira : colors.muted,
                 color: draft.minRating === r ? colors.primaryForeground : colors.foreground,
@@ -97,7 +105,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
-                gap: 4,
+                gap: "var(--space-4)",
               }}
             >
               {r === 0 ? (
@@ -112,7 +120,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
         </div>
 
         <p style={labelStyle}>Distância máxima</p>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-18)" }}>
           <input
             type="range"
             min={1}
@@ -137,7 +145,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
         </div>
 
         <p style={labelStyle}>Atendimento</p>
-        <div style={{ display: "flex", gap: 8, marginBottom: 18 }}>
+        <div style={{ display: "flex", gap: "var(--space-8)", marginBottom: "var(--space-18)" }}>
           {[
             ["presencial", "Presencial"],
             ["domicilio", "Domicílio"],
@@ -148,8 +156,8 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
               onClick={() => setDraft((d) => ({ ...d, mode: key }))}
               style={{
                 flex: 1,
-                padding: "10px 8px",
-                borderRadius: 12,
+                padding: "var(--space-10) var(--space-8)",
+                borderRadius: "var(--radius-lg)",
                 border: `1px solid ${draft.mode === key ? colors.primary : colors.border}`,
                 background: draft.mode === key ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                 color: colors.foreground,
@@ -165,7 +173,9 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
         </div>
 
         <p style={labelStyle}>Ordenar por</p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 22 }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", marginBottom: "var(--space-22)" }}
+        >
           {[
             ["proximo", "Mais próximo"],
             ["avaliado", "Melhor avaliado"],
@@ -179,8 +189,8 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "12px 14px",
-                borderRadius: 12,
+                padding: "var(--space-12) var(--space-14)",
+                borderRadius: "var(--radius-lg)",
                 border: `1px solid ${draft.sort === key ? colors.primary : colors.border}`,
                 background: draft.sort === key ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                 cursor: "pointer",
@@ -192,7 +202,7 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
           ))}
         </div>
 
-        <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ display: "flex", gap: "var(--space-10)" }}>
           <div style={{ flex: 1 }}>
             <SecondaryButton onClick={onClear}>Limpar filtros</SecondaryButton>
           </div>

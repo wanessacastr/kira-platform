@@ -17,11 +17,19 @@ export default function FaceScreen() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 16,
-          padding: 24,
+          gap: "var(--space-16)",
+          padding: "var(--space-24)",
         }}
       >
-        <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 22, color: colors.foreground, margin: 0 }}>
+        <h1
+          style={{
+            fontFamily: fontDisplay,
+            fontWeight: 700,
+            fontSize: 22,
+            color: colors.foreground,
+            margin: 0,
+          }}
+        >
           Reconhecimento facial
         </h1>
         <p
@@ -74,9 +82,16 @@ export default function FaceScreen() {
             </>
           )}
           {faceStatus === "success" && (
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-6)" }}>
               <CheckCircle2 size={44} color={colors.primary} />
-              <span style={{ fontFamily: fontDisplay, fontSize: 15, fontWeight: 700, color: colors.foreground }}>
+              <span
+                style={{
+                  fontFamily: fontDisplay,
+                  fontSize: 15,
+                  fontWeight: 700,
+                  color: colors.foreground,
+                }}
+              >
                 Identidade verificada
               </span>
             </div>
@@ -92,7 +107,13 @@ export default function FaceScreen() {
           {faceStatus === "success" && <PrimaryButton onClick={() => setScreen(faceReturnTo)}>Continuar</PrimaryButton>}
         </div>
         <p
-          style={{ fontSize: 10, color: colors.mutedForeground, fontFamily: fontBody, textAlign: "center", margin: 0 }}
+          style={{
+            fontSize: 10,
+            color: colors.mutedForeground,
+            fontFamily: fontBody,
+            textAlign: "center",
+            margin: 0,
+          }}
         >
           Tela de teste — nenhum dado biométrico é armazenado.
         </p>

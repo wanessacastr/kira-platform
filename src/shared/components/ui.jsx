@@ -4,8 +4,8 @@ import { colors, fontBody, gradientKira } from "../theme";
 
 export const inputStyle = (hasError) => ({
   width: "100%",
-  padding: "13px 15px",
-  borderRadius: 12,
+  padding: "var(--space-13) var(--space-15)",
+  borderRadius: "var(--radius-lg)",
   background: colors.muted,
   color: colors.foreground,
   fontFamily: fontBody,
@@ -17,7 +17,7 @@ export const inputStyle = (hasError) => ({
 });
 
 export const Field = ({ label, error, children }) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
+  <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)", marginBottom: "var(--space-14)" }}>
     <label style={{ fontSize: 12, fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}>{label}</label>
     {children}
     {error && <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: 0 }}>{error}</p>}
@@ -31,7 +31,7 @@ export const PrimaryButton = ({ children, onClick, disabled, pill, type = "butto
     onClick={onClick}
     style={{
       width: "100%",
-      padding: 15,
+      padding: "var(--space-15)",
       borderRadius: pill ? 999 : 16,
       border: "none",
       background: gradientKira,
@@ -41,7 +41,7 @@ export const PrimaryButton = ({ children, onClick, disabled, pill, type = "butto
       fontFamily: fontBody,
       cursor: disabled ? "not-allowed" : "pointer",
       opacity: disabled ? 0.4 : 1,
-      marginTop: 4,
+      marginTop: "var(--space-4)",
     }}
   >
     {children}
@@ -54,8 +54,8 @@ export const SecondaryButton = ({ children, onClick }) => (
     onClick={onClick}
     style={{
       width: "100%",
-      padding: 12,
-      borderRadius: 12,
+      padding: "var(--space-12)",
+      borderRadius: "var(--radius-lg)",
       border: "none",
       background: colors.muted,
       color: colors.primary,
@@ -66,7 +66,7 @@ export const SecondaryButton = ({ children, onClick }) => (
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      gap: 6,
+      gap: "var(--space-6)",
     }}
   >
     {children}
@@ -74,7 +74,7 @@ export const SecondaryButton = ({ children, onClick }) => (
 );
 
 export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
-  <div style={{ marginBottom: 14 }}>
+  <div style={{ marginBottom: "var(--space-14)" }}>
     <label
       style={{
         fontSize: 12,
@@ -82,7 +82,7 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
         color: colors.foreground,
         fontFamily: fontBody,
         display: "block",
-        marginBottom: 6,
+        marginBottom: "var(--space-6)",
       }}
     >
       {label}
@@ -92,13 +92,13 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
       style={{
         width: "100%",
         aspectRatio: "16/10",
-        borderRadius: 16,
+        borderRadius: "var(--radius-2xl)",
         overflow: "hidden",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 6,
+        gap: "var(--space-6)",
         border: `2px ${value ? "solid" : "dashed"} ${error ? colors.destructive : value ? colors.primary : colors.border}`,
         background: colors.muted,
         cursor: "pointer",
@@ -121,13 +121,22 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
       onChange={(e) => onChange(e.target.files?.[0])}
     />
     {error && (
-      <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: "4px 0 0" }}>{error}</p>
+      <p
+        style={{
+          fontSize: 11,
+          color: colors.destructive,
+          fontFamily: fontBody,
+          margin: "var(--space-4) 0 0",
+        }}
+      >
+        {error}
+      </p>
     )}
   </div>
 );
 
 export const Header = ({ onBack }) => (
-  <div style={{ display: "flex", alignItems: "center", padding: 14 }}>
+  <div style={{ display: "flex", alignItems: "center", padding: "var(--space-14)" }}>
     <button
       onClick={onBack}
       aria-label="Voltar"
@@ -150,27 +159,32 @@ export const Header = ({ onBack }) => (
 );
 
 export const StepDots = ({ total, done }) => (
-  <div style={{ display: "flex", gap: 3, padding: "0 22px 4px" }}>
+  <div style={{ display: "flex", gap: "var(--space-3)", padding: "0 var(--space-22) var(--space-4)" }}>
     {Array.from({ length: total }).map((_, i) => (
       <div
         key={i}
-        style={{ height: 3, flex: 1, borderRadius: 2, background: i < done ? colors.primary : colors.border }}
+        style={{
+          height: 3,
+          flex: 1,
+          borderRadius: "var(--radius-2xs)",
+          background: i < done ? colors.primary : colors.border,
+        }}
       />
     ))}
   </div>
 );
 
 export const SearchBar = ({ value, onChange, onFilterClick }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+  <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)" }}>
     <div
       style={{
         flex: 1,
         display: "flex",
         alignItems: "center",
-        gap: 10,
+        gap: "var(--space-10)",
         background: colors.muted,
-        borderRadius: 999,
-        padding: "12px 16px",
+        borderRadius: "var(--radius-pill)",
+        padding: "var(--space-12) var(--space-16)",
       }}
     >
       <Search size={16} color={colors.mutedForeground} />
@@ -196,7 +210,7 @@ export const SearchBar = ({ value, onChange, onFilterClick }) => (
       style={{
         width: 46,
         height: 46,
-        borderRadius: 16,
+        borderRadius: "var(--radius-2xl)",
         border: "none",
         background: gradientKira,
         display: "flex",
@@ -215,8 +229,8 @@ export const CategoryChip = ({ label, active, onClick }) => (
   <button
     onClick={onClick}
     style={{
-      padding: "9px 16px",
-      borderRadius: 999,
+      padding: "var(--space-9) var(--space-16)",
+      borderRadius: "var(--radius-pill)",
       border: "none",
       whiteSpace: "nowrap",
       background: active ? gradientKira : colors.muted,
@@ -233,7 +247,7 @@ export const CategoryChip = ({ label, active, onClick }) => (
 );
 
 export const ProfileSection = ({ title, children }) => (
-  <div style={{ marginBottom: 22 }}>
+  <div style={{ marginBottom: "var(--space-22)" }}>
     <p
       style={{
         fontFamily: fontBody,
@@ -242,13 +256,18 @@ export const ProfileSection = ({ title, children }) => (
         color: colors.mutedForeground,
         letterSpacing: "0.06em",
         textTransform: "uppercase",
-        margin: "0 0 8px",
+        margin: "0 0 var(--space-8)",
       }}
     >
       {title}
     </p>
     <div
-      style={{ borderRadius: 16, border: `1px solid ${colors.border}`, background: colors.card, overflow: "hidden" }}
+      style={{
+        borderRadius: "var(--radius-2xl)",
+        border: `1px solid ${colors.border}`,
+        background: colors.card,
+        overflow: "hidden",
+      }}
     >
       {children}
     </div>
@@ -261,9 +280,9 @@ export const ProfileMenuRow = ({ icon: Icon, label, onClick, destructive, last }
     style={{
       display: "flex",
       alignItems: "center",
-      gap: 12,
+      gap: "var(--space-12)",
       width: "100%",
-      padding: "13px 14px",
+      padding: "var(--space-13) var(--space-14)",
       border: "none",
       borderBottom: last ? "none" : `1px solid ${colors.border}`,
       background: "transparent",
@@ -275,7 +294,7 @@ export const ProfileMenuRow = ({ icon: Icon, label, onClick, destructive, last }
       style={{
         width: 30,
         height: 30,
-        borderRadius: 9,
+        borderRadius: "var(--radius-icon)",
         background: destructive ? "hsl(var(--destructive-hsl) / 0.1)" : colors.muted,
         display: "flex",
         alignItems: "center",

@@ -20,24 +20,31 @@ export default function ProAnalyticsScreen() {
   const maxServiceCount = Math.max(...proServiceRankingMock.map((s) => s.count));
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
-      <div style={{ padding: "20px 24px 4px" }}>
+      <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Analytics
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 4px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-4)",
+          }}
+        >
           Desempenho do seu perfil profissional na Kira.
         </p>
       </div>
-      <div style={{ flex: 1, padding: "8px 24px 24px", overflowY: "auto" }}>
-        <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
+      <div style={{ flex: 1, padding: "var(--space-8) var(--space-24) var(--space-24)", overflowY: "auto" }}>
+        <div style={{ display: "flex", gap: "var(--space-10)", marginBottom: "var(--space-20)" }}>
           <ProStatCard label="Ticket médio" value={`R$ ${proAnalyticsSummary.avgTicket}`} icon={CreditCard} />
           <ProStatCard label="Retorno de clientes" value={`${proAnalyticsSummary.retentionRate}%`} icon={TrendingUp} />
           <ProStatCard label="Conclusão" value={`${proAnalyticsSummary.completionRate}%`} icon={CheckCircle2} />
@@ -45,11 +52,11 @@ export default function ProAnalyticsScreen() {
 
         <div
           style={{
-            borderRadius: 18,
+            borderRadius: "var(--radius-3xl)",
             border: `1px solid ${colors.border}`,
             background: colors.card,
-            padding: 16,
-            marginBottom: 20,
+            padding: "var(--space-16)",
+            marginBottom: "var(--space-20)",
           }}
         >
           <h2
@@ -58,7 +65,7 @@ export default function ProAnalyticsScreen() {
               fontWeight: 700,
               fontSize: 15,
               color: colors.foreground,
-              margin: "0 0 14px",
+              margin: "0 0 var(--space-14)",
             }}
           >
             Atendimentos por dia
@@ -68,7 +75,14 @@ export default function ProAnalyticsScreen() {
             selectedIndex={proAnalyticsSel}
             onSelect={setProAnalyticsSel}
           />
-          <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "12px 0 0" }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: 11,
+              color: colors.mutedForeground,
+              margin: "var(--space-12) 0 0",
+            }}
+          >
             {proAnalyticsSel !== null
               ? `${proAppointmentsWeekMock[proAnalyticsSel].label} · ${proAppointmentsWeekMock[proAnalyticsSel].value} atendimento(s)`
               : "Toque em um dia para ver o total"}
@@ -81,19 +95,21 @@ export default function ProAnalyticsScreen() {
             fontWeight: 700,
             fontSize: 15,
             color: colors.foreground,
-            margin: "0 0 10px",
+            margin: "0 0 var(--space-10)",
           }}
         >
           Serviços mais procurados
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)", marginBottom: "var(--space-20)" }}
+        >
           {proServiceRankingMock.map((s) => (
             <button
               key={s.service}
               onClick={() => setProServiceDetail(s)}
               style={{
-                padding: "12px 14px",
-                borderRadius: 14,
+                padding: "var(--space-12) var(--space-14)",
+                borderRadius: "var(--radius-xl)",
                 border: `1px solid ${colors.border}`,
                 background: colors.card,
                 width: "100%",
@@ -101,15 +117,29 @@ export default function ProAnalyticsScreen() {
                 cursor: "pointer",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-                <span style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 700, color: colors.foreground }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: "var(--space-8)",
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    color: colors.foreground,
+                  }}
+                >
                   {s.service}
                 </span>
                 <span
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 4,
+                    gap: "var(--space-4)",
                     fontFamily: fontBody,
                     fontSize: 11,
                     color: colors.mutedForeground,
@@ -119,13 +149,19 @@ export default function ProAnalyticsScreen() {
                 </span>
               </div>
               <div
-                style={{ width: "100%", height: 6, borderRadius: 999, background: colors.muted, overflow: "hidden" }}
+                style={{
+                  width: "100%",
+                  height: 6,
+                  borderRadius: "var(--radius-pill)",
+                  background: colors.muted,
+                  overflow: "hidden",
+                }}
               >
                 <div
                   style={{
                     width: `${(s.count / maxServiceCount) * 100}%`,
                     height: "100%",
-                    borderRadius: 999,
+                    borderRadius: "var(--radius-pill)",
                     background: gradientKira,
                   }}
                 />
@@ -140,14 +176,14 @@ export default function ProAnalyticsScreen() {
             fontWeight: 700,
             fontSize: 15,
             color: colors.foreground,
-            margin: "0 0 10px",
+            margin: "0 0 var(--space-10)",
           }}
         >
           Distribuição de avaliações
         </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)" }}>
           {proRatingBreakdownMock.map((r) => (
-            <div key={r.stars} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div key={r.stars} style={{ display: "flex", alignItems: "center", gap: "var(--space-8)" }}>
               <span
                 style={{
                   fontFamily: fontBody,
@@ -158,13 +194,28 @@ export default function ProAnalyticsScreen() {
                   flexShrink: 0,
                   display: "flex",
                   alignItems: "center",
-                  gap: 2,
+                  gap: "var(--space-2)",
                 }}
               >
                 {r.stars} <Star size={11} color={colors.primary} fill={colors.primary} />
               </span>
-              <div style={{ flex: 1, height: 6, borderRadius: 999, background: colors.muted, overflow: "hidden" }}>
-                <div style={{ width: `${r.percent}%`, height: "100%", borderRadius: 999, background: gradientKira }} />
+              <div
+                style={{
+                  flex: 1,
+                  height: 6,
+                  borderRadius: "var(--radius-pill)",
+                  background: colors.muted,
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    width: `${r.percent}%`,
+                    height: "100%",
+                    borderRadius: "var(--radius-pill)",
+                    background: gradientKira,
+                  }}
+                />
               </div>
               <span
                 style={{
@@ -210,15 +261,26 @@ export default function ProAnalyticsScreen() {
                   margin: "0 auto",
                   background: colors.card,
                   borderRadius: "24px 24px 0 0",
-                  padding: "20px 24px 28px",
+                  padding: "var(--space-20) var(--space-24) var(--space-28)",
                   overflowY: "auto",
                 }}
               >
                 <div
-                  style={{ width: 40, height: 4, borderRadius: 2, background: colors.border, margin: "0 auto 16px" }}
+                  style={{
+                    width: 40,
+                    height: 4,
+                    borderRadius: "var(--radius-2xs)",
+                    background: colors.border,
+                    margin: "0 auto var(--space-16)",
+                  }}
                 />
                 <div
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "var(--space-4)",
+                  }}
                 >
                   <h2
                     style={{
@@ -245,7 +307,14 @@ export default function ProAnalyticsScreen() {
                     <X size={18} />
                   </button>
                 </div>
-                <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 16px" }}>
+                <p
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: 12,
+                    color: colors.mutedForeground,
+                    margin: "0 0 var(--space-16)",
+                  }}
+                >
                   {proServiceDetail.count} atendimentos · {uniqueClients} cliente{uniqueClients === 1 ? "" : "s"} · R${" "}
                   {proServiceDetail.revenue}
                 </p>
@@ -258,21 +327,21 @@ export default function ProAnalyticsScreen() {
                     color: colors.mutedForeground,
                     textTransform: "uppercase",
                     letterSpacing: "0.04em",
-                    margin: "0 0 10px",
+                    margin: "0 0 var(--space-10)",
                   }}
                 >
                   Clientes que realizaram este serviço
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)" }}>
                   {clients.map((c) => (
                     <div
                       key={c.name}
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: 12,
-                        padding: "10px 12px",
-                        borderRadius: 14,
+                        gap: "var(--space-12)",
+                        padding: "var(--space-10) var(--space-12)",
+                        borderRadius: "var(--radius-xl)",
                         border: `1px solid ${colors.border}`,
                         background: colors.background,
                       }}
@@ -308,7 +377,7 @@ export default function ProAnalyticsScreen() {
                             fontFamily: fontBody,
                             fontSize: 11,
                             color: colors.mutedForeground,
-                            margin: "1px 0 0",
+                            margin: "var(--space-1) 0 0",
                           }}
                         >
                           {c.visits} atendimento{c.visits === 1 ? "" : "s"} · Último: {c.lastDate}

@@ -10,27 +10,34 @@ export default function ClientCouponsScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Cupons e gift cards
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Resgate um cupom ou gift card para usar nos seus agendamentos.
         </p>
-        <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+        <div style={{ display: "flex", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}>
           <input placeholder="Código do cupom" style={{ ...inputStyle(false), flex: 1 }} />
           <button
             style={{
-              padding: "0 18px",
-              borderRadius: 12,
+              padding: "0 var(--space-18)",
+              borderRadius: "var(--radius-lg)",
               border: "none",
               background: gradientKira,
               color: colors.primaryForeground,
@@ -48,8 +55,8 @@ export default function ClientCouponsScreen() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 14,
-            padding: "24px 24px",
+            gap: "var(--space-14)",
+            padding: "var(--space-24) var(--space-24)",
             textAlign: "center",
           }}
         >

@@ -10,19 +10,26 @@ export default function ProDocumentScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={4} />
       <Header onBack={() => setScreen("proLocation")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Documento de identidade
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Envie a foto da frente e do verso do seu documento com foto.
         </p>
         <DocUploadBox
@@ -45,7 +52,7 @@ export default function ProDocumentScreen() {
             color: colors.mutedForeground,
             fontFamily: fontBody,
             textAlign: "center",
-            margin: "0 0 12px",
+            margin: "0 0 var(--space-12)",
           }}
         >
           Aceitamos RG, CNH ou outro documento oficial com foto.

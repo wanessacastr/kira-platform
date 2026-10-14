@@ -12,23 +12,30 @@ export default function ProSpecialtiesScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={5} />
       <Header onBack={() => setScreen("face")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Especialidades
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Quais áreas você atende? Adicione quantas quiser.
         </p>
 
-        <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+        <div style={{ display: "flex", gap: "var(--space-8)", marginBottom: "var(--space-8)" }}>
           <input
             value={specialtyInput}
             onChange={(e) => setSpecialtyInput(e.target.value)}
@@ -46,7 +53,7 @@ export default function ProSpecialtiesScreen() {
             style={{
               width: 44,
               height: 44,
-              borderRadius: 12,
+              borderRadius: "var(--radius-lg)",
               border: "none",
               background: gradientKira,
               display: "flex",
@@ -60,15 +67,29 @@ export default function ProSpecialtiesScreen() {
           </button>
         </div>
         {pErrors.specialties && (
-          <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: "0 0 10px" }}>
+          <p
+            style={{
+              fontSize: 11,
+              color: colors.destructive,
+              fontFamily: fontBody,
+              margin: "0 0 var(--space-10)",
+            }}
+          >
             {pErrors.specialties}
           </p>
         )}
 
-        <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: "6px 0 6px" }}>
+        <p
+          style={{
+            fontSize: 11,
+            color: colors.mutedForeground,
+            fontFamily: fontBody,
+            margin: "var(--space-6) 0 var(--space-6)",
+          }}
+        >
           Sugestões
         </p>
-        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 14 }}>
+        <div style={{ display: "flex", gap: "var(--space-6)", flexWrap: "wrap", marginBottom: "var(--space-14)" }}>
           {specialtySuggestions
             .filter((s) => !pForm.specialties.includes(s))
             .map((s) => (
@@ -76,8 +97,8 @@ export default function ProSpecialtiesScreen() {
                 key={s}
                 onClick={() => addSpecialty(s)}
                 style={{
-                  padding: "6px 12px",
-                  borderRadius: 999,
+                  padding: "var(--space-6) var(--space-12)",
+                  borderRadius: "var(--radius-pill)",
                   fontSize: 11,
                   fontWeight: 500,
                   fontFamily: fontBody,
@@ -93,19 +114,26 @@ export default function ProSpecialtiesScreen() {
 
         {pForm.specialties.length > 0 && (
           <div>
-            <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: "0 0 6px" }}>
+            <p
+              style={{
+                fontSize: 11,
+                color: colors.mutedForeground,
+                fontFamily: fontBody,
+                margin: "0 0 var(--space-6)",
+              }}
+            >
               Suas especialidades ({pForm.specialties.length})
             </p>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "var(--space-6)", flexWrap: "wrap" }}>
               {pForm.specialties.map((s) => (
                 <span
                   key={s}
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 5,
-                    padding: "6px 12px",
-                    borderRadius: 999,
+                    gap: "var(--space-5)",
+                    padding: "var(--space-6) var(--space-12)",
+                    borderRadius: "var(--radius-pill)",
                     fontSize: 11,
                     fontWeight: 600,
                     fontFamily: fontBody,
@@ -122,7 +150,7 @@ export default function ProSpecialtiesScreen() {
           </div>
         )}
 
-        <div style={{ marginTop: 20 }}>
+        <div style={{ marginTop: "var(--space-20)" }}>
           <PrimaryButton
             onClick={() => {
               if (pForm.specialties.length === 0) {

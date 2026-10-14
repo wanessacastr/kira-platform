@@ -10,19 +10,26 @@ export default function ClientPrivacyDataScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
             fontSize: 22,
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Dados e privacidade
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Estes são os dados que a Kira guarda sobre sua conta.
         </p>
         <ProfileSection title="Dados cadastrados">
@@ -38,7 +45,7 @@ export default function ClientPrivacyDataScreen() {
               style={{
                 display: "flex",
                 justifyContent: "space-between",
-                padding: "12px 14px",
+                padding: "var(--space-12) var(--space-14)",
                 borderBottom: i === arr.length - 1 ? "none" : `1px solid ${colors.border}`,
               }}
             >
