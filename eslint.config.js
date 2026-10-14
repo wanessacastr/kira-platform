@@ -25,8 +25,8 @@ export default [
       "react/prop-types": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      // acessibilidade entra como aviso; vira erro na fase de acessibilidade
-      ...Object.fromEntries(Object.keys(jsxA11y.configs.recommended.rules).map((r) => [r, "warn"])),
+      ...jsxA11y.configs.recommended.rules,
+      "jsx-a11y/label-has-associated-control": ["error", { controlComponents: ["Checkbox"], assert: "either" }],
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
     },
   },
