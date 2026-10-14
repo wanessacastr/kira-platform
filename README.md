@@ -37,6 +37,3 @@ Cada arquivo de `src/` começa com uma legenda de uma linha: o que faz, de onde 
 - [Como contribuir](CONTRIBUTING.md): commits, branches e PRs
 - [Histórico de mudanças](CHANGELOG.md)
 
-## Legado
-
-`legacy/kira_front.jsx` guarda o protótipo em arquivo único anterior à migração, apenas para consulta.
