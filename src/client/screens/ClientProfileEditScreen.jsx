@@ -14,29 +14,44 @@ export default function ClientProfileEditScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Editar perfil
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Atualize seus dados pessoais.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--space-10)",
+            marginBottom: "var(--space-18)",
+          }}
+        >
           <div style={{ position: "relative" }}>
             <div
               style={{
                 width: 88,
                 height: 88,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
@@ -64,7 +79,7 @@ export default function ClientProfileEditScreen() {
                 right: -4,
                 width: 34,
                 height: 34,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 border: "none",
                 background: gradientKira,
                 display: "flex",
@@ -116,19 +131,19 @@ export default function ClientProfileEditScreen() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 8,
+            gap: "var(--space-8)",
             width: "100%",
-            padding: "12px 14px",
-            borderRadius: 12,
+            padding: "var(--space-12) var(--space-14)",
+            borderRadius: "var(--radius-lg)",
             border: `1px solid ${colors.border}`,
             background: colors.muted,
-            marginBottom: 18,
+            marginBottom: "var(--space-18)",
             cursor: "pointer",
             textAlign: "left",
           }}
         >
           <MapPin size={15} color={colors.mutedForeground} />
-          <span style={{ flex: 1, fontFamily: fontBody, fontSize: 12, color: colors.foreground }}>
+          <span style={{ flex: 1, fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground }}>
             {cForm.street ? `${cForm.street}, ${cForm.city}` : "Adicionar endereço"}
           </span>
           <ChevronRight size={15} color={colors.mutedForeground} />
@@ -139,21 +154,23 @@ export default function ClientProfileEditScreen() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 6,
-              padding: "10px 14px",
-              borderRadius: 12,
-              background: "hsl(340 70% 55% / 0.08)",
-              marginBottom: 12,
+              gap: "var(--space-6)",
+              padding: "var(--space-10) var(--space-14)",
+              borderRadius: "var(--radius-lg)",
+              background: "hsl(var(--primary-hsl) / 0.08)",
+              marginBottom: "var(--space-12)",
             }}
           >
             <CheckCircle2 size={15} color={colors.primary} />
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.primary, fontWeight: 600 }}>
+            <span
+              style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.primary, fontWeight: 600 }}
+            >
               Perfil atualizado!
             </span>
           </div>
         )}
 
-        <div style={{ display: "flex", gap: 10 }}>
+        <div style={{ display: "flex", gap: "var(--space-10)" }}>
           <div style={{ flex: 1 }}>
             <SecondaryButton onClick={() => setScreen("clientProfile")}>
               <X size={15} /> Cancelar

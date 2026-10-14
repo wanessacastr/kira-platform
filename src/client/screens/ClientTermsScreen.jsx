@@ -10,36 +10,43 @@ export default function ClientTermsScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={6} />
       <Header onBack={() => setScreen("clientSelfie")} />
-      <div style={{ flex: 1, padding: "0 24px 32px" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Termos
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Só falta confirmar os termos para concluir o cadastro.
         </p>
         {[
           { key: "termsUse", label: "Termos de Uso" },
           { key: "termsPrivacy", label: "Política de Privacidade" },
         ].map(({ key, label }) => (
-          <div key={key} style={{ marginBottom: 14 }}>
+          <div key={key} style={{ marginBottom: "var(--space-14)" }}>
             <label
-              style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer" }}
+              style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-10)", cursor: "pointer" }}
               onClick={() => setCField(key, !cForm[key])}
             >
               <span
                 style={{
-                  marginTop: 2,
+                  marginTop: "var(--space-2)",
                   width: 18,
                   height: 18,
-                  borderRadius: 6,
+                  borderRadius: "var(--radius-xs)",
                   border: `1px solid ${cForm[key] ? colors.primary : cErrors[key] ? colors.destructive : colors.border}`,
                   background: cForm[key] ? colors.primary : colors.muted,
                   display: "flex",
@@ -50,13 +57,20 @@ export default function ClientTermsScreen() {
               >
                 {cForm[key] && <Check size={12} color={colors.primaryForeground} />}
               </span>
-              <span style={{ fontSize: 13, color: colors.foreground, fontFamily: fontBody }}>
+              <span style={{ fontSize: "var(--font-size-sm)", color: colors.foreground, fontFamily: fontBody }}>
                 Aceito {key === "termsUse" ? "os" : "a"}{" "}
                 <span style={{ color: colors.primary, fontWeight: 600 }}>{label}</span>
               </span>
             </label>
             {cErrors[key] && (
-              <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: "4px 0 0 28px" }}>
+              <p
+                style={{
+                  fontSize: "var(--font-size-xs)",
+                  color: colors.destructive,
+                  fontFamily: fontBody,
+                  margin: "var(--space-4) 0 0 var(--space-28)",
+                }}
+              >
                 {cErrors[key]}
               </p>
             )}

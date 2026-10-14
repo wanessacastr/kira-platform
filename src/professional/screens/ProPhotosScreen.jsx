@@ -10,19 +10,26 @@ export default function ProPhotosScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={7} />
       <Header onBack={() => setScreen("proServices")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Fotos
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Mostre seu estabelecimento e trabalhos. Sem limite de fotos.
         </p>
 
@@ -38,40 +45,71 @@ export default function ProPhotosScreen() {
           onClick={() => pWorkPhotosInputRef.current?.click()}
           style={{
             width: "100%",
-            padding: 26,
-            borderRadius: 16,
+            padding: "var(--space-26)",
+            borderRadius: "var(--radius-2xl)",
             border: `2px dashed ${pErrors.workPhotos ? colors.destructive : colors.border}`,
             background: colors.muted,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 6,
+            gap: "var(--space-6)",
             cursor: "pointer",
-            marginBottom: 14,
+            marginBottom: "var(--space-14)",
           }}
         >
           <ImagePlus size={26} color={colors.mutedForeground} />
-          <span style={{ fontSize: 13, fontWeight: 600, color: colors.primary, fontFamily: fontBody }}>
+          <span
+            style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: colors.primary, fontFamily: fontBody }}
+          >
             Adicionar fotos
           </span>
-          <span style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, textAlign: "center" }}>
+          <span
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: colors.mutedForeground,
+              fontFamily: fontBody,
+              textAlign: "center",
+            }}
+          >
             Estabelecimento e trabalhos realizados. Sem limite.
           </span>
         </button>
         {pErrors.workPhotos && (
-          <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: "-8px 0 10px" }}>
+          <p
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: colors.destructive,
+              fontFamily: fontBody,
+              margin: "-var(--space-8) 0 var(--space-10)",
+            }}
+          >
             {pErrors.workPhotos}
           </p>
         )}
 
         {pForm.workPhotos.length > 0 && (
           <div>
-            <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: "0 0 8px" }}>
+            <p
+              style={{
+                fontSize: "var(--font-size-xs)",
+                color: colors.mutedForeground,
+                fontFamily: fontBody,
+                margin: "0 0 var(--space-8)",
+              }}
+            >
               Fotos adicionadas ({pForm.workPhotos.length})
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--space-8)" }}>
               {pForm.workPhotos.map((photo, idx) => (
-                <div key={idx} style={{ position: "relative", aspectRatio: "1", borderRadius: 10, overflow: "hidden" }}>
+                <div
+                  key={idx}
+                  style={{
+                    position: "relative",
+                    aspectRatio: "1",
+                    borderRadius: "var(--radius-md)",
+                    overflow: "hidden",
+                  }}
+                >
                   <img
                     src={photo}
                     alt={`Foto ${idx + 1}`}
@@ -85,8 +123,8 @@ export default function ProPhotosScreen() {
                       right: 4,
                       width: 20,
                       height: 20,
-                      borderRadius: "50%",
-                      background: "rgba(255,255,255,0.85)",
+                      borderRadius: "var(--radius-round)",
+                      background: "hsl(var(--white-hsl) / 0.85)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -101,7 +139,7 @@ export default function ProPhotosScreen() {
           </div>
         )}
 
-        <div style={{ marginTop: 16 }}>
+        <div style={{ marginTop: "var(--space-16)" }}>
           <PrimaryButton
             onClick={() => {
               if (pForm.workPhotos.length === 0) {

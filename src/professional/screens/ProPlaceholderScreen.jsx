@@ -21,8 +21,8 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 14,
-          padding: 24,
+          gap: "var(--space-14)",
+          padding: "var(--space-24)",
           textAlign: "center",
         }}
       >
@@ -30,7 +30,7 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
           style={{
             width: 64,
             height: 64,
-            borderRadius: "50%",
+            borderRadius: "var(--radius-round)",
             background: colors.muted,
             display: "flex",
             alignItems: "center",
@@ -39,10 +39,26 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
         >
           <Sparkles size={26} color={colors.mutedForeground} />
         </div>
-        <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 18, color: colors.foreground, margin: 0 }}>
+        <h1
+          style={{
+            fontFamily: fontDisplay,
+            fontWeight: 700,
+            fontSize: "var(--font-size-lg)",
+            color: colors.foreground,
+            margin: 0,
+          }}
+        >
           {title}
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0, maxWidth: 240 }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: 0,
+            maxWidth: 240,
+          }}
+        >
           {message}
         </p>
       </div>

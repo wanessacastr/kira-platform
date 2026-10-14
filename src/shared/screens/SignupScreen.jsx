@@ -9,22 +9,36 @@ export default function SignupScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("splash")} />
-      <div style={{ flex: 1, padding: "0 24px 32px" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 26,
+            fontSize: "var(--font-size-3xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Criar conta
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: "0 0 24px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-sm)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-24)",
+          }}
+        >
           Escolha seu perfil para começar
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "var(--space-10)",
+            marginBottom: "var(--space-24)",
+          }}
+        >
           {[
             { type: "client", icon: User, label: "Cliente", desc: "Agendar serviços", go: "clientPersonal" },
             {
@@ -46,11 +60,11 @@ export default function SignupScreen() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 6,
-                padding: 18,
-                borderRadius: 16,
+                gap: "var(--space-6)",
+                padding: "var(--space-18)",
+                borderRadius: "var(--radius-2xl)",
                 border: `2px solid ${accountType === type ? colors.primary : colors.border}`,
-                background: accountType === type ? "hsl(340 70% 55% / 0.08)" : colors.card,
+                background: accountType === type ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                 cursor: "pointer",
               }}
             >
@@ -58,7 +72,7 @@ export default function SignupScreen() {
                 style={{
                   width: 44,
                   height: 44,
-                  borderRadius: 12,
+                  borderRadius: "var(--radius-lg)",
                   background: accountType === type ? gradientKira : colors.muted,
                   display: "flex",
                   alignItems: "center",
@@ -67,14 +81,30 @@ export default function SignupScreen() {
               >
                 <Icon size={20} color={accountType === type ? colors.primaryForeground : colors.mutedForeground} />
               </div>
-              <span style={{ fontWeight: 600, fontSize: 13, color: colors.foreground, fontFamily: fontBody }}>
+              <span
+                style={{
+                  fontWeight: 600,
+                  fontSize: "var(--font-size-sm)",
+                  color: colors.foreground,
+                  fontFamily: fontBody,
+                }}
+              >
                 {label}
               </span>
-              <span style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody }}>{desc}</span>
+              <span style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody }}>
+                {desc}
+              </span>
             </button>
           ))}
         </div>
-        <p style={{ textAlign: "center", fontSize: 12, color: colors.mutedForeground, fontFamily: fontBody }}>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            fontFamily: fontBody,
+          }}
+        >
           Já tem conta?{" "}
           <span
             style={{ color: colors.primary, fontWeight: 600, cursor: "pointer" }}

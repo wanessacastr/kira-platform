@@ -1,0 +1,112 @@
+/* Tokens de design (cor, espaço, raio, sombra e tipografia) · fonte única dos valores visuais · API: nenhuma */
+:root {
+  /* cor: canais HSL, para permitir transparência com hsl(var(--x-hsl) / 0.1) */
+  --white-hsl: 0 0% 100%;
+  --black-hsl: 0 0% 0%;
+  --foreground-hsl: 280 20% 15%;
+  --primary-hsl: 340 70% 55%;
+  --secondary-hsl: 280 40% 50%;
+  --accent-hsl: 15 80% 60%;
+  --destructive-hsl: 0 84% 60%;
+
+  --color-background: hsl(var(--white-hsl));
+  --color-foreground: hsl(var(--foreground-hsl));
+  --color-card: hsl(var(--white-hsl));
+  --color-primary: hsl(var(--primary-hsl));
+  --color-primary-foreground: hsl(40 80% 92%);
+  --color-secondary: hsl(var(--secondary-hsl));
+  --color-accent: hsl(var(--accent-hsl));
+  --color-muted: hsl(340 20% 96%);
+  --color-muted-foreground: hsl(280 10% 45%);
+  --color-border: hsl(340 20% 90%);
+  --color-destructive: hsl(var(--destructive-hsl));
+  --color-primary-tint: hsl(340 55% 88%);
+  --color-surface-soft: hsl(340 30% 96%);
+  --color-violet: hsl(270 60% 55%);
+  --color-pink-light: hsl(320 75% 75% / 0.85);
+  --color-magenta: hsl(300 65% 55% / 0.8);
+  --color-page: #efeff1;
+  --color-neutral-soft: hsl(0 0% 97%);
+  --color-lilac: hsl(270 25% 95%);
+  --color-orange-glow: hsl(15 85% 65% / 0.9);
+  --color-amber-glow: hsl(20 80% 60% / 0.8);
+  --medal-gold-from: #ffd76a;
+  --medal-gold-to: #ffb84d;
+  --medal-gold-text: #5a3b00;
+  --medal-silver-from: #e4e7ec;
+  --medal-silver-to: #c7ccd6;
+  --medal-bronze-from: #e7b78c;
+  --medal-bronze-to: #ce9564;
+  --medal-bronze-text: #4a2a0e;
+
+  --gradient-kira: linear-gradient(135deg, var(--color-accent), var(--color-primary), var(--color-violet));
+
+  /* espaço: o número é o valor em px */
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-5: 5px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-9: 9px;
+  --space-10: 10px;
+  --space-11: 11px;
+  --space-12: 12px;
+  --space-13: 13px;
+  --space-14: 14px;
+  --space-15: 15px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-22: 22px;
+  --space-24: 24px;
+  --space-26: 26px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+
+  /* raio */
+  --radius-2xs: 2px;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-icon: 9px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-2xl: 16px;
+  --radius-3xl: 18px;
+  --radius-4xl: 20px;
+  --radius-phone: 32px;
+  --radius-pill: 999px;
+  --radius-round: 50%;
+  --radius-sheet: 24px 24px 0 0;
+
+  /* sombra */
+  --shadow-xs: 0 1px 2px hsl(var(--foreground-hsl) / 0.1);
+  --shadow-sm: 0 2px 10px hsl(var(--foreground-hsl) / 0.12);
+  --shadow-md: 0 2px 10px hsl(var(--foreground-hsl) / 0.15);
+  --shadow-lg: 0 4px 14px hsl(var(--foreground-hsl) / 0.18);
+  --shadow-nav: 0 -6px 20px -12px hsl(var(--foreground-hsl) / 0.18);
+  --shadow-card-glow: 0 4px 20px -4px hsl(var(--primary-hsl) / 0.2);
+  --shadow-medal: 0 2px 14px -6px hsl(var(--primary-hsl) / 0.35);
+  --shadow-phone: 0 12px 40px hsl(var(--black-hsl) / 0.18);
+  --text-shadow-sm: 0 4px 12px hsl(var(--black-hsl) / 0.12);
+  --text-shadow-md: 0 4px 12px hsl(var(--black-hsl) / 0.15);
+  --focus-ring: 2px solid var(--color-primary);
+
+  /* tipografia: escala única, mínimo de 12px */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 22px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 32px;
+  --font-size-hero: 96px;
+  --font-display: "Playfair Display", serif;
+  --font-body: "DM Sans", sans-serif;
+}

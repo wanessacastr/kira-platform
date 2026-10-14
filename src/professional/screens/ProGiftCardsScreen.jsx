@@ -11,19 +11,26 @@ export default function ProGiftCardsScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proProfileMenu")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Gift Cards Kira
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Aceite gift cards como forma de pagamento e acompanhe os que já foram vendidos.
         </p>
 
@@ -33,27 +40,36 @@ export default function ProGiftCardsScreen() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 14,
-              padding: "40px 24px",
+              gap: "var(--space-14)",
+              padding: "var(--space-40) var(--space-24)",
               textAlign: "center",
             }}
           >
             <Gift size={30} color={colors.mutedForeground} />
-            <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-sm)",
+                color: colors.mutedForeground,
+                margin: 0,
+              }}
+            >
               Nenhum gift card vendido ainda.
             </p>
           </div>
         ) : (
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}
+          >
             {proGiftCardsMock.map((gc) => (
               <div
                 key={gc.id}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 12,
-                  padding: "12px 14px",
-                  borderRadius: 14,
+                  gap: "var(--space-12)",
+                  padding: "var(--space-12) var(--space-14)",
+                  borderRadius: "var(--radius-xl)",
                   border: `1px solid ${colors.border}`,
                   background: colors.card,
                 }}
@@ -62,7 +78,7 @@ export default function ProGiftCardsScreen() {
                   style={{
                     width: 40,
                     height: 40,
-                    borderRadius: 12,
+                    borderRadius: "var(--radius-lg)",
                     background: gradientKira,
                     display: "flex",
                     alignItems: "center",
@@ -74,22 +90,44 @@ export default function ProGiftCardsScreen() {
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <p
-                    style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 700, color: colors.foreground, margin: 0 }}
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-xs)",
+                      fontWeight: 700,
+                      color: colors.foreground,
+                      margin: 0,
+                    }}
                   >
                     {gc.code}
                   </p>
-                  <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>
+                  <p
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-xs)",
+                      color: colors.mutedForeground,
+                      margin: "var(--space-1) 0 0",
+                    }}
+                  >
                     Comprado por {gc.buyer}
                   </p>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
-                  <span style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 700, color: colors.primary }}>
+                <div
+                  style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "var(--space-2)" }}
+                >
+                  <span
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-sm)",
+                      fontWeight: 700,
+                      color: colors.primary,
+                    }}
+                  >
                     R$ {gc.value}
                   </span>
                   <span
                     style={{
                       fontFamily: fontBody,
-                      fontSize: 10,
+                      fontSize: "var(--font-size-xs)",
                       fontWeight: 600,
                       color: gc.status === "ativo" ? colors.primary : colors.mutedForeground,
                     }}

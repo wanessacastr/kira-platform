@@ -24,14 +24,30 @@ export default function HomeScreen() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 12,
-        padding: 24,
+        gap: "var(--space-12)",
+        padding: "var(--space-24)",
       }}
     >
-      <p style={{ fontFamily: fontDisplay, fontSize: 20, fontWeight: 700, color: colors.foreground, margin: 0 }}>
+      <p
+        style={{
+          fontFamily: fontDisplay,
+          fontSize: "var(--font-size-xl)",
+          fontWeight: 700,
+          color: colors.foreground,
+          margin: 0,
+        }}
+      >
         Bem-vinda! ✨
       </p>
-      <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, textAlign: "center", margin: 0 }}>
+      <p
+        style={{
+          fontFamily: fontBody,
+          fontSize: "var(--font-size-xs)",
+          color: colors.mutedForeground,
+          textAlign: "center",
+          margin: 0,
+        }}
+      >
         A partir daqui entra a Home real do app (fora do escopo deste protótipo).
       </p>
       <div style={{ width: "100%", maxWidth: 240 }}>

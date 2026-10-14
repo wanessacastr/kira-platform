@@ -4,6 +4,22 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+## [0.3.0] - 2026-10-14
+
+### Adicionado
+
+- Tokens em variáveis CSS: cor, espaço, raio, sombra e tipografia.
+- Primitivos de interface: Heading, Text, Card, Stack, Button, Chip, Badge, ListRow e ScreenHeader.
+- Foco visível e hover em botões, links e campos.
+- Regra de lint que barra cor, fonte e raio fixos.
+
+### Alterado
+
+- Componentes base usam os primitivos.
+- Barra inferior do cliente e do profissional agora é um componente só (NavBar).
+- Escala de fontes única, com mínimo de 12px (textos de 9, 10 e 11px subiram para 12px).
+- Campos mostram o anel de foco ao receber foco por teclado.
+
 ## [0.2.0] - 2026-10-14
 
 ### Adicionado

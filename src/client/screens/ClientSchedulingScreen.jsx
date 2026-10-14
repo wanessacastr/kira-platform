@@ -41,7 +41,7 @@ export default function ClientSchedulingScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("clientProfessionalProfile")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         {bookedSlot ? (
           <div
             style={{
@@ -49,8 +49,8 @@ export default function ClientSchedulingScreen() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              gap: 14,
-              padding: "48px 0",
+              gap: "var(--space-14)",
+              padding: "var(--space-48) 0",
               textAlign: "center",
             }}
           >
@@ -58,7 +58,7 @@ export default function ClientSchedulingScreen() {
               style={{
                 width: 72,
                 height: 72,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 background: gradientKira,
                 display: "flex",
                 alignItems: "center",
@@ -67,14 +67,31 @@ export default function ClientSchedulingScreen() {
             >
               <Check size={32} color={colors.primaryForeground} />
             </div>
-            <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 20, color: colors.foreground, margin: 0 }}>
+            <h1
+              style={{
+                fontFamily: fontDisplay,
+                fontWeight: 700,
+                fontSize: "var(--font-size-xl)",
+                color: colors.foreground,
+                margin: 0,
+              }}
+            >
               Agendamento confirmado!
             </h1>
-            <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-xs)",
+                color: colors.mutedForeground,
+                margin: 0,
+              }}
+            >
               {pro.name} • {selectedDate?.toLocaleDateString("pt-BR", { day: "2-digit", month: "long" })} às{" "}
               {bookedSlot}
             </p>
-            <div style={{ width: "100%", maxWidth: 260, display: "flex", flexDirection: "column", gap: 10 }}>
+            <div
+              style={{ width: "100%", maxWidth: 260, display: "flex", flexDirection: "column", gap: "var(--space-10)" }}
+            >
               <PrimaryButton
                 onClick={() => {
                   setAgendaTab("proximo");
@@ -92,14 +109,21 @@ export default function ClientSchedulingScreen() {
               style={{
                 fontFamily: fontDisplay,
                 fontWeight: 700,
-                fontSize: 20,
+                fontSize: "var(--font-size-xl)",
                 color: colors.foreground,
-                margin: "4px 0 4px",
+                margin: "var(--space-4) 0 var(--space-4)",
               }}
             >
               Agendar com {pro.name}
             </h1>
-            <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-xs)",
+                color: colors.mutedForeground,
+                margin: "0 0 var(--space-18)",
+              }}
+            >
               Escolha o melhor dia e horário para o seu atendimento.
             </p>
 
@@ -109,7 +133,7 @@ export default function ClientSchedulingScreen() {
               onNext={() => changeMonth(1)}
               canGoPrev={canGoPrev}
             />
-            <div style={{ marginBottom: 24 }}>
+            <div style={{ marginBottom: "var(--space-24)" }}>
               <CalendarMonth
                 monthDate={viewMonth}
                 selectedDate={selectedDate}
@@ -125,9 +149,9 @@ export default function ClientSchedulingScreen() {
                   style={{
                     fontFamily: fontDisplay,
                     fontWeight: 700,
-                    fontSize: 15,
+                    fontSize: "var(--font-size-base)",
                     color: colors.foreground,
-                    margin: "0 0 10px",
+                    margin: "0 0 var(--space-10)",
                   }}
                 >
                   Horários disponíveis
@@ -144,10 +168,10 @@ export default function ClientSchedulingScreen() {
                     <p
                       style={{
                         fontFamily: fontBody,
-                        fontSize: 11,
+                        fontSize: "var(--font-size-xs)",
                         color: colors.mutedForeground,
                         textAlign: "center",
-                        margin: "14px 0 0",
+                        margin: "var(--space-14) 0 0",
                       }}
                     >
                       Toque em um horário para continuar.
@@ -158,7 +182,7 @@ export default function ClientSchedulingScreen() {
             )}
 
             {scheduleTime && (
-              <div style={{ marginTop: 20 }}>
+              <div style={{ marginTop: "var(--space-20)" }}>
                 <PrimaryButton onClick={() => setBookedSlot(scheduleTime)}>Continuar para confirmação</PrimaryButton>
               </div>
             )}

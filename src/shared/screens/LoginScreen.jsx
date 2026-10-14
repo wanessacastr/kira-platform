@@ -17,19 +17,26 @@ export default function LoginScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("splash")} />
-      <div style={{ flex: 1, padding: "8px 24px 32px" }}>
+      <div style={{ flex: 1, padding: "var(--space-8) var(--space-24) var(--space-32)" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 26,
+            fontSize: "var(--font-size-3xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Bem-vinda de volta
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: "0 0 24px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-sm)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-24)",
+          }}
+        >
           Entre na sua conta Kira
         </p>
         <Field label="E-mail">
@@ -71,10 +78,10 @@ export default function LoginScreen() {
         <p
           style={{
             textAlign: "center",
-            fontSize: 12,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             fontFamily: fontBody,
-            marginTop: 20,
+            marginTop: "var(--space-20)",
           }}
         >
           Não tem conta?{" "}

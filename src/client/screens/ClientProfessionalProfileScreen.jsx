@@ -44,9 +44,9 @@ export default function ClientProfessionalProfileScreen() {
               left: 14,
               width: 34,
               height: 34,
-              borderRadius: "50%",
+              borderRadius: "var(--radius-round)",
               border: "none",
-              background: "rgba(255,255,255,0.25)",
+              background: "hsl(var(--white-hsl) / 0.25)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -64,9 +64,9 @@ export default function ClientProfessionalProfileScreen() {
               right: 14,
               width: 34,
               height: 34,
-              borderRadius: "50%",
+              borderRadius: "var(--radius-round)",
               border: "none",
-              background: "rgba(255,255,255,0.25)",
+              background: "hsl(var(--white-hsl) / 0.25)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -80,31 +80,38 @@ export default function ClientProfessionalProfileScreen() {
             />
           </button>
         </div>
-        <div style={{ padding: "0 24px 24px", marginTop: -40 }}>
+        <div style={{ padding: "0 var(--space-24) var(--space-24)", marginTop: -40 }}>
           <img
             src={pro.photo}
             alt={pro.name}
             style={{
               width: 84,
               height: 84,
-              borderRadius: 20,
+              borderRadius: "var(--radius-4xl)",
               objectFit: "cover",
               border: `3px solid ${colors.card}`,
-              boxShadow: "0 2px 10px hsl(280 20% 15% / 0.15)",
+              boxShadow: "var(--shadow-md)",
             }}
           />
           <h1
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 20,
+              fontSize: "var(--font-size-xl)",
               color: colors.foreground,
-              margin: "12px 0 2px",
+              margin: "var(--space-12) 0 var(--space-2)",
             }}
           >
             {pro.name}
           </h1>
-          <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: "0 0 6px" }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-sm)",
+              color: colors.mutedForeground,
+              margin: "0 0 var(--space-6)",
+            }}
+          >
             {pro.role}
           </p>
           {extras.verified && (
@@ -112,25 +119,27 @@ export default function ClientProfessionalProfileScreen() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 4,
+                gap: "var(--space-4)",
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 color: colors.primary,
-                margin: "0 0 10px",
+                margin: "0 0 var(--space-10)",
               }}
             >
               <BadgeCheck size={14} /> Profissional verificado
             </span>
           )}
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
+          <div
+            style={{ display: "flex", alignItems: "center", gap: "var(--space-12)", marginBottom: "var(--space-18)" }}
+          >
             <span
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 4,
+                gap: "var(--space-4)",
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 color: colors.foreground,
                 fontWeight: 600,
               }}
@@ -144,14 +153,21 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
-              margin: "0 0 6px",
+              margin: "0 0 var(--space-6)",
             }}
           >
             Sobre
           </h2>
-          <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: "0 0 18px" }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-sm)",
+              color: colors.mutedForeground,
+              margin: "0 0 var(--space-18)",
+            }}
+          >
             {pro.description}
           </p>
 
@@ -159,14 +175,16 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
-              margin: "0 0 10px",
+              margin: "0 0 var(--space-10)",
             }}
           >
             Serviços
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}
+          >
             {pro.services.map((s) => (
               <div
                 key={s}
@@ -174,19 +192,37 @@ export default function ClientProfessionalProfileScreen() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  padding: "12px 14px",
-                  borderRadius: 14,
+                  padding: "var(--space-12) var(--space-14)",
+                  borderRadius: "var(--radius-xl)",
                   border: `1px solid ${colors.border}`,
                   background: colors.card,
                 }}
               >
                 <div>
-                  <span style={{ fontFamily: fontBody, fontSize: 13, color: colors.foreground, display: "block" }}>
+                  <span
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-sm)",
+                      color: colors.foreground,
+                      display: "block",
+                    }}
+                  >
                     {s}
                   </span>
-                  <span style={{ fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground }}>≈ 45 min</span>
+                  <span
+                    style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}
+                  >
+                    ≈ 45 min
+                  </span>
                 </div>
-                <span style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 700, color: colors.primary }}>
+                <span
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: "var(--font-size-sm)",
+                    fontWeight: 700,
+                    color: colors.primary,
+                  }}
+                >
                   R$ {pro.price}
                 </span>
               </div>
@@ -197,20 +233,27 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
-              margin: "0 0 10px",
+              margin: "0 0 var(--space-10)",
             }}
           >
             Portfólio
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 20 }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gap: "var(--space-8)",
+              marginBottom: "var(--space-20)",
+            }}
+          >
             {extras.portfolio.map((photo, i) => (
               <img
                 key={i}
                 src={photo}
                 alt={`Trabalho ${i + 1} de ${pro.name}`}
-                style={{ width: "100%", aspectRatio: "1/1", borderRadius: 12, objectFit: "cover" }}
+                style={{ width: "100%", aspectRatio: "1/1", borderRadius: "var(--radius-lg)", objectFit: "cover" }}
               />
             ))}
           </div>
@@ -219,9 +262,9 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
-              margin: "0 0 10px",
+              margin: "0 0 var(--space-10)",
             }}
           >
             Avaliações
@@ -230,43 +273,76 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 8,
-              padding: "12px 14px",
-              borderRadius: 14,
+              gap: "var(--space-8)",
+              padding: "var(--space-12) var(--space-14)",
+              borderRadius: "var(--radius-xl)",
               border: `1px solid ${colors.border}`,
               background: colors.card,
               marginBottom: extras.reviewComments.length > 0 ? 10 : 20,
             }}
           >
             <RatingStars value={pro.rating} size={15} />
-            <span style={{ fontFamily: fontBody, fontSize: 13, color: colors.foreground, fontWeight: 700 }}>
+            <span
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-sm)",
+                color: colors.foreground,
+                fontWeight: 700,
+              }}
+            >
               {pro.rating}
             </span>
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
               com base em {pro.reviews} avaliações
             </span>
           </div>
           {extras.reviewComments.length > 0 && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "var(--space-8)",
+                marginBottom: "var(--space-20)",
+              }}
+            >
               {extras.reviewComments.map((r, i) => (
                 <div
                   key={i}
                   style={{
-                    padding: "12px 14px",
-                    borderRadius: 14,
+                    padding: "var(--space-12) var(--space-14)",
+                    borderRadius: "var(--radius-xl)",
                     border: `1px solid ${colors.border}`,
                     background: colors.card,
                   }}
                 >
                   <div
-                    style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 4 }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginBottom: "var(--space-4)",
+                    }}
                   >
-                    <span style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 700, color: colors.foreground }}>
+                    <span
+                      style={{
+                        fontFamily: fontBody,
+                        fontSize: "var(--font-size-xs)",
+                        fontWeight: 700,
+                        color: colors.foreground,
+                      }}
+                    >
                       {r.author}
                     </span>
                     <RatingStars value={r.stars} size={10} />
                   </div>
-                  <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>
+                  <p
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-xs)",
+                      color: colors.mutedForeground,
+                      margin: 0,
+                    }}
+                  >
                     {r.text}
                   </p>
                 </div>
@@ -278,9 +354,9 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
-              margin: "0 0 10px",
+              margin: "0 0 var(--space-10)",
             }}
           >
             Localização
@@ -289,20 +365,27 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 8,
-              padding: "12px 14px",
-              borderRadius: 14,
+              gap: "var(--space-8)",
+              padding: "var(--space-12) var(--space-14)",
+              borderRadius: "var(--radius-xl)",
               border: `1px solid ${colors.border}`,
               background: colors.card,
-              marginBottom: 20,
+              marginBottom: "var(--space-20)",
             }}
           >
             <MapPin size={16} color={colors.primary} />
             <div>
-              <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground, margin: 0 }}>
+              <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground, margin: 0 }}>
                 {extras.address}
               </p>
-              <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>
+              <p
+                style={{
+                  fontFamily: fontBody,
+                  fontSize: "var(--font-size-xs)",
+                  color: colors.mutedForeground,
+                  margin: "var(--space-1) 0 0",
+                }}
+              >
                 {pro.distance} km de você
               </p>
             </div>
@@ -312,9 +395,9 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 15,
+              fontSize: "var(--font-size-base)",
               color: colors.foreground,
-              margin: "0 0 10px",
+              margin: "0 0 var(--space-10)",
             }}
           >
             Disponibilidade
@@ -323,15 +406,15 @@ export default function ClientProfessionalProfileScreen() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 8,
-              padding: "12px 14px",
-              borderRadius: 14,
+              gap: "var(--space-8)",
+              padding: "var(--space-12) var(--space-14)",
+              borderRadius: "var(--radius-xl)",
               border: `1px solid ${colors.border}`,
               background: colors.card,
             }}
           >
             <Clock size={16} color={colors.primary} />
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground }}>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground }}>
               Próximo horário: {nextSlots}
             </span>
           </div>
@@ -339,7 +422,7 @@ export default function ClientProfessionalProfileScreen() {
       </div>
       <div
         style={{
-          padding: "12px 24px calc(12px + env(safe-area-inset-bottom, 0px))",
+          padding: "var(--space-12) var(--space-24) calc(var(--space-12) + env(safe-area-inset-bottom, 0px))",
           borderTop: `1px solid ${colors.border}`,
           background: colors.card,
           flexShrink: 0,

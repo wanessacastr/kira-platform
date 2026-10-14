@@ -13,19 +13,26 @@ export default function ClientAccountSecurityScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Segurança da conta
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Status da verificação de identidade da sua conta.
         </p>
 
@@ -34,19 +41,19 @@ export default function ClientAccountSecurityScreen() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 10,
-            padding: 22,
-            borderRadius: 16,
+            gap: "var(--space-10)",
+            padding: "var(--space-22)",
+            borderRadius: "var(--radius-2xl)",
             border: `1px solid ${colors.border}`,
             textAlign: "center",
-            marginBottom: 18,
+            marginBottom: "var(--space-18)",
           }}
         >
           <div
             style={{
               width: 52,
               height: 52,
-              borderRadius: "50%",
+              borderRadius: "var(--radius-round)",
               background: verified ? gradientKira : colors.muted,
               display: "flex",
               alignItems: "center",
@@ -58,13 +65,13 @@ export default function ClientAccountSecurityScreen() {
           {verified ? (
             <p
               style={{
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 fontWeight: 700,
                 color: colors.primary,
                 fontFamily: fontBody,
                 display: "flex",
                 alignItems: "center",
-                gap: 6,
+                gap: "var(--space-6)",
                 margin: 0,
               }}
             >
@@ -73,25 +80,29 @@ export default function ClientAccountSecurityScreen() {
           ) : (
             <p
               style={{
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 fontWeight: 700,
                 color: colors.mutedForeground,
                 fontFamily: fontBody,
                 display: "flex",
                 alignItems: "center",
-                gap: 6,
+                gap: "var(--space-6)",
                 margin: 0,
               }}
             >
               <Clock size={16} /> Verificação pendente
             </p>
           )}
-          <p style={{ fontSize: 11, color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}>
+          <p
+            style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}
+          >
             {verified ? "Selfie e documento confirmados." : "Conclua a selfie e o documento para verificar sua conta."}
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}
+        >
           {[
             { label: "Selfie de verificação", done: hasSelfie },
             { label: "Documento com foto", done: hasDocs },
@@ -101,9 +112,9 @@ export default function ClientAccountSecurityScreen() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 10,
-                padding: "12px 14px",
-                borderRadius: 14,
+                gap: "var(--space-10)",
+                padding: "var(--space-12) var(--space-14)",
+                borderRadius: "var(--radius-xl)",
                 border: `1px solid ${colors.border}`,
                 background: colors.card,
               }}
@@ -113,13 +124,15 @@ export default function ClientAccountSecurityScreen() {
               ) : (
                 <XCircle size={16} color={colors.mutedForeground} />
               )}
-              <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.foreground, flex: 1 }}>
+              <span
+                style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.foreground, flex: 1 }}
+              >
                 {item.label}
               </span>
               <span
                 style={{
                   fontFamily: fontBody,
-                  fontSize: 11,
+                  fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
                   color: item.done ? colors.primary : colors.mutedForeground,
                 }}

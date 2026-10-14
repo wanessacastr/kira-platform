@@ -12,19 +12,25 @@ export default function ProProfileMenuScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div
-        style={{ background: gradientKira, padding: "28px 24px 24px", display: "flex", alignItems: "center", gap: 14 }}
+        style={{
+          background: gradientKira,
+          padding: "var(--space-28) var(--space-24) var(--space-24)",
+          display: "flex",
+          alignItems: "center",
+          gap: "var(--space-14)",
+        }}
       >
         <div
           style={{
             width: 64,
             height: 64,
-            borderRadius: "50%",
+            borderRadius: "var(--radius-round)",
             overflow: "hidden",
-            border: "3px solid rgba(255,255,255,0.6)",
+            border: "3px solid hsl(var(--white-hsl) / 0.6)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "rgba(255,255,255,0.2)",
+            background: "hsl(var(--white-hsl) / 0.2)",
             flexShrink: 0,
           }}
         >
@@ -39,7 +45,7 @@ export default function ProProfileMenuScreen() {
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 17,
+              fontSize: "var(--font-size-lg)",
               color: colors.primaryForeground,
               margin: 0,
             }}
@@ -49,17 +55,17 @@ export default function ProProfileMenuScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.primaryForeground,
               opacity: 0.85,
-              margin: "2px 0 0",
+              margin: "var(--space-2) 0 0",
             }}
           >
             {pForm.specialties.length > 0 ? pForm.specialties.join(" · ") : "Profissional da beleza"}
           </p>
         </div>
       </div>
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px 24px 24px" }}>
+      <div style={{ flex: 1, overflowY: "auto", padding: "var(--space-20) var(--space-24) var(--space-24)" }}>
         {proProfileMenu.map((section) => (
           <ProfileSection key={section.title} title={section.title}>
             {section.items.map((item, i) => (
@@ -77,19 +83,19 @@ export default function ProProfileMenuScreen() {
           onClick={() => setScreen("splash")}
           style={{
             width: "100%",
-            padding: 13,
-            borderRadius: 14,
-            border: `1px solid hsl(0 84% 60% / 0.3)`,
-            background: "hsl(0 84% 60% / 0.06)",
+            padding: "var(--space-13)",
+            borderRadius: "var(--radius-xl)",
+            border: `1px solid hsl(var(--destructive-hsl) / 0.3)`,
+            background: "hsl(var(--destructive-hsl) / 0.06)",
             color: colors.destructive,
             fontWeight: 700,
-            fontSize: 13,
+            fontSize: "var(--font-size-sm)",
             fontFamily: fontBody,
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: 8,
+            gap: "var(--space-8)",
           }}
         >
           <LogOut size={15} /> Sair da conta

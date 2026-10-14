@@ -26,19 +26,26 @@ export default function ClientSelfieScreen() {
           setScreen("clientDocument");
         }}
       />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Verificação Facial
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Tire uma selfie para aumentarmos a segurança da sua conta e confirmarmos sua identidade.
         </p>
 
@@ -47,8 +54,8 @@ export default function ClientSelfieScreen() {
             width: "100%",
             aspectRatio: "1/1",
             maxWidth: 280,
-            margin: "0 auto 16px",
-            borderRadius: 20,
+            margin: "0 auto var(--space-16)",
+            borderRadius: "var(--radius-4xl)",
             overflow: "hidden",
             display: "flex",
             alignItems: "center",
@@ -70,13 +77,15 @@ export default function ClientSelfieScreen() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 8,
-                padding: 20,
+                gap: "var(--space-8)",
+                padding: "var(--space-20)",
                 textAlign: "center",
               }}
             >
               <AlertCircle size={30} color={colors.destructive} />
-              <span style={{ fontSize: 12, color: colors.mutedForeground, fontFamily: fontBody }}>{cSelfieError}</span>
+              <span style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody }}>
+                {cSelfieError}
+              </span>
             </div>
           ) : (
             <video
@@ -92,8 +101,8 @@ export default function ClientSelfieScreen() {
               style={{
                 position: "absolute",
                 inset: 14,
-                borderRadius: 14,
-                border: "2px solid hsl(340 70% 55% / 0.6)",
+                borderRadius: "var(--radius-xl)",
+                border: "2px solid hsl(var(--primary-hsl) / 0.6)",
                 pointerEvents: "none",
               }}
             />
@@ -102,7 +111,14 @@ export default function ClientSelfieScreen() {
         <canvas ref={cSelfieCanvasRef} style={{ display: "none" }} />
 
         <div
-          style={{ width: "100%", maxWidth: 280, margin: "0 auto", display: "flex", flexDirection: "column", gap: 10 }}
+          style={{
+            width: "100%",
+            maxWidth: 280,
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--space-10)",
+          }}
         >
           {!cForm.selfiePhoto && cSelfieStatus !== "error" && (
             <PrimaryButton onClick={captureClientSelfie} disabled={cSelfieStatus !== "streaming"}>
@@ -121,11 +137,11 @@ export default function ClientSelfieScreen() {
         </div>
         <p
           style={{
-            fontSize: 10,
+            fontSize: "var(--font-size-xs)",
             color: colors.mutedForeground,
             fontFamily: fontBody,
             textAlign: "center",
-            margin: "14px 0 0",
+            margin: "var(--space-14) 0 0",
           }}
         >
           Sua selfie é usada apenas para confirmar sua identidade.

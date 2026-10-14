@@ -16,37 +16,46 @@ export default function ProSecurityScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proProfileMenu")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Segurança Kira
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Credibilidade que gera confiança, para você e para seus clientes.
         </p>
 
         <div
           style={{
-            borderRadius: 18,
+            borderRadius: "var(--radius-3xl)",
             border: `1px solid ${colors.border}`,
             background: colors.card,
-            padding: 18,
-            marginBottom: 20,
+            padding: "var(--space-18)",
+            marginBottom: "var(--space-20)",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+          <div
+            style={{ display: "flex", alignItems: "center", gap: "var(--space-12)", marginBottom: "var(--space-16)" }}
+          >
             <div
               style={{
                 width: 52,
                 height: 52,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
@@ -66,7 +75,15 @@ export default function ProSecurityScreen() {
               )}
             </div>
             <div>
-              <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: colors.foreground, margin: 0 }}>
+              <p
+                style={{
+                  fontFamily: fontBody,
+                  fontWeight: 700,
+                  fontSize: "var(--font-size-md)",
+                  color: colors.foreground,
+                  margin: 0,
+                }}
+              >
                 {pForm.name || "Profissional Kira"}
               </p>
               {verified && (
@@ -74,12 +91,12 @@ export default function ProSecurityScreen() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 4,
+                    gap: "var(--space-4)",
                     fontFamily: fontBody,
-                    fontSize: 11,
+                    fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     color: colors.primary,
-                    marginTop: 2,
+                    marginTop: "var(--space-2)",
                   }}
                 >
                   <BadgeCheck size={13} /> Perfil verificado
@@ -88,7 +105,9 @@ export default function ProSecurityScreen() {
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 14 }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", marginBottom: "var(--space-14)" }}
+          >
             {[
               { label: "Documento validado", detail: hasDocs ? "CPF confirmado" : "Pendente", done: hasDocs },
               {
@@ -103,9 +122,9 @@ export default function ProSecurityScreen() {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: 10,
-                  padding: "10px 12px",
-                  borderRadius: 12,
+                  gap: "var(--space-10)",
+                  padding: "var(--space-10) var(--space-12)",
+                  borderRadius: "var(--radius-lg)",
                   background: colors.muted,
                 }}
               >
@@ -116,11 +135,24 @@ export default function ProSecurityScreen() {
                 )}
                 <div style={{ flex: 1 }}>
                   <p
-                    style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, color: colors.foreground, margin: 0 }}
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-xs)",
+                      fontWeight: 600,
+                      color: colors.foreground,
+                      margin: 0,
+                    }}
                   >
                     {item.label}
                   </p>
-                  <p style={{ fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground, margin: 0 }}>
+                  <p
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-xs)",
+                      color: colors.mutedForeground,
+                      margin: 0,
+                    }}
+                  >
                     {item.detail}
                   </p>
                 </div>
@@ -128,15 +160,15 @@ export default function ProSecurityScreen() {
             ))}
           </div>
 
-          <div style={{ display: "flex", gap: 8 }}>
+          <div style={{ display: "flex", gap: "var(--space-8)" }}>
             <span
               style={{
-                padding: "8px 12px",
-                borderRadius: 999,
+                padding: "var(--space-8) var(--space-12)",
+                borderRadius: "var(--radius-pill)",
                 background: gradientKira,
                 color: colors.primaryForeground,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
               }}
             >
@@ -145,12 +177,12 @@ export default function ProSecurityScreen() {
             <span
               onClick={() => setScreen("proFinance")}
               style={{
-                padding: "8px 12px",
-                borderRadius: 999,
+                padding: "var(--space-8) var(--space-12)",
+                borderRadius: "var(--radius-pill)",
                 background: colors.muted,
                 color: colors.foreground,
                 fontFamily: fontBody,
-                fontSize: 11,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 cursor: "pointer",
               }}
@@ -164,14 +196,21 @@ export default function ProSecurityScreen() {
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 15,
+            fontSize: "var(--font-size-base)",
             color: colors.foreground,
-            margin: "0 0 10px",
+            margin: "0 0 var(--space-10)",
           }}
         >
           Canal de Segurança
         </h2>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 14px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-14)",
+          }}
+        >
           A proteção vale para os dois lados. Clientes também passam por verificação, e você pode reportar qualquer
           situação suspeita de forma protegida, com análise da equipe Kira.
         </p>

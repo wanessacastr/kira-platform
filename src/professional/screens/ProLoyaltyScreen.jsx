@@ -10,19 +10,26 @@ export default function ProLoyaltyScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proProfileMenu")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Programa de fidelidade
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Fidelize clientes com pontos, cashback e recompensas.
         </p>
 
@@ -30,12 +37,12 @@ export default function ProLoyaltyScreen() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 10,
-            padding: "14px 16px",
-            borderRadius: 16,
+            gap: "var(--space-10)",
+            padding: "var(--space-14) var(--space-16)",
+            borderRadius: "var(--radius-2xl)",
             border: `1px solid ${colors.border}`,
             background: colors.card,
-            marginBottom: 18,
+            marginBottom: "var(--space-18)",
             cursor: "pointer",
           }}
           onClick={() => setLoyaltySettings((s) => ({ ...s, enabled: !s.enabled }))}
@@ -44,7 +51,7 @@ export default function ProLoyaltyScreen() {
             style={{
               width: 18,
               height: 18,
-              borderRadius: 6,
+              borderRadius: "var(--radius-xs)",
               border: `1px solid ${loyaltySettings.enabled ? colors.primary : colors.border}`,
               background: loyaltySettings.enabled ? colors.primary : colors.muted,
               display: "flex",
@@ -55,15 +62,31 @@ export default function ProLoyaltyScreen() {
           >
             {loyaltySettings.enabled && <Check size={12} color={colors.primaryForeground} />}
           </span>
-          <span style={{ flex: 1, fontFamily: fontBody, fontSize: 13, color: colors.foreground, fontWeight: 600 }}>
+          <span
+            style={{
+              flex: 1,
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-sm)",
+              color: colors.foreground,
+              fontWeight: 600,
+            }}
+          >
             Ativar programa de fidelidade
           </span>
         </label>
 
-        <p style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, color: colors.foreground, margin: "0 0 8px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            fontWeight: 600,
+            color: colors.foreground,
+            margin: "0 0 var(--space-8)",
+          }}
+        >
           Pontos por real gasto
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-18)" }}>
           <input
             type="range"
             min={0}
@@ -76,7 +99,7 @@ export default function ProLoyaltyScreen() {
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.foreground,
               minWidth: 60,
@@ -87,10 +110,18 @@ export default function ProLoyaltyScreen() {
           </span>
         </div>
 
-        <p style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, color: colors.foreground, margin: "0 0 8px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            fontWeight: 600,
+            color: colors.foreground,
+            margin: "0 0 var(--space-8)",
+          }}
+        >
           Cashback
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 22 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-22)" }}>
           <input
             type="range"
             min={0}
@@ -103,7 +134,7 @@ export default function ProLoyaltyScreen() {
           <span
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               fontWeight: 600,
               color: colors.foreground,
               minWidth: 44,

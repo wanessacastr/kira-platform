@@ -15,27 +15,48 @@ export default function ClientAgendaDetailScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientAgenda")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
-          <img src={pro.photo} alt={pro.name} style={{ width: 60, height: 60, borderRadius: 16, objectFit: "cover" }} />
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-12)", marginBottom: "var(--space-18)" }}>
+          <img
+            src={pro.photo}
+            alt={pro.name}
+            style={{ width: 60, height: 60, borderRadius: "var(--radius-2xl)", objectFit: "cover" }}
+          />
           <div>
-            <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 15, color: colors.foreground, margin: 0 }}>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontWeight: 700,
+                fontSize: "var(--font-size-base)",
+                color: colors.foreground,
+                margin: 0,
+              }}
+            >
               {pro.name}
             </p>
-            <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>{pro.role}</p>
+            <p
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-xs)",
+                color: colors.mutedForeground,
+                margin: 0,
+              }}
+            >
+              {pro.role}
+            </p>
           </div>
         </div>
 
         <div
           style={{
-            borderRadius: 16,
+            borderRadius: "var(--radius-2xl)",
             border: `1px solid ${colors.border}`,
             background: colors.card,
-            padding: 16,
-            marginBottom: 18,
+            padding: "var(--space-16)",
+            marginBottom: "var(--space-18)",
             display: "flex",
             flexDirection: "column",
-            gap: 10,
+            gap: "var(--space-10)",
           }}
         >
           {[
@@ -47,8 +68,17 @@ export default function ClientAgendaDetailScreen() {
             ["Pagamento", appointment.payment],
           ].map(([label, value]) => (
             <div key={label} style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>{label}</span>
-              <span style={{ fontFamily: fontBody, fontSize: 12, fontWeight: 600, color: colors.foreground }}>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                {label}
+              </span>
+              <span
+                style={{
+                  fontFamily: fontBody,
+                  fontSize: "var(--font-size-xs)",
+                  fontWeight: 600,
+                  color: colors.foreground,
+                }}
+              >
                 {value}
               </span>
             </div>
@@ -58,15 +88,17 @@ export default function ClientAgendaDetailScreen() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              paddingTop: 8,
+              paddingTop: "var(--space-8)",
               borderTop: `1px solid ${colors.border}`,
             }}
           >
-            <span style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground }}>Status</span>
+            <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+              Status
+            </span>
             <span
               style={{
                 fontFamily: fontBody,
-                fontSize: 12,
+                fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
                 color: appointment.status === "cancelado" ? colors.destructive : colors.primary,
               }}
@@ -80,7 +112,7 @@ export default function ClientAgendaDetailScreen() {
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
           <SecondaryButton onClick={() => {}}>
             <MessageCircle size={15} /> Conversar com {pro.name.split(" ")[0]}
           </SecondaryButton>
@@ -92,19 +124,19 @@ export default function ClientAgendaDetailScreen() {
               onClick={() => {}}
               style={{
                 width: "100%",
-                padding: 12,
-                borderRadius: 12,
+                padding: "var(--space-12)",
+                borderRadius: "var(--radius-lg)",
                 border: "none",
                 background: "transparent",
                 color: colors.destructive,
                 fontWeight: 600,
-                fontSize: 13,
+                fontSize: "var(--font-size-sm)",
                 fontFamily: fontBody,
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: 6,
+                gap: "var(--space-6)",
               }}
             >
               <XCircle size={15} /> Cancelar agendamento

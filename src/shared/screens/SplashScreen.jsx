@@ -13,7 +13,7 @@ export default function SplashScreen() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        padding: "0 24px",
+        padding: "0 var(--space-24)",
         overflow: "hidden",
       }}
     >
@@ -22,11 +22,16 @@ export default function SplashScreen() {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(circle at 18% 15%, hsl(15 85% 65% / 0.9), transparent 45%), radial-gradient(circle at 82% 10%, hsl(320 75% 75% / 0.85), transparent 50%), radial-gradient(circle at 88% 55%, hsl(300 65% 55% / 0.8), transparent 55%), radial-gradient(circle at 8% 68%, hsl(20 80% 60% / 0.8), transparent 50%), radial-gradient(circle at 50% 92%, hsl(0 0% 100% / 0.55), transparent 60%), linear-gradient(180deg, hsl(340 55% 88%), hsl(0 0% 97%))",
+            "radial-gradient(circle at 18% 15%, var(--color-orange-glow), transparent 45%), radial-gradient(circle at 82% 10%, var(--color-pink-light), transparent 50%), radial-gradient(circle at 88% 55%, var(--color-magenta), transparent 55%), radial-gradient(circle at 8% 68%, var(--color-amber-glow), transparent 50%), radial-gradient(circle at 50% 92%, hsl(var(--white-hsl) / 0.55), transparent 60%), linear-gradient(180deg, var(--color-primary-tint), var(--color-neutral-soft))",
         }}
       />
       <div
-        style={{ position: "absolute", inset: 0, background: "rgba(255,255,255,0.1)", backdropFilter: "blur(2px)" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "hsl(var(--white-hsl) / 0.1)",
+          backdropFilter: "blur(2px)",
+        }}
       />
       <div
         style={{
@@ -35,19 +40,19 @@ export default function SplashScreen() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 40,
+          gap: "var(--space-40)",
         }}
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-12)" }}>
           <h1
             style={{
               fontFamily: fontDisplay,
               fontWeight: 700,
-              fontSize: 96,
+              fontSize: "var(--font-size-hero)",
               lineHeight: 1,
               color: colors.primaryForeground,
               margin: 0,
-              textShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              textShadow: "var(--text-shadow-md)",
             }}
           >
             K
@@ -55,10 +60,10 @@ export default function SplashScreen() {
           <p
             style={{
               fontFamily: fontDisplay,
-              fontSize: 32,
+              fontSize: "var(--font-size-4xl)",
               color: colors.primaryForeground,
               margin: 0,
-              textShadow: "0 4px 12px rgba(0,0,0,0.12)",
+              textShadow: "var(--text-shadow-sm)",
             }}
           >
             Kira
@@ -66,32 +71,32 @@ export default function SplashScreen() {
           <p
             style={{
               fontFamily: fontBody,
-              fontSize: 12,
+              fontSize: "var(--font-size-xs)",
               color: colors.primaryForeground,
               opacity: 0.9,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              marginTop: 8,
+              marginTop: "var(--space-8)",
             }}
           >
             Beleza com confiança
           </p>
         </div>
-        <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ width: "100%", maxWidth: 320, display: "flex", flexDirection: "column", gap: "var(--space-12)" }}>
           <button
             onClick={() => setScreen("login")}
             style={{
               width: "100%",
-              padding: 16,
-              borderRadius: 999,
+              padding: "var(--space-16)",
+              borderRadius: "var(--radius-pill)",
               border: "none",
-              background: "rgba(255,255,255,0.95)",
+              background: "hsl(var(--white-hsl) / 0.95)",
               color: colors.foreground,
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: "var(--font-size-md)",
               fontFamily: fontBody,
               cursor: "pointer",
-              boxShadow: "0 4px 20px -4px hsl(340 70% 55% / 0.2)",
+              boxShadow: "var(--shadow-card-glow)",
             }}
           >
             Entrar
@@ -100,13 +105,13 @@ export default function SplashScreen() {
             onClick={() => setScreen("signup")}
             style={{
               width: "100%",
-              padding: 16,
-              borderRadius: 999,
+              padding: "var(--space-16)",
+              borderRadius: "var(--radius-pill)",
               border: "none",
-              background: "hsl(340 70% 55% / 0.3)",
+              background: "hsl(var(--primary-hsl) / 0.3)",
               color: colors.primaryForeground,
               fontWeight: 600,
-              fontSize: 14,
+              fontSize: "var(--font-size-md)",
               fontFamily: fontBody,
               cursor: "pointer",
             }}

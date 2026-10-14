@@ -25,29 +25,44 @@ export default function ClientPersonalScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={1} />
       <Header onBack={() => setScreen("signup")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           Cadastro de cliente
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Complete seus dados para agendar com nossos profissionais.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, marginBottom: 18 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "var(--space-10)",
+            marginBottom: "var(--space-18)",
+          }}
+        >
           <div style={{ position: "relative" }}>
             <div
               style={{
                 width: 88,
                 height: 88,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
@@ -75,7 +90,7 @@ export default function ClientPersonalScreen() {
                 right: -4,
                 width: 34,
                 height: 34,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 border: "none",
                 background: gradientKira,
                 display: "flex",
@@ -95,13 +110,21 @@ export default function ClientPersonalScreen() {
             onChange={(e) => handlePhoto(e.target.files?.[0], (v) => setCField("photo", v))}
           />
           <span
-            style={{ fontSize: 12, color: colors.primary, fontWeight: 600, fontFamily: fontBody, cursor: "pointer" }}
+            style={{
+              fontSize: "var(--font-size-xs)",
+              color: colors.primary,
+              fontWeight: 600,
+              fontFamily: fontBody,
+              cursor: "pointer",
+            }}
             onClick={() => cFileInputRef.current?.click()}
           >
             {cForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
           </span>
           {cErrors.photo && (
-            <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: 0 }}>{cErrors.photo}</p>
+            <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+              {cErrors.photo}
+            </p>
           )}
         </div>
 
@@ -113,7 +136,7 @@ export default function ClientPersonalScreen() {
             style={inputStyle(cErrors.name)}
           />
         </Field>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-10)" }}>
           <Field label="CPF" error={cErrors.cpf}>
             <input
               value={cForm.cpf}

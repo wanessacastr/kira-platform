@@ -9,24 +9,38 @@ export default function ClientPreferencesScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("clientDone")} />
-      <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
+      <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <h1
           style={{
             fontFamily: fontDisplay,
             fontWeight: 700,
-            fontSize: 22,
+            fontSize: "var(--font-size-2xl)",
             color: colors.foreground,
-            margin: "4px 0 4px",
+            margin: "var(--space-4) 0 var(--space-4)",
           }}
         >
           ✨ Vamos personalizar sua experiência
         </h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+        <p
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.mutedForeground,
+            margin: "0 0 var(--space-18)",
+          }}
+        >
           Escolha os serviços que mais combinam com você. Assim a Kira poderá mostrar profissionais e inspirações mais
           relevantes.
         </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 24 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "var(--space-10)",
+            marginBottom: "var(--space-24)",
+          }}
+        >
           {preferenceCategories.map((cat) => {
             const selected = cPreferences.includes(cat.id);
             return (
@@ -38,11 +52,11 @@ export default function ClientPreferencesScreen() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: 6,
-                  padding: 18,
-                  borderRadius: 16,
+                  gap: "var(--space-6)",
+                  padding: "var(--space-18)",
+                  borderRadius: "var(--radius-2xl)",
                   border: `2px solid ${selected ? colors.primary : colors.border}`,
-                  background: selected ? "hsl(340 70% 55% / 0.08)" : colors.card,
+                  background: selected ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                   cursor: "pointer",
                 }}
               >
@@ -50,17 +64,24 @@ export default function ClientPreferencesScreen() {
                   style={{
                     width: 44,
                     height: 44,
-                    borderRadius: 12,
+                    borderRadius: "var(--radius-lg)",
                     background: selected ? gradientKira : colors.muted,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    fontSize: 20,
+                    fontSize: "var(--font-size-xl)",
                   }}
                 >
                   {cat.emoji}
                 </div>
-                <span style={{ fontWeight: 600, fontSize: 13, color: colors.foreground, fontFamily: fontBody }}>
+                <span
+                  style={{
+                    fontWeight: 600,
+                    fontSize: "var(--font-size-sm)",
+                    color: colors.foreground,
+                    fontFamily: fontBody,
+                  }}
+                >
                   {cat.label}
                 </span>
               </button>
