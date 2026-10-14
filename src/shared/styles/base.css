@@ -1,0 +1,34 @@
+/* Estilos base: reset do corpo, foco visível e hover dos primitivos · API: nenhuma */
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+[tabindex]:not([tabindex="-1"]) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(button, a, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .k-btn:hover:not(:disabled) {
+    filter: brightness(0.96);
+  }
+  .k-chip:hover,
+  .k-row:hover {
+    filter: brightness(0.97);
+  }
+}
+
+.k-btn:active:not(:disabled) {
+  filter: brightness(0.92);
+}
