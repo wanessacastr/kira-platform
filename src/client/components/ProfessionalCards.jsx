@@ -1,11 +1,5 @@
 // Cards de profissional, recomendação, ranking e agendamento · API: nenhuma
-import {
-  ChevronRight,
-  Clock,
-  MapPin,
-  Sparkles,
-  Star,
-} from "lucide-react";
+import { ChevronRight, Clock, MapPin, Sparkles, Star } from "lucide-react";
 import { SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, gradientKira } from "../../shared/theme";
 import { getRankingExtras } from "../data/mocks";
@@ -14,19 +8,54 @@ export const ProfessionalCard = ({ pro, onClick }) => (
   <button
     onClick={onClick}
     style={{
-      display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 16,
-      border: `1px solid ${colors.border}`, background: colors.card, width: "100%", textAlign: "left", cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      padding: 12,
+      borderRadius: 16,
+      border: `1px solid ${colors.border}`,
+      background: colors.card,
+      width: "100%",
+      textAlign: "left",
+      cursor: "pointer",
     }}
   >
-    <img src={pro.photo} alt={pro.name} style={{ width: 56, height: 56, borderRadius: 14, objectFit: "cover", flexShrink: 0 }} />
+    <img
+      src={pro.photo}
+      alt={pro.name}
+      style={{ width: 56, height: 56, borderRadius: 14, objectFit: "cover", flexShrink: 0 }}
+    />
     <div style={{ flex: 1, minWidth: 0 }}>
-      <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>{pro.name}</p>
-      <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 4px" }}>{pro.role}</p>
+      <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+        {pro.name}
+      </p>
+      <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 4px" }}>
+        {pro.role}
+      </p>
       <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-        <span style={{ display: "flex", alignItems: "center", gap: 3, fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
-          <Star size={11} color={colors.accent} fill={colors.accent} /> {pro.rating}{pro.reviews ? ` (${pro.reviews})` : ""}
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 3,
+            fontFamily: fontBody,
+            fontSize: 11,
+            color: colors.mutedForeground,
+          }}
+        >
+          <Star size={11} color={colors.accent} fill={colors.accent} /> {pro.rating}
+          {pro.reviews ? ` (${pro.reviews})` : ""}
         </span>
-        <span style={{ display: "flex", alignItems: "center", gap: 2, fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            fontFamily: fontBody,
+            fontSize: 11,
+            color: colors.mutedForeground,
+          }}
+        >
           <MapPin size={11} /> {pro.distance} km
         </span>
       </div>
@@ -40,10 +69,20 @@ export const ProfessionalCard = ({ pro, onClick }) => (
 );
 
 export const CompatibilityBadge = ({ value }) => (
-  <span style={{
-    display: "inline-flex", alignItems: "center", gap: 4, padding: "4px 10px", borderRadius: 999,
-    background: gradientKira, color: colors.primaryForeground, fontFamily: fontBody, fontSize: 11, fontWeight: 700,
-  }}>
+  <span
+    style={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 4,
+      padding: "4px 10px",
+      borderRadius: 999,
+      background: gradientKira,
+      color: colors.primaryForeground,
+      fontFamily: fontBody,
+      fontSize: 11,
+      fontWeight: 700,
+    }}
+  >
     <Sparkles size={11} /> {value}% compatível com seu visual
   </span>
 );
@@ -51,27 +90,75 @@ export const CompatibilityBadge = ({ value }) => (
 export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
   const extras = getRankingExtras(pro);
   return (
-    <div onClick={onViewProfile} style={{ borderRadius: 18, border: `1px solid ${colors.border}`, background: colors.card, overflow: "hidden", cursor: "pointer" }}>
+    <div
+      onClick={onViewProfile}
+      style={{
+        borderRadius: 18,
+        border: `1px solid ${colors.border}`,
+        background: colors.card,
+        overflow: "hidden",
+        cursor: "pointer",
+      }}
+    >
       <div style={{ padding: "12px 14px 0" }}>
         <CompatibilityBadge value={pro.compatibility} />
       </div>
       <div style={{ display: "flex", gap: 12, padding: 14 }}>
-        <img src={pro.photo} alt={pro.name} style={{ width: 64, height: 64, borderRadius: 16, objectFit: "cover", flexShrink: 0 }} />
+        <img
+          src={pro.photo}
+          alt={pro.name}
+          style={{ width: 64, height: 64, borderRadius: 16, objectFit: "cover", flexShrink: 0 }}
+        />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: colors.foreground, margin: 0 }}>{pro.name}</p>
-          <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "1px 0 5px" }}>{pro.role}</p>
+          <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 14, color: colors.foreground, margin: 0 }}>
+            {pro.name}
+          </p>
+          <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "1px 0 5px" }}>
+            {pro.role}
+          </p>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 4 }}>
-            <span style={{ display: "flex", alignItems: "center", gap: 3, fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 3,
+                fontFamily: fontBody,
+                fontSize: 11,
+                color: colors.mutedForeground,
+              }}
+            >
               <Star size={11} color={colors.accent} fill={colors.accent} /> {pro.rating} ({pro.reviews} avaliações)
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-            <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>R$ {pro.price} — R$ {pro.price + 70}</span>
-            <span style={{ display: "flex", alignItems: "center", gap: 2, fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+            <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+              R$ {pro.price} — R$ {pro.price + 70}
+            </span>
+            <span
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
+                fontFamily: fontBody,
+                fontSize: 11,
+                color: colors.mutedForeground,
+              }}
+            >
               <MapPin size={11} /> {pro.distance} km
             </span>
           </div>
-          <span style={{ display: "flex", alignItems: "center", gap: 4, fontFamily: fontBody, fontSize: 11, color: colors.primary, fontWeight: 600, marginTop: 4 }}>
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 4,
+              fontFamily: fontBody,
+              fontSize: 11,
+              color: colors.primary,
+              fontWeight: 600,
+              marginTop: 4,
+            }}
+          >
             <Clock size={11} /> Disponível {extras.nextSlot.toLowerCase()}
           </span>
         </div>
@@ -79,7 +166,12 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
       {extras.portfolio.length > 0 && (
         <div style={{ display: "flex", gap: 6, padding: "0 14px 14px" }}>
           {extras.portfolio.map((photo, i) => (
-            <img key={i} src={photo} alt={`Trabalho de ${pro.name}`} style={{ width: 56, height: 56, borderRadius: 10, objectFit: "cover" }} />
+            <img
+              key={i}
+              src={photo}
+              alt={`Trabalho de ${pro.name}`}
+              style={{ width: 56, height: 56, borderRadius: 10, objectFit: "cover" }}
+            />
           ))}
         </div>
       )}
@@ -114,26 +206,72 @@ export const RankingCard = ({ pro, rank, onClick }) => {
     <button
       onClick={onClick}
       style={{
-        display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 16, width: "100%", textAlign: "left", cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        padding: 12,
+        borderRadius: 16,
+        width: "100%",
+        textAlign: "left",
+        cursor: "pointer",
         border: `1px solid ${medal ? "transparent" : colors.border}`,
         background: medal ? "hsl(340 70% 55% / 0.06)" : colors.card,
         boxShadow: medal ? "0 2px 14px -6px hsl(340 70% 55% / 0.35)" : "none",
       }}
     >
       {medal ? (
-        <div style={{ width: 26, height: 26, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: fontBody, fontWeight: 700, fontSize: 12, flexShrink: 0, ...medal }}>
+        <div
+          style={{
+            width: 26,
+            height: 26,
+            borderRadius: "50%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: fontBody,
+            fontWeight: 700,
+            fontSize: 12,
+            flexShrink: 0,
+            ...medal,
+          }}
+        >
           {rank}
         </div>
       ) : (
-        <span style={{ width: 26, height: 26, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: fontBody, fontWeight: 700, fontSize: 12, color: colors.mutedForeground, flexShrink: 0 }}>{rank}</span>
+        <span
+          style={{
+            width: 26,
+            height: 26,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: fontBody,
+            fontWeight: 700,
+            fontSize: 12,
+            color: colors.mutedForeground,
+            flexShrink: 0,
+          }}
+        >
+          {rank}
+        </span>
       )}
-      <img src={pro.photo} alt={pro.name} style={{ width: 52, height: 52, borderRadius: 14, objectFit: "cover", flexShrink: 0 }} />
+      <img
+        src={pro.photo}
+        alt={pro.name}
+        style={{ width: 52, height: 52, borderRadius: 14, objectFit: "cover", flexShrink: 0 }}
+      />
       <div style={{ flex: 1, minWidth: 0 }}>
-        <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>{pro.name}</p>
-        <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 4px" }}>{pro.role}</p>
+        <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+          {pro.name}
+        </p>
+        <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 4px" }}>
+          {pro.role}
+        </p>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <RatingStars value={pro.rating} size={10} />
-          <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>{pro.rating} ({pro.reviews})</span>
+          <span style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}>
+            {pro.rating} ({pro.reviews})
+          </span>
         </div>
       </div>
       <ChevronRight size={18} color={colors.mutedForeground} style={{ flexShrink: 0 }} />
@@ -151,24 +289,81 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
   return (
     <button
       onClick={onClick}
-      style={{ display: "flex", flexDirection: "column", gap: 10, padding: 14, borderRadius: 16, border: `1px solid ${colors.border}`, background: colors.card, width: "100%", textAlign: "left", cursor: "pointer" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 10,
+        padding: 14,
+        borderRadius: 16,
+        border: `1px solid ${colors.border}`,
+        background: colors.card,
+        width: "100%",
+        textAlign: "left",
+        cursor: "pointer",
+      }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <img src={pro.photo} alt={pro.name} style={{ width: 48, height: 48, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+        <img
+          src={pro.photo}
+          alt={pro.name}
+          style={{ width: 48, height: 48, borderRadius: 12, objectFit: "cover", flexShrink: 0 }}
+        />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>{pro.name}</p>
-          <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>{pro.role}</p>
+          <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>
+            {pro.name}
+          </p>
+          <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>
+            {pro.role}
+          </p>
         </div>
         <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: status.color }}>{status.label}</span>
       </div>
-      <p style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 600, color: colors.foreground, margin: 0 }}>{appointment.service}</p>
+      <p style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 600, color: colors.foreground, margin: 0 }}>
+        {appointment.service}
+      </p>
       <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-        <span style={{ display: "flex", alignItems: "center", gap: 4, fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}><Clock size={11} /> {appointment.date} • {appointment.time}</span>
-        <span style={{ display: "flex", alignItems: "center", gap: 4, fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground }}><MapPin size={11} /> {appointment.place}</span>
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            fontFamily: fontBody,
+            fontSize: 11,
+            color: colors.mutedForeground,
+          }}
+        >
+          <Clock size={11} /> {appointment.date} • {appointment.time}
+        </span>
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            fontFamily: fontBody,
+            fontSize: 11,
+            color: colors.mutedForeground,
+          }}
+        >
+          <MapPin size={11} /> {appointment.place}
+        </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 700, color: colors.primary }}>R$ {appointment.price.toFixed(2)}</span>
-        <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 600, color: colors.primary, display: "flex", alignItems: "center", gap: 2 }}>Ver detalhes <ChevronRight size={13} /></span>
+        <span style={{ fontFamily: fontBody, fontSize: 13, fontWeight: 700, color: colors.primary }}>
+          R$ {appointment.price.toFixed(2)}
+        </span>
+        <span
+          style={{
+            fontFamily: fontBody,
+            fontSize: 11,
+            fontWeight: 600,
+            color: colors.primary,
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
+          Ver detalhes <ChevronRight size={13} />
+        </span>
       </div>
     </button>
   );

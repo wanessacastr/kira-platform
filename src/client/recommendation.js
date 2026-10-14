@@ -6,7 +6,10 @@ import { mockProfessionals } from "../shared/data/professionals";
 // que, quando o algoritmo de visão computacional (busca por imagem de
 // referência) estiver pronto, baste plugar o resultado dele aqui como mais
 // um fator — sem mexer no restante da tela.
-export function scoreProfessional(pro, { service, category, referenceImage, generatedImage, preferences, location, priceRange, minRating } = {}) {
+export function scoreProfessional(
+  pro,
+  { service, category, referenceImage, generatedImage, preferences, location, priceRange, minRating } = {},
+) {
   // Ranking personalizado do Provador Virtual: quando existe uma foto de
   // referência, a prioridade conceitual muda para "procedimento compatível
   // > similaridade com a referência > resultado gerado (complementar) >
@@ -22,7 +25,8 @@ export function scoreProfessional(pro, { service, category, referenceImage, gene
     if (category) {
       score += 0.35 * (pro.category === category ? 1 : 0.1);
     } else if (service) {
-      const matches = pro.category === service || pro.services.some((s) => s.toLowerCase().includes(String(service).toLowerCase()));
+      const matches =
+        pro.category === service || pro.services.some((s) => s.toLowerCase().includes(String(service).toLowerCase()));
       score += 0.35 * (matches ? 1 : 0.25);
     } else {
       score += 0.35 * 0.6;
@@ -76,7 +80,8 @@ export function scoreProfessional(pro, { service, category, referenceImage, gene
   if (category) {
     score += 0.2 * (pro.category === category ? 1 : 0.15);
   } else if (service) {
-    const matches = pro.category === service || pro.services.some((s) => s.toLowerCase().includes(String(service).toLowerCase()));
+    const matches =
+      pro.category === service || pro.services.some((s) => s.toLowerCase().includes(String(service).toLowerCase()));
     score += 0.2 * (matches ? 1 : 0.3);
   } else {
     score += 0.2 * 0.6; // sem serviço/categoria definidos, pontuação neutra
@@ -114,7 +119,17 @@ export function scoreProfessional(pro, { service, category, referenceImage, gene
 // pronta, o corpo desta função deve trocar para uma chamada fetch/axios que
 // devolva a mesma forma de dado (lista de profissionais com `compatibility`),
 // sem precisar alterar `renderClientRanking` nem os componentes de card.
-export function recommendProfessionals({ service, category, referenceImage, generatedImage, preferences = [], location, priceRange, minRating, limit = 3 } = {}) {
+export function recommendProfessionals({
+  service,
+  category,
+  referenceImage,
+  generatedImage,
+  preferences = [],
+  location,
+  priceRange,
+  minRating,
+  limit = 3,
+} = {}) {
   let pool = mockProfessionals;
   if (category && category !== "todos") pool = pool.filter((p) => p.category === category);
   else if (preferences && preferences.length > 0) pool = pool.filter((p) => preferences.includes(p.category));
@@ -122,7 +137,21 @@ export function recommendProfessionals({ service, category, referenceImage, gene
   const source = pool.length > 0 ? pool : mockProfessionals;
 
   return source
-    .map((pro) => ({ ...pro, compatibility: Math.round(scoreProfessional(pro, { service, category, referenceImage, generatedImage, preferences, location, priceRange, minRating }) * 100) }))
+    .map((pro) => ({
+      ...pro,
+      compatibility: Math.round(
+        scoreProfessional(pro, {
+          service,
+          category,
+          referenceImage,
+          generatedImage,
+          preferences,
+          location,
+          priceRange,
+          minRating,
+        }) * 100,
+      ),
+    }))
     .sort((a, b) => b.compatibility - a.compatibility)
     .slice(0, limit);
 }

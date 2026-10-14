@@ -14,12 +14,37 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proHome")} />
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, padding: 24, textAlign: "center" }}>
-        <div style={{ width: 64, height: 64, borderRadius: "50%", background: colors.muted, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 14,
+          padding: 24,
+          textAlign: "center",
+        }}
+      >
+        <div
+          style={{
+            width: 64,
+            height: 64,
+            borderRadius: "50%",
+            background: colors.muted,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Sparkles size={26} color={colors.mutedForeground} />
         </div>
-        <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 18, color: colors.foreground, margin: 0 }}>{title}</h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0, maxWidth: 240 }}>{message}</p>
+        <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 18, color: colors.foreground, margin: 0 }}>
+          {title}
+        </h1>
+        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0, maxWidth: 240 }}>
+          {message}
+        </p>
       </div>
       <ProBottomNav active={activeKey} onNavigate={goToProTab} />
     </div>
@@ -28,6 +53,10 @@ export default function ProPlaceholderScreen({ title, message, activeKey }) {
 
 export function ProSearchScreen() {
   return (
-    <ProPlaceholderScreen title="Buscar" message="Em breve você poderá buscar parcerias e profissionais próximos." activeKey="proSearch" />
+    <ProPlaceholderScreen
+      title="Buscar"
+      message="Em breve você poderá buscar parcerias e profissionais próximos."
+      activeKey="proSearch"
+    />
   );
 }

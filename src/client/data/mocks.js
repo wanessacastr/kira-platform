@@ -72,14 +72,38 @@ export const defaultSearchFilters = { price: 500, minRating: 0, maxDistance: 30,
 // já usados em outros lugares do protótipo, só que em outro tamanho).
 // No backend real, isso viria do profissional (workPhotos) e da agenda dele.
 export const proRankingExtras = {
-  1: { nextSlot: "Hoje às 15:30", portfolio: ["https://picsum.photos/seed/kiraport1a/160/160", "https://picsum.photos/seed/kiraport1b/160/160"] },
-  2: { nextSlot: "Hoje às 17:00", portfolio: ["https://picsum.photos/seed/kiraport2a/160/160", "https://picsum.photos/seed/kiraport2b/160/160"] },
-  3: { nextSlot: "Amanhã às 09:00", portfolio: ["https://picsum.photos/seed/kiraport3a/160/160", "https://picsum.photos/seed/kiraport3b/160/160"] },
-  4: { nextSlot: "Amanhã às 12:00", portfolio: ["https://picsum.photos/seed/kiraport4a/160/160", "https://picsum.photos/seed/kiraport4b/160/160"] },
-  7: { nextSlot: "Hoje às 16:00", portfolio: ["https://picsum.photos/seed/kiraport7a/160/160", "https://picsum.photos/seed/kiraport7b/160/160"] },
-  10: { nextSlot: "Hoje às 15:00", portfolio: ["https://picsum.photos/seed/kiraport10a/160/160", "https://picsum.photos/seed/kiraport10b/160/160"] },
-  14: { nextSlot: "Amanhã às 11:00", portfolio: ["https://picsum.photos/seed/kiraport14a/160/160", "https://picsum.photos/seed/kiraport14b/160/160"] },
-  18: { nextSlot: "Hoje às 14:30", portfolio: ["https://picsum.photos/seed/kiraport18a/160/160", "https://picsum.photos/seed/kiraport18b/160/160"] },
+  1: {
+    nextSlot: "Hoje às 15:30",
+    portfolio: ["https://picsum.photos/seed/kiraport1a/160/160", "https://picsum.photos/seed/kiraport1b/160/160"],
+  },
+  2: {
+    nextSlot: "Hoje às 17:00",
+    portfolio: ["https://picsum.photos/seed/kiraport2a/160/160", "https://picsum.photos/seed/kiraport2b/160/160"],
+  },
+  3: {
+    nextSlot: "Amanhã às 09:00",
+    portfolio: ["https://picsum.photos/seed/kiraport3a/160/160", "https://picsum.photos/seed/kiraport3b/160/160"],
+  },
+  4: {
+    nextSlot: "Amanhã às 12:00",
+    portfolio: ["https://picsum.photos/seed/kiraport4a/160/160", "https://picsum.photos/seed/kiraport4b/160/160"],
+  },
+  7: {
+    nextSlot: "Hoje às 16:00",
+    portfolio: ["https://picsum.photos/seed/kiraport7a/160/160", "https://picsum.photos/seed/kiraport7b/160/160"],
+  },
+  10: {
+    nextSlot: "Hoje às 15:00",
+    portfolio: ["https://picsum.photos/seed/kiraport10a/160/160", "https://picsum.photos/seed/kiraport10b/160/160"],
+  },
+  14: {
+    nextSlot: "Amanhã às 11:00",
+    portfolio: ["https://picsum.photos/seed/kiraport14a/160/160", "https://picsum.photos/seed/kiraport14b/160/160"],
+  },
+  18: {
+    nextSlot: "Hoje às 14:30",
+    portfolio: ["https://picsum.photos/seed/kiraport18a/160/160", "https://picsum.photos/seed/kiraport18b/160/160"],
+  },
 };
 
 export const getRankingExtras = (pro) =>
@@ -93,7 +117,11 @@ export const proProfileExtras = {
   1: {
     verified: true,
     address: "Av. T-4, Setor Bueno, Goiânia - GO",
-    portfolio: ["https://picsum.photos/seed/kiraprof1a/300/300", "https://picsum.photos/seed/kiraprof1b/300/300", "https://picsum.photos/seed/kiraprof1c/300/300"],
+    portfolio: [
+      "https://picsum.photos/seed/kiraprof1a/300/300",
+      "https://picsum.photos/seed/kiraprof1b/300/300",
+      "https://picsum.photos/seed/kiraprof1c/300/300",
+    ],
     reviewComments: [
       { author: "Camila R.", stars: 5, text: "Adorei o corte, ficou exatamente como eu queria." },
       { author: "Juliana S.", stars: 5, text: "Atendimento super atencioso e pontual." },
@@ -108,7 +136,11 @@ export const proProfileExtras = {
   10: {
     verified: true,
     address: "Av. República do Líbano, Setor Oeste, Goiânia - GO",
-    portfolio: ["https://picsum.photos/seed/kiraprof10a/300/300", "https://picsum.photos/seed/kiraprof10b/300/300", "https://picsum.photos/seed/kiraprof10c/300/300"],
+    portfolio: [
+      "https://picsum.photos/seed/kiraprof10a/300/300",
+      "https://picsum.photos/seed/kiraprof10b/300/300",
+      "https://picsum.photos/seed/kiraprof10c/300/300",
+    ],
     reviewComments: [
       { author: "Fernanda A.", stars: 5, text: "Nail art perfeita, super caprichosa." },
       { author: "Larissa D.", stars: 4, text: "Ótimo trabalho, só demorou um pouco mais que o previsto." },

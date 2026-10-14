@@ -1,11 +1,5 @@
 // Estado e ações globais (useKira) · APIs do navegador: geolocation, câmera (getUserMedia), FileReader · demais fluxos simulados com setTimeout, sem backend
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { bottomNavItems, defaultSearchFilters } from "../client/data/mocks";
 import { recommendProfessionals } from "../client/recommendation";
 import {
@@ -126,8 +120,16 @@ export function KiraProvider({ children }) {
     setFilterModalMounted(false);
     setTimeout(() => setFilterModalOpen(false), 200);
   };
-  const applyFilters = () => { setAppliedFilters(draftFilters); closeFilterModal(); };
-  const clearFilters = () => { setDraftFilters(defaultSearchFilters); setAppliedFilters(defaultSearchFilters); setCategoryFilter("todos"); closeFilterModal(); };
+  const applyFilters = () => {
+    setAppliedFilters(draftFilters);
+    closeFilterModal();
+  };
+  const clearFilters = () => {
+    setDraftFilters(defaultSearchFilters);
+    setAppliedFilters(defaultSearchFilters);
+    setCategoryFilter("todos");
+    closeFilterModal();
+  };
   const runSearchLoad = () => {
     setSearchLoading(true);
     setVisibleCount(8);
@@ -137,7 +139,9 @@ export function KiraProvider({ children }) {
     if (screen === "clientSearch") runSearchLoad();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [screen]);
-  useEffect(() => { setVisibleCount(8); }, [searchQuery, categoryFilter, appliedFilters]);
+  useEffect(() => {
+    setVisibleCount(8);
+  }, [searchQuery, categoryFilter, appliedFilters]);
   const handleSearchScroll = (e) => {
     const el = e.target;
     if (el.scrollHeight - el.scrollTop - el.clientHeight < 80) {
@@ -157,7 +161,10 @@ export function KiraProvider({ children }) {
   const handlePullEnd = () => {
     if (pullDistance > 55) {
       setRefreshing(true);
-      setTimeout(() => { setRefreshing(false); runSearchLoad(); }, 600);
+      setTimeout(() => {
+        setRefreshing(false);
+        runSearchLoad();
+      }, 600);
     }
     setPullDistance(0);
     pullStartY.current = null;
@@ -192,7 +199,8 @@ export function KiraProvider({ children }) {
     setProViewMonth((m) => new Date(m.getFullYear(), m.getMonth() + delta, 1));
     setProMonthAnimKey((k) => k + 1);
   };
-  const getProDayAppointments = (date) => proAgendaMock[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] || [];
+  const getProDayAppointments = (date) =>
+    proAgendaMock[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] || [];
   const [loyaltySettings, setLoyaltySettings] = useState(initialLoyaltySettings);
   const [proHomeRevenueSel, setProHomeRevenueSel] = useState(null);
   const [proAnalyticsSel, setProAnalyticsSel] = useState(null);
@@ -204,7 +212,9 @@ export function KiraProvider({ children }) {
   // painel estiver aberto resolve isso.
   useEffect(() => {
     document.body.style.overflow = proServiceDetail ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [proServiceDetail]);
   const [financePeriod, setFinancePeriod] = useState("semana");
   const [financeRevenueSel, setFinanceRevenueSel] = useState(null);
@@ -277,7 +287,8 @@ export function KiraProvider({ children }) {
     setFavoriteProIds((prev) => (prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]));
   const validateProfileEdit = () => {
     const e = {};
-    if (!cForm.name.trim() || cForm.name.trim().length < 3 || !/\s/.test(cForm.name.trim())) e.name = "Informe nome e sobrenome";
+    if (!cForm.name.trim() || cForm.name.trim().length < 3 || !/\s/.test(cForm.name.trim()))
+      e.name = "Informe nome e sobrenome";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cForm.email)) e.email = "E-mail inválido";
     if (onlyDigits(cForm.phone).length < 10) e.phone = "Telefone incompleto";
     setCErrors(e);
@@ -288,16 +299,29 @@ export function KiraProvider({ children }) {
     setProfileSaveStatus("saving");
     setTimeout(() => {
       setProfileSaveStatus("success");
-      setTimeout(() => { setProfileSaveStatus("idle"); setScreen("clientProfile"); }, 700);
+      setTimeout(() => {
+        setProfileSaveStatus("idle");
+        setScreen("clientProfile");
+      }, 700);
     }, 700);
   };
   const setCField = (key, value) => {
     setCForm((f) => ({ ...f, [key]: value }));
-    if (cErrors[key]) setCErrors((e) => { const n = { ...e }; delete n[key]; return n; });
+    if (cErrors[key])
+      setCErrors((e) => {
+        const n = { ...e };
+        delete n[key];
+        return n;
+      });
   };
   const setPField = (key, value) => {
     setPForm((f) => ({ ...f, [key]: value }));
-    if (pErrors[key]) setPErrors((e) => { const n = { ...e }; delete n[key]; return n; });
+    if (pErrors[key])
+      setPErrors((e) => {
+        const n = { ...e };
+        delete n[key];
+        return n;
+      });
   };
   const handlePhoto = (file, setter) => {
     if (!file || !file.type.startsWith("image/")) return;
@@ -317,7 +341,8 @@ export function KiraProvider({ children }) {
   const validateClientPersonal = () => {
     const e = {};
     if (!cForm.photo) e.photo = "Adicione uma foto de perfil";
-    if (!cForm.name.trim() || cForm.name.trim().length < 3 || !/\s/.test(cForm.name.trim())) e.name = "Informe nome e sobrenome";
+    if (!cForm.name.trim() || cForm.name.trim().length < 3 || !/\s/.test(cForm.name.trim()))
+      e.name = "Informe nome e sobrenome";
     if (!isValidCpf(cForm.cpf)) e.cpf = "CPF inválido";
     if (!cForm.birth) e.birth = "Informe sua data de nascimento";
     else {
@@ -327,7 +352,8 @@ export function KiraProvider({ children }) {
     if (!cForm.gender) e.gender = "Selecione uma opção";
     if (onlyDigits(cForm.phone).length < 10) e.phone = "Telefone incompleto";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cForm.email)) e.email = "E-mail inválido";
-    if (cForm.password.length < 8 || !/[A-Z]/.test(cForm.password) || !/[0-9]/.test(cForm.password)) e.password = "Mínimo 8 caracteres, com maiúscula e número";
+    if (cForm.password.length < 8 || !/[A-Z]/.test(cForm.password) || !/[0-9]/.test(cForm.password))
+      e.password = "Mínimo 8 caracteres, com maiúscula e número";
     if (cForm.password !== cForm.confirm) e.confirm = "As senhas não coincidem";
     setCErrors(e);
     return Object.keys(e).length === 0;
@@ -353,7 +379,8 @@ export function KiraProvider({ children }) {
   const validateProPersonal = () => {
     const e = {};
     if (!pForm.photo) e.photo = "Adicione uma foto de perfil";
-    if (!pForm.name.trim() || pForm.name.trim().length < 3 || !/\s/.test(pForm.name.trim())) e.name = "Informe nome e sobrenome";
+    if (!pForm.name.trim() || pForm.name.trim().length < 3 || !/\s/.test(pForm.name.trim()))
+      e.name = "Informe nome e sobrenome";
     const docValid = pForm.documentType === "cpf" ? isValidCpf(pForm.document) : isValidCnpj(pForm.document);
     if (!docValid) e.document = "Documento inválido";
     if (!pForm.birth) e.birth = "Informe sua data de nascimento";
@@ -363,7 +390,8 @@ export function KiraProvider({ children }) {
     }
     if (onlyDigits(pForm.phone).length < 10) e.phone = "Telefone incompleto";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pForm.email)) e.email = "E-mail inválido";
-    if (pForm.password.length < 8 || !/[A-Z]/.test(pForm.password) || !/[0-9]/.test(pForm.password)) e.password = "Mínimo 8 caracteres, com maiúscula e número";
+    if (pForm.password.length < 8 || !/[A-Z]/.test(pForm.password) || !/[0-9]/.test(pForm.password))
+      e.password = "Mínimo 8 caracteres, com maiúscula e número";
     if (pForm.password !== pForm.confirm) e.confirm = "As senhas não coincidem";
     setPErrors(e);
     return Object.keys(e).length === 0;
@@ -395,7 +423,7 @@ export function KiraProvider({ children }) {
         setStatus("success");
       },
       () => setStatus("error"),
-      { timeout: 8000 }
+      { timeout: 8000 },
     );
   };
   const addSpecialty = (value) => {
@@ -406,14 +434,22 @@ export function KiraProvider({ children }) {
     }
     setPForm((f) => ({ ...f, specialties: [...f.specialties, trimmed] }));
     setSpecialtyInput("");
-    setPErrors((e) => { const n = { ...e }; delete n.specialties; return n; });
+    setPErrors((e) => {
+      const n = { ...e };
+      delete n.specialties;
+      return n;
+    });
   };
   const removeSpecialty = (value) => setPForm((f) => ({ ...f, specialties: f.specialties.filter((s) => s !== value) }));
   const addService = () => {
     if (!serviceDraft.name.trim() || !serviceDraft.price.trim() || !serviceDraft.duration.trim()) return;
     setPForm((f) => ({ ...f, services: [...f.services, { id: `${Date.now()}`, ...serviceDraft }] }));
     setServiceDraft({ name: "", price: "", duration: "" });
-    setPErrors((e) => { const n = { ...e }; delete n.services; return n; });
+    setPErrors((e) => {
+      const n = { ...e };
+      delete n.services;
+      return n;
+    });
   };
   const removeService = (id) => setPForm((f) => ({ ...f, services: f.services.filter((s) => s.id !== id) }));
   const removeWorkPhoto = (idx) => setPForm((f) => ({ ...f, workPhotos: f.workPhotos.filter((_, i) => i !== idx) }));
@@ -422,7 +458,11 @@ export function KiraProvider({ children }) {
     setFaceProgress(0);
     const interval = setInterval(() => {
       setFaceProgress((p) => {
-        if (p >= 100) { clearInterval(interval); setFaceStatus("success"); return 100; }
+        if (p >= 100) {
+          clearInterval(interval);
+          setFaceStatus("success");
+          return 100;
+        }
         return p + 5;
       });
     }, 70);
@@ -488,47 +528,170 @@ export function KiraProvider({ children }) {
   };
 
   const value = {
-    screen, setScreen, accountType, setAccountType,
-    loginEmail, setLoginEmail, loginPassword, setLoginPassword,
-    showLoginPassword, setShowLoginPassword, cForm, setCForm,
-    cErrors, setCErrors, cShowPassword, setCShowPassword,
-    cShowConfirm, setCShowConfirm, cCepLoading, setCCepLoading,
-    cLocationStatus, setCLocationStatus, cFileInputRef, cDocFrontRef,
-    cDocBackRef, cSelfieStatus, cSelfieError, cSelfieVideoRef,
-    cSelfieCanvasRef, cPreferences, setCPreferences, toggleCPreference,
-    searchQuery, setSearchQuery, categoryFilter, setCategoryFilter,
-    draftFilters, setDraftFilters, filterModalOpen, filterModalMounted,
-    searchLoading, visibleCount, refreshing, selectedProId,
-    setSelectedProId, homeMapSelectedId, setHomeMapSelectedId, bookedSlot,
-    setBookedSlot, viewMonth, setViewMonth, selectedDate,
-    setSelectedDate, scheduleTime, setScheduleTime, scheduleLoading,
-    scheduleError, setScheduleError, monthAnimKey, today,
-    selectScheduleDate, retrySchedule, changeMonth, searchListRef,
-    pullDistance, filteredProfessionals, searchHasError, openFilterModal,
-    closeFilterModal, applyFilters, clearFilters, runSearchLoad,
-    handleSearchScroll, handlePullStart, handlePullMove, handlePullEnd,
-    goToTab, pForm, setPForm, pErrors,
-    setPErrors, pShowPassword, setPShowPassword, pShowConfirm,
-    setPShowConfirm, pCepLoading, setPCepLoading, pLocationStatus,
-    setPLocationStatus, specialtyInput, setSpecialtyInput, serviceDraft,
-    setServiceDraft, pFileInputRef, pWorkPhotosInputRef, pDocFrontRef,
-    pDocBackRef, goToProTab, proViewMonth, proSelectedDate,
-    setProSelectedDate, proMonthAnimKey, changeProMonth, getProDayAppointments,
-    loyaltySettings, setLoyaltySettings, proHomeRevenueSel, setProHomeRevenueSel,
-    proAnalyticsSel, setProAnalyticsSel, proServiceDetail, setProServiceDetail,
-    financePeriod, setFinancePeriod, financeRevenueSel, setFinanceRevenueSel,
-    financeData, faceStatus, setFaceStatus, faceProgress,
-    faceReturnTo, faceBackTo, rankingLoading, rankingError,
-    recommended, rankingSource, loadRanking, tryOnReference,
-    setTryOnReference, tryOnClientPhoto, setTryOnClientPhoto, tryOnRefInputRef,
-    tryOnPhotoInputRef, startTryOnFlow, goToPersonalizedRanking, agendaTab,
-    setAgendaTab, selectedAppointmentId, setSelectedAppointmentId, profileSaveStatus,
-    favoriteProIds, toggleFavoriteProfessional, saveProfileEdit, setCField,
-    setPField, handlePhoto, handleWorkPhotos, validateClientPersonal,
-    validateAddress, validateTerms, validateProPersonal, handleCepBlur,
-    handleActivateLocation, addSpecialty, removeSpecialty, addService,
-    removeService, removeWorkPhoto, startFaceScan, stopClientSelfieCamera,
-    startClientSelfieCamera, captureClientSelfie, retakeClientSelfie, goToFace,
+    screen,
+    setScreen,
+    accountType,
+    setAccountType,
+    loginEmail,
+    setLoginEmail,
+    loginPassword,
+    setLoginPassword,
+    showLoginPassword,
+    setShowLoginPassword,
+    cForm,
+    setCForm,
+    cErrors,
+    setCErrors,
+    cShowPassword,
+    setCShowPassword,
+    cShowConfirm,
+    setCShowConfirm,
+    cCepLoading,
+    setCCepLoading,
+    cLocationStatus,
+    setCLocationStatus,
+    cFileInputRef,
+    cDocFrontRef,
+    cDocBackRef,
+    cSelfieStatus,
+    cSelfieError,
+    cSelfieVideoRef,
+    cSelfieCanvasRef,
+    cPreferences,
+    setCPreferences,
+    toggleCPreference,
+    searchQuery,
+    setSearchQuery,
+    categoryFilter,
+    setCategoryFilter,
+    draftFilters,
+    setDraftFilters,
+    filterModalOpen,
+    filterModalMounted,
+    searchLoading,
+    visibleCount,
+    refreshing,
+    selectedProId,
+    setSelectedProId,
+    homeMapSelectedId,
+    setHomeMapSelectedId,
+    bookedSlot,
+    setBookedSlot,
+    viewMonth,
+    setViewMonth,
+    selectedDate,
+    setSelectedDate,
+    scheduleTime,
+    setScheduleTime,
+    scheduleLoading,
+    scheduleError,
+    setScheduleError,
+    monthAnimKey,
+    today,
+    selectScheduleDate,
+    retrySchedule,
+    changeMonth,
+    searchListRef,
+    pullDistance,
+    filteredProfessionals,
+    searchHasError,
+    openFilterModal,
+    closeFilterModal,
+    applyFilters,
+    clearFilters,
+    runSearchLoad,
+    handleSearchScroll,
+    handlePullStart,
+    handlePullMove,
+    handlePullEnd,
+    goToTab,
+    pForm,
+    setPForm,
+    pErrors,
+    setPErrors,
+    pShowPassword,
+    setPShowPassword,
+    pShowConfirm,
+    setPShowConfirm,
+    pCepLoading,
+    setPCepLoading,
+    pLocationStatus,
+    setPLocationStatus,
+    specialtyInput,
+    setSpecialtyInput,
+    serviceDraft,
+    setServiceDraft,
+    pFileInputRef,
+    pWorkPhotosInputRef,
+    pDocFrontRef,
+    pDocBackRef,
+    goToProTab,
+    proViewMonth,
+    proSelectedDate,
+    setProSelectedDate,
+    proMonthAnimKey,
+    changeProMonth,
+    getProDayAppointments,
+    loyaltySettings,
+    setLoyaltySettings,
+    proHomeRevenueSel,
+    setProHomeRevenueSel,
+    proAnalyticsSel,
+    setProAnalyticsSel,
+    proServiceDetail,
+    setProServiceDetail,
+    financePeriod,
+    setFinancePeriod,
+    financeRevenueSel,
+    setFinanceRevenueSel,
+    financeData,
+    faceStatus,
+    setFaceStatus,
+    faceProgress,
+    faceReturnTo,
+    faceBackTo,
+    rankingLoading,
+    rankingError,
+    recommended,
+    rankingSource,
+    loadRanking,
+    tryOnReference,
+    setTryOnReference,
+    tryOnClientPhoto,
+    setTryOnClientPhoto,
+    tryOnRefInputRef,
+    tryOnPhotoInputRef,
+    startTryOnFlow,
+    goToPersonalizedRanking,
+    agendaTab,
+    setAgendaTab,
+    selectedAppointmentId,
+    setSelectedAppointmentId,
+    profileSaveStatus,
+    favoriteProIds,
+    toggleFavoriteProfessional,
+    saveProfileEdit,
+    setCField,
+    setPField,
+    handlePhoto,
+    handleWorkPhotos,
+    validateClientPersonal,
+    validateAddress,
+    validateTerms,
+    validateProPersonal,
+    handleCepBlur,
+    handleActivateLocation,
+    addSpecialty,
+    removeSpecialty,
+    addService,
+    removeService,
+    removeWorkPhoto,
+    startFaceScan,
+    stopClientSelfieCamera,
+    startClientSelfieCamera,
+    captureClientSelfie,
+    retakeClientSelfie,
+    goToFace,
   };
 
   return <KiraContext.Provider value={value}>{children}</KiraContext.Provider>;

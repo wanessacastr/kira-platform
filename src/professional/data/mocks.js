@@ -1,16 +1,5 @@
 // Mocks do profissional: receita, analytics, agenda, gift cards, fidelidade · backend futuro
-import {
-  BarChart3,
-  Calendar,
-  CreditCard,
-  Gift,
-  HelpCircle,
-  Home,
-  Search,
-  ShieldCheck,
-  Star,
-  User,
-} from "lucide-react";
+import { BarChart3, Calendar, CreditCard, Gift, HelpCircle, Home, Search, ShieldCheck, Star, User } from "lucide-react";
 
 // ==========================================================================
 // NOVO — Painel do profissional (mock)
@@ -76,19 +65,21 @@ export const getServiceClientBreakdown = (serviceEntry) => {
   const rotated = names.map((_, i) => names[(i + hash) % names.length]);
   const base = Math.floor(serviceEntry.count / names.length);
   const remainder = serviceEntry.count % names.length;
-  const clients = rotated.map((name, i) => {
-    const visits = base + (i < remainder ? 1 : 0);
-    const daysAgo = ((hash + i * 7) % 20) + 1;
-    const lastDate = new Date();
-    lastDate.setDate(lastDate.getDate() - daysAgo);
-    return {
-      name,
-      visits,
-      lastDate: lastDate.toLocaleDateString("pt-BR"),
-      totalSpent: Math.round((visits / serviceEntry.count) * serviceEntry.revenue),
-      daysAgo,
-    };
-  }).filter((c) => c.visits > 0);
+  const clients = rotated
+    .map((name, i) => {
+      const visits = base + (i < remainder ? 1 : 0);
+      const daysAgo = ((hash + i * 7) % 20) + 1;
+      const lastDate = new Date();
+      lastDate.setDate(lastDate.getDate() - daysAgo);
+      return {
+        name,
+        visits,
+        lastDate: lastDate.toLocaleDateString("pt-BR"),
+        totalSpent: Math.round((visits / serviceEntry.count) * serviceEntry.revenue),
+        daysAgo,
+      };
+    })
+    .filter((c) => c.visits > 0);
   return clients.sort((a, b) => b.visits - a.visits || a.daysAgo - b.daysAgo);
 };
 

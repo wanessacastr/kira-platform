@@ -10,21 +10,21 @@ Protótipo front-end em Vite + React. Não há backend: todo dado vem de mocks e
 
 ## O que roda em cada integração
 
-| Integração | Tipo | Onde roda | Situação |
-|---|---|---|---|
-| Geolocalização | API do navegador (`navigator.geolocation`) | `ClientLocationScreen`, `ProLocationScreen` via `KiraContext` | Real |
-| Câmera da selfie | API do navegador (`getUserMedia`) | `ClientSelfieScreen` via `KiraContext` | Real |
-| Upload de imagens | API do navegador (`FileReader`) | Cadastro, documentos, fotos e Provador | Real, só local, nada é enviado |
-| Fontes | Google Fonts (CSS externo) | `App.jsx` | Real |
-| Busca e filtros | Simulado | `ClientSearchScreen` + `KiraContext` | Mock, latência simulada |
-| Recomendação e TOP 5 | Simulado | `client/recommendation.js`, `KiraContext.loadRanking` | Mock sobre `mockProfessionals`; futura API de recomendação |
-| Disponibilidade de horários | Simulado | `shared/utils/date.js` (`getDaySchedule`) | Mock; futura `GET /profissionais/:id/disponibilidade` |
-| Denúncia e emergência | Simulado | `shared/components/Safety.jsx` | Mock; futura `POST /api/denuncias` |
-| CEP | Simulado | `handleCepBlur` no `KiraContext` | Mock (ViaCEP não integrado) |
-| Verificação facial | Simulado | `FaceScreen` | Mock, nenhum dado biométrico é salvo |
-| Login e cadastro | Sem backend | Telas de cadastro e login | Mock, sem autenticação real |
-| Mapa da Home | Visual | `ClientHomeScreen` | Mock, sem mapa real |
-| Pagamento | Não implementado | Perfil do cliente | Sem gateway |
+| Integração                  | Tipo                                       | Onde roda                                                     | Situação                                                   |
+| --------------------------- | ------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------- |
+| Geolocalização              | API do navegador (`navigator.geolocation`) | `ClientLocationScreen`, `ProLocationScreen` via `KiraContext` | Real                                                       |
+| Câmera da selfie            | API do navegador (`getUserMedia`)          | `ClientSelfieScreen` via `KiraContext`                        | Real                                                       |
+| Upload de imagens           | API do navegador (`FileReader`)            | Cadastro, documentos, fotos e Provador                        | Real, só local, nada é enviado                             |
+| Fontes                      | Google Fonts (CSS externo)                 | `App.jsx`                                                     | Real                                                       |
+| Busca e filtros             | Simulado                                   | `ClientSearchScreen` + `KiraContext`                          | Mock, latência simulada                                    |
+| Recomendação e TOP 5        | Simulado                                   | `client/recommendation.js`, `KiraContext.loadRanking`         | Mock sobre `mockProfessionals`; futura API de recomendação |
+| Disponibilidade de horários | Simulado                                   | `shared/utils/date.js` (`getDaySchedule`)                     | Mock; futura `GET /profissionais/:id/disponibilidade`      |
+| Denúncia e emergência       | Simulado                                   | `shared/components/Safety.jsx`                                | Mock; futura `POST /api/denuncias`                         |
+| CEP                         | Simulado                                   | `handleCepBlur` no `KiraContext`                              | Mock (ViaCEP não integrado)                                |
+| Verificação facial          | Simulado                                   | `FaceScreen`                                                  | Mock, nenhum dado biométrico é salvo                       |
+| Login e cadastro            | Sem backend                                | Telas de cadastro e login                                     | Mock, sem autenticação real                                |
+| Mapa da Home                | Visual                                     | `ClientHomeScreen`                                            | Mock, sem mapa real                                        |
+| Pagamento                   | Não implementado                           | Perfil do cliente                                             | Sem gateway                                                |
 
 ## Fluxo principal do Provador
 

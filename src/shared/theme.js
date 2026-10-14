@@ -13,8 +13,7 @@ export const colors = {
   destructive: "hsl(0 84% 60%)",
 };
 
-export const gradientKira =
-  "linear-gradient(135deg, hsl(15 80% 60%), hsl(340 70% 55%), hsl(270 60% 55%))";
+export const gradientKira = "linear-gradient(135deg, hsl(15 80% 60%), hsl(340 70% 55%), hsl(270 60% 55%))";
 
 export const fontDisplay = "'Playfair Display', serif";
 
