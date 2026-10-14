@@ -108,7 +108,9 @@ export default function ProPersonalScreen() {
             style={{ display: "none" }}
             onChange={(e) => handlePhoto(e.target.files?.[0], (v) => setPField("photo", v))}
           />
-          <span
+          <button
+            type="button"
+            className="k-reset"
             style={{
               fontSize: "var(--font-size-xs)",
               color: colors.primaryText,
@@ -119,7 +121,7 @@ export default function ProPersonalScreen() {
             onClick={() => pFileInputRef.current?.click()}
           >
             {pForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
-          </span>
+          </button>
           {pErrors.photo && (
             <p
               style={{
@@ -215,6 +217,8 @@ export default function ProPersonalScreen() {
               style={inputStyle(pErrors.password)}
             />
             <button
+              type="button"
+              aria-label={pShowPassword ? "Ocultar a senha" : "Mostrar a senha"}
               onClick={() => setPShowPassword((s) => !s)}
               style={{
                 position: "absolute",
@@ -241,6 +245,8 @@ export default function ProPersonalScreen() {
               style={inputStyle(pErrors.confirm)}
             />
             <button
+              type="button"
+              aria-label={pShowConfirm ? "Ocultar a confirmação de senha" : "Mostrar a confirmação de senha"}
               onClick={() => setPShowConfirm((s) => !s)}
               style={{
                 position: "absolute",

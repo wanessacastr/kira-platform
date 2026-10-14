@@ -100,9 +100,12 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
     >
       {label}
     </label>
-    <div
+    <button
+      type="button"
+      className="k-reset"
       onClick={() => inputRef.current?.click()}
       style={{
+        boxSizing: "content-box",
         width: "100%",
         aspectRatio: "16/10",
         borderRadius: "var(--radius-2xl)",
@@ -127,7 +130,7 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
           </span>
         </>
       )}
-    </div>
+    </button>
     <input
       ref={inputRef}
       type="file"

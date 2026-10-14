@@ -78,6 +78,7 @@ export default function ProLoyaltyScreen() {
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-18)" }}>
           <input
             type="range"
+            aria-label="Pontos por real gasto"
             min={0}
             max={5}
             step={0.5}
@@ -113,6 +114,7 @@ export default function ProLoyaltyScreen() {
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-22)" }}>
           <input
             type="range"
+            aria-label="Porcentagem de cashback"
             min={0}
             max={20}
             step={1}

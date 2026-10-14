@@ -120,7 +120,10 @@ export default function ProPhotosScreen() {
                     alt={`Foto ${idx + 1}`}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
-                  <div
+                  <button
+                    type="button"
+                    className="k-reset"
+                    aria-label="Remover foto"
                     onClick={() => removeWorkPhoto(idx)}
                     style={{
                       position: "absolute",
@@ -137,7 +140,7 @@ export default function ProPhotosScreen() {
                     }}
                   >
                     <X size={12} color={colors.foreground} />
-                  </div>
+                  </button>
                 </div>
               ))}
             </div>

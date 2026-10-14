@@ -42,8 +42,7 @@ export default function ProHomeScreen() {
 
         <div
           onClick={() => setScreen("proFinance")}
-          role="button"
-          tabIndex={0}
+          role="presentation"
           style={{
             width: "100%",
             textAlign: "left",
@@ -105,7 +104,13 @@ export default function ProHomeScreen() {
                 ? `${proWeeklyRevenue[proHomeRevenueSel].label} · R$ ${proWeeklyRevenue[proHomeRevenueSel].value.toLocaleString("pt-BR")}`
                 : "Toque em um dia para ver o valor"}
             </span>
-            <span
+            <button
+              type="button"
+              className="k-reset"
+              onClick={(e) => {
+                e.stopPropagation();
+                setScreen("proFinance");
+              }}
               style={{
                 fontFamily: fontBody,
                 fontSize: "var(--font-size-xs)",
@@ -117,7 +122,7 @@ export default function ProHomeScreen() {
               }}
             >
               Ver gestão financeira <ChevronRight size={13} />
-            </span>
+            </button>
           </div>
         </div>
 
@@ -140,7 +145,9 @@ export default function ProHomeScreen() {
           >
             Próximos atendimentos
           </h2>
-          <span
+          <button
+            type="button"
+            className="k-reset"
             style={{
               fontFamily: fontBody,
               fontSize: "var(--font-size-xs)",
@@ -151,7 +158,7 @@ export default function ProHomeScreen() {
             onClick={() => setScreen("proAgendaDash")}
           >
             Ver agenda
-          </span>
+          </button>
         </div>
         <div
           style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)", marginBottom: "var(--space-22)" }}

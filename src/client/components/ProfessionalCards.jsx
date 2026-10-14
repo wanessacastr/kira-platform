@@ -114,6 +114,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
   const extras = getRankingExtras(pro);
   return (
     <div
+      role="presentation"
       onClick={onViewProfile}
       style={{
         borderRadius: "var(--radius-3xl)",

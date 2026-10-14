@@ -113,7 +113,7 @@ export default function SignupScreen() {
             onClick={() => setScreen("login")}
           >
             Entrar
-          </span>
+          </button>
         </p>
       </div>
     </div>

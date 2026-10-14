@@ -33,9 +33,12 @@ export default function ClientTryOnPhotoScreen() {
           Envie uma foto sua para vermos como o visual combina com você.
         </p>
 
-        <div
+        <button
+          type="button"
+          className="k-reset"
           onClick={() => tryOnPhotoInputRef.current?.click()}
           style={{
+            boxSizing: "content-box",
             width: "100%",
             aspectRatio: "1/1",
             maxWidth: 280,
@@ -66,7 +69,7 @@ export default function ClientTryOnPhotoScreen() {
               </span>
             </>
           )}
-        </div>
+        </button>
         <input
           ref={tryOnPhotoInputRef}
           type="file"

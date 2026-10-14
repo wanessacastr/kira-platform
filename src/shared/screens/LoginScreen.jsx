@@ -58,6 +58,8 @@ export default function LoginScreen() {
               style={inputStyle(false)}
             />
             <button
+              type="button"
+              aria-label={showLoginPassword ? "Ocultar a senha" : "Mostrar a senha"}
               onClick={() => setShowLoginPassword((s) => !s)}
               style={{
                 position: "absolute",
@@ -92,7 +94,7 @@ export default function LoginScreen() {
             onClick={() => setScreen("signup")}
           >
             Criar conta
-          </span>
+          </button>
         </p>
       </div>
     </div>
