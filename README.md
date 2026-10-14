@@ -2,7 +2,6 @@
 
 Kira é uma plataforma inteligente de agendamento e gestão de serviços, criada para otimizar a disponibilidade de profissionais, automatizar processos e oferecer uma experiência escalável.
 
-
 ## Stack
 
 Vite + React (JavaScript/JSX) e lucide-react. Navegação por estado `screen`, sem router.
