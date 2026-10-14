@@ -250,7 +250,7 @@ export default function ClientProfessionalProfileScreen() {
           >
             {extras.portfolio.map((photo, i) => (
               <img
-                key={i}
+                key={photo}
                 src={photo}
                 alt={`Trabalho ${i + 1} de ${pro.name}`}
                 style={{ width: "100%", aspectRatio: "1/1", borderRadius: "var(--radius-lg)", objectFit: "cover" }}
@@ -305,9 +305,9 @@ export default function ClientProfessionalProfileScreen() {
                 marginBottom: "var(--space-20)",
               }}
             >
-              {extras.reviewComments.map((r, i) => (
+              {extras.reviewComments.map((r) => (
                 <div
-                  key={i}
+                  key={`${r.author}-${r.text}`}
                   style={{
                     padding: "var(--space-12) var(--space-14)",
                     borderRadius: "var(--radius-xl)",

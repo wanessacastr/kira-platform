@@ -209,9 +209,9 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
       </div>
       {extras.portfolio.length > 0 && (
         <div style={{ display: "flex", gap: "var(--space-6)", padding: "0 var(--space-14) var(--space-14)" }}>
-          {extras.portfolio.map((photo, i) => (
+          {extras.portfolio.map((photo) => (
             <img
-              key={i}
+              key={photo}
               src={photo}
               alt={`Trabalho de ${pro.name}`}
               style={{ width: 56, height: 56, borderRadius: "var(--radius-md)", objectFit: "cover" }}

@@ -99,9 +99,9 @@ export default function ProAgendaDashScreen() {
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
-            {dayAppointments.map((a, i) => (
+            {dayAppointments.map((a) => (
               <div
-                key={i}
+                key={`${a.time}-${a.client}`}
                 style={{
                   display: "flex",
                   alignItems: "center",

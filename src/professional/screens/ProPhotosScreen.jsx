@@ -102,7 +102,7 @@ export default function ProPhotosScreen() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--space-8)" }}>
               {pForm.workPhotos.map((photo, idx) => (
                 <div
-                  key={idx}
+                  key={`${photo.slice(-32)}-${pForm.workPhotos.slice(0, idx).filter((p) => p === photo).length}`}
                   style={{
                     position: "relative",
                     aspectRatio: "1",

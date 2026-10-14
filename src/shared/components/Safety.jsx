@@ -165,10 +165,10 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
               { icon: Bell, text: "Um responsável é alertado na hora, sem entrar em fila" },
               { icon: UserX, text: "O perfil envolvido é suspenso de forma preventiva" },
               { icon: LockOpen, text: "Sua identidade fica visível só para a equipe, não é anônima aqui" },
-            ].map((item, i) => {
+            ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-8)" }}>
+                <div key={item.text} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-8)" }}>
                   <Icon
                     size={14}
                     color={colors.mutedForeground}
