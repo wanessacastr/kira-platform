@@ -33,7 +33,7 @@ function Prototype() {
     <div style={outer}>
       <style>{"body, html { margin: 0; padding: 0; } .spin { animation: kiraspin 1s linear infinite; } @keyframes kiraspin { to { transform: rotate(360deg); } }"}</style>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-        <div style={phoneFrame}><Screen /></div>
+        <div style={phoneFrame} data-testid="phone-frame"><Screen /></div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 390 }}>
           {navGroups.map((group) => (
             <div key={group.label} style={{ display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center" }}>
@@ -41,6 +41,7 @@ function Prototype() {
               {group.screens.map(([label, key]) => (
                 <button
                   key={key}
+                  data-testid="screen-shortcut"
                   onClick={() => setScreen(key)}
                   style={{
                     padding: "5px 10px",
