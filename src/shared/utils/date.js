@@ -5,7 +5,24 @@
 // A assinatura (date, pro) => string[] pode permanecer a mesma para a integração real.
 export const getDaySchedule = (date, pro) => {
   const day = date.getDate();
-  const base = ["08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"];
+  const base = [
+    "08:30",
+    "09:00",
+    "09:30",
+    "10:00",
+    "10:30",
+    "11:00",
+    "11:30",
+    "13:00",
+    "13:30",
+    "14:00",
+    "14:30",
+    "15:00",
+    "15:30",
+    "16:00",
+    "16:30",
+    "17:00",
+  ];
   if (day % 6 === 0) return []; // dia sem horários disponíveis (exemplo mockado)
   const seed = (day * 7 + pro.id * 13) % base.length;
   const count = 3 + (day % 4);

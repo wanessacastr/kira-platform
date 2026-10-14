@@ -16,18 +16,36 @@ export default function ClientAgendaScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientHome")} />
       <div style={{ padding: "0 24px 4px" }}>
-        <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 22, color: colors.foreground, margin: "0 0 4px" }}>Minha agenda</h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 16px" }}>Seus próximos momentos de beleza</p>
+        <h1
+          style={{
+            fontFamily: fontDisplay,
+            fontWeight: 700,
+            fontSize: 22,
+            color: colors.foreground,
+            margin: "0 0 4px",
+          }}
+        >
+          Minha agenda
+        </h1>
+        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 16px" }}>
+          Seus próximos momentos de beleza
+        </p>
         <div style={{ display: "flex", gap: 8 }}>
           {appointmentTabs.map((t) => (
             <button
               key={t.id}
               onClick={() => setAgendaTab(t.id)}
               style={{
-                flex: 1, padding: "9px 8px", borderRadius: 12, border: "none",
+                flex: 1,
+                padding: "9px 8px",
+                borderRadius: 12,
+                border: "none",
                 background: agendaTab === t.id ? gradientKira : colors.muted,
                 color: agendaTab === t.id ? colors.primaryForeground : colors.mutedForeground,
-                fontFamily: fontBody, fontWeight: 700, fontSize: 12, cursor: "pointer",
+                fontFamily: fontBody,
+                fontWeight: 700,
+                fontSize: 12,
+                cursor: "pointer",
               }}
             >
               {t.label}
@@ -37,16 +55,35 @@ export default function ClientAgendaScreen() {
       </div>
       <div style={{ flex: 1, overflowY: "auto", padding: "16px 24px 24px" }}>
         {filtered.length === 0 ? (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, padding: "48px 24px", textAlign: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 10,
+              padding: "48px 24px",
+              textAlign: "center",
+            }}
+          >
             <Calendar size={30} color={colors.mutedForeground} />
-            <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>Nenhum agendamento aqui ainda.</p>
+            <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>
+              Nenhum agendamento aqui ainda.
+            </p>
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {filtered.map((a) => {
               const pro = mockProfessionals.find((p) => p.id === a.proId) || mockProfessionals[0];
               return (
-                <AppointmentCard key={a.id} appointment={a} pro={pro} onClick={() => { setSelectedAppointmentId(a.id); setScreen("clientAgendaDetail"); }} />
+                <AppointmentCard
+                  key={a.id}
+                  appointment={a}
+                  pro={pro}
+                  onClick={() => {
+                    setSelectedAppointmentId(a.id);
+                    setScreen("clientAgendaDetail");
+                  }}
+                />
               );
             })}
           </div>

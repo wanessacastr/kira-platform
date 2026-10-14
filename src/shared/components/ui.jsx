@@ -1,11 +1,5 @@
 // UI base: botões, campos, cabeçalho, chips e seções · API: nenhuma
-import {
-  ArrowLeft,
-  Camera,
-  ChevronRight,
-  Search,
-  SlidersHorizontal,
-} from "lucide-react";
+import { ArrowLeft, Camera, ChevronRight, Search, SlidersHorizontal } from "lucide-react";
 import { colors, fontBody, gradientKira } from "../theme";
 
 export const inputStyle = (hasError) => ({
@@ -24,9 +18,7 @@ export const inputStyle = (hasError) => ({
 
 export const Field = ({ label, error, children }) => (
   <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
-    <label style={{ fontSize: 12, fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}>
-      {label}
-    </label>
+    <label style={{ fontSize: 12, fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}>{label}</label>
     {children}
     {error && <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: 0 }}>{error}</p>}
   </div>
@@ -83,7 +75,18 @@ export const SecondaryButton = ({ children, onClick }) => (
 
 export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
   <div style={{ marginBottom: 14 }}>
-    <label style={{ fontSize: 12, fontWeight: 500, color: colors.foreground, fontFamily: fontBody, display: "block", marginBottom: 6 }}>{label}</label>
+    <label
+      style={{
+        fontSize: 12,
+        fontWeight: 500,
+        color: colors.foreground,
+        fontFamily: fontBody,
+        display: "block",
+        marginBottom: 6,
+      }}
+    >
+      {label}
+    </label>
     <div
       onClick={() => inputRef.current?.click()}
       style={{
@@ -110,8 +113,16 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
         </>
       )}
     </div>
-    <input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={(e) => onChange(e.target.files?.[0])} />
-    {error && <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: "4px 0 0" }}>{error}</p>}
+    <input
+      ref={inputRef}
+      type="file"
+      accept="image/*"
+      style={{ display: "none" }}
+      onChange={(e) => onChange(e.target.files?.[0])}
+    />
+    {error && (
+      <p style={{ fontSize: 11, color: colors.destructive, fontFamily: fontBody, margin: "4px 0 0" }}>{error}</p>
+    )}
   </div>
 );
 
@@ -141,26 +152,59 @@ export const Header = ({ onBack }) => (
 export const StepDots = ({ total, done }) => (
   <div style={{ display: "flex", gap: 3, padding: "0 22px 4px" }}>
     {Array.from({ length: total }).map((_, i) => (
-      <div key={i} style={{ height: 3, flex: 1, borderRadius: 2, background: i < done ? colors.primary : colors.border }} />
+      <div
+        key={i}
+        style={{ height: 3, flex: 1, borderRadius: 2, background: i < done ? colors.primary : colors.border }}
+      />
     ))}
   </div>
 );
 
 export const SearchBar = ({ value, onChange, onFilterClick }) => (
   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-    <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 10, background: colors.muted, borderRadius: 999, padding: "12px 16px" }}>
+    <div
+      style={{
+        flex: 1,
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        background: colors.muted,
+        borderRadius: 999,
+        padding: "12px 16px",
+      }}
+    >
       <Search size={16} color={colors.mutedForeground} />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Buscar profissionais..."
-        style={{ flex: 1, minWidth: 0, border: "none", outline: "none", background: "transparent", fontFamily: fontBody, fontSize: 13, color: colors.foreground }}
+        style={{
+          flex: 1,
+          minWidth: 0,
+          border: "none",
+          outline: "none",
+          background: "transparent",
+          fontFamily: fontBody,
+          fontSize: 13,
+          color: colors.foreground,
+        }}
       />
     </div>
     <button
       onClick={onFilterClick}
       aria-label="Filtros"
-      style={{ width: 46, height: 46, borderRadius: 16, border: "none", background: gradientKira, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}
+      style={{
+        width: 46,
+        height: 46,
+        borderRadius: 16,
+        border: "none",
+        background: gradientKira,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        flexShrink: 0,
+      }}
     >
       <SlidersHorizontal size={18} color={colors.primaryForeground} />
     </button>
@@ -190,8 +234,24 @@ export const CategoryChip = ({ label, active, onClick }) => (
 
 export const ProfileSection = ({ title, children }) => (
   <div style={{ marginBottom: 22 }}>
-    <p style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: colors.mutedForeground, letterSpacing: "0.06em", textTransform: "uppercase", margin: "0 0 8px" }}>{title}</p>
-    <div style={{ borderRadius: 16, border: `1px solid ${colors.border}`, background: colors.card, overflow: "hidden" }}>{children}</div>
+    <p
+      style={{
+        fontFamily: fontBody,
+        fontSize: 11,
+        fontWeight: 700,
+        color: colors.mutedForeground,
+        letterSpacing: "0.06em",
+        textTransform: "uppercase",
+        margin: "0 0 8px",
+      }}
+    >
+      {title}
+    </p>
+    <div
+      style={{ borderRadius: 16, border: `1px solid ${colors.border}`, background: colors.card, overflow: "hidden" }}
+    >
+      {children}
+    </div>
   </div>
 );
 
@@ -199,15 +259,43 @@ export const ProfileMenuRow = ({ icon: Icon, label, onClick, destructive, last }
   <button
     onClick={onClick}
     style={{
-      display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "13px 14px",
-      border: "none", borderBottom: last ? "none" : `1px solid ${colors.border}`, background: "transparent",
-      textAlign: "left", cursor: onClick ? "pointer" : "default",
+      display: "flex",
+      alignItems: "center",
+      gap: 12,
+      width: "100%",
+      padding: "13px 14px",
+      border: "none",
+      borderBottom: last ? "none" : `1px solid ${colors.border}`,
+      background: "transparent",
+      textAlign: "left",
+      cursor: onClick ? "pointer" : "default",
     }}
   >
-    <div style={{ width: 30, height: 30, borderRadius: 9, background: destructive ? "hsl(0 84% 60% / 0.1)" : colors.muted, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+    <div
+      style={{
+        width: 30,
+        height: 30,
+        borderRadius: 9,
+        background: destructive ? "hsl(0 84% 60% / 0.1)" : colors.muted,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+      }}
+    >
       <Icon size={15} color={destructive ? colors.destructive : colors.mutedForeground} />
     </div>
-    <span style={{ flex: 1, fontFamily: fontBody, fontSize: 13, color: destructive ? colors.destructive : colors.foreground, fontWeight: destructive ? 600 : 500 }}>{label}</span>
+    <span
+      style={{
+        flex: 1,
+        fontFamily: fontBody,
+        fontSize: 13,
+        color: destructive ? colors.destructive : colors.foreground,
+        fontWeight: destructive ? 600 : 500,
+      }}
+    >
+      {label}
+    </span>
     {!destructive && <ChevronRight size={16} color={colors.mutedForeground} />}
   </button>
 );

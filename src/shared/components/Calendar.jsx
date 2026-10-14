@@ -8,17 +8,46 @@ export const CalendarHeader = ({ monthDate, onPrev, onNext, canGoPrev }) => (
       onClick={onPrev}
       disabled={!canGoPrev}
       aria-label="Mês anterior"
-      style={{ width: 32, height: 32, borderRadius: "50%", border: "none", background: colors.muted, display: "flex", alignItems: "center", justifyContent: "center", cursor: canGoPrev ? "pointer" : "not-allowed", opacity: canGoPrev ? 1 : 0.4 }}
+      style={{
+        width: 32,
+        height: 32,
+        borderRadius: "50%",
+        border: "none",
+        background: colors.muted,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: canGoPrev ? "pointer" : "not-allowed",
+        opacity: canGoPrev ? 1 : 0.4,
+      }}
     >
       <ChevronLeft size={17} color={colors.foreground} />
     </button>
-    <span style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 15, color: colors.foreground, textTransform: "capitalize" }}>
+    <span
+      style={{
+        fontFamily: fontDisplay,
+        fontWeight: 700,
+        fontSize: 15,
+        color: colors.foreground,
+        textTransform: "capitalize",
+      }}
+    >
       {monthDate.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
     </span>
     <button
       onClick={onNext}
       aria-label="Próximo mês"
-      style={{ width: 32, height: 32, borderRadius: "50%", border: "none", background: colors.muted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}
+      style={{
+        width: 32,
+        height: 32,
+        borderRadius: "50%",
+        border: "none",
+        background: colors.muted,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+      }}
     >
       <ChevronRight size={17} color={colors.foreground} />
     </button>
@@ -36,7 +65,13 @@ export const CalendarDay = ({ cell, selected, onClick }) => {
         borderRadius: 12,
         border: cell.isToday && !selected ? `1.5px solid ${colors.primary}` : "1.5px solid transparent",
         background: selected ? gradientKira : "transparent",
-        color: !cell.inMonth ? colors.border : cell.unavailable ? colors.mutedForeground : selected ? colors.primaryForeground : colors.foreground,
+        color: !cell.inMonth
+          ? colors.border
+          : cell.unavailable
+            ? colors.mutedForeground
+            : selected
+              ? colors.primaryForeground
+              : colors.foreground,
         opacity: !cell.inMonth ? 0.35 : cell.unavailable ? 0.5 : 1,
         textDecoration: cell.unavailable && cell.inMonth ? "line-through" : "none",
         fontFamily: fontBody,
@@ -77,10 +112,25 @@ export const CalendarMonth = ({ monthDate, selectedDate, today, monthKey, onSele
   const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
   return (
     <div key={monthKey} style={{ animation: "kiraCalendarFade 0.25s ease" }}>
-      <style>{"@keyframes kiraCalendarFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }"}</style>
+      <style>
+        {
+          "@keyframes kiraCalendarFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }"
+        }
+      </style>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", marginBottom: 6 }}>
         {weekDays.map((w) => (
-          <span key={w} style={{ textAlign: "center", fontFamily: fontBody, fontSize: 10, fontWeight: 700, color: colors.mutedForeground }}>{w}</span>
+          <span
+            key={w}
+            style={{
+              textAlign: "center",
+              fontFamily: fontBody,
+              fontSize: 10,
+              fontWeight: 700,
+              color: colors.mutedForeground,
+            }}
+          >
+            {w}
+          </span>
         ))}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(7,1fr)", gap: 4 }}>
@@ -104,11 +154,19 @@ export const TimeSlotButton = ({ time, selected, onClick }) => (
   <button
     onClick={onClick}
     style={{
-      display: "flex", alignItems: "center", justifyContent: "center", gap: 4, padding: "10px 6px", borderRadius: 12,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 4,
+      padding: "10px 6px",
+      borderRadius: 12,
       border: `1px solid ${selected ? colors.primary : colors.border}`,
       background: selected ? gradientKira : colors.card,
       color: selected ? colors.primaryForeground : colors.foreground,
-      fontFamily: fontBody, fontSize: 12, fontWeight: selected ? 700 : 500, cursor: "pointer",
+      fontFamily: fontBody,
+      fontSize: 12,
+      fontWeight: selected ? 700 : 500,
+      cursor: "pointer",
       transition: "background 0.2s ease, transform 0.15s ease",
       transform: selected ? "scale(1.04)" : "scale(1)",
     }}
@@ -126,9 +184,21 @@ export const TimeSlotGrid = ({ times, selectedTime, onSelect }) => (
 );
 
 export const EmptySchedule = () => (
-  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, padding: "28px 16px", textAlign: "center" }}>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      padding: "28px 16px",
+      textAlign: "center",
+    }}
+  >
     <span style={{ fontSize: 28 }}>📅</span>
-    <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.foreground, fontWeight: 600, margin: 0 }}>Nenhum horário disponível nesta data.</p>
+    <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.foreground, fontWeight: 600, margin: 0 }}>
+      Nenhum horário disponível nesta data.
+    </p>
     <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: 0 }}>Escolha outro dia.</p>
   </div>
 );
@@ -137,7 +207,15 @@ export const LoadingSchedule = () => (
   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
     <style>{"@keyframes kiraPulse { 0%, 100% { opacity: .55 } 50% { opacity: 1 } }"}</style>
     {Array.from({ length: 6 }).map((_, i) => (
-      <div key={i} style={{ height: 38, borderRadius: 12, background: colors.muted, animation: "kiraPulse 1.2s ease-in-out infinite" }} />
+      <div
+        key={i}
+        style={{
+          height: 38,
+          borderRadius: 12,
+          background: colors.muted,
+          animation: "kiraPulse 1.2s ease-in-out infinite",
+        }}
+      />
     ))}
   </div>
 );

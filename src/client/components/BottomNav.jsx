@@ -30,14 +30,36 @@ export const BottomNav = ({ active, onNavigate }) => (
           onClick={() => onNavigate?.(item.key)}
           aria-label={item.label}
           style={{
-            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2,
-            flex: 1, minWidth: 0, padding: "6px 2px", borderRadius: 12,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+            flex: 1,
+            minWidth: 0,
+            padding: "6px 2px",
+            borderRadius: 12,
             background: isActive ? "hsl(340 70% 55% / 0.1)" : "transparent",
-            border: "none", cursor: "pointer",
+            border: "none",
+            cursor: "pointer",
           }}
         >
-          <Icon size={18} color={isActive ? colors.primary : colors.mutedForeground} strokeWidth={isActive ? 2.3 : 1.8} />
-          <span style={{ fontFamily: fontBody, fontSize: 9.5, fontWeight: isActive ? 700 : 500, color: isActive ? colors.primary : colors.mutedForeground, whiteSpace: "nowrap" }}>{item.label}</span>
+          <Icon
+            size={18}
+            color={isActive ? colors.primary : colors.mutedForeground}
+            strokeWidth={isActive ? 2.3 : 1.8}
+          />
+          <span
+            style={{
+              fontFamily: fontBody,
+              fontSize: 9.5,
+              fontWeight: isActive ? 700 : 500,
+              color: isActive ? colors.primary : colors.mutedForeground,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {item.label}
+          </span>
         </button>
       );
     })}

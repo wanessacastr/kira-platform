@@ -20,10 +20,27 @@ export default function ClientSelfieScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={5} />
-      <Header onBack={() => { stopClientSelfieCamera(); setScreen("clientDocument"); }} />
+      <Header
+        onBack={() => {
+          stopClientSelfieCamera();
+          setScreen("clientDocument");
+        }}
+      />
       <div style={{ flex: 1, padding: "0 24px 32px", overflowY: "auto" }}>
-        <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 22, color: colors.foreground, margin: "4px 0 4px" }}>Verificação Facial</h1>
-        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>Tire uma selfie para aumentarmos a segurança da sua conta e confirmarmos sua identidade.</p>
+        <h1
+          style={{
+            fontFamily: fontDisplay,
+            fontWeight: 700,
+            fontSize: 22,
+            color: colors.foreground,
+            margin: "4px 0 4px",
+          }}
+        >
+          Verificação Facial
+        </h1>
+        <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 18px" }}>
+          Tire uma selfie para aumentarmos a segurança da sua conta e confirmarmos sua identidade.
+        </p>
 
         <div
           style={{
@@ -42,9 +59,22 @@ export default function ClientSelfieScreen() {
           }}
         >
           {cForm.selfiePhoto ? (
-            <img src={cForm.selfiePhoto} alt="Prévia da selfie" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img
+              src={cForm.selfiePhoto}
+              alt="Prévia da selfie"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           ) : cSelfieStatus === "error" ? (
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: 20, textAlign: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 8,
+                padding: 20,
+                textAlign: "center",
+              }}
+            >
               <AlertCircle size={30} color={colors.destructive} />
               <span style={{ fontSize: 12, color: colors.mutedForeground, fontFamily: fontBody }}>{cSelfieError}</span>
             </div>
@@ -58,16 +88,30 @@ export default function ClientSelfieScreen() {
             />
           )}
           {cSelfieStatus === "streaming" && !cForm.selfiePhoto && (
-            <div style={{ position: "absolute", inset: 14, borderRadius: 14, border: "2px solid hsl(340 70% 55% / 0.6)", pointerEvents: "none" }} />
+            <div
+              style={{
+                position: "absolute",
+                inset: 14,
+                borderRadius: 14,
+                border: "2px solid hsl(340 70% 55% / 0.6)",
+                pointerEvents: "none",
+              }}
+            />
           )}
         </div>
         <canvas ref={cSelfieCanvasRef} style={{ display: "none" }} />
 
-        <div style={{ width: "100%", maxWidth: 280, margin: "0 auto", display: "flex", flexDirection: "column", gap: 10 }}>
+        <div
+          style={{ width: "100%", maxWidth: 280, margin: "0 auto", display: "flex", flexDirection: "column", gap: 10 }}
+        >
           {!cForm.selfiePhoto && cSelfieStatus !== "error" && (
-            <PrimaryButton onClick={captureClientSelfie} disabled={cSelfieStatus !== "streaming"}>Tirar selfie</PrimaryButton>
+            <PrimaryButton onClick={captureClientSelfie} disabled={cSelfieStatus !== "streaming"}>
+              Tirar selfie
+            </PrimaryButton>
           )}
-          {cSelfieStatus === "error" && <PrimaryButton onClick={startClientSelfieCamera}>Tentar novamente</PrimaryButton>}
+          {cSelfieStatus === "error" && (
+            <PrimaryButton onClick={startClientSelfieCamera}>Tentar novamente</PrimaryButton>
+          )}
           {cForm.selfiePhoto && (
             <>
               <PrimaryButton onClick={() => setScreen("clientTerms")}>Confirmar selfie</PrimaryButton>
@@ -75,7 +119,17 @@ export default function ClientSelfieScreen() {
             </>
           )}
         </div>
-        <p style={{ fontSize: 10, color: colors.mutedForeground, fontFamily: fontBody, textAlign: "center", margin: "14px 0 0" }}>Sua selfie é usada apenas para confirmar sua identidade.</p>
+        <p
+          style={{
+            fontSize: 10,
+            color: colors.mutedForeground,
+            fontFamily: fontBody,
+            textAlign: "center",
+            margin: "14px 0 0",
+          }}
+        >
+          Sua selfie é usada apenas para confirmar sua identidade.
+        </p>
       </div>
     </div>
   );
