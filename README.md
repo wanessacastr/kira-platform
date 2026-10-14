@@ -2,7 +2,6 @@
 
 Kira é uma plataforma inteligente de agendamento e gestão de serviços, criada para otimizar a disponibilidade de profissionais, automatizar processos e oferecer uma experiência escalável.
 
-Este repositório contém o **front-end** (protótipo navegável, sem backend). Todos os dados vêm de mocks locais.
 
 ## Stack
 
