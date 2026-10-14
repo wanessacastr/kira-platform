@@ -7,6 +7,7 @@ Protótipo front-end em Vite + React. Não há backend: todo dado vem de mocks e
 - **Navegação:** estado `screen` no `KiraContext`; `src/screens.js` liga cada chave a uma tela.
 - **Estado:** `src/context/KiraContext.jsx` expõe estado e ações pelo hook `useKira()`.
 - **Design system:** valores visuais ficam em `src/shared/styles/tokens.css` (cor, espaço, raio, sombra, tipografia). `shared/theme.js` aponta para essas variáveis e `shared/components/primitives.jsx` traz os blocos de UI. Cor, fonte e raio fixos são barrados pelo lint.
+- **Acessibilidade:** controles clicáveis são `<button>`; campos usam `Field` (rótulo, erro e id ligados); modais fecham com Esc; textos seguem contraste AA (`--color-primary-text`). As regras `jsx-a11y` do lint são erros.
 - **Organização:** por feature (`client/`, `professional/`) e `shared/` para o que é comum. `shared/` nunca importa de uma feature.
 
 ## O que roda em cada integração
