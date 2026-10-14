@@ -31,6 +31,23 @@ export default [
     },
   },
   {
+    // valores visuais vêm dos tokens de src/shared/styles/tokens.css
+    files: ["src/**/*.{js,jsx}"],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "Property[key.name=/^(fontSize|borderRadius)$/] > Literal[value=/^\\d/]",
+          message: "Use um token (var(--font-size-*) ou var(--radius-*)).",
+        },
+        {
+          selector: "Literal[value=/^(#[0-9a-fA-F]{3,8}|hsl\\(\\d|rgba?\\()/]",
+          message: "Use um token de cor (var(--color-*)) em vez de cor fixa.",
+        },
+      ],
+    },
+  },
+  {
     files: ["**/*.config.{js,cjs}", "**/*.test.{js,jsx}"],
     languageOptions: { globals: { ...globals.node } },
   },
