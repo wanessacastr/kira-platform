@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { useKira } from "../../context/KiraContext";
 import { Header, PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
+import { Checkbox } from "../../shared/components/primitives";
 
 // "Programa de fidelidade" — pontos, cashback e recompensas.
 export default function ProLoyaltyScreen() {
@@ -45,23 +46,11 @@ export default function ProLoyaltyScreen() {
             marginBottom: "var(--space-18)",
             cursor: "pointer",
           }}
-          onClick={() => setLoyaltySettings((s) => ({ ...s, enabled: !s.enabled }))}
         >
-          <span
-            style={{
-              width: 18,
-              height: 18,
-              borderRadius: "var(--radius-xs)",
-              border: `1px solid ${loyaltySettings.enabled ? colors.primary : colors.border}`,
-              background: loyaltySettings.enabled ? colors.primary : colors.muted,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            {loyaltySettings.enabled && <Check size={12} color={colors.primaryForeground} />}
-          </span>
+          <Checkbox
+            checked={loyaltySettings.enabled}
+            onChange={() => setLoyaltySettings((s) => ({ ...s, enabled: !s.enabled }))}
+          />
           <span
             style={{
               flex: 1,
