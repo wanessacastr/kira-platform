@@ -42,40 +42,69 @@
   --gradient-kira: linear-gradient(135deg, var(--color-accent), var(--color-primary), var(--color-violet));
 
   /* espaço: o número é o valor em px */
+  --space-1: 1px;
   --space-2: 2px;
+  --space-3: 3px;
   --space-4: 4px;
+  --space-5: 5px;
   --space-6: 6px;
   --space-8: 8px;
+  --space-9: 9px;
   --space-10: 10px;
+  --space-11: 11px;
   --space-12: 12px;
+  --space-13: 13px;
   --space-14: 14px;
+  --space-15: 15px;
   --space-16: 16px;
   --space-18: 18px;
   --space-20: 20px;
   --space-22: 22px;
   --space-24: 24px;
+  --space-26: 26px;
+  --space-28: 28px;
   --space-32: 32px;
   --space-40: 40px;
+  --space-48: 48px;
 
   /* raio */
+  --radius-2xs: 2px;
   --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
-  --radius-xl: 16px;
-  --radius-2xl: 20px;
+  --radius-sm: 8px;
+  --radius-icon: 9px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-2xl: 16px;
+  --radius-3xl: 18px;
+  --radius-4xl: 20px;
   --radius-phone: 32px;
   --radius-pill: 999px;
 
   /* sombra */
-  --shadow-sm: 0 1px 2px hsl(var(--foreground-hsl) / 0.1);
-  --shadow-md: 0 2px 10px hsl(var(--foreground-hsl) / 0.12);
+  --shadow-xs: 0 1px 2px hsl(var(--foreground-hsl) / 0.1);
+  --shadow-sm: 0 2px 10px hsl(var(--foreground-hsl) / 0.12);
+  --shadow-md: 0 2px 10px hsl(var(--foreground-hsl) / 0.15);
   --shadow-lg: 0 4px 14px hsl(var(--foreground-hsl) / 0.18);
-  --shadow-phone: 0 12px 40px hsl(var(--black-hsl) / 0.18);
   --shadow-nav: 0 -6px 20px -12px hsl(var(--foreground-hsl) / 0.18);
+  --shadow-card-glow: 0 4px 20px -4px hsl(var(--primary-hsl) / 0.2);
+  --shadow-medal: 0 2px 14px -6px hsl(var(--primary-hsl) / 0.35);
+  --shadow-phone: 0 12px 40px hsl(var(--black-hsl) / 0.18);
+  --text-shadow-sm: 0 4px 12px hsl(var(--black-hsl) / 0.12);
+  --text-shadow-md: 0 4px 12px hsl(var(--black-hsl) / 0.15);
   --focus-ring: 2px solid var(--color-primary);
 
-  /* tipografia */
+  /* tipografia: escala única, mínimo de 12px */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 22px;
+  --font-size-3xl: 28px;
+  --font-size-4xl: 32px;
+  --font-size-hero: 96px;
   --font-display: "Playfair Display", serif;
   --font-body: "DM Sans", sans-serif;
 }
