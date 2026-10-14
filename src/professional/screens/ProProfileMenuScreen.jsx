@@ -87,7 +87,7 @@ export default function ProProfileMenuScreen() {
             borderRadius: "var(--radius-xl)",
             border: `1px solid hsl(var(--destructive-hsl) / 0.3)`,
             background: "hsl(var(--destructive-hsl) / 0.06)",
-            color: colors.destructive,
+            color: colors.destructiveText,
             fontWeight: 700,
             fontSize: "var(--font-size-sm)",
             fontFamily: fontBody,

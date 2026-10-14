@@ -68,7 +68,7 @@ export default function ClientTryOnResultScreen() {
             <p
               style={{
                 fontSize: "var(--font-size-xs)",
-                color: colors.primary,
+                color: colors.primaryText,
                 fontWeight: 700,
                 fontFamily: fontBody,
                 margin: "0 0 var(--space-4)",

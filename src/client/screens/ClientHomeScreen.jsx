@@ -62,7 +62,7 @@ export default function ClientHomeScreen() {
               }}
             >
               Olá, {cForm.name ? cForm.name.split(" ")[0] : "bem-vinda"}{" "}
-              <Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", color: colors.primary }} />
+              <Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
             </h1>
           </div>
           <button

@@ -59,7 +59,12 @@ export default function ProPhotosScreen() {
         >
           <ImagePlus size={26} color={colors.mutedForeground} />
           <span
-            style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: colors.primary, fontFamily: fontBody }}
+            style={{
+              fontSize: "var(--font-size-sm)",
+              fontWeight: 600,
+              color: colors.primaryText,
+              fontFamily: fontBody,
+            }}
           >
             Adicionar fotos
           </span>
@@ -78,7 +83,7 @@ export default function ProPhotosScreen() {
           <p
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.destructive,
+              color: colors.destructiveText,
               fontFamily: fontBody,
               margin: "-var(--space-8) 0 var(--space-10)",
             }}

@@ -154,7 +154,7 @@ export default function ProAgendaDashScreen() {
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
-                    color: a.status === "confirmado" ? colors.primary : colors.accent,
+                    color: a.status === "confirmado" ? colors.primaryText : colors.accent,
                   }}
                 >
                   {a.status === "confirmado" ? "✓ Confirmado" : "Aguardando"}

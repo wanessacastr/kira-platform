@@ -91,7 +91,7 @@ export default function ProLocationScreen() {
                 style={{
                   fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
-                  color: colors.primary,
+                  color: colors.primaryText,
                   fontFamily: fontBody,
                   display: "flex",
                   alignItems: "center",
@@ -120,7 +120,7 @@ export default function ProLocationScreen() {
                 style={{
                   fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
-                  color: colors.destructive,
+                  color: colors.destructiveText,
                   fontFamily: fontBody,
                   display: "flex",
                   alignItems: "center",

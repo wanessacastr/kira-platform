@@ -111,7 +111,7 @@ export default function ProPersonalScreen() {
           <span
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.primary,
+              color: colors.primaryText,
               fontWeight: 600,
               fontFamily: fontBody,
               cursor: "pointer",
@@ -121,7 +121,14 @@ export default function ProPersonalScreen() {
             {pForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
           </span>
           {pErrors.photo && (
-            <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+            <p
+              style={{
+                fontSize: "var(--font-size-xs)",
+                color: colors.destructiveText,
+                fontFamily: fontBody,
+                margin: 0,
+              }}
+            >
               {pErrors.photo}
             </p>
           )}

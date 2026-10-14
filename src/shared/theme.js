@@ -4,6 +4,8 @@ export const colors = {
   foreground: "var(--color-foreground)",
   card: "var(--color-card)",
   primary: "var(--color-primary)",
+  primaryText: "var(--color-primary-text)",
+  destructiveText: "var(--color-destructive-text)",
   primaryForeground: "var(--color-primary-foreground)",
   secondary: "var(--color-secondary)",
   accent: "var(--color-accent)",

@@ -81,7 +81,9 @@ export const ProfessionalCard = ({ pro, onClick }) => (
       <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
         a partir de
       </span>
-      <span style={{ fontFamily: fontBody, fontWeight: 700, fontSize: "var(--font-size-md)", color: colors.primary }}>
+      <span
+        style={{ fontFamily: fontBody, fontWeight: 700, fontSize: "var(--font-size-md)", color: colors.primaryText }}
+      >
         R$ {pro.price}
       </span>
     </div>
@@ -198,7 +200,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
               gap: "var(--space-4)",
               fontFamily: fontBody,
               fontSize: "var(--font-size-xs)",
-              color: colors.primary,
+              color: colors.primaryText,
               fontWeight: 600,
               marginTop: "var(--space-4)",
             }}
@@ -352,9 +354,9 @@ export const RankingCard = ({ pro, rank, onClick }) => {
 
 export const AppointmentCard = ({ appointment, pro, onClick }) => {
   const statusMap = {
-    proximo: { label: "✓ Confirmado", color: colors.primary },
+    proximo: { label: "✓ Confirmado", color: colors.primaryText },
     concluido: { label: "Concluído", color: colors.mutedForeground },
-    cancelado: { label: "Cancelado", color: colors.destructive },
+    cancelado: { label: "Cancelado", color: colors.destructiveText },
   };
   const status = statusMap[appointment.status];
   return (
@@ -444,7 +446,9 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", fontWeight: 700, color: colors.primary }}>
+        <span
+          style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", fontWeight: 700, color: colors.primaryText }}
+        >
           R$ {appointment.price.toFixed(2)}
         </span>
         <span
@@ -452,7 +456,7 @@ export const AppointmentCard = ({ appointment, pro, onClick }) => {
             fontFamily: fontBody,
             fontSize: "var(--font-size-xs)",
             fontWeight: 600,
-            color: colors.primary,
+            color: colors.primaryText,
             display: "flex",
             alignItems: "center",
             gap: "var(--space-2)",

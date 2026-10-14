@@ -13,6 +13,8 @@
   --color-foreground: hsl(var(--foreground-hsl));
   --color-card: hsl(var(--white-hsl));
   --color-primary: hsl(var(--primary-hsl));
+  --color-primary-text: hsl(340 70% 47%); /* rosa para texto: contraste AA sobre fundo claro */
+  --color-destructive-text: hsl(0 84% 46%);
   --color-primary-foreground: hsl(40 80% 92%);
   --color-secondary: hsl(var(--secondary-hsl));
   --color-accent: hsl(var(--accent-hsl));

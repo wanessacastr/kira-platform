@@ -67,7 +67,7 @@ export default function ClientAccountSecurityScreen() {
               style={{
                 fontSize: "var(--font-size-sm)",
                 fontWeight: 700,
-                color: colors.primary,
+                color: colors.primaryText,
                 fontFamily: fontBody,
                 display: "flex",
                 alignItems: "center",
@@ -134,7 +134,7 @@ export default function ClientAccountSecurityScreen() {
                   fontFamily: fontBody,
                   fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
-                  color: item.done ? colors.primary : colors.mutedForeground,
+                  color: item.done ? colors.primaryText : colors.mutedForeground,
                 }}
               >
                 {item.done ? "Concluído" : "Pendente"}

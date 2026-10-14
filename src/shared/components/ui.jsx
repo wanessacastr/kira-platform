@@ -139,7 +139,7 @@ export const DocUploadBox = ({ label, value, error, inputRef, onChange }) => (
       <p
         style={{
           fontSize: "var(--font-size-xs)",
-          color: colors.destructive,
+          color: colors.destructiveText,
           fontFamily: fontBody,
           margin: "var(--space-4) 0 0",
         }}

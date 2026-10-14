@@ -98,7 +98,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
               fontFamily: fontBody,
               fontSize: "var(--font-size-sm)",
               fontWeight: 700,
-              color: colors.destructive,
+              color: colors.destructiveText,
             }}
           >
             Se você está em perigo agora, ligue primeiro
@@ -373,7 +373,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 color={colors.destructive}
                 style={{ flexShrink: 0, marginTop: "var(--space-1)" }}
               />
-              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.destructive }}>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.destructiveText }}>
                 Em caso de risco imediato, ligue 190 antes de qualquer outra coisa.
               </span>
             </div>
@@ -433,7 +433,7 @@ export const ReportButton = ({ agendamentoId, papel }) => {
           borderRadius: "var(--radius-lg)",
           border: `1px solid hsl(var(--destructive-hsl) / 0.35)`,
           background: "transparent",
-          color: colors.destructive,
+          color: colors.destructiveText,
           fontFamily: fontBody,
           fontWeight: 600,
           fontSize: "var(--font-size-sm)",

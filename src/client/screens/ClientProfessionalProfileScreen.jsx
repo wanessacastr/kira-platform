@@ -123,7 +123,7 @@ export default function ClientProfessionalProfileScreen() {
                 fontFamily: fontBody,
                 fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
-                color: colors.primary,
+                color: colors.primaryText,
                 margin: "0 0 var(--space-10)",
               }}
             >
@@ -220,7 +220,7 @@ export default function ClientProfessionalProfileScreen() {
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-sm)",
                     fontWeight: 700,
-                    color: colors.primary,
+                    color: colors.primaryText,
                   }}
                 >
                   R$ {pro.price}

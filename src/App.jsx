@@ -141,7 +141,7 @@ function Prototype() {
                     borderRadius: "var(--radius-pill)",
                     border: `1px solid ${screen === key ? colors.primary : colors.border}`,
                     background: screen === key ? "hsl(var(--primary-hsl) / 0.1)" : colors.card,
-                    color: screen === key ? colors.primary : colors.mutedForeground,
+                    color: screen === key ? colors.primaryText : colors.mutedForeground,
                     fontSize: "var(--font-size-xs)",
                     fontFamily: fontBody,
                     cursor: "pointer",

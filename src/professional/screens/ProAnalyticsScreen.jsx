@@ -393,7 +393,7 @@ export default function ProAnalyticsScreen() {
                           fontFamily: fontBody,
                           fontSize: "var(--font-size-xs)",
                           fontWeight: 700,
-                          color: colors.primary,
+                          color: colors.primaryText,
                           flexShrink: 0,
                         }}
                       >

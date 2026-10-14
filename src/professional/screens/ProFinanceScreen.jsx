@@ -105,7 +105,7 @@ export default function ProFinanceScreen() {
                     fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
                     background: financePeriod === p.key ? colors.card : "transparent",
-                    color: financePeriod === p.key ? colors.primary : colors.mutedForeground,
+                    color: financePeriod === p.key ? colors.primaryText : colors.mutedForeground,
                     boxShadow: financePeriod === p.key ? "var(--shadow-xs)" : "none",
                   }}
                 >
@@ -226,7 +226,7 @@ export default function ProFinanceScreen() {
                   fontFamily: fontBody,
                   fontSize: "var(--font-size-sm)",
                   fontWeight: 700,
-                  color: colors.primary,
+                  color: colors.primaryText,
                 }}
               >
                 +R$ {tx.value.toFixed(2)}

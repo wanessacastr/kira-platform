@@ -95,7 +95,7 @@ export default function ProSecurityScreen() {
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
-                    color: colors.primary,
+                    color: colors.primaryText,
                     marginTop: "var(--space-2)",
                   }}
                 >

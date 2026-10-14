@@ -47,14 +47,14 @@ export default function ClientTermsScreen() {
               />
               <span style={{ fontSize: "var(--font-size-sm)", color: colors.foreground, fontFamily: fontBody }}>
                 Aceito {key === "termsUse" ? "os" : "a"}{" "}
-                <span style={{ color: colors.primary, fontWeight: 600 }}>{label}</span>
+                <span style={{ color: colors.primaryText, fontWeight: 600 }}>{label}</span>
               </span>
             </label>
             {cErrors[key] && (
               <p
                 style={{
                   fontSize: "var(--font-size-xs)",
-                  color: colors.destructive,
+                  color: colors.destructiveText,
                   fontFamily: fontBody,
                   margin: "var(--space-4) 0 0 var(--space-28)",
                 }}

@@ -116,7 +116,7 @@ export default function ClientReviewsScreen() {
                         fontFamily: fontBody,
                         fontSize: "var(--font-size-xs)",
                         fontWeight: 700,
-                        color: colors.primary,
+                        color: colors.primaryText,
                       }}
                     >
                       Avaliar este atendimento

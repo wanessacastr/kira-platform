@@ -106,8 +106,10 @@ export default function SignupScreen() {
           }}
         >
           Já tem conta?{" "}
-          <span
-            style={{ color: colors.primary, fontWeight: 600, cursor: "pointer" }}
+          <button
+            type="button"
+            className="k-reset"
+            style={{ color: colors.primaryText, fontWeight: 600, cursor: "pointer" }}
             onClick={() => setScreen("login")}
           >
             Entrar

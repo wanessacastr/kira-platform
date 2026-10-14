@@ -70,7 +70,7 @@ export default function ProSpecialtiesScreen() {
           <p
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.destructive,
+              color: colors.destructiveText,
               fontFamily: fontBody,
               margin: "0 0 var(--space-10)",
             }}

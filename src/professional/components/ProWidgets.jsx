@@ -75,7 +75,7 @@ export const RevenueBarChart = ({ data, selectedIndex, onSelect }) => {
                 fontFamily: fontBody,
                 fontSize: "var(--font-size-xs)",
                 fontWeight: isSelected ? 700 : 400,
-                color: isSelected ? colors.primary : colors.mutedForeground,
+                color: isSelected ? colors.primaryText : colors.mutedForeground,
               }}
             >
               {d.label}
