@@ -25,7 +25,7 @@ src/
   App.jsx                  moldura do celular + atalhos de tela (dev)
   screens.js               mapa screen -> tela
   context/KiraContext.jsx  estado e ações globais (useKira)
-  shared/                  tema, utils, dados e componentes comuns
+  shared/                  tema, tokens (styles/), utils, dados e componentes comuns (primitives, NavBar)
   client/                  lado cliente (telas, componentes, mocks, recomendação)
   professional/            lado profissional (telas, componentes, mocks)
 ```
