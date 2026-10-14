@@ -59,7 +59,12 @@ export default function ProPhotosScreen() {
         >
           <ImagePlus size={26} color={colors.mutedForeground} />
           <span
-            style={{ fontSize: "var(--font-size-sm)", fontWeight: 600, color: colors.primary, fontFamily: fontBody }}
+            style={{
+              fontSize: "var(--font-size-sm)",
+              fontWeight: 600,
+              color: colors.primaryText,
+              fontFamily: fontBody,
+            }}
           >
             Adicionar fotos
           </span>
@@ -78,7 +83,7 @@ export default function ProPhotosScreen() {
           <p
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.destructive,
+              color: colors.destructiveText,
               fontFamily: fontBody,
               margin: "-var(--space-8) 0 var(--space-10)",
             }}
@@ -102,7 +107,7 @@ export default function ProPhotosScreen() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "var(--space-8)" }}>
               {pForm.workPhotos.map((photo, idx) => (
                 <div
-                  key={idx}
+                  key={`${photo.slice(-32)}-${pForm.workPhotos.slice(0, idx).filter((p) => p === photo).length}`}
                   style={{
                     position: "relative",
                     aspectRatio: "1",
@@ -115,7 +120,10 @@ export default function ProPhotosScreen() {
                     alt={`Foto ${idx + 1}`}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
-                  <div
+                  <button
+                    type="button"
+                    className="k-reset"
+                    aria-label="Remover foto"
                     onClick={() => removeWorkPhoto(idx)}
                     style={{
                       position: "absolute",
@@ -132,7 +140,7 @@ export default function ProPhotosScreen() {
                     }}
                   >
                     <X size={12} color={colors.foreground} />
-                  </div>
+                  </button>
                 </div>
               ))}
             </div>

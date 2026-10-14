@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { useKira } from "../../context/KiraContext";
 import { Header, PrimaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
+import { Checkbox } from "../../shared/components/primitives";
 
 export default function ProTermsScreen() {
   const { pErrors, pForm, setPErrors, setPField, setScreen, validateTerms } = useKira();
@@ -37,36 +38,23 @@ export default function ProTermsScreen() {
           { key: "termsPrivacy", label: "Política de Privacidade" },
         ].map(({ key, label }) => (
           <div key={key} style={{ marginBottom: "var(--space-14)" }}>
-            <label
-              style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-10)", cursor: "pointer" }}
-              onClick={() => setPField(key, !pForm[key])}
-            >
-              <span
-                style={{
-                  marginTop: "var(--space-2)",
-                  width: 18,
-                  height: 18,
-                  borderRadius: "var(--radius-xs)",
-                  border: `1px solid ${pForm[key] ? colors.primary : pErrors[key] ? colors.destructive : colors.border}`,
-                  background: pForm[key] ? colors.primary : colors.muted,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexShrink: 0,
-                }}
-              >
-                {pForm[key] && <Check size={12} color={colors.primaryForeground} />}
-              </span>
+            <label style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-10)", cursor: "pointer" }}>
+              <Checkbox
+                checked={!!pForm[key]}
+                onChange={() => setPField(key, !pForm[key])}
+                invalid={!!pErrors[key]}
+                style={{ marginTop: "var(--space-2)" }}
+              />
               <span style={{ fontSize: "var(--font-size-sm)", color: colors.foreground, fontFamily: fontBody }}>
                 Aceito {key === "termsUse" ? "os" : "a"}{" "}
-                <span style={{ color: colors.primary, fontWeight: 600 }}>{label}</span>
+                <span style={{ color: colors.primaryText, fontWeight: 600 }}>{label}</span>
               </span>
             </label>
             {pErrors[key] && (
               <p
                 style={{
                   fontSize: "var(--font-size-xs)",
-                  color: colors.destructive,
+                  color: colors.destructiveText,
                   fontFamily: fontBody,
                   margin: "var(--space-4) 0 0 var(--space-28)",
                 }}

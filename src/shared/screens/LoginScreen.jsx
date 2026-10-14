@@ -58,6 +58,8 @@ export default function LoginScreen() {
               style={inputStyle(false)}
             />
             <button
+              type="button"
+              aria-label={showLoginPassword ? "Ocultar a senha" : "Mostrar a senha"}
               onClick={() => setShowLoginPassword((s) => !s)}
               style={{
                 position: "absolute",
@@ -85,12 +87,14 @@ export default function LoginScreen() {
           }}
         >
           Não tem conta?{" "}
-          <span
-            style={{ color: colors.primary, fontWeight: 600, cursor: "pointer" }}
+          <button
+            type="button"
+            className="k-reset"
+            style={{ color: colors.primaryText, fontWeight: 600, cursor: "pointer" }}
             onClick={() => setScreen("signup")}
           >
             Criar conta
-          </span>
+          </button>
         </p>
       </div>
     </div>

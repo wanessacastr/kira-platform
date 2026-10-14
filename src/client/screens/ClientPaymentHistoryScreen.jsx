@@ -87,7 +87,7 @@ export default function ClientPaymentHistoryScreen() {
                       fontFamily: fontBody,
                       fontSize: "var(--font-size-sm)",
                       fontWeight: 700,
-                      color: colors.primary,
+                      color: colors.primaryText,
                     }}
                   >
                     R$ {a.price.toFixed(2)}

@@ -119,7 +119,7 @@ export default function ProGiftCardsScreen() {
                       fontFamily: fontBody,
                       fontSize: "var(--font-size-sm)",
                       fontWeight: 700,
-                      color: colors.primary,
+                      color: colors.primaryText,
                     }}
                   >
                     R$ {gc.value}
@@ -129,7 +129,7 @@ export default function ProGiftCardsScreen() {
                       fontFamily: fontBody,
                       fontSize: "var(--font-size-xs)",
                       fontWeight: 600,
-                      color: gc.status === "ativo" ? colors.primary : colors.mutedForeground,
+                      color: gc.status === "ativo" ? colors.primaryText : colors.mutedForeground,
                     }}
                   >
                     {gc.status === "ativo" ? "Ativo" : "Usado"}

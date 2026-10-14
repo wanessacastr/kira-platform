@@ -108,10 +108,12 @@ export default function ProPersonalScreen() {
             style={{ display: "none" }}
             onChange={(e) => handlePhoto(e.target.files?.[0], (v) => setPField("photo", v))}
           />
-          <span
+          <button
+            type="button"
+            className="k-reset"
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.primary,
+              color: colors.primaryText,
               fontWeight: 600,
               fontFamily: fontBody,
               cursor: "pointer",
@@ -119,9 +121,16 @@ export default function ProPersonalScreen() {
             onClick={() => pFileInputRef.current?.click()}
           >
             {pForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
-          </span>
+          </button>
           {pErrors.photo && (
-            <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+            <p
+              style={{
+                fontSize: "var(--font-size-xs)",
+                color: colors.destructiveText,
+                fontFamily: fontBody,
+                margin: 0,
+              }}
+            >
               {pErrors.photo}
             </p>
           )}
@@ -208,6 +217,8 @@ export default function ProPersonalScreen() {
               style={inputStyle(pErrors.password)}
             />
             <button
+              type="button"
+              aria-label={pShowPassword ? "Ocultar a senha" : "Mostrar a senha"}
               onClick={() => setPShowPassword((s) => !s)}
               style={{
                 position: "absolute",
@@ -234,6 +245,8 @@ export default function ProPersonalScreen() {
               style={inputStyle(pErrors.confirm)}
             />
             <button
+              type="button"
+              aria-label={pShowConfirm ? "Ocultar a confirmação de senha" : "Mostrar a confirmação de senha"}
               onClick={() => setPShowConfirm((s) => !s)}
               style={{
                 position: "absolute",

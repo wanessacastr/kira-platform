@@ -4,6 +4,27 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+## [0.4.0] - 2026-10-14
+
+### Adicionado
+
+- Caixa de seleção real (teclado e leitor de tela) nos termos e na fidelidade.
+- Fechar modais com a tecla Esc.
+- Regras de acessibilidade do lint agora são erros.
+
+### Alterado
+
+- Textos rosa e vermelhos ficam um pouco mais escuros, para contraste AA.
+- Divs e spans clicáveis viraram botões, sem mudar o visual.
+- Chaves de listas usam dados estáveis, não o índice.
+
+### Corrigido
+
+- Campos sem rótulo ligado (nascimento, sexo, termos, sliders de fidelidade).
+- Botões de ver senha, adicionar especialidade e remover foto sem nome.
+- Card de faturamento do painel tinha botões dentro de botão.
+- axe: de 11 erros críticos e 75 sérios para 0 nas 52 telas.
+
 ## [0.3.0] - 2026-10-14
 
 ### Adicionado

@@ -99,9 +99,9 @@ export default function ProAgendaDashScreen() {
           </div>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
-            {dayAppointments.map((a, i) => (
+            {dayAppointments.map((a) => (
               <div
-                key={i}
+                key={`${a.time}-${a.client}`}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -154,7 +154,7 @@ export default function ProAgendaDashScreen() {
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
-                    color: a.status === "confirmado" ? colors.primary : colors.accent,
+                    color: a.status === "confirmado" ? colors.primaryText : colors.accent,
                   }}
                 >
                   {a.status === "confirmado" ? "✓ Confirmado" : "Aguardando"}

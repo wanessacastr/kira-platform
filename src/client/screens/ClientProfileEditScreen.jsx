@@ -163,7 +163,12 @@ export default function ClientProfileEditScreen() {
           >
             <CheckCircle2 size={15} color={colors.primary} />
             <span
-              style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.primary, fontWeight: 600 }}
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-xs)",
+                color: colors.primaryText,
+                fontWeight: 600,
+              }}
             >
               Perfil atualizado!
             </span>

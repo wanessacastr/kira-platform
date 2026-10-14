@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { colors, fontBody, fontDisplay } from "../theme";
 import { Field, SecondaryButton, inputStyle } from "./ui";
+import { EscapeKey } from "./primitives";
 
 // ==========================================================================
 // NOVO — Canal de segurança e denúncia
@@ -45,7 +46,8 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
   };
   return (
     <div
-      onClick={onClose}
+      role="presentation"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       style={{
         position: "fixed",
         inset: 0,
@@ -56,8 +58,11 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
         zIndex: 60,
       }}
     >
+      <EscapeKey onEscape={onClose} />
       <div
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Emergência"
         style={{
           width: "100%",
           maxWidth: 380,
@@ -93,7 +98,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
               fontFamily: fontBody,
               fontSize: "var(--font-size-sm)",
               fontWeight: 700,
-              color: colors.destructive,
+              color: colors.destructiveText,
             }}
           >
             Se você está em perigo agora, ligue primeiro
@@ -160,10 +165,10 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
               { icon: Bell, text: "Um responsável é alertado na hora, sem entrar em fila" },
               { icon: UserX, text: "O perfil envolvido é suspenso de forma preventiva" },
               { icon: LockOpen, text: "Sua identidade fica visível só para a equipe, não é anônima aqui" },
-            ].map((item, i) => {
+            ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-8)" }}>
+                <div key={item.text} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-8)" }}>
                   <Icon
                     size={14}
                     color={colors.mutedForeground}
@@ -223,7 +228,8 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
 
   return (
     <div
-      onClick={onClose}
+      role="presentation"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       style={{
         position: "fixed",
         inset: 0,
@@ -234,8 +240,11 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
         zIndex: 60,
       }}
     >
+      <EscapeKey onEscape={onClose} />
       <div
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Denunciar"
         style={{
           width: "100%",
           maxWidth: 380,
@@ -364,7 +373,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 color={colors.destructive}
                 style={{ flexShrink: 0, marginTop: "var(--space-1)" }}
               />
-              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.destructive }}>
+              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.destructiveText }}>
                 Em caso de risco imediato, ligue 190 antes de qualquer outra coisa.
               </span>
             </div>
@@ -424,7 +433,7 @@ export const ReportButton = ({ agendamentoId, papel }) => {
           borderRadius: "var(--radius-lg)",
           border: `1px solid hsl(var(--destructive-hsl) / 0.35)`,
           background: "transparent",
-          color: colors.destructive,
+          color: colors.destructiveText,
           fontFamily: fontBody,
           fontWeight: 600,
           fontSize: "var(--font-size-sm)",

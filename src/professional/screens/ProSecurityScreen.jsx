@@ -95,7 +95,7 @@ export default function ProSecurityScreen() {
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
-                    color: colors.primary,
+                    color: colors.primaryText,
                     marginTop: "var(--space-2)",
                   }}
                 >
@@ -174,7 +174,9 @@ export default function ProSecurityScreen() {
             >
               Pagamento protegido
             </span>
-            <span
+            <button
+              type="button"
+              className="k-reset"
               onClick={() => setScreen("proFinance")}
               style={{
                 padding: "var(--space-8) var(--space-12)",
@@ -188,7 +190,7 @@ export default function ProSecurityScreen() {
               }}
             >
               Histórico completo
-            </span>
+            </button>
           </div>
         </div>
 

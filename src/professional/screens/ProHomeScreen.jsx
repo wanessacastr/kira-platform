@@ -26,7 +26,7 @@ export default function ProHomeScreen() {
           }}
         >
           {pForm.name ? pForm.name.split(" ")[0] : "Profissional"}{" "}
-          <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primary }} />
+          <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
         </h1>
       </div>
       <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>
@@ -42,8 +42,7 @@ export default function ProHomeScreen() {
 
         <div
           onClick={() => setScreen("proFinance")}
-          role="button"
-          tabIndex={0}
+          role="presentation"
           style={{
             width: "100%",
             textAlign: "left",
@@ -75,7 +74,12 @@ export default function ProHomeScreen() {
               Faturamento semanal
             </h2>
             <span
-              style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", fontWeight: 700, color: colors.primary }}
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-xs)",
+                fontWeight: 700,
+                color: colors.primaryText,
+              }}
             >
               +{proDashboardStats.revenueDelta}%
             </span>
@@ -100,19 +104,25 @@ export default function ProHomeScreen() {
                 ? `${proWeeklyRevenue[proHomeRevenueSel].label} · R$ ${proWeeklyRevenue[proHomeRevenueSel].value.toLocaleString("pt-BR")}`
                 : "Toque em um dia para ver o valor"}
             </span>
-            <span
+            <button
+              type="button"
+              className="k-reset"
+              onClick={(e) => {
+                e.stopPropagation();
+                setScreen("proFinance");
+              }}
               style={{
                 fontFamily: fontBody,
                 fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
-                color: colors.primary,
+                color: colors.primaryText,
                 display: "flex",
                 alignItems: "center",
                 gap: "var(--space-2)",
               }}
             >
               Ver gestão financeira <ChevronRight size={13} />
-            </span>
+            </button>
           </div>
         </div>
 
@@ -135,18 +145,20 @@ export default function ProHomeScreen() {
           >
             Próximos atendimentos
           </h2>
-          <span
+          <button
+            type="button"
+            className="k-reset"
             style={{
               fontFamily: fontBody,
               fontSize: "var(--font-size-xs)",
               fontWeight: 600,
-              color: colors.primary,
+              color: colors.primaryText,
               cursor: "pointer",
             }}
             onClick={() => setScreen("proAgendaDash")}
           >
             Ver agenda
-          </span>
+          </button>
         </div>
         <div
           style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)", marginBottom: "var(--space-22)" }}

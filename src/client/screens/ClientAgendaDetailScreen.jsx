@@ -100,7 +100,7 @@ export default function ClientAgendaDetailScreen() {
                 fontFamily: fontBody,
                 fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
-                color: appointment.status === "cancelado" ? colors.destructive : colors.primary,
+                color: appointment.status === "cancelado" ? colors.destructiveText : colors.primaryText,
               }}
             >
               {appointment.status === "proximo"
@@ -128,7 +128,7 @@ export default function ClientAgendaDetailScreen() {
                 borderRadius: "var(--radius-lg)",
                 border: "none",
                 background: "transparent",
-                color: colors.destructive,
+                color: colors.destructiveText,
                 fontWeight: 600,
                 fontSize: "var(--font-size-sm)",
                 fontFamily: fontBody,

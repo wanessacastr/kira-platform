@@ -62,7 +62,7 @@ export default function ClientLgpdConsentsScreen() {
                   fontFamily: fontBody,
                   fontSize: "var(--font-size-xs)",
                   fontWeight: 600,
-                  color: item.accepted ? colors.primary : colors.mutedForeground,
+                  color: item.accepted ? colors.primaryText : colors.mutedForeground,
                 }}
               >
                 {item.accepted ? "Aceito" : "Pendente"}

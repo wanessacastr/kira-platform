@@ -109,10 +109,12 @@ export default function ClientPersonalScreen() {
             style={{ display: "none" }}
             onChange={(e) => handlePhoto(e.target.files?.[0], (v) => setCField("photo", v))}
           />
-          <span
+          <button
+            type="button"
+            className="k-reset"
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.primary,
+              color: colors.primaryText,
               fontWeight: 600,
               fontFamily: fontBody,
               cursor: "pointer",
@@ -120,9 +122,16 @@ export default function ClientPersonalScreen() {
             onClick={() => cFileInputRef.current?.click()}
           >
             {cForm.photo ? "Trocar foto" : "Enviar foto de perfil"}
-          </span>
+          </button>
           {cErrors.photo && (
-            <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
+            <p
+              style={{
+                fontSize: "var(--font-size-xs)",
+                color: colors.destructiveText,
+                fontFamily: fontBody,
+                margin: 0,
+              }}
+            >
               {cErrors.photo}
             </p>
           )}
@@ -198,6 +207,8 @@ export default function ClientPersonalScreen() {
               style={inputStyle(cErrors.password)}
             />
             <button
+              type="button"
+              aria-label={cShowPassword ? "Ocultar a senha" : "Mostrar a senha"}
               onClick={() => setCShowPassword((s) => !s)}
               style={{
                 position: "absolute",
@@ -224,6 +235,8 @@ export default function ClientPersonalScreen() {
               style={inputStyle(cErrors.confirm)}
             />
             <button
+              type="button"
+              aria-label={cShowConfirm ? "Ocultar a confirmação de senha" : "Mostrar a confirmação de senha"}
               onClick={() => setCShowConfirm((s) => !s)}
               style={{
                 position: "absolute",

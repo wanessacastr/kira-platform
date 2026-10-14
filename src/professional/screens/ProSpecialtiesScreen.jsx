@@ -49,6 +49,8 @@ export default function ProSpecialtiesScreen() {
             style={inputStyle(pErrors.specialties)}
           />
           <button
+            type="button"
+            aria-label="Adicionar especialidade"
             onClick={() => addSpecialty(specialtyInput)}
             style={{
               width: 44,
@@ -70,7 +72,7 @@ export default function ProSpecialtiesScreen() {
           <p
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.destructive,
+              color: colors.destructiveText,
               fontFamily: fontBody,
               margin: "0 0 var(--space-10)",
             }}
@@ -93,7 +95,9 @@ export default function ProSpecialtiesScreen() {
           {specialtySuggestions
             .filter((s) => !pForm.specialties.includes(s))
             .map((s) => (
-              <span
+              <button
+                type="button"
+                className="k-reset"
                 key={s}
                 onClick={() => addSpecialty(s)}
                 style={{
@@ -108,7 +112,7 @@ export default function ProSpecialtiesScreen() {
                 }}
               >
                 + {s}
-              </span>
+              </button>
             ))}
         </div>
 

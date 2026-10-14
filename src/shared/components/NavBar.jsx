@@ -53,7 +53,7 @@ export const NavBar = ({ items, active, onNavigate }) => (
               fontFamily: fontBody,
               fontSize: "var(--font-size-xs)",
               fontWeight: isActive ? 700 : 500,
-              color: isActive ? colors.primary : colors.mutedForeground,
+              color: isActive ? colors.primaryText : colors.mutedForeground,
               whiteSpace: "nowrap",
             }}
           >

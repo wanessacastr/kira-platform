@@ -76,7 +76,7 @@ export default function ProServicesScreen() {
           <p
             style={{
               fontSize: "var(--font-size-xs)",
-              color: colors.destructive,
+              color: colors.destructiveText,
               fontFamily: fontBody,
               margin: "0 0 var(--space-10)",
             }}
@@ -138,7 +138,7 @@ export default function ProServicesScreen() {
                     style={{
                       fontSize: "var(--font-size-xs)",
                       fontWeight: 700,
-                      color: colors.primary,
+                      color: colors.primaryText,
                       fontFamily: fontBody,
                     }}
                   >

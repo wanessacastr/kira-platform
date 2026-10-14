@@ -1,5 +1,6 @@
 // Primitivos de UI (Heading, Text, Card, Stack, Button, Chip, Badge, ListRow, ScreenHeader) · API: nenhuma
-import { ArrowLeft, ChevronRight } from "lucide-react";
+import { useEffect } from "react";
+import { ArrowLeft, Check, ChevronRight } from "lucide-react";
 import { colors, fontBody, fontDisplay, gradientKira } from "../theme";
 
 const sizeVar = (size) => `var(--font-size-${size})`;
@@ -56,7 +57,7 @@ export const Card = ({ radius = "2xl", padding, clip = true, style, children, ..
 
 const buttonVariants = {
   primary: { background: gradientKira, color: colors.primaryForeground },
-  secondary: { background: colors.muted, color: colors.primary },
+  secondary: { background: colors.muted, color: colors.primaryText },
 };
 
 export const Button = ({
@@ -118,8 +119,8 @@ export const Chip = ({ active, style, children, ...rest }) => (
 );
 
 const badgeTones = {
-  primary: { background: "hsl(var(--primary-hsl) / 0.1)", color: colors.primary },
-  danger: { background: "hsl(var(--destructive-hsl) / 0.1)", color: colors.destructive },
+  primary: { background: "hsl(var(--primary-hsl) / 0.1)", color: colors.primaryText },
+  danger: { background: "hsl(var(--destructive-hsl) / 0.1)", color: colors.destructiveText },
   neutral: { background: colors.muted, color: colors.mutedForeground },
 };
 
@@ -179,7 +180,7 @@ export const ListRow = ({ icon: Icon, label, onClick, destructive, last }) => (
         flex: 1,
         fontFamily: fontBody,
         fontSize: sizeVar("sm"),
-        color: destructive ? colors.destructive : colors.foreground,
+        color: destructive ? colors.destructiveText : colors.foreground,
         fontWeight: destructive ? 600 : 500,
       }}
     >
@@ -213,4 +214,39 @@ export const ScreenHeader = ({ onBack, children }) => (
     </button>
     {children}
   </div>
+);
+
+// Fecha o painel ao apertar Esc (modais e folhas inferiores)
+export const EscapeKey = ({ onEscape }) => {
+  useEffect(() => {
+    const onKey = (e) => e.key === "Escape" && onEscape();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onEscape]);
+  return null;
+};
+
+// Caixa de seleção real (teclado e leitor de tela) com o visual do protótipo. Use dentro de um <label>.
+export const Checkbox = ({ checked, onChange, invalid, style }) => (
+  <>
+    <input type="checkbox" className="k-sr-only" checked={checked} onChange={onChange} />
+    <span
+      className="k-check"
+      aria-hidden="true"
+      style={{
+        width: 18,
+        height: 18,
+        borderRadius: "var(--radius-xs)",
+        border: `1px solid ${checked ? colors.primary : invalid ? colors.destructive : colors.border}`,
+        background: checked ? colors.primary : colors.muted,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        ...style,
+      }}
+    >
+      {checked && <Check size={12} color={colors.primaryForeground} />}
+    </span>
+  </>
 );

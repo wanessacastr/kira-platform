@@ -2,6 +2,7 @@
 import { CheckCircle2, Star } from "lucide-react";
 import { PrimaryButton, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
+import { EscapeKey } from "../../shared/components/primitives";
 
 export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, onClear }) => {
   if (!open) return null;
@@ -14,7 +15,8 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
   };
   return (
     <div
-      onClick={onClose}
+      role="presentation"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       style={{
         position: "fixed",
         inset: 0,
@@ -27,8 +29,11 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
         transition: "opacity 0.25s ease",
       }}
     >
+      <EscapeKey onEscape={onClose} />
       <div
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Filtros"
         style={{
           width: "100%",
           maxWidth: 380,

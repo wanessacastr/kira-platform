@@ -62,7 +62,7 @@ export default function ClientHomeScreen() {
               }}
             >
               Olá, {cForm.name ? cForm.name.split(" ")[0] : "bem-vinda"}{" "}
-              <Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", color: colors.primary }} />
+              <Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
             </h1>
           </div>
           <button
@@ -95,8 +95,12 @@ export default function ClientHomeScreen() {
           </button>
         </div>
 
-        <div
+        <button
+          type="button"
+          className="k-reset"
           style={{
+            width: "100%",
+            boxSizing: "border-box",
             display: "flex",
             alignItems: "center",
             gap: "var(--space-10)",
@@ -109,10 +113,16 @@ export default function ClientHomeScreen() {
           onClick={() => setScreen("clientSearch")}
         >
           <Search size={16} color={colors.mutedForeground} />
-          <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground }}>
+          <span
+            style={{
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-sm)",
+              color: colors.mutedForeground,
+            }}
+          >
             Buscar profissional ou serviço
           </span>
-        </div>
+        </button>
       </div>
 
       <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>

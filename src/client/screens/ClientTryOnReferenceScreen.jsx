@@ -36,9 +36,12 @@ export default function ClientTryOnReferenceScreen() {
           Escolha uma referência do visual que você deseja experimentar.
         </p>
 
-        <div
+        <button
+          type="button"
+          className="k-reset"
           onClick={() => tryOnRefInputRef.current?.click()}
           style={{
+            boxSizing: "content-box",
             width: "100%",
             aspectRatio: "1/1",
             maxWidth: 280,
@@ -69,7 +72,7 @@ export default function ClientTryOnReferenceScreen() {
               </span>
             </>
           )}
-        </div>
+        </button>
         <input
           ref={tryOnRefInputRef}
           type="file"
