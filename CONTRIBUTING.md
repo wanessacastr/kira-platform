@@ -7,21 +7,21 @@
 ## Commits (Conventional Commits)
 
 ```
-<tipo>(<escopo>): <resumo no imperativo, até 72 caracteres>
+<tipo>(<escopo>): <verbo no infinitivo + objeto, até 60 caracteres, minúsculo, sem ponto final>
 
 <corpo opcional: o que e por que>
 ```
 
-- **Tipos:** `feat`, `fix`, `refactor`, `docs`, `style`, `test`, `chore`, `build`.
-- **Escopos:** `shared`, `client`, `professional`, `core`, `docs`, `build`.
+- **Tipos:** `feat`, `fix`, `refactor`, `docs`, `style`, `test`, `chore`, `build`, `ci`.
+- **Escopos:** `shared`, `client`, `professional`, `core`, `build`, `ci`, `docs`.
 - Um commit, uma intenção. Não misturar refatoração com funcionalidade.
-- Referencie a issue no rodapé quando houver: `Refs #12`.
+- Corpo só se for necessário, em até 2 linhas. O commitlint valida a mensagem (Husky local e CI).
 
 ## Pull Requests
 
 - Título no mesmo padrão dos commits.
 - Preencher o template: o que mudou, como testar, impacto.
-- `npm run build` deve passar antes do merge.
+- `npm run lint`, `npm run format:check`, `npm test` e `npm run build` devem passar antes do merge (o CI roda tudo).
 - Merge com `--no-ff` para manter o histórico dos commits.
 
 ## Legenda de arquivo

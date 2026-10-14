@@ -13,6 +13,9 @@ Vite + React (JavaScript/JSX) e lucide-react. Navegação por estado `screen`, s
 npm install
 npm run dev      # desenvolvimento (http://localhost:5173)
 npm run build    # build de produção em dist/
+npm run lint     # ESLint
+npm run format   # Prettier
+npm test         # Vitest
 ```
 
 ## Estrutura
@@ -35,4 +38,3 @@ Cada arquivo de `src/` começa com uma legenda de uma linha: o que faz, de onde 
 - [Arquitetura e integrações](docs/ARQUITETURA.md): o que roda em cada API, o que é mock e o que é futuro
 - [Como contribuir](CONTRIBUTING.md): commits, branches e PRs
 - [Histórico de mudanças](CHANGELOG.md)
-
