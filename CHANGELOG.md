@@ -4,6 +4,21 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+## [0.6.0] - 2026-10-14
+
+### Adicionado
+
+- Camada de serviços em `src/shared/api/` com adaptador de mock e contrato pronto para API real.
+- TanStack Query para carregando, erro e nova tentativa em horários, busca, recomendações, CEP e perfil.
+- Regras de validação em zod e react-hook-form na edição de perfil.
+- Testes dos serviços, da busca e das regras de formulário.
+
+### Alterado
+
+- O estado global foi dividido por assunto: sessão, cadastro, busca, agendamento, Provador e painel profissional.
+- Estado que só vale para uma tela (modais, abas, carregando) passou a ficar na própria tela e volta ao início ao sair dela.
+- `KiraContext` e o hook `useKira` foram substituídos pelos contextos por assunto.
+
 ## [0.5.0] - 2026-10-14
 
 ### Adicionado
