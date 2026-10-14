@@ -1,4 +1,5 @@
 // UI base: botões, campos, cabeçalho, chips e seções · API: nenhuma
+import { Children, cloneElement, isValidElement, useId } from "react";
 import { Camera, Search, SlidersHorizontal } from "lucide-react";
 import { colors, fontBody, gradientKira } from "../theme";
 import { Button, Card, Chip, ListRow, ScreenHeader, Text } from "./primitives";
@@ -16,19 +17,49 @@ export const inputStyle = (hasError) => ({
   colorScheme: "light",
 });
 
-export const Field = ({ label, error, children }) => (
-  <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)", marginBottom: "var(--space-14)" }}>
-    <label style={{ fontSize: "var(--font-size-xs)", fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}>
-      {label}
-    </label>
-    {children}
-    {error && (
-      <p style={{ fontSize: "var(--font-size-xs)", color: colors.destructive, fontFamily: fontBody, margin: 0 }}>
-        {error}
-      </p>
-    )}
-  </div>
-);
+// Liga o rótulo ao campo (id, aria-invalid e aria-describedby) sem mudar o markup das telas
+const FORM_CONTROLS = ["input", "select", "textarea"];
+const wireControl = (node, props) => {
+  if (!isValidElement(node)) return node;
+  if (FORM_CONTROLS.includes(node.type)) return cloneElement(node, { ...props, ...node.props });
+  if (node.props.children)
+    return cloneElement(
+      node,
+      undefined,
+      Children.map(node.props.children, (c) => wireControl(c, props)),
+    );
+  return node;
+};
+
+export const Field = ({ label, error, children }) => {
+  const id = useId();
+  const errorId = `${id}-erro`;
+  const control = wireControl(children, {
+    id,
+    "aria-invalid": error ? true : undefined,
+    "aria-describedby": error ? errorId : undefined,
+  });
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-6)", marginBottom: "var(--space-14)" }}>
+      <label
+        htmlFor={id}
+        style={{ fontSize: "var(--font-size-xs)", fontWeight: 500, color: colors.foreground, fontFamily: fontBody }}
+      >
+        {label}
+      </label>
+      {control}
+      {error && (
+        <p
+          id={errorId}
+          role="alert"
+          style={{ fontSize: "var(--font-size-xs)", color: colors.destructiveText, fontFamily: fontBody, margin: 0 }}
+        >
+          {error}
+        </p>
+      )}
+    </div>
+  );
+};
 
 export const PrimaryButton = ({ children, onClick, disabled, pill, type = "button" }) => (
   <Button
