@@ -13,6 +13,7 @@ import {
 import { useState } from "react";
 import { colors, fontBody, fontDisplay } from "../theme";
 import { Field, SecondaryButton, inputStyle } from "./ui";
+import { EscapeKey } from "./primitives";
 
 // ==========================================================================
 // NOVO — Canal de segurança e denúncia
@@ -45,7 +46,8 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
   };
   return (
     <div
-      onClick={onClose}
+      role="presentation"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       style={{
         position: "fixed",
         inset: 0,
@@ -56,8 +58,11 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
         zIndex: 60,
       }}
     >
+      <EscapeKey onEscape={onClose} />
       <div
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Emergência"
         style={{
           width: "100%",
           maxWidth: 380,
@@ -223,7 +228,8 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
 
   return (
     <div
-      onClick={onClose}
+      role="presentation"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
       style={{
         position: "fixed",
         inset: 0,
@@ -234,8 +240,11 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
         zIndex: 60,
       }}
     >
+      <EscapeKey onEscape={onClose} />
       <div
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Denunciar"
         style={{
           width: "100%",
           maxWidth: 380,

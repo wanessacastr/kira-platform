@@ -11,6 +11,7 @@ import {
   proRatingBreakdownMock,
   proServiceRankingMock,
 } from "../data/mocks";
+import { EscapeKey } from "../../shared/components/primitives";
 
 // "Analytics" — painel de desempenho do profissional: atendimentos por
 // dia, serviços mais procurados, distribuição de avaliações e métricas
@@ -241,7 +242,8 @@ export default function ProAnalyticsScreen() {
           const uniqueClients = clients.length;
           return (
             <div
-              onClick={() => setProServiceDetail(null)}
+              role="presentation"
+              onClick={(e) => e.target === e.currentTarget && setProServiceDetail(null)}
               style={{
                 position: "fixed",
                 inset: 0,
@@ -252,8 +254,11 @@ export default function ProAnalyticsScreen() {
                 zIndex: 60,
               }}
             >
+              <EscapeKey onEscape={() => setProServiceDetail(null)} />
               <div
-                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Detalhes do serviço"
                 style={{
                   width: "100%",
                   maxWidth: 380,
