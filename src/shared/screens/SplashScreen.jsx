@@ -1,9 +1,9 @@
 // Abertura do app (Entrar / Criar conta) · API: nenhuma
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { colors, fontBody, fontDisplay } from "../theme";
 
 export default function SplashScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   return (
     <div
       style={{

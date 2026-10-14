@@ -1,12 +1,14 @@
 // Perfil: status de verificação (selfie e documentos do cadastro) · estado local
 import { CheckCircle2, Clock, ScanFace, XCircle } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 
 // === PERFIL: IdentityVerification (Segurança da conta) ===
 export default function ClientAccountSecurityScreen() {
-  const { cForm, setScreen } = useKira();
+  const { cForm } = useSignup();
+  const { setScreen } = useSession();
   const hasSelfie = !!cForm.selfiePhoto;
   const hasDocs = !!cForm.docFront && !!cForm.docBack;
   const verified = hasSelfie && hasDocs;

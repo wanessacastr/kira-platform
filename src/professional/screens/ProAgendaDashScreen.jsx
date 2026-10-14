@@ -1,23 +1,27 @@
 // Agenda do profissional com calendário · mock
+import { useState } from "react";
 import { Calendar, Clock } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useProDashboard } from "../../context/ProDashboardContext";
+import { useSession } from "../../context/SessionContext";
 import { CalendarHeader, CalendarMonth } from "../../shared/components/Calendar";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
+import { startOfDay } from "../../shared/utils/date";
 import { ProBottomNav } from "../components/ProBottomNav";
+import { proAgendaMock } from "../data/mocks";
 
 // "Minha agenda" do profissional — reaproveita o CalendarHeader/CalendarMonth
 // já existentes (genéricos, recebidos por props), só com estado próprio.
 export default function ProAgendaDashScreen() {
-  const {
-    changeProMonth,
-    getProDayAppointments,
-    goToProTab,
-    proMonthAnimKey,
-    proSelectedDate,
-    proViewMonth,
-    setProSelectedDate,
-    today,
-  } = useKira();
+  const { changeProMonth, proSelectedDate, proViewMonth, setProSelectedDate } = useProDashboard();
+  const { goToProTab } = useSession();
+  const today = startOfDay(new Date());
+  const [proMonthAnimKey, setProMonthAnimKey] = useState(0);
+  const handleChangeMonth = (delta) => {
+    changeProMonth(delta);
+    setProMonthAnimKey((k) => k + 1);
+  };
+  const getProDayAppointments = (date) =>
+    proAgendaMock[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] || [];
   const dayAppointments = getProDayAppointments(proSelectedDate);
   const canGoPrev =
     proViewMonth.getFullYear() > today.getFullYear() ||
@@ -50,8 +54,8 @@ export default function ProAgendaDashScreen() {
       <div style={{ flex: 1, overflowY: "auto", padding: "var(--space-8) var(--space-24) var(--space-24)" }}>
         <CalendarHeader
           monthDate={proViewMonth}
-          onPrev={() => changeProMonth(-1)}
-          onNext={() => changeProMonth(1)}
+          onPrev={() => handleChangeMonth(-1)}
+          onNext={() => handleChangeMonth(1)}
           canGoPrev={canGoPrev}
         />
         <div style={{ marginBottom: "var(--space-20)" }}>

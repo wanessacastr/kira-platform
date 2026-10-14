@@ -1,6 +1,7 @@
 // Segurança Kira: verificação, denúncia e emergência · mock · futura API: POST /api/denuncias
 import { BadgeCheck, CheckCircle2, Clock, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { ReportButton } from "../../shared/components/Safety";
 import { Header } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
@@ -9,7 +10,8 @@ import { proDashboardStats } from "../data/mocks";
 // "Segurança Kira" — perfil verificado, checklist de credibilidade e
 // Canal de Segurança, conforme a segunda página do folheto profissional.
 export default function ProSecurityScreen() {
-  const { pForm, setScreen } = useKira();
+  const { pForm } = useSignup();
+  const { setScreen } = useSession();
   const hasDocs = !!pForm.docFrontPhoto && !!pForm.docBackPhoto;
   const certCount = pForm.specialties.length;
   const verified = hasDocs;

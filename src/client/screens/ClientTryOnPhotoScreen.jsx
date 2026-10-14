@@ -1,12 +1,18 @@
 // Provador: foto do cliente · FileReader local
+import { useRef } from "react";
 import { Camera } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
+import { useSignup } from "../../context/SignupContext";
+import { useTryOn } from "../../context/TryOnContext";
 import { Header, PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { BottomNav } from "../components/BottomNav";
 
 export default function ClientTryOnPhotoScreen() {
-  const { goToTab, handlePhoto, setScreen, setTryOnClientPhoto, tryOnClientPhoto, tryOnPhotoInputRef } = useKira();
+  const { goToTab, setScreen } = useSession();
+  const { handlePhoto } = useSignup();
+  const { setTryOnClientPhoto, tryOnClientPhoto } = useTryOn();
+  const tryOnPhotoInputRef = useRef(null);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientTryOnReference")} />

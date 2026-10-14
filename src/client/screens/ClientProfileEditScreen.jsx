@@ -1,16 +1,51 @@
-// Edição do perfil · validação local · foto via FileReader
+// Edição do perfil · react-hook-form + zod · foto via FileReader · api.profile
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { useRef, useState } from "react";
 import { Check, CheckCircle2, ChevronRight, ImagePlus, Loader2, MapPin, User, X } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, SecondaryButton, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
+import { api } from "../../shared/api";
+import { profileEditSchema } from "../../shared/schemas/forms";
 import { formatPhone } from "../../shared/utils/format";
 
 // === PERFIL: EditProfileScreen ===
-// Formulário de edição, reaproveitando cForm/cErrors direto (mesma fonte
+// Formulário de edição: cForm segue como fonte dos dados (mesma fonte
 // de verdade usada no resto do app) em vez de duplicar estado.
 export default function ClientProfileEditScreen() {
-  const { cErrors, cFileInputRef, cForm, handlePhoto, profileSaveStatus, saveProfileEdit, setCField, setScreen } =
-    useKira();
+  const { cForm, handlePhoto, setCField } = useSignup();
+  const { setScreen } = useSession();
+  const cFileInputRef = useRef(null);
+  const [profileSaveStatus, setProfileSaveStatus] = useState("idle"); // idle | saving | success
+  const save = useMutation({
+    mutationFn: (data) => api.profile.save(data),
+    onMutate: () => setProfileSaveStatus("saving"),
+    onSuccess: () => {
+      setProfileSaveStatus("success");
+      setTimeout(() => {
+        setProfileSaveStatus("idle");
+        setScreen("clientProfile");
+      }, 700);
+    },
+  });
+  const {
+    handleSubmit,
+    setValue,
+    clearErrors,
+    formState: { errors },
+  } = useForm({
+    defaultValues: { name: cForm.name, email: cForm.email, phone: cForm.phone },
+    resolver: zodResolver(profileEditSchema),
+  });
+  const change = (key, value) => {
+    setCField(key, value);
+    setValue(key, value);
+    clearErrors(key);
+  };
+  const saveProfileEdit = handleSubmit(() => save.mutate(cForm));
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />
@@ -100,29 +135,29 @@ export default function ClientProfileEditScreen() {
           />
         </div>
 
-        <Field label="Nome completo" error={cErrors.name}>
+        <Field label="Nome completo" error={errors.name?.message}>
           <input
             value={cForm.name}
-            onChange={(e) => setCField("name", e.target.value)}
+            onChange={(e) => change("name", e.target.value)}
             placeholder="Ex.: Maria Almeida"
-            style={inputStyle(cErrors.name)}
+            style={inputStyle(errors.name?.message)}
           />
         </Field>
-        <Field label="E-mail" error={cErrors.email}>
+        <Field label="E-mail" error={errors.email?.message}>
           <input
             type="email"
             value={cForm.email}
-            onChange={(e) => setCField("email", e.target.value)}
+            onChange={(e) => change("email", e.target.value)}
             placeholder="seu@email.com"
-            style={inputStyle(cErrors.email)}
+            style={inputStyle(errors.email?.message)}
           />
         </Field>
-        <Field label="Telefone" error={cErrors.phone}>
+        <Field label="Telefone" error={errors.phone?.message}>
           <input
             value={cForm.phone}
-            onChange={(e) => setCField("phone", formatPhone(e.target.value))}
+            onChange={(e) => change("phone", formatPhone(e.target.value))}
             placeholder="(00) 00000-0000"
-            style={inputStyle(cErrors.phone)}
+            style={inputStyle(errors.phone?.message)}
           />
         </Field>
 

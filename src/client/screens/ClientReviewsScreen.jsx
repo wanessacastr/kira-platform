@@ -1,5 +1,6 @@
 // Perfil: avaliações feitas · mock
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
+import { useScheduling } from "../../context/SchedulingContext";
 import { EmptyState } from "../../shared/components/states";
 import { Header } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
@@ -9,7 +10,8 @@ import { appointmentsMock, clientReviewsMock } from "../data/mocks";
 
 // === PERFIL: Minhas avaliações ===
 export default function ClientReviewsScreen() {
-  const { setScreen, setSelectedAppointmentId } = useKira();
+  const { setScreen } = useSession();
+  const { setSelectedAppointmentId } = useScheduling();
   const reviewed = appointmentsMock.filter((a) => a.status === "concluido");
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

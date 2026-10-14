@@ -1,10 +1,15 @@
 // Cadastro: foto do documento · FileReader local, sem upload
-import { useKira } from "../../context/KiraContext";
+import { useRef } from "react";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { DocUploadBox, Header, PrimaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 export default function ClientDocumentScreen() {
-  const { cDocBackRef, cDocFrontRef, cErrors, cForm, handlePhoto, setCErrors, setCField, setScreen } = useKira();
+  const { cErrors, cForm, handlePhoto, setCErrors, setCField } = useSignup();
+  const { setScreen } = useSession();
+  const cDocBackRef = useRef(null);
+  const cDocFrontRef = useRef(null);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={4} />

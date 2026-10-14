@@ -1,11 +1,18 @@
 // Cadastro: ativar localização · API do navegador: geolocation
 import { AlertCircle, CheckCircle2, Loader2, MapPin } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
+import { useLocationActivation } from "../../shared/hooks/useLocationActivation";
 
 export default function ClientLocationScreen() {
-  const { cForm, cLocationStatus, handleActivateLocation, setCForm, setCLocationStatus, setScreen } = useKira();
+  const { cForm, setCForm } = useSignup();
+  const { setScreen } = useSession();
+  const { status: cLocationStatus, activate: handleActivateLocation } = useLocationActivation(
+    setCForm,
+    Boolean(cForm.latitude),
+  );
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={3} />
@@ -144,7 +151,7 @@ export default function ClientLocationScreen() {
             </div>
           )}
           {(cLocationStatus === "idle" || cLocationStatus === "error") && (
-            <PrimaryButton pill onClick={() => handleActivateLocation(setCForm, setCLocationStatus)}>
+            <PrimaryButton pill onClick={() => handleActivateLocation()}>
               {cLocationStatus === "error" ? "Tentar novamente" : "Ativar localização"}
             </PrimaryButton>
           )}

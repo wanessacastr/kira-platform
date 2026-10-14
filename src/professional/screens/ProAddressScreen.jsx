@@ -1,23 +1,16 @@
 // Cadastro: endereço · CEP simulado (ViaCEP não integrado)
 import { Loader2 } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, StepDots, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { formatCep } from "../../shared/utils/format";
+import { useCepLookup } from "../../shared/hooks/useCepLookup";
 
 export default function ProAddressScreen() {
-  const {
-    handleCepBlur,
-    pCepLoading,
-    pErrors,
-    pForm,
-    setPCepLoading,
-    setPErrors,
-    setPField,
-    setPForm,
-    setScreen,
-    validateAddress,
-  } = useKira();
+  const { pErrors, pForm, setPErrors, setPField, setPForm, validateAddress } = useSignup();
+  const { setScreen } = useSession();
+  const { cepLoading: pCepLoading, handleCepBlur } = useCepLookup(setPForm);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={2} />
@@ -49,7 +42,7 @@ export default function ProAddressScreen() {
             <input
               value={pForm.cep}
               onChange={(e) => setPField("cep", formatCep(e.target.value))}
-              onBlur={() => handleCepBlur(pForm, setPForm, setPCepLoading)}
+              onBlur={() => handleCepBlur(pForm)}
               placeholder="00000-000"
               style={inputStyle(pErrors.cep)}
             />

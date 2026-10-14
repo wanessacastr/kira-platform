@@ -1,6 +1,8 @@
 // Perfil: favoritas · estado local + mockProfessionals
 import { Bookmark } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSearch } from "../../context/SearchContext";
+import { useScheduling } from "../../context/SchedulingContext";
+import { useSession } from "../../context/SessionContext";
 import { Header } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
@@ -8,7 +10,9 @@ import { ProfessionalCard } from "../components/ProfessionalCards";
 
 // === PERFIL: Profissionais favoritos ===
 export default function ClientFavoritesScreen() {
-  const { favoriteProIds, setBookedSlot, setScreen, setSelectedProId } = useKira();
+  const { favoriteProIds } = useSearch();
+  const { setBookedSlot, setSelectedProId } = useScheduling();
+  const { setScreen } = useSession();
   const favorites = mockProfessionals.filter((p) => favoriteProIds.includes(p.id));
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

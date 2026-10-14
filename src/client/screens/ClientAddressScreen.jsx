@@ -1,23 +1,16 @@
 // Cadastro: endereço · CEP simulado (ViaCEP não integrado)
 import { Loader2 } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, StepDots, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { formatCep } from "../../shared/utils/format";
+import { useCepLookup } from "../../shared/hooks/useCepLookup";
 
 export default function ClientAddressScreen() {
-  const {
-    cCepLoading,
-    cErrors,
-    cForm,
-    handleCepBlur,
-    setCCepLoading,
-    setCErrors,
-    setCField,
-    setCForm,
-    setScreen,
-    validateAddress,
-  } = useKira();
+  const { cErrors, cForm, setCErrors, setCField, setCForm, validateAddress } = useSignup();
+  const { setScreen } = useSession();
+  const { cepLoading: cCepLoading, handleCepBlur } = useCepLookup(setCForm);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={2} />
@@ -49,7 +42,7 @@ export default function ClientAddressScreen() {
             <input
               value={cForm.cep}
               onChange={(e) => setCField("cep", formatCep(e.target.value))}
-              onBlur={() => handleCepBlur(cForm, setCForm, setCCepLoading)}
+              onBlur={() => handleCepBlur(cForm)}
               placeholder="00000-000"
               style={inputStyle(cErrors.cep)}
             />

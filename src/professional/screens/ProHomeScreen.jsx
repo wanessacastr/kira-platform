@@ -1,6 +1,8 @@
 // Painel: métricas, receita da semana e próximos atendimentos · mock
+import { useState } from "react";
 import { ChevronRight, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
+import { useSignup } from "../../context/SignupContext";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { ProBottomNav } from "../components/ProBottomNav";
 import { ProStatCard, RevenueBarChart } from "../components/ProWidgets";
@@ -9,7 +11,9 @@ import { proDashboardStats, proUpcomingMock, proWeeklyRevenue } from "../data/mo
 // "Meu painel" — visão geral do profissional: estatísticas do dia,
 // faturamento semanal (gráfico) e próximos atendimentos, como no folheto.
 export default function ProHomeScreen() {
-  const { goToProTab, pForm, proHomeRevenueSel, setProHomeRevenueSel, setScreen } = useKira();
+  const { goToProTab, setScreen } = useSession();
+  const { pForm } = useSignup();
+  const [proHomeRevenueSel, setProHomeRevenueSel] = useState(null);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>

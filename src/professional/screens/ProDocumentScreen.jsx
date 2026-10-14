@@ -1,11 +1,15 @@
 // Cadastro: foto do documento · FileReader local, sem upload
-import { useKira } from "../../context/KiraContext";
+import { useRef } from "react";
+import { useSession } from "../../context/SessionContext";
+import { useSignup } from "../../context/SignupContext";
 import { DocUploadBox, Header, PrimaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 export default function ProDocumentScreen() {
-  const { goToFace, handlePhoto, pDocBackRef, pDocFrontRef, pErrors, pForm, setPErrors, setPField, setScreen } =
-    useKira();
+  const { goToFace, setScreen } = useSession();
+  const { handlePhoto, pErrors, pForm, setPErrors, setPField } = useSignup();
+  const pDocBackRef = useRef(null);
+  const pDocFrontRef = useRef(null);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={4} />

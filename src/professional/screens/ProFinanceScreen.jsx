@@ -1,18 +1,21 @@
 // Financeiro: saldo, faturamento e transações · mock
+import { useState } from "react";
 import { Calendar, CreditCard } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { ProStatCard, RevenueBarChart } from "../components/ProWidgets";
-import { proDashboardStats, proTransactionsMock } from "../data/mocks";
+import { proDashboardStats, proMonthlyRevenue, proTransactionsMock, proWeeklyRevenue } from "../data/mocks";
 
 // "Gestão financeira" — painel de controle financeiro do profissional:
 // saldo, próximo repasse, faturamento por semana ou mês (gráfico
 // interativo), formas de recebimento e últimas transações, conforme
 // "Controle financeiro com métricas e gráfico de faturamento" do folheto.
 export default function ProFinanceScreen() {
-  const { financeData, financePeriod, financeRevenueSel, setFinancePeriod, setFinanceRevenueSel, setScreen } =
-    useKira();
+  const { setScreen } = useSession();
+  const [financePeriod, setFinancePeriod] = useState("semana");
+  const [financeRevenueSel, setFinanceRevenueSel] = useState(null);
+  const financeData = financePeriod === "semana" ? proWeeklyRevenue : proMonthlyRevenue;
   const periodTotal = financeData.reduce((sum, d) => sum + d.value, 0);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

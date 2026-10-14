@@ -1,13 +1,20 @@
 // Cadastro: especialidades · estado local
+import { useState } from "react";
 import { Plus, Sparkles, X } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton, StepDots, inputStyle } from "../../shared/components/ui";
 import { specialtySuggestions } from "../../shared/data/forms";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 
 export default function ProSpecialtiesScreen() {
-  const { addSpecialty, pErrors, pForm, removeSpecialty, setPErrors, setScreen, setSpecialtyInput, specialtyInput } =
-    useKira();
+  const { addSpecialty, pErrors, pForm, removeSpecialty, setPErrors } = useSignup();
+  const { setScreen } = useSession();
+  const [specialtyInput, setSpecialtyInput] = useState("");
+  const add = (value) => {
+    addSpecialty(value);
+    setSpecialtyInput("");
+  };
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={5} />
@@ -42,7 +49,7 @@ export default function ProSpecialtiesScreen() {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-                addSpecialty(specialtyInput);
+                add(specialtyInput);
               }
             }}
             placeholder="Ex.: Coloração, Design de sobrancelhas..."
@@ -51,7 +58,7 @@ export default function ProSpecialtiesScreen() {
           <button
             type="button"
             aria-label="Adicionar especialidade"
-            onClick={() => addSpecialty(specialtyInput)}
+            onClick={() => add(specialtyInput)}
             style={{
               width: 44,
               height: 44,
@@ -99,7 +106,7 @@ export default function ProSpecialtiesScreen() {
                 type="button"
                 className="k-reset"
                 key={s}
-                onClick={() => addSpecialty(s)}
+                onClick={() => add(s)}
                 style={{
                   padding: "var(--space-6) var(--space-12)",
                   borderRadius: "var(--radius-pill)",

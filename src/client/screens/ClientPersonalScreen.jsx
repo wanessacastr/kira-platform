@@ -1,6 +1,8 @@
 // Cadastro: dados pessoais · validação local · foto via FileReader
+import { useRef, useState } from "react";
 import { Camera, Eye, EyeOff, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, StepDots, inputStyle } from "../../shared/components/ui";
 import { genderOptions } from "../../shared/data/forms";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
@@ -8,19 +10,11 @@ import { formatCpf, formatPhone } from "../../shared/utils/format";
 
 // ---------- Fluxo cliente ----------
 export default function ClientPersonalScreen() {
-  const {
-    cErrors,
-    cFileInputRef,
-    cForm,
-    cShowConfirm,
-    cShowPassword,
-    handlePhoto,
-    setCField,
-    setCShowConfirm,
-    setCShowPassword,
-    setScreen,
-    validateClientPersonal,
-  } = useKira();
+  const { cErrors, cForm, handlePhoto, setCField, validateClientPersonal } = useSignup();
+  const { setScreen } = useSession();
+  const cFileInputRef = useRef(null);
+  const [cShowPassword, setCShowPassword] = useState(false);
+  const [cShowConfirm, setCShowConfirm] = useState(false);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={1} />

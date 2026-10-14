@@ -1,13 +1,15 @@
 // Fidelidade: pontos e cashback · estado local
 import { Check } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useProDashboard } from "../../context/ProDashboardContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { Checkbox } from "../../shared/components/primitives";
 
 // "Programa de fidelidade" — pontos, cashback e recompensas.
 export default function ProLoyaltyScreen() {
-  const { loyaltySettings, setLoyaltySettings, setScreen } = useKira();
+  const { loyaltySettings, setLoyaltySettings } = useProDashboard();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proProfileMenu")} />

@@ -1,25 +1,30 @@
 // Busca com filtros, scroll infinito e pull-to-refresh · mock com latência simulada
 import { Loader2 } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSearch } from "../../context/SearchContext";
+import { useSession } from "../../context/SessionContext";
+import { useScheduling } from "../../context/SchedulingContext";
 import { EmptyState, ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { CategoryChip, Header, SearchBar } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { BottomNav } from "../components/BottomNav";
 import { FilterModal } from "../components/FilterModal";
 import { ProfessionalCard } from "../components/ProfessionalCards";
+import { useSearchScreen } from "../hooks/useSearchScreen";
 import { categoryOptions } from "../data/mocks";
 
 export default function ClientSearchScreen() {
+  const { categoryFilter, searchQuery, setCategoryFilter, setSearchQuery } = useSearch();
+  const { goToTab, setScreen } = useSession();
+  const { setBookedSlot, setSelectedProId } = useScheduling();
+  const search = useSearchScreen();
   const {
     applyFilters,
-    categoryFilter,
     clearFilters,
     closeFilterModal,
     draftFilters,
     filterModalMounted,
     filterModalOpen,
     filteredProfessionals,
-    goToTab,
     handlePullEnd,
     handlePullMove,
     handlePullStart,
@@ -31,15 +36,9 @@ export default function ClientSearchScreen() {
     searchHasError,
     searchListRef,
     searchLoading,
-    searchQuery,
-    setBookedSlot,
-    setCategoryFilter,
     setDraftFilters,
-    setScreen,
-    setSearchQuery,
-    setSelectedProId,
     visibleCount,
-  } = useKira();
+  } = search;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientHome")} />

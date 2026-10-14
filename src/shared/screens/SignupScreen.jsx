@@ -1,11 +1,11 @@
 // Escolha do tipo de conta (cliente ou profissional) · API: nenhuma
 import { Briefcase, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header } from "../components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../theme";
 
 export default function SignupScreen() {
-  const { accountType, setAccountType, setScreen } = useKira();
+  const { accountType, setAccountType, setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("splash")} />

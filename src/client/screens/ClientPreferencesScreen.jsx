@@ -1,11 +1,13 @@
 // Preferências de serviços · estado local
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { preferenceCategories } from "../data/mocks";
 
 export default function ClientPreferencesScreen() {
-  const { cPreferences, setScreen, toggleCPreference } = useKira();
+  const { cPreferences, toggleCPreference } = useSignup();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("clientDone")} />

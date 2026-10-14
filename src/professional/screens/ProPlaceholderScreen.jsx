@@ -1,6 +1,6 @@
 // Placeholder de tela em breve (ex.: Buscar) · API: nenhuma
 import { Sparkles } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { ProBottomNav } from "../components/ProBottomNav";
@@ -10,7 +10,7 @@ import { ProBottomNav } from "../components/ProBottomNav";
 // profissional (mostrados no mockup do folheto, mas fora do escopo pedido
 // agora). Nada aqui altera o Provador virtual do cliente.
 export default function ProPlaceholderScreen({ title, message, activeKey }) {
-  const { goToProTab, setScreen } = useKira();
+  const { goToProTab, setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proHome")} />

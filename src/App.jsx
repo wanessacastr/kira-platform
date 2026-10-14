@@ -2,11 +2,12 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./AppRoutes";
-import { KiraProvider, useKira } from "./context/KiraContext";
+import { AppProviders } from "./context/AppProviders";
+import { useSession } from "./context/SessionContext";
 import { colors, fontBody } from "./shared/theme";
 
 function Prototype() {
-  const { screen, setScreen, setAccountType } = useKira();
+  const { screen, setScreen, setAccountType } = useSession();
 
   const phoneFrame = {
     width: 390,
@@ -176,9 +177,9 @@ export default function App() {
 
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-      <KiraProvider>
+      <AppProviders>
         <Prototype />
-      </KiraProvider>
+      </AppProviders>
     </BrowserRouter>
   );
 }

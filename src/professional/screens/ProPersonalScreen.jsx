@@ -1,25 +1,19 @@
 // Cadastro: dados pessoais · validação local · foto via FileReader
+import { useRef, useState } from "react";
 import { Camera, Eye, EyeOff, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, StepDots, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { formatCnpj, formatCpf, formatPhone } from "../../shared/utils/format";
 
 // ---------- Fluxo profissional ----------
 export default function ProPersonalScreen() {
-  const {
-    handlePhoto,
-    pErrors,
-    pFileInputRef,
-    pForm,
-    pShowConfirm,
-    pShowPassword,
-    setPField,
-    setPShowConfirm,
-    setPShowPassword,
-    setScreen,
-    validateProPersonal,
-  } = useKira();
+  const { handlePhoto, pErrors, pForm, setPField, validateProPersonal } = useSignup();
+  const { setScreen } = useSession();
+  const pFileInputRef = useRef(null);
+  const [pShowPassword, setPShowPassword] = useState(false);
+  const [pShowConfirm, setPShowConfirm] = useState(false);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={1} />

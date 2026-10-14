@@ -1,6 +1,9 @@
 // Agendamento: data e horário · mock com latência e erro simulados · futura API: GET /profissionais/:id/disponibilidade
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Check } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useScheduling } from "../../context/SchedulingContext";
+import { useSession } from "../../context/SessionContext";
 import {
   CalendarHeader,
   CalendarMonth,
@@ -10,18 +13,17 @@ import {
 } from "../../shared/components/Calendar";
 import { ErrorState } from "../../shared/components/states";
 import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/ui";
+import { api } from "../../shared/api";
 import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
-import { getDaySchedule } from "../../shared/utils/date";
+import { startOfDay } from "../../shared/utils/date";
 
 export default function ClientSchedulingScreen() {
   const {
     bookedSlot,
     changeMonth,
-    monthAnimKey,
+    retriedDatesRef,
     retrySchedule,
-    scheduleError,
-    scheduleLoading,
     scheduleTime,
     selectScheduleDate,
     selectedDate,
@@ -29,12 +31,30 @@ export default function ClientSchedulingScreen() {
     setAgendaTab,
     setBookedSlot,
     setScheduleTime,
-    setScreen,
-    today,
     viewMonth,
-  } = useKira();
+  } = useScheduling();
+  const { setScreen } = useSession();
+  const today = startOfDay(new Date());
+  const [monthAnimKey, setMonthAnimKey] = useState(0);
   const pro = mockProfessionals.find((p) => p.id === selectedProId) || mockProfessionals[0];
-  const times = selectedDate ? getDaySchedule(selectedDate, pro) : [];
+  // Horários do dia escolhido (mock com latência e um erro simulado; ver api.availability)
+  const availability = useQuery({
+    queryKey: ["availability", pro.id, selectedDate?.toDateString()],
+    queryFn: () =>
+      api.availability.get({
+        pro,
+        date: selectedDate,
+        retried: retriedDatesRef.current.has(selectedDate.toDateString()),
+      }),
+    enabled: !!selectedDate,
+  });
+  const times = availability.data ?? [];
+  const scheduleLoading = availability.isFetching;
+  const scheduleError = availability.isError && !availability.isFetching;
+  const handleChangeMonth = (delta) => {
+    changeMonth(delta);
+    setMonthAnimKey((k) => k + 1);
+  };
   const canGoPrev =
     viewMonth.getFullYear() > today.getFullYear() ||
     (viewMonth.getFullYear() === today.getFullYear() && viewMonth.getMonth() > today.getMonth());
@@ -129,8 +149,8 @@ export default function ClientSchedulingScreen() {
 
             <CalendarHeader
               monthDate={viewMonth}
-              onPrev={() => changeMonth(-1)}
-              onNext={() => changeMonth(1)}
+              onPrev={() => handleChangeMonth(-1)}
+              onNext={() => handleChangeMonth(1)}
               canGoPrev={canGoPrev}
             />
             <div style={{ marginBottom: "var(--space-24)" }}>
@@ -159,7 +179,10 @@ export default function ClientSchedulingScreen() {
                 {scheduleLoading ? (
                   <LoadingSchedule />
                 ) : scheduleError ? (
-                  <ErrorState onRetry={retrySchedule} message="Não foi possível carregar os horários agora." />
+                  <ErrorState
+                    onRetry={() => retrySchedule(availability.refetch)}
+                    message="Não foi possível carregar os horários agora."
+                  />
                 ) : times.length === 0 ? (
                   <EmptySchedule />
                 ) : (
