@@ -1,0 +1,209 @@
+// Home: busca, categorias, mapa mock, próximas e TOP 3 recomendadas · mock
+import {
+  ChevronRight,
+  MapPin,
+  Search,
+  Sparkles,
+  Star,
+  User,
+  Wand2,
+} from "lucide-react";
+import { useKira } from "../../context/KiraContext";
+import { ErrorState, SkeletonLoading } from "../../shared/components/states";
+import { CategoryChip } from "../../shared/components/ui";
+import { mockProfessionals, nearbyProfessionals } from "../../shared/data/professionals";
+import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
+import { BottomNav } from "../components/BottomNav";
+import { RecommendedProfessionalCard } from "../components/ProfessionalCards";
+import { dashboardCategories } from "../data/mocks";
+
+export default function ClientHomeScreen() {
+  const {
+    cForm,
+    categoryFilter,
+    goToTab,
+    homeMapSelectedId,
+    loadRanking,
+    rankingError,
+    rankingLoading,
+    rankingSource,
+    recommended,
+    setBookedSlot,
+    setCategoryFilter,
+    setHomeMapSelectedId,
+    setScreen,
+    setSelectedProId,
+    startTryOnFlow,
+  } = useKira();
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? "Bom dia," : hour < 18 ? "Boa tarde," : "Boa noite,";
+  const nearbyCount = mockProfessionals.filter((p) => p.distance <= 5).length;
+  return (
+    <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
+      <div style={{ padding: "20px 24px 4px" }}>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 18 }}>
+          <div>
+            <p style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground, margin: 0 }}>{greeting}</p>
+            <h1 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 21, color: colors.foreground, margin: "2px 0 0" }}>
+              Olá, {cForm.name ? cForm.name.split(" ")[0] : "bem-vinda"} <Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", color: colors.primary }} />
+            </h1>
+          </div>
+          <button
+            onClick={() => setScreen("clientProfile")}
+            aria-label="Meu perfil"
+            style={{ width: 42, height: 42, borderRadius: "50%", overflow: "hidden", border: `2px solid ${colors.border}`, background: colors.muted, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0, padding: 0 }}
+          >
+            {cForm.photo ? <img src={cForm.photo} alt="Foto de perfil" style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <User size={18} color={colors.mutedForeground} />}
+          </button>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 10, background: colors.muted, borderRadius: 999, padding: "12px 16px", cursor: "pointer", marginBottom: 16 }} onClick={() => setScreen("clientSearch")}>
+          <Search size={16} color={colors.mutedForeground} />
+          <span style={{ fontFamily: fontBody, fontSize: 13, color: colors.mutedForeground }}>Buscar profissional ou serviço</span>
+        </div>
+      </div>
+
+      <div style={{ flex: 1, overflowY: "auto", padding: "0 24px 24px" }}>
+        <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "0 0 18px" }}>
+          {dashboardCategories.map((cat) => (
+            <CategoryChip key={cat.id} label={cat.label} active={categoryFilter === cat.id} onClick={() => { setCategoryFilter(cat.id); setScreen("clientSearch"); }} />
+          ))}
+        </div>
+
+        {/* Mapa/localização — representação visual local (mock), sem integração externa de mapas */}
+        {(() => {
+          const mapPros = [...mockProfessionals].sort((a, b) => a.distance - b.distance).slice(0, 4);
+          const markerPositions = [
+            { top: "26%", left: "20%" },
+            { top: "55%", left: "46%" },
+            { top: "36%", left: "72%" },
+            { top: "70%", left: "82%" },
+          ];
+          const markerColors = [colors.primary, colors.accent, colors.secondary, colors.primary];
+          const selectedPro = mapPros.find((p) => p.id === homeMapSelectedId);
+          return (
+            <div style={{ position: "relative", width: "100%", height: 148, borderRadius: 20, overflow: "hidden", marginBottom: 22, background: "linear-gradient(160deg, hsl(340 30% 96%), hsl(270 25% 95%))", border: `1px solid ${colors.border}` }}>
+              <svg width="100%" height="100%" viewBox="0 0 320 148" preserveAspectRatio="none" style={{ position: "absolute", inset: 0 }}>
+                <line x1="0" y1="38" x2="320" y2="28" stroke={colors.border} strokeWidth="2" />
+                <line x1="0" y1="95" x2="320" y2="112" stroke={colors.border} strokeWidth="2" />
+                <line x1="60" y1="0" x2="90" y2="148" stroke={colors.border} strokeWidth="2" />
+                <line x1="230" y1="0" x2="205" y2="148" stroke={colors.border} strokeWidth="2" />
+              </svg>
+              {mapPros.map((pro, i) => {
+                const pos = markerPositions[i];
+                const isSelected = homeMapSelectedId === pro.id;
+                return (
+                  <button
+                    key={pro.id}
+                    onClick={() => setHomeMapSelectedId((id) => (id === pro.id ? null : pro.id))}
+                    aria-label={pro.name}
+                    style={{
+                      position: "absolute", top: pos.top, left: pos.left, transform: "translate(-50%, -50%)",
+                      width: isSelected ? 16 : 10, height: isSelected ? 16 : 10, borderRadius: "50%",
+                      background: markerColors[i], border: "none", padding: 0, cursor: "pointer",
+                      boxShadow: isSelected ? `0 0 0 5px hsl(340 70% 55% / 0.25)` : "0 0 0 4px rgba(255,255,255,0.65)",
+                      transition: "width 0.15s ease, height 0.15s ease",
+                    }}
+                  />
+                );
+              })}
+              <div style={{ position: "absolute", top: 12, left: 12, display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", borderRadius: 999, background: colors.card, boxShadow: "0 2px 10px hsl(280 20% 15% / 0.12)" }}>
+                <MapPin size={13} color={colors.primary} />
+                <span style={{ fontFamily: fontBody, fontSize: 11, fontWeight: 700, color: colors.foreground }}>{nearbyCount} perto de você</span>
+              </div>
+              {selectedPro && (
+                <div style={{ position: "absolute", left: 10, right: 10, bottom: 10, display: "flex", alignItems: "center", gap: 10, padding: 8, borderRadius: 14, background: colors.card, boxShadow: "0 4px 14px hsl(280 20% 15% / 0.18)" }}>
+                  <img src={selectedPro.photo} alt={selectedPro.name} style={{ width: 36, height: 36, borderRadius: 10, objectFit: "cover", flexShrink: 0 }} />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 11, color: colors.foreground, margin: 0 }}>{selectedPro.name}</p>
+                    <span style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground }}>
+                      <Star size={10} color={colors.accent} fill={colors.accent} /> {selectedPro.rating} <MapPin size={10} /> {selectedPro.distance} km
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => { setSelectedProId(selectedPro.id); setBookedSlot(null); setScreen("clientProfessionalProfile"); }}
+                    style={{ padding: "6px 12px", borderRadius: 999, border: "none", background: gradientKira, color: colors.primaryForeground, fontFamily: fontBody, fontSize: 10, fontWeight: 700, cursor: "pointer", flexShrink: 0 }}
+                  >
+                    Ver perfil
+                  </button>
+                </div>
+              )}
+            </div>
+          );
+        })()}
+
+        <h2 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 16, color: colors.foreground, margin: "0 0 12px" }}>Profissionais perto de você</h2>
+        {(() => {
+          const recommendedTop5 = recommended.slice(0, 3);
+          const recommendedIds = new Set(recommendedTop5.map((p) => p.id));
+          const nearbyDeduped = nearbyProfessionals.filter((p) => !recommendedIds.has(p.id));
+          const isPersonalizedHome = rankingSource === "provador";
+          return (
+            <>
+              <div style={{ display: "flex", gap: 10, overflowX: "auto", paddingBottom: 4, marginBottom: 24 }}>
+                {nearbyDeduped.map((pro) => (
+                  <button
+                    key={pro.id}
+                    onClick={() => { setSelectedProId(pro.id); setBookedSlot(null); setScreen("clientProfessionalProfile"); }}
+                    style={{ flexShrink: 0, width: 148, display: "flex", flexDirection: "column", gap: 8, padding: 12, borderRadius: 16, border: `1px solid ${colors.border}`, background: colors.card, textAlign: "left", cursor: "pointer" }}
+                  >
+                    <img src={pro.photo} alt={pro.name} style={{ width: "100%", height: 84, borderRadius: 12, objectFit: "cover" }} />
+                    <div>
+                      <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 12, color: colors.foreground, margin: 0 }}>{pro.name}</p>
+                      <p style={{ fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground, margin: "1px 0 4px" }}>{pro.role}</p>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span style={{ display: "flex", alignItems: "center", gap: 2, fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground }}>
+                          <Star size={10} color={colors.accent} fill={colors.accent} /> {pro.rating}
+                        </span>
+                        <span style={{ display: "flex", alignItems: "center", gap: 2, fontFamily: fontBody, fontSize: 10, color: colors.mutedForeground }}>
+                          <MapPin size={10} /> {pro.distance}
+                        </span>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              <h2 style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: 16, color: colors.foreground, margin: "0 0 4px" }}>✨ Recomendadas para você</h2>
+              <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "0 0 14px" }}>
+                {isPersonalizedHome ? "Encontramos profissionais que combinam com o visual que você escolheu." : "Selecionadas para você com base em avaliação e proximidade."}
+              </p>
+              {rankingLoading ? (
+                <SkeletonLoading count={3} />
+              ) : rankingError ? (
+                <ErrorState onRetry={loadRanking} message="Não foi possível carregar as recomendações." />
+              ) : recommendedTop5.length === 0 ? (
+                <p style={{ fontFamily: fontBody, fontSize: 12, color: colors.mutedForeground, margin: "12px 0 24px", textAlign: "center" }}>Nenhuma recomendação disponível no momento.</p>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
+                  {recommendedTop5.map((pro) => (
+                    <RecommendedProfessionalCard key={pro.id} pro={pro} onViewProfile={() => { setSelectedProId(pro.id); setBookedSlot(null); setScreen("clientProfessionalProfile"); }} />
+                  ))}
+                </div>
+              )}
+            </>
+          );
+        })()}
+
+        <button
+          onClick={startTryOnFlow}
+          style={{
+            width: "100%", display: "flex", alignItems: "center", gap: 12, padding: 16, borderRadius: 18, border: "none",
+            background: "hsl(340 70% 55% / 0.08)", cursor: "pointer", textAlign: "left",
+          }}
+        >
+          <div style={{ width: 44, height: 44, borderRadius: 12, background: gradientKira, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <Wand2 size={20} color={colors.primaryForeground} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontFamily: fontBody, fontWeight: 700, fontSize: 13, color: colors.foreground, margin: 0 }}>Provador virtual</p>
+            <p style={{ fontFamily: fontBody, fontSize: 11, color: colors.mutedForeground, margin: "1px 0 0" }}>Veja como um visual fica em você antes de agendar</p>
+          </div>
+          <ChevronRight size={18} color={colors.primary} />
+        </button>
+      </div>
+
+      <BottomNav active="clientHome" onNavigate={goToTab} />
+    </div>
+  );
+}

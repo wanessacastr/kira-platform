@@ -1,0 +1,63 @@
+// Estado inicial dos formulários de cadastro e opções de campo · dados locais
+export const genderOptions = [
+  { value: "feminino", label: "Feminino" },
+  { value: "masculino", label: "Masculino" },
+  { value: "nao_binario", label: "Não Binário" },
+  { value: "prefiro_nao_informar", label: "Prefiro não informar" },
+];
+
+export const specialtySuggestions = ["Cabelo", "Unhas", "Estética", "Makeup"];
+
+export const initialClientForm = {
+  photo: "",
+  selfiePhoto: "",
+  name: "",
+  email: "",
+  phone: "",
+  cpf: "",
+  birth: "",
+  gender: "",
+  password: "",
+  confirm: "",
+  cep: "",
+  street: "",
+  number: "",
+  complement: "",
+  neighborhood: "",
+  city: "",
+  state: "",
+  latitude: null,
+  longitude: null,
+  docFront: "",
+  docBack: "",
+  termsUse: false,
+  termsPrivacy: false,
+};
+
+export const initialProForm = {
+  photo: "",
+  name: "",
+  documentType: "cpf",
+  document: "",
+  email: "",
+  phone: "",
+  birth: "",
+  password: "",
+  confirm: "",
+  cep: "",
+  street: "",
+  number: "",
+  complement: "",
+  neighborhood: "",
+  city: "",
+  state: "",
+  latitude: null,
+  longitude: null,
+  specialties: [],
+  services: [],
+  workPhotos: [],
+  docFrontPhoto: "",
+  docBackPhoto: "",
+  termsUse: false,
+  termsPrivacy: false,
+};
