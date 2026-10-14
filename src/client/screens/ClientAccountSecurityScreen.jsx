@@ -53,7 +53,7 @@ export default function ClientAccountSecurityScreen() {
             style={{
               width: 52,
               height: 52,
-              borderRadius: "50%",
+              borderRadius: "var(--radius-round)",
               background: verified ? gradientKira : colors.muted,
               display: "flex",
               alignItems: "center",

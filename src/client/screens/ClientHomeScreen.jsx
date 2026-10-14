@@ -71,7 +71,7 @@ export default function ClientHomeScreen() {
             style={{
               width: 42,
               height: 42,
-              borderRadius: "50%",
+              borderRadius: "var(--radius-round)",
               overflow: "hidden",
               border: `2px solid ${colors.border}`,
               background: colors.muted,
@@ -181,7 +181,7 @@ export default function ClientHomeScreen() {
                       transform: "translate(-50%, -50%)",
                       width: isSelected ? 16 : 10,
                       height: isSelected ? 16 : 10,
-                      borderRadius: "50%",
+                      borderRadius: "var(--radius-round)",
                       background: markerColors[i],
                       border: "none",
                       padding: 0,

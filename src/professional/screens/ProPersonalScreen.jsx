@@ -61,7 +61,7 @@ export default function ProPersonalScreen() {
               style={{
                 width: 88,
                 height: 88,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
@@ -89,7 +89,7 @@ export default function ProPersonalScreen() {
                 right: -4,
                 width: 34,
                 height: 34,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 border: "none",
                 background: gradientKira,
                 display: "flex",

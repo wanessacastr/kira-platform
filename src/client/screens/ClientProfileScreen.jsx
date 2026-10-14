@@ -24,7 +24,7 @@ export default function ClientProfileScreen() {
           style={{
             width: 64,
             height: 64,
-            borderRadius: "50%",
+            borderRadius: "var(--radius-round)",
             overflow: "hidden",
             border: "3px solid hsl(var(--white-hsl) / 0.6)",
             display: "flex",

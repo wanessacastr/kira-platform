@@ -260,7 +260,7 @@ export default function ProAnalyticsScreen() {
                   maxHeight: "78%",
                   margin: "0 auto",
                   background: colors.card,
-                  borderRadius: "24px 24px 0 0",
+                  borderRadius: "var(--radius-sheet)",
                   padding: "var(--space-20) var(--space-24) var(--space-28)",
                   overflowY: "auto",
                 }}
@@ -350,7 +350,7 @@ export default function ProAnalyticsScreen() {
                         style={{
                           width: 36,
                           height: 36,
-                          borderRadius: "50%",
+                          borderRadius: "var(--radius-round)",
                           background: colors.muted,
                           display: "flex",
                           alignItems: "center",

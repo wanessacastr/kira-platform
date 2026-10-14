@@ -62,7 +62,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
           width: "100%",
           maxWidth: 380,
           background: colors.card,
-          borderRadius: "24px 24px 0 0",
+          borderRadius: "var(--radius-sheet)",
           padding: "var(--space-20) var(--space-24) var(--space-28)",
         }}
       >
@@ -240,7 +240,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
           width: "100%",
           maxWidth: 380,
           background: colors.card,
-          borderRadius: "24px 24px 0 0",
+          borderRadius: "var(--radius-sheet)",
           padding: "var(--space-20) var(--space-24) var(--space-28)",
         }}
       >
@@ -259,7 +259,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
               style={{
                 width: 56,
                 height: 56,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 background: "hsl(var(--primary-hsl) / 0.1)",
                 display: "flex",
                 alignItems: "center",

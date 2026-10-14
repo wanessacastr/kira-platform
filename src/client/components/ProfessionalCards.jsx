@@ -280,7 +280,7 @@ export const RankingCard = ({ pro, rank, onClick }) => {
           style={{
             width: 26,
             height: 26,
-            borderRadius: "50%",
+            borderRadius: "var(--radius-round)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

@@ -58,7 +58,7 @@ export default function ClientSchedulingScreen() {
               style={{
                 width: 72,
                 height: 72,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 background: gradientKira,
                 display: "flex",
                 alignItems: "center",

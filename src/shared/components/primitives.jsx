@@ -199,7 +199,7 @@ export const ScreenHeader = ({ onBack, children }) => (
       style={{
         width: 34,
         height: 34,
-        borderRadius: "50%",
+        borderRadius: "var(--radius-round)",
         border: "none",
         background: "transparent",
         display: "flex",

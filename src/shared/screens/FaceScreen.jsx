@@ -48,7 +48,7 @@ export default function FaceScreen() {
           style={{
             width: 200,
             height: 200,
-            borderRadius: "50%",
+            borderRadius: "var(--radius-round)",
             background: colors.muted,
             border: `1px solid ${colors.border}`,
             display: "flex",
@@ -65,7 +65,7 @@ export default function FaceScreen() {
                 style={{
                   width: "75%",
                   height: "75%",
-                  borderRadius: "50%",
+                  borderRadius: "var(--radius-round)",
                   border: "4px solid hsl(var(--primary-hsl) / 0.7)",
                 }}
               />

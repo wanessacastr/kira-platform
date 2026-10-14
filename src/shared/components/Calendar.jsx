@@ -13,7 +13,7 @@ export const CalendarHeader = ({ monthDate, onPrev, onNext, canGoPrev }) => (
       style={{
         width: 32,
         height: 32,
-        borderRadius: "50%",
+        borderRadius: "var(--radius-round)",
         border: "none",
         background: colors.muted,
         display: "flex",
@@ -42,7 +42,7 @@ export const CalendarHeader = ({ monthDate, onPrev, onNext, canGoPrev }) => (
       style={{
         width: 32,
         height: 32,
-        borderRadius: "50%",
+        borderRadius: "var(--radius-round)",
         border: "none",
         background: colors.muted,
         display: "flex",

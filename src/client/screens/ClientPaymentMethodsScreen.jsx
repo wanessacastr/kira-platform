@@ -46,7 +46,7 @@ export default function ClientPaymentMethodsScreen() {
             style={{
               width: 64,
               height: 64,
-              borderRadius: "50%",
+              borderRadius: "var(--radius-round)",
               background: colors.muted,
               display: "flex",
               alignItems: "center",

@@ -123,7 +123,7 @@ export default function ProPhotosScreen() {
                       right: 4,
                       width: 20,
                       height: 20,
-                      borderRadius: "50%",
+                      borderRadius: "var(--radius-round)",
                       background: "hsl(var(--white-hsl) / 0.85)",
                       display: "flex",
                       alignItems: "center",

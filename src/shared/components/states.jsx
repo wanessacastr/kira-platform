@@ -81,7 +81,7 @@ export const EmptyState = ({ onClear }) => (
       style={{
         width: 72,
         height: 72,
-        borderRadius: "50%",
+        borderRadius: "var(--radius-round)",
         background: colors.muted,
         display: "flex",
         alignItems: "center",
@@ -115,7 +115,7 @@ export const ErrorState = ({ onRetry, message = "Não foi possível carregar os 
       style={{
         width: 72,
         height: 72,
-        borderRadius: "50%",
+        borderRadius: "var(--radius-round)",
         background: "hsl(var(--destructive-hsl) / 0.1)",
         display: "flex",
         alignItems: "center",

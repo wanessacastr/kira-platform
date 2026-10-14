@@ -55,7 +55,7 @@ export default function ProSecurityScreen() {
               style={{
                 width: 52,
                 height: 52,
-                borderRadius: "50%",
+                borderRadius: "var(--radius-round)",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
