@@ -4,6 +4,20 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+## [0.5.0] - 2026-10-14
+
+### Adicionado
+
+- React Router com rotas `/cliente/*` e `/profissional/*` e telas compartilhadas na raiz.
+- Layouts ClientLayout e ProLayout, com proteção por tipo de conta.
+- Botão voltar e avançar do navegador, e links diretos para cada tela.
+- Testes da tabela de rotas.
+
+### Alterado
+
+- A tela atual vem da URL. `setScreen(chave)` continua igual e navega para a rota.
+- Os atalhos do protótipo agora também definem o tipo de conta da área.
+
 ## [0.4.0] - 2026-10-14
 
 ### Adicionado
