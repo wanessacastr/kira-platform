@@ -22,11 +22,16 @@ export default function SplashScreen() {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(circle at 18% 15%, hsl(15 85% 65% / 0.9), transparent 45%), radial-gradient(circle at 82% 10%, hsl(320 75% 75% / 0.85), transparent 50%), radial-gradient(circle at 88% 55%, hsl(300 65% 55% / 0.8), transparent 55%), radial-gradient(circle at 8% 68%, hsl(20 80% 60% / 0.8), transparent 50%), radial-gradient(circle at 50% 92%, hsl(0 0% 100% / 0.55), transparent 60%), linear-gradient(180deg, hsl(340 55% 88%), hsl(0 0% 97%))",
+            "radial-gradient(circle at 18% 15%, var(--color-orange-glow), transparent 45%), radial-gradient(circle at 82% 10%, var(--color-pink-light), transparent 50%), radial-gradient(circle at 88% 55%, var(--color-magenta), transparent 55%), radial-gradient(circle at 8% 68%, var(--color-amber-glow), transparent 50%), radial-gradient(circle at 50% 92%, hsl(var(--white-hsl) / 0.55), transparent 60%), linear-gradient(180deg, var(--color-primary-tint), var(--color-neutral-soft))",
         }}
       />
       <div
-        style={{ position: "absolute", inset: 0, background: "rgba(255,255,255,0.1)", backdropFilter: "blur(2px)" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "hsl(var(--white-hsl) / 0.1)",
+          backdropFilter: "blur(2px)",
+        }}
       />
       <div
         style={{
@@ -47,7 +52,7 @@ export default function SplashScreen() {
               lineHeight: 1,
               color: colors.primaryForeground,
               margin: 0,
-              textShadow: "0 4px 12px rgba(0,0,0,0.15)",
+              textShadow: "0 4px 12px hsl(var(--black-hsl) / 0.15)",
             }}
           >
             K
@@ -58,7 +63,7 @@ export default function SplashScreen() {
               fontSize: 32,
               color: colors.primaryForeground,
               margin: 0,
-              textShadow: "0 4px 12px rgba(0,0,0,0.12)",
+              textShadow: "0 4px 12px hsl(var(--black-hsl) / 0.12)",
             }}
           >
             Kira
@@ -85,13 +90,13 @@ export default function SplashScreen() {
               padding: 16,
               borderRadius: 999,
               border: "none",
-              background: "rgba(255,255,255,0.95)",
+              background: "hsl(var(--white-hsl) / 0.95)",
               color: colors.foreground,
               fontWeight: 600,
               fontSize: 14,
               fontFamily: fontBody,
               cursor: "pointer",
-              boxShadow: "0 4px 20px -4px hsl(340 70% 55% / 0.2)",
+              boxShadow: "0 4px 20px -4px hsl(var(--primary-hsl) / 0.2)",
             }}
           >
             Entrar
@@ -103,7 +108,7 @@ export default function SplashScreen() {
               padding: 16,
               borderRadius: 999,
               border: "none",
-              background: "hsl(340 70% 55% / 0.3)",
+              background: "hsl(var(--primary-hsl) / 0.3)",
               color: colors.primaryForeground,
               fontWeight: 600,
               fontSize: 14,

@@ -194,9 +194,21 @@ export const RatingStars = ({ value, size = 12 }) => {
 };
 
 export const rankMedalStyle = (rank) => {
-  if (rank === 1) return { background: "linear-gradient(135deg, #FFD76A, #FFB84D)", color: "#5A3B00" };
-  if (rank === 2) return { background: "linear-gradient(135deg, #E4E7EC, #C7CCD6)", color: colors.foreground };
-  if (rank === 3) return { background: "linear-gradient(135deg, #E7B78C, #CE9564)", color: "#4A2A0E" };
+  if (rank === 1)
+    return {
+      background: "linear-gradient(135deg, var(--medal-gold-from), var(--medal-gold-to))",
+      color: "var(--medal-gold-text)",
+    };
+  if (rank === 2)
+    return {
+      background: "linear-gradient(135deg, var(--medal-silver-from), var(--medal-silver-to))",
+      color: colors.foreground,
+    };
+  if (rank === 3)
+    return {
+      background: "linear-gradient(135deg, var(--medal-bronze-from), var(--medal-bronze-to))",
+      color: "var(--medal-bronze-text)",
+    };
   return null;
 };
 
@@ -215,8 +227,8 @@ export const RankingCard = ({ pro, rank, onClick }) => {
         textAlign: "left",
         cursor: "pointer",
         border: `1px solid ${medal ? "transparent" : colors.border}`,
-        background: medal ? "hsl(340 70% 55% / 0.06)" : colors.card,
-        boxShadow: medal ? "0 2px 14px -6px hsl(340 70% 55% / 0.35)" : "none",
+        background: medal ? "hsl(var(--primary-hsl) / 0.06)" : colors.card,
+        boxShadow: medal ? "0 2px 14px -6px hsl(var(--primary-hsl) / 0.35)" : "none",
       }}
     >
       {medal ? (

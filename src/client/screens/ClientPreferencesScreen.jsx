@@ -42,7 +42,7 @@ export default function ClientPreferencesScreen() {
                   padding: 18,
                   borderRadius: 16,
                   border: `2px solid ${selected ? colors.primary : colors.border}`,
-                  background: selected ? "hsl(340 70% 55% / 0.08)" : colors.card,
+                  background: selected ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                   cursor: "pointer",
                 }}
               >

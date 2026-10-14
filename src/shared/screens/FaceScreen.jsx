@@ -54,7 +54,12 @@ export default function FaceScreen() {
           {faceStatus === "scanning" && (
             <>
               <div
-                style={{ width: "75%", height: "75%", borderRadius: "50%", border: "4px solid hsl(340 70% 55% / 0.7)" }}
+                style={{
+                  width: "75%",
+                  height: "75%",
+                  borderRadius: "50%",
+                  border: "4px solid hsl(var(--primary-hsl) / 0.7)",
+                }}
               />
               <div
                 style={{

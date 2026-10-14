@@ -50,7 +50,7 @@ export default function SignupScreen() {
                 padding: 18,
                 borderRadius: 16,
                 border: `2px solid ${accountType === type ? colors.primary : colors.border}`,
-                background: accountType === type ? "hsl(340 70% 55% / 0.08)" : colors.card,
+                background: accountType === type ? "hsl(var(--primary-hsl) / 0.08)" : colors.card,
                 cursor: "pointer",
               }}
             >

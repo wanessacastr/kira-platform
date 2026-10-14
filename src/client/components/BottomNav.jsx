@@ -16,7 +16,7 @@ export const BottomNav = ({ active, onNavigate }) => (
       padding: "8px 6px calc(8px + env(safe-area-inset-bottom, 0px))",
       borderTop: `1px solid ${colors.border}`,
       borderRadius: "20px 20px 0 0",
-      boxShadow: "0 -6px 20px -12px hsl(280 20% 15% / 0.18)",
+      boxShadow: "0 -6px 20px -12px hsl(var(--foreground-hsl) / 0.18)",
       background: colors.card,
       flexShrink: 0,
     }}
@@ -39,7 +39,7 @@ export const BottomNav = ({ active, onNavigate }) => (
             minWidth: 0,
             padding: "6px 2px",
             borderRadius: 12,
-            background: isActive ? "hsl(340 70% 55% / 0.1)" : "transparent",
+            background: isActive ? "hsl(var(--primary-hsl) / 0.1)" : "transparent",
             border: "none",
             cursor: "pointer",
           }}

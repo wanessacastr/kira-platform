@@ -86,7 +86,7 @@ export default function ProPhotosScreen() {
                       width: 20,
                       height: 20,
                       borderRadius: "50%",
-                      background: "rgba(255,255,255,0.85)",
+                      background: "hsl(var(--white-hsl) / 0.85)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",

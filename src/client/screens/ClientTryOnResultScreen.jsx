@@ -82,7 +82,7 @@ export default function ClientTryOnResultScreen() {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "hsl(340 70% 55% / 0.18)",
+                  background: "hsl(var(--primary-hsl) / 0.18)",
                   border: `2px solid ${colors.primary}`,
                   borderRadius: 14,
                 }}

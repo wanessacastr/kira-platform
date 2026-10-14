@@ -116,7 +116,7 @@ export const ErrorState = ({ onRetry, message = "Não foi possível carregar os 
         width: 72,
         height: 72,
         borderRadius: "50%",
-        background: "hsl(0 84% 60% / 0.1)",
+        background: "hsl(var(--destructive-hsl) / 0.1)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

@@ -46,7 +46,7 @@ export default function ClientProfessionalProfileScreen() {
               height: 34,
               borderRadius: "50%",
               border: "none",
-              background: "rgba(255,255,255,0.25)",
+              background: "hsl(var(--white-hsl) / 0.25)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -66,7 +66,7 @@ export default function ClientProfessionalProfileScreen() {
               height: 34,
               borderRadius: "50%",
               border: "none",
-              background: "rgba(255,255,255,0.25)",
+              background: "hsl(var(--white-hsl) / 0.25)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -90,7 +90,7 @@ export default function ClientProfessionalProfileScreen() {
               borderRadius: 20,
               objectFit: "cover",
               border: `3px solid ${colors.card}`,
-              boxShadow: "0 2px 10px hsl(280 20% 15% / 0.15)",
+              boxShadow: "0 2px 10px hsl(var(--foreground-hsl) / 0.15)",
             }}
           />
           <h1

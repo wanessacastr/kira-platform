@@ -93,7 +93,7 @@ export default function ClientSelfieScreen() {
                 position: "absolute",
                 inset: 14,
                 borderRadius: 14,
-                border: "2px solid hsl(340 70% 55% / 0.6)",
+                border: "2px solid hsl(var(--primary-hsl) / 0.6)",
                 pointerEvents: "none",
               }}
             />

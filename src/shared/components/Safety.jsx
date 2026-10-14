@@ -49,7 +49,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
       style={{
         position: "fixed",
         inset: 0,
-        background: "hsl(280 20% 15% / 0.45)",
+        background: "hsl(var(--foreground-hsl) / 0.45)",
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "center",
@@ -75,7 +75,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
             gap: 10,
             padding: 12,
             borderRadius: 12,
-            background: "hsl(0 84% 60% / 0.08)",
+            background: "hsl(var(--destructive-hsl) / 0.08)",
             marginBottom: 16,
           }}
         >
@@ -95,7 +95,7 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
             height: 48,
             borderRadius: 14,
             background: colors.destructive,
-            color: "#fff",
+            color: "var(--color-background)",
             fontFamily: fontBody,
             fontWeight: 700,
             fontSize: 14,
@@ -197,7 +197,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
       style={{
         position: "fixed",
         inset: 0,
-        background: "hsl(280 20% 15% / 0.45)",
+        background: "hsl(var(--foreground-hsl) / 0.45)",
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "center",
@@ -222,7 +222,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 width: 56,
                 height: 56,
                 borderRadius: "50%",
-                background: "hsl(340 70% 55% / 0.1)",
+                background: "hsl(var(--primary-hsl) / 0.1)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -297,7 +297,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 gap: 8,
                 padding: 10,
                 borderRadius: 12,
-                background: "hsl(0 84% 60% / 0.08)",
+                background: "hsl(var(--destructive-hsl) / 0.08)",
                 marginBottom: 14,
               }}
             >
@@ -319,7 +319,7 @@ export const ReportModal = ({ agendamentoId, papel, onClose }) => {
                 borderRadius: 12,
                 border: "none",
                 background: colors.destructive,
-                color: "#fff",
+                color: "var(--color-background)",
                 fontFamily: fontBody,
                 fontWeight: 700,
                 fontSize: 13,
@@ -353,7 +353,7 @@ export const ReportButton = ({ agendamentoId, papel }) => {
           gap: 8,
           padding: 12,
           borderRadius: 12,
-          border: `1px solid hsl(0 84% 60% / 0.35)`,
+          border: `1px solid hsl(var(--destructive-hsl) / 0.35)`,
           background: "transparent",
           color: colors.destructive,
           fontFamily: fontBody,

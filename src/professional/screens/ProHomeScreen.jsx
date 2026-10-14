@@ -152,7 +152,7 @@ export default function ProHomeScreen() {
             padding: 14,
             borderRadius: 16,
             border: "none",
-            background: "hsl(340 70% 55% / 0.08)",
+            background: "hsl(var(--primary-hsl) / 0.08)",
             cursor: "pointer",
             textAlign: "left",
           }}

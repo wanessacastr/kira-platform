@@ -134,7 +134,7 @@ export default function ClientHomeScreen() {
                 borderRadius: 20,
                 overflow: "hidden",
                 marginBottom: 22,
-                background: "linear-gradient(160deg, hsl(340 30% 96%), hsl(270 25% 95%))",
+                background: "linear-gradient(160deg, var(--color-surface-soft), var(--color-lilac))",
                 border: `1px solid ${colors.border}`,
               }}
             >
@@ -170,7 +170,9 @@ export default function ClientHomeScreen() {
                       border: "none",
                       padding: 0,
                       cursor: "pointer",
-                      boxShadow: isSelected ? `0 0 0 5px hsl(340 70% 55% / 0.25)` : "0 0 0 4px rgba(255,255,255,0.65)",
+                      boxShadow: isSelected
+                        ? `0 0 0 5px hsl(var(--primary-hsl) / 0.25)`
+                        : "0 0 0 4px hsl(var(--white-hsl) / 0.65)",
                       transition: "width 0.15s ease, height 0.15s ease",
                     }}
                   />
@@ -187,7 +189,7 @@ export default function ClientHomeScreen() {
                   padding: "6px 12px",
                   borderRadius: 999,
                   background: colors.card,
-                  boxShadow: "0 2px 10px hsl(280 20% 15% / 0.12)",
+                  boxShadow: "0 2px 10px hsl(var(--foreground-hsl) / 0.12)",
                 }}
               >
                 <MapPin size={13} color={colors.primary} />
@@ -208,7 +210,7 @@ export default function ClientHomeScreen() {
                     padding: 8,
                     borderRadius: 14,
                     background: colors.card,
-                    boxShadow: "0 4px 14px hsl(280 20% 15% / 0.18)",
+                    boxShadow: "0 4px 14px hsl(var(--foreground-hsl) / 0.18)",
                   }}
                 >
                   <img
@@ -429,7 +431,7 @@ export default function ClientHomeScreen() {
             padding: 16,
             borderRadius: 18,
             border: "none",
-            background: "hsl(340 70% 55% / 0.08)",
+            background: "hsl(var(--primary-hsl) / 0.08)",
             cursor: "pointer",
             textAlign: "left",
           }}

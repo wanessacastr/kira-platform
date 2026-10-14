@@ -142,7 +142,7 @@ export default function ClientProfileEditScreen() {
               gap: 6,
               padding: "10px 14px",
               borderRadius: 12,
-              background: "hsl(340 70% 55% / 0.08)",
+              background: "hsl(var(--primary-hsl) / 0.08)",
               marginBottom: 12,
             }}
           >

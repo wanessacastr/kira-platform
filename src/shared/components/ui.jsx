@@ -276,7 +276,7 @@ export const ProfileMenuRow = ({ icon: Icon, label, onClick, destructive, last }
         width: 30,
         height: 30,
         borderRadius: 9,
-        background: destructive ? "hsl(0 84% 60% / 0.1)" : colors.muted,
+        background: destructive ? "hsl(var(--destructive-hsl) / 0.1)" : colors.muted,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

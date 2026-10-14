@@ -194,7 +194,7 @@ export default function ProAnalyticsScreen() {
               style={{
                 position: "fixed",
                 inset: 0,
-                background: "hsl(280 20% 15% / 0.45)",
+                background: "hsl(var(--foreground-hsl) / 0.45)",
                 display: "flex",
                 alignItems: "flex-end",
                 justifyContent: "center",

@@ -76,7 +76,7 @@ export default function ProFinanceScreen() {
                     fontWeight: 700,
                     background: financePeriod === p.key ? colors.card : "transparent",
                     color: financePeriod === p.key ? colors.primary : colors.mutedForeground,
-                    boxShadow: financePeriod === p.key ? "0 1px 2px hsl(280 20% 15% / 0.1)" : "none",
+                    boxShadow: financePeriod === p.key ? "0 1px 2px hsl(var(--foreground-hsl) / 0.1)" : "none",
                   }}
                 >
                   {p.label}
