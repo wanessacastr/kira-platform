@@ -1,12 +1,12 @@
 // Ajuda do profissional · estático
 import { HelpCircle, MessageCircle } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, ProfileMenuRow, ProfileSection, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 // "Ajuda e suporte" do profissional — mesma lógica do renderClientHelpSupport.
 export default function ProHelpScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proProfileMenu")} />

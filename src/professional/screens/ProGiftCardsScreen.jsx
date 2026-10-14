@@ -1,13 +1,13 @@
 // Gift Cards · mock
 import { Gift, Plus } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { proGiftCardsMock } from "../data/mocks";
 
 // "Gift Cards Kira" — vender/acompanhar gift cards como forma de pagamento.
 export default function ProGiftCardsScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("proProfileMenu")} />

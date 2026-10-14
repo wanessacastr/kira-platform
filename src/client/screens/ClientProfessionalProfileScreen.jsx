@@ -1,34 +1,23 @@
 // Perfil da profissional (serviços, portfólio, avaliações) · mock
 import { ArrowLeft, BadgeCheck, Bookmark, Clock, MapPin } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSearch } from "../../context/SearchContext";
+import { useScheduling } from "../../context/SchedulingContext";
+import { useSession } from "../../context/SessionContext";
 import { PrimaryButton } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
-import { startOfMonth } from "../../shared/utils/date";
 import { RatingStars } from "../components/ProfessionalCards";
 import { getProfileExtras, getRankingExtras } from "../data/mocks";
 
 export default function ClientProfessionalProfileScreen() {
-  const {
-    favoriteProIds,
-    selectedProId,
-    setBookedSlot,
-    setScheduleError,
-    setScheduleTime,
-    setScreen,
-    setSelectedDate,
-    setViewMonth,
-    toggleFavoriteProfessional,
-  } = useKira();
+  const { favoriteProIds, toggleFavoriteProfessional } = useSearch();
+  const { selectedProId, resetScheduling } = useScheduling();
+  const { setScreen } = useSession();
   const pro = mockProfessionals.find((p) => p.id === selectedProId) || mockProfessionals[0];
   const extras = getProfileExtras(pro);
   const nextSlots = getRankingExtras(pro).nextSlot;
   const goToScheduling = () => {
-    setBookedSlot(null);
-    setSelectedDate(null);
-    setScheduleTime(null);
-    setScheduleError(false);
-    setViewMonth(startOfMonth(new Date()));
+    resetScheduling();
     setScreen("clientScheduling");
   };
   return (

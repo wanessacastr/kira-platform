@@ -1,6 +1,7 @@
 // Menu do perfil do profissional · API: nenhuma
 import { LogOut, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
+import { useSignup } from "../../context/SignupContext";
 import { ProfileMenuRow, ProfileSection } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { ProBottomNav } from "../components/ProBottomNav";
@@ -8,7 +9,8 @@ import { proProfileMenu } from "../data/mocks";
 
 // Menu de Perfil do profissional — mesma lógica do renderClientProfile.
 export default function ProProfileMenuScreen() {
-  const { goToProTab, pForm, setScreen } = useKira();
+  const { goToProTab, setScreen } = useSession();
+  const { pForm } = useSignup();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div

@@ -1,24 +1,18 @@
 // Provador: resultado e botão Encontrar profissionais · mock de recomendação
 import { Sparkles } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useRanking, useTryOn } from "../../context/TryOnContext";
+import { useScheduling } from "../../context/SchedulingContext";
+import { useSession } from "../../context/SessionContext";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { Header, PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { RecommendedProfessionalCard } from "../components/ProfessionalCards";
 
 export default function ClientTryOnResultScreen() {
-  const {
-    goToPersonalizedRanking,
-    loadRanking,
-    rankingError,
-    rankingLoading,
-    recommended,
-    setBookedSlot,
-    setScreen,
-    setSelectedProId,
-    tryOnClientPhoto,
-    tryOnReference,
-  } = useKira();
+  const { goToPersonalizedRanking, tryOnClientPhoto, tryOnReference } = useTryOn();
+  const { loadRanking, rankingError, rankingLoading, recommended } = useRanking();
+  const { setBookedSlot, setSelectedProId } = useScheduling();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientTryOnPhoto")} />

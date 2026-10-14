@@ -1,6 +1,7 @@
 // Detalhe do agendamento + botão de segurança · mock · denúncia: futura POST /api/denuncias
 import { MessageCircle, XCircle } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useScheduling } from "../../context/SchedulingContext";
+import { useSession } from "../../context/SessionContext";
 import { ReportButton } from "../../shared/components/Safety";
 import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
@@ -8,7 +9,8 @@ import { colors, fontBody } from "../../shared/theme";
 import { appointmentsMock } from "../data/mocks";
 
 export default function ClientAgendaDetailScreen() {
-  const { selectedAppointmentId, setScreen } = useKira();
+  const { selectedAppointmentId } = useScheduling();
+  const { setScreen } = useSession();
   const appointment = appointmentsMock.find((a) => a.id === selectedAppointmentId) || appointmentsMock[0];
   const pro = mockProfessionals.find((p) => p.id === appointment.proId) || mockProfessionals[0];
   const canCancel = appointment.status === "proximo";

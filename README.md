@@ -26,7 +26,8 @@ src/
   routes.js                tabela chave da tela -> URL
   AppRoutes.jsx            rotas e layouts
   screens.js               mapa chave -> componente da tela
-  context/KiraContext.jsx  estado e ações globais (useKira)
+  context/                 estado por assunto: sessão, cadastro, busca, agendamento, Provador e painel
+  shared/api/              serviços (hoje mock) atrás de um contrato pronto para API real
   shared/                  tema, tokens (styles/), utils, dados e componentes comuns (primitives, NavBar)
   client/                  lado cliente (telas, componentes, mocks, recomendação)
   professional/            lado profissional (telas, componentes, mocks)

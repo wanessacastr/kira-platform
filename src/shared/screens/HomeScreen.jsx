@@ -1,21 +1,12 @@
 // Placeholder pós-cadastro com botão de reiniciar o protótipo · API: nenhuma
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { PrimaryButton } from "../components/ui";
-import { initialClientForm, initialProForm } from "../data/forms";
 import { colors, fontBody, fontDisplay } from "../theme";
 
 export default function HomeScreen() {
-  const {
-    setCErrors,
-    setCForm,
-    setCLocationStatus,
-    setCPreferences,
-    setFaceStatus,
-    setPErrors,
-    setPForm,
-    setPLocationStatus,
-    setScreen,
-  } = useKira();
+  const { reset } = useSignup();
+  const { setScreen } = useSession();
   return (
     <div
       style={{
@@ -53,14 +44,7 @@ export default function HomeScreen() {
       <div style={{ width: "100%", maxWidth: 240 }}>
         <PrimaryButton
           onClick={() => {
-            setCForm(initialClientForm);
-            setCErrors({});
-            setPForm(initialProForm);
-            setPErrors({});
-            setFaceStatus("idle");
-            setCLocationStatus("idle");
-            setPLocationStatus("idle");
-            setCPreferences([]);
+            reset();
             setScreen("splash");
           }}
         >

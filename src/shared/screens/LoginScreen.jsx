@@ -1,19 +1,15 @@
 // Login simulado, sem autenticação real · API: nenhuma
+import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, inputStyle } from "../components/ui";
 import { colors, fontBody, fontDisplay } from "../theme";
 
 export default function LoginScreen() {
-  const {
-    loginEmail,
-    loginPassword,
-    setLoginEmail,
-    setLoginPassword,
-    setScreen,
-    setShowLoginPassword,
-    showLoginPassword,
-  } = useKira();
+  const { setScreen } = useSession();
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("splash")} />

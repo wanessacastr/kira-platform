@@ -1,11 +1,15 @@
 // Cadastro: fotos do trabalho · FileReader local
+import { useRef } from "react";
 import { ImagePlus, X } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 export default function ProPhotosScreen() {
-  const { handleWorkPhotos, pErrors, pForm, pWorkPhotosInputRef, removeWorkPhoto, setPErrors, setScreen } = useKira();
+  const { handleWorkPhotos, pErrors, pForm, removeWorkPhoto, setPErrors } = useSignup();
+  const { setScreen } = useSession();
+  const pWorkPhotosInputRef = useRef(null);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={7} />

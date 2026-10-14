@@ -1,11 +1,11 @@
 // Cadastro concluído · API: nenhuma
 import { Check } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 
 export default function ProDoneScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   return (
     <div
       style={{

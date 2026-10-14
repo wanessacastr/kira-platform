@@ -1,12 +1,12 @@
 // Perfil: formas de pagamento · estático, sem gateway
 import { CreditCard, Plus } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 // === PERFIL: Formas de pagamento ===
 export default function ClientPaymentMethodsScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />

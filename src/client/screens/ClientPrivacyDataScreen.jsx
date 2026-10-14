@@ -1,12 +1,14 @@
 // Perfil: privacidade e dados · estático, lê dados do cadastro
 import { ShieldCheck } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, ProfileSection, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 // === PERFIL: Dados e privacidade ===
 export default function ClientPrivacyDataScreen() {
-  const { cForm, setScreen } = useKira();
+  const { cForm } = useSignup();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />

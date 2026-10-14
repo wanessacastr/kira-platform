@@ -1,12 +1,14 @@
 // Cadastro: aceite de termos · API: nenhuma
 import { Check } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { Checkbox } from "../../shared/components/primitives";
 
 export default function ProTermsScreen() {
-  const { pErrors, pForm, setPErrors, setPField, setScreen, validateTerms } = useKira();
+  const { pErrors, pForm, setPErrors, setPField, validateTerms } = useSignup();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={8} />

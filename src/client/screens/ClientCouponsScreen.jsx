@@ -1,12 +1,12 @@
 // Perfil: cupons · estático
 import { Gift } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 
 // === PERFIL: Cupons e gift cards ===
 export default function ClientCouponsScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />

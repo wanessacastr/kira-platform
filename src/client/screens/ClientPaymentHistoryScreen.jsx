@@ -1,5 +1,5 @@
 // Perfil: histórico de pagamentos · mock
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { EmptyState } from "../../shared/components/states";
 import { Header } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
@@ -8,7 +8,7 @@ import { appointmentsMock } from "../data/mocks";
 
 // === PERFIL: Histórico de pagamentos ===
 export default function ClientPaymentHistoryScreen() {
-  const { setScreen } = useKira();
+  const { setScreen } = useSession();
   const paid = appointmentsMock.filter((a) => a.status === "concluido");
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

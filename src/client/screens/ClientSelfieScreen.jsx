@@ -1,22 +1,24 @@
 // Cadastro: selfie · API do navegador: getUserMedia (câmera)
 import { AlertCircle } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton, SecondaryButton, StepDots } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
+import { useSelfieCamera } from "../hooks/useSelfieCamera";
 
 export default function ClientSelfieScreen() {
+  const { cForm, setCField } = useSignup();
+  const { setScreen } = useSession();
   const {
-    cForm,
     cSelfieCanvasRef,
     cSelfieError,
     cSelfieStatus,
     cSelfieVideoRef,
     captureClientSelfie,
     retakeClientSelfie,
-    setScreen,
     startClientSelfieCamera,
     stopClientSelfieCamera,
-  } = useKira();
+  } = useSelfieCamera(cForm.selfiePhoto, (v) => setCField("selfiePhoto", v));
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={6} done={5} />

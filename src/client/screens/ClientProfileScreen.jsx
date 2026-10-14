@@ -1,6 +1,7 @@
 // Menu do perfil do cliente · API: nenhuma
 import { LogOut, User } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { ProfileMenuRow, ProfileSection } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { BottomNav } from "../components/BottomNav";
@@ -8,7 +9,8 @@ import { clientProfileMenu } from "../data/mocks";
 
 // ---------- Perfil da cliente ----------
 export default function ClientProfileScreen() {
-  const { cForm, goToTab, setScreen } = useKira();
+  const { cForm } = useSignup();
+  const { goToTab, setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div

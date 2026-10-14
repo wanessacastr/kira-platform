@@ -1,6 +1,7 @@
 // Analytics: serviços mais agendados, avaliações e retorno · mock
+import { useEffect, useState } from "react";
 import { CheckCircle2, ChevronRight, CreditCard, Star, TrendingUp, User, X } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { ProBottomNav } from "../components/ProBottomNav";
 import { ProStatCard, RevenueBarChart } from "../components/ProWidgets";
@@ -17,7 +18,16 @@ import { EscapeKey } from "../../shared/components/primitives";
 // dia, serviços mais procurados, distribuição de avaliações e métricas
 // de conversão/retorno de clientes.
 export default function ProAnalyticsScreen() {
-  const { goToProTab, proAnalyticsSel, proServiceDetail, setProAnalyticsSel, setProServiceDetail } = useKira();
+  const { goToProTab } = useSession();
+  const [proAnalyticsSel, setProAnalyticsSel] = useState(null);
+  const [proServiceDetail, setProServiceDetail] = useState(null);
+  // Com o painel de detalhes aberto, trava a rolagem da página por trás dele
+  useEffect(() => {
+    document.body.style.overflow = proServiceDetail ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [proServiceDetail]);
   const maxServiceCount = Math.max(...proServiceRankingMock.map((s) => s.count));
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

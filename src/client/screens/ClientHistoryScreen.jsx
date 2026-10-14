@@ -1,5 +1,6 @@
 // Perfil: histórico de serviços · mock
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
+import { useScheduling } from "../../context/SchedulingContext";
 import { Header } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
@@ -8,7 +9,8 @@ import { appointmentsMock } from "../data/mocks";
 
 // === PERFIL: Histórico completo ===
 export default function ClientHistoryScreen() {
-  const { setScreen, setSelectedAppointmentId } = useKira();
+  const { setScreen } = useSession();
+  const { setSelectedAppointmentId } = useScheduling();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />

@@ -1,6 +1,11 @@
 // Home: busca, categorias, mapa mock, próximas e TOP 3 recomendadas · mock
+import { useState } from "react";
 import { ChevronRight, MapPin, Search, Sparkles, Star, User, Wand2 } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSearch } from "../../context/SearchContext";
+import { useSession } from "../../context/SessionContext";
+import { useRanking, useTryOn } from "../../context/TryOnContext";
+import { useScheduling } from "../../context/SchedulingContext";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { CategoryChip } from "../../shared/components/ui";
 import { mockProfessionals, nearbyProfessionals } from "../../shared/data/professionals";
@@ -10,23 +15,13 @@ import { RecommendedProfessionalCard } from "../components/ProfessionalCards";
 import { dashboardCategories } from "../data/mocks";
 
 export default function ClientHomeScreen() {
-  const {
-    cForm,
-    categoryFilter,
-    goToTab,
-    homeMapSelectedId,
-    loadRanking,
-    rankingError,
-    rankingLoading,
-    rankingSource,
-    recommended,
-    setBookedSlot,
-    setCategoryFilter,
-    setHomeMapSelectedId,
-    setScreen,
-    setSelectedProId,
-    startTryOnFlow,
-  } = useKira();
+  const { cForm } = useSignup();
+  const { categoryFilter, setCategoryFilter } = useSearch();
+  const { goToTab, setScreen } = useSession();
+  const { loadRanking, rankingError, rankingLoading, recommended } = useRanking();
+  const { rankingSource, startTryOnFlow } = useTryOn();
+  const { setBookedSlot, setSelectedProId } = useScheduling();
+  const [homeMapSelectedId, setHomeMapSelectedId] = useState(null);
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Bom dia," : hour < 18 ? "Boa tarde," : "Boa noite,";
   const nearbyCount = mockProfessionals.filter((p) => p.distance <= 5).length;

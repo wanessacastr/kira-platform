@@ -1,6 +1,7 @@
 // Agenda do cliente por abas · mock
 import { Calendar } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useScheduling } from "../../context/SchedulingContext";
+import { useSession } from "../../context/SessionContext";
 import { Header } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
@@ -10,7 +11,8 @@ import { appointmentTabs, appointmentsMock } from "../data/mocks";
 
 // ---------- Agenda ----------
 export default function ClientAgendaScreen() {
-  const { agendaTab, goToTab, setAgendaTab, setScreen, setSelectedAppointmentId } = useKira();
+  const { agendaTab, setAgendaTab, setSelectedAppointmentId } = useScheduling();
+  const { goToTab, setScreen } = useSession();
   const filtered = appointmentsMock.filter((a) => a.status === agendaTab);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

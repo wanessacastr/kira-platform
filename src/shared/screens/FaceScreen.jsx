@@ -1,12 +1,35 @@
 // Verificação facial simulada, nenhum dado biométrico é salvo · API: nenhuma
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { CheckCircle2, ScanFace } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSession } from "../../context/SessionContext";
 import { Header, PrimaryButton } from "../components/ui";
 import { colors, fontBody, fontDisplay } from "../theme";
 
 // ---------- Compartilhado ----------
 export default function FaceScreen() {
-  const { faceBackTo, faceProgress, faceReturnTo, faceStatus, setScreen, startFaceScan } = useKira();
+  const { setScreen } = useSession();
+  const { state } = useLocation();
+  const faceBackTo = state?.backTo ?? "terms";
+  const faceReturnTo = state?.returnTo ?? "home";
+  const [faceStatus, setFaceStatus] = useState("idle"); // idle | scanning | success
+  const [faceProgress, setFaceProgress] = useState(0);
+  const timerRef = useRef(null);
+  useEffect(() => () => clearInterval(timerRef.current), []);
+  const startFaceScan = () => {
+    setFaceStatus("scanning");
+    setFaceProgress(0);
+    timerRef.current = setInterval(() => {
+      setFaceProgress((p) => {
+        if (p >= 100) {
+          clearInterval(timerRef.current);
+          setFaceStatus("success");
+          return 100;
+        }
+        return p + 5;
+      });
+    }, 70);
+  };
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen(faceBackTo)} />

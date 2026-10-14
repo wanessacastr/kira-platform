@@ -1,11 +1,18 @@
 // Cadastro: serviços com valor e duração · estado local
+import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
-import { useKira } from "../../context/KiraContext";
+import { useSignup } from "../../context/SignupContext";
+import { useSession } from "../../context/SessionContext";
 import { Field, Header, PrimaryButton, SecondaryButton, StepDots, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 export default function ProServicesScreen() {
-  const { addService, pErrors, pForm, removeService, serviceDraft, setPErrors, setScreen, setServiceDraft } = useKira();
+  const { addService, pErrors, pForm, removeService, setPErrors } = useSignup();
+  const { setScreen } = useSession();
+  const [serviceDraft, setServiceDraft] = useState({ name: "", price: "", duration: "" });
+  const handleAddService = () => {
+    if (addService(serviceDraft)) setServiceDraft({ name: "", price: "", duration: "" });
+  };
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <StepDots total={8} done={6} />
@@ -67,7 +74,7 @@ export default function ProServicesScreen() {
               />
             </Field>
           </div>
-          <SecondaryButton onClick={addService}>
+          <SecondaryButton onClick={handleAddService}>
             <Plus size={15} /> Adicionar serviço
           </SecondaryButton>
         </div>
