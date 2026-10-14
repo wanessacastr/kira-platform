@@ -1,12 +1,12 @@
 // Moldura do celular + atalhos de tela (dev) · API externa: Google Fonts (CSS das fontes)
 import { useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./AppRoutes";
 import { KiraProvider, useKira } from "./context/KiraContext";
-import { screens } from "./screens";
 import { colors, fontBody } from "./shared/theme";
 
 function Prototype() {
-  const { screen, setScreen } = useKira();
-  const Screen = screens[screen];
+  const { screen, setScreen, setAccountType } = useKira();
 
   const phoneFrame = {
     width: 390,
@@ -44,6 +44,7 @@ function Prototype() {
     },
     {
       label: "Cliente",
+      accountType: "client",
       screens: [
         ["Dados", "clientPersonal"],
         ["Endereço", "clientAddress"],
@@ -78,6 +79,7 @@ function Prototype() {
     },
     {
       label: "Profissional",
+      accountType: "professional",
       screens: [
         ["Dados", "proPersonal"],
         ["Endereço", "proAddress"],
@@ -112,7 +114,7 @@ function Prototype() {
       </style>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-16)" }}>
         <div style={phoneFrame} data-testid="phone-frame">
-          <Screen />
+          <AppRoutes />
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)", maxWidth: 390 }}>
           {navGroups.map((group) => (
@@ -135,7 +137,11 @@ function Prototype() {
                 <button
                   key={key}
                   data-testid="screen-shortcut"
-                  onClick={() => setScreen(key)}
+                  onClick={() => {
+                    // atalho do protótipo: abre a tela já como o tipo de conta da área
+                    if (group.accountType) setAccountType(group.accountType);
+                    setScreen(key);
+                  }}
                   style={{
                     padding: "var(--space-5) var(--space-10)",
                     borderRadius: "var(--radius-pill)",
@@ -169,8 +175,10 @@ export default function App() {
   }, []);
 
   return (
-    <KiraProvider>
-      <Prototype />
-    </KiraProvider>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <KiraProvider>
+        <Prototype />
+      </KiraProvider>
+    </BrowserRouter>
   );
 }

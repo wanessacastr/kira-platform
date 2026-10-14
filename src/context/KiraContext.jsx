@@ -1,5 +1,6 @@
-// Estado e ações globais (useKira) · APIs do navegador: geolocation, câmera (getUserMedia), FileReader · demais fluxos simulados com setTimeout, sem backend
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+// Estado e ações globais (useKira); a tela atual vem da URL (React Router) · APIs do navegador: geolocation, câmera (getUserMedia), FileReader · demais fluxos simulados com setTimeout, sem backend
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { bottomNavItems, defaultSearchFilters } from "../client/data/mocks";
 import { recommendProfessionals } from "../client/recommendation";
 import {
@@ -9,6 +10,7 @@ import {
   proMonthlyRevenue,
   proWeeklyRevenue,
 } from "../professional/data/mocks";
+import { keyFor, pathFor } from "../routes";
 import { initialClientForm, initialProForm } from "../shared/data/forms";
 import { mockProfessionals } from "../shared/data/professionals";
 import { startOfDay, startOfMonth } from "../shared/utils/date";
@@ -19,7 +21,11 @@ const KiraContext = createContext(null);
 // Estado global do protótipo. Mesma lógica do componente único original,
 // agora exposta via contexto para as telas por feature.
 export function KiraProvider({ children }) {
-  const [screen, setScreen] = useState("splash");
+  // A tela atual vem da URL; setScreen(chave) navega para a rota da tela (botão voltar do navegador funciona).
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const screen = keyFor(pathname) ?? "splash";
+  const setScreen = useCallback((key) => navigate(pathFor(key)), [navigate]);
   const [accountType, setAccountType] = useState(null);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
