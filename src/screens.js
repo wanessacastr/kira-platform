@@ -1,4 +1,4 @@
-// Mapa screen → tela (navegação por estado, sem router) · API: nenhuma
+// Mapa chave da tela → componente (as URLs ficam em routes.js) · API: nenhuma
 import ClientAccountSecurityScreen from "./client/screens/ClientAccountSecurityScreen";
 import ClientAddressScreen from "./client/screens/ClientAddressScreen";
 import ClientAgendaDetailScreen from "./client/screens/ClientAgendaDetailScreen";
@@ -53,7 +53,7 @@ import LoginScreen from "./shared/screens/LoginScreen";
 import SignupScreen from "./shared/screens/SignupScreen";
 import SplashScreen from "./shared/screens/SplashScreen";
 
-// Mapa `screen` -> tela. Mesma navegação por estado do protótipo original.
+// Mapa `screen` -> tela. A navegação usa as rotas de routes.js e AppRoutes.jsx.
 export const screens = {
   splash: SplashScreen,
   login: LoginScreen,

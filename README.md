@@ -4,7 +4,7 @@ Kira é uma plataforma inteligente de agendamento e gestão de serviços, criada
 
 ## Stack
 
-Vite + React (JavaScript/JSX) e lucide-react. Navegação por estado `screen`, sem router.
+Vite + React (JavaScript/JSX) e lucide-react. React Router (`/cliente/*`, `/profissional/*`).
 
 ## Como rodar
 
@@ -23,7 +23,9 @@ npm test         # Vitest
 src/
   main.jsx                 entrada
   App.jsx                  moldura do celular + atalhos de tela (dev)
-  screens.js               mapa screen -> tela
+  routes.js                tabela chave da tela -> URL
+  AppRoutes.jsx            rotas e layouts
+  screens.js               mapa chave -> componente da tela
   context/KiraContext.jsx  estado e ações globais (useKira)
   shared/                  tema, tokens (styles/), utils, dados e componentes comuns (primitives, NavBar)
   client/                  lado cliente (telas, componentes, mocks, recomendação)

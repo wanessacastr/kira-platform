@@ -4,7 +4,7 @@
 
 Protótipo front-end em Vite + React. Não há backend: todo dado vem de mocks e todo "carregamento" é simulado com `setTimeout`.
 
-- **Navegação:** estado `screen` no `KiraContext`; `src/screens.js` liga cada chave a uma tela.
+- **Navegação:** React Router. `src/routes.js` tem a tabela chave → URL, `src/screens.js` liga a chave ao componente e `src/AppRoutes.jsx` monta as rotas. `/cliente/*` e `/profissional/*` têm layout próprio (`ClientLayout`, `ProLayout`) que bloqueia o tipo de conta errado; sem conta escolhida, as duas áreas ficam livres (modo protótipo). `setScreen(chave)` do `KiraContext` navega para a rota.
 - **Estado:** `src/context/KiraContext.jsx` expõe estado e ações pelo hook `useKira()`.
 - **Design system:** valores visuais ficam em `src/shared/styles/tokens.css` (cor, espaço, raio, sombra, tipografia). `shared/theme.js` aponta para essas variáveis e `shared/components/primitives.jsx` traz os blocos de UI. Cor, fonte e raio fixos são barrados pelo lint.
 - **Acessibilidade:** controles clicáveis são `<button>`; campos usam `Field` (rótulo, erro e id ligados); modais fecham com Esc; textos seguem contraste AA (`--color-primary-text`). As regras `jsx-a11y` do lint são erros.
