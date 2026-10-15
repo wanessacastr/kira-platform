@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-Front-end em Vite + React que consome o kira-backend (Spring Boot). A URL vem de `VITE_API_URL` (padrão `http://localhost:8081`). O app não tem dados de exemplo: sem backend no ar, as telas mostram o estado de erro com "Tentar novamente".
+Front-end em Vite + React que consome o kira-backend (Spring Boot). Em desenvolvimento as chamadas vão para `/api` na origem do app e o proxy do Vite repassa ao backend (`VITE_API_PROXY`, padrão `http://localhost:8081`), sem CORS. No build, a URL vem de `VITE_API_URL`. O app não tem dados de exemplo: sem backend no ar, as telas mostram o estado de erro com "Tentar novamente".
 
 - **Navegação:** React Router. `src/routes.js` tem a tabela chave → URL, `src/screens.js` liga a chave ao componente e `src/AppRoutes.jsx` monta as rotas. `/cliente/*` e `/profissional/*` têm layout próprio (`ClientLayout`, `ProLayout`) que bloqueia o tipo de conta errado; sem conta escolhida, as duas áreas ficam livres (modo protótipo). `setScreen(chave)` do `useSession()` navega para a rota.
 - **Estado:** `src/context/` tem um contexto por assunto (`useSession`, `useSignup`, `useSearch`, `useScheduling`, `useTryOn`, `useProDashboard`), reunidos em `AppProviders`. Só dado que sobrevive à troca de tela mora no contexto; estado de uma tela só (modal aberto, carregando, aba) fica na própria tela e volta ao início ao sair dela.

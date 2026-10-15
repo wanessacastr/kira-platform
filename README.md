@@ -8,10 +8,9 @@ Vite + React (JavaScript/JSX) e lucide-react. React Router (`/cliente/*`, `/prof
 
 ## Como rodar
 
-O app consome o [kira-backend](../kira-backend) (Spring Boot, porta 8081 por padrão). Suba o backend antes e, se ele estiver em outro endereço, crie um `.env` a partir de `.env.example`:
+O app consome o [kira-backend](../kira-backend) (Spring Boot, porta 8081 por padrão). Suba o backend antes. Em desenvolvimento o Vite repassa `/api` ao backend (proxy em `vite.config.js`), então não há CORS em nenhuma porta. Para outro endereço do backend ou para o build de produção, veja `.env.example`.
 
 ```bash
-cp .env.example .env   # VITE_API_URL=http://localhost:8081
 npm install
 npm run dev      # desenvolvimento (http://localhost:5173)
 npm run build    # build de produção em dist/

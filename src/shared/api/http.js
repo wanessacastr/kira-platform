@@ -1,7 +1,13 @@
 // Cliente HTTP do kira-backend: URL base, token Bearer, renovação do token e erros · API: kira-backend (VITE_API_URL)
 import { ApiError } from "./contract";
 
-export const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:8081").replace(/\/$/, "");
+// Em desenvolvimento fica vazio: as chamadas vão para /api na origem do app e o proxy do Vite
+// repassa ao backend (vite.config.js). No build, VITE_API_URL aponta para o backend.
+export const API_URL = (import.meta.env.VITE_API_URL ?? (import.meta.env.DEV ? "" : "http://localhost:8081")).replace(
+  /\/$/,
+  "",
+);
+const baseUrl = () => API_URL || globalThis.location?.origin || "http://localhost";
 
 const STORAGE_KEY = "kira.auth";
 
@@ -41,7 +47,7 @@ const toApiError = async (res) => {
 };
 
 const send = (path, { method = "GET", body, query, auth = true } = {}) => {
-  const url = new URL(`${API_URL}${path}`);
+  const url = new URL(`${baseUrl()}${path}`);
   Object.entries(query ?? {}).forEach(([k, v]) => v != null && url.searchParams.set(k, v));
   const headers = { Accept: "application/json" };
   if (body !== undefined) headers["Content-Type"] = "application/json";

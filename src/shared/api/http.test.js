@@ -1,7 +1,7 @@
 // Testes do cliente HTTP: token Bearer, renovação no 401 e erros do backend · fetch simulado
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ApiError } from "./contract";
-import { API_URL, authStore, request } from "./http";
+import { authStore, request } from "./http";
 
 const json = (status, body) => new Response(body === undefined ? null : JSON.stringify(body), { status });
 
@@ -22,7 +22,7 @@ describe("request", () => {
     vi.stubGlobal("fetch", fetch);
     expect(await request("/api/studios", { query: { cidade: "Goiânia", vazio: null } })).toEqual([{ id: 1 }]);
     const [url, init] = fetch.mock.calls[0];
-    expect(String(url)).toBe(`${API_URL}/api/studios?cidade=Goi%C3%A2nia`);
+    expect(String(url)).toMatch(/\/api\/studios\?cidade=Goi%C3%A2nia$/);
     expect(init.headers.Authorization).toBe("Bearer t1");
   });
 
