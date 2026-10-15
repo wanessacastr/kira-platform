@@ -8,7 +8,10 @@ Vite + React (JavaScript/JSX) e lucide-react. React Router (`/cliente/*`, `/prof
 
 ## Como rodar
 
+O app consome o [kira-backend](../kira-backend) (Spring Boot, porta 8081 por padrão). Suba o backend antes e, se ele estiver em outro endereço, crie um `.env` a partir de `.env.example`:
+
 ```bash
+cp .env.example .env   # VITE_API_URL=http://localhost:8081
 npm install
 npm run dev      # desenvolvimento (http://localhost:5173)
 npm run build    # build de produção em dist/
@@ -27,16 +30,16 @@ src/
   AppRoutes.jsx            rotas e layouts
   screens.js               mapa chave -> componente da tela
   context/                 estado por assunto: sessão, cadastro, busca, agendamento, Provador e painel
-  shared/api/              serviços (hoje mock) atrás de um contrato pronto para API real
+  shared/api/              cliente HTTP do kira-backend, conversão de dados e contrato
   shared/                  tema, tokens (styles/), utils, dados e componentes comuns (primitives, NavBar)
-  client/                  lado cliente (telas, componentes, mocks, recomendação)
-  professional/            lado profissional (telas, componentes, mocks)
+  client/                  lado cliente (telas, componentes, hooks de dados, recomendação)
+  professional/            lado profissional (telas, componentes, métricas do painel)
 ```
 
 Cada arquivo de `src/` começa com uma legenda de uma linha: o que faz, de onde vêm os dados e qual API usa.
 
 ## Documentação
 
-- [Arquitetura e integrações](docs/ARQUITETURA.md): o que roda em cada API, o que é mock e o que é futuro
+- [Arquitetura e integrações](docs/ARQUITETURA.md): o que vem do backend, o que ainda não tem API e o que é futuro
 - [Como contribuir](CONTRIBUTING.md): commits, branches e PRs
 - [Histórico de mudanças](CHANGELOG.md)

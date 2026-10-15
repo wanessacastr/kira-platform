@@ -1,13 +1,17 @@
-// Agenda do profissional com calendário · mock
+// Agenda do profissional com calendário · API: kira-backend (GET /api/agendamentos/empresa/{id})
 import { useState } from "react";
 import { Calendar, Clock } from "lucide-react";
 import { useProDashboard } from "../../context/ProDashboardContext";
 import { useSession } from "../../context/SessionContext";
+import { errorMessage } from "../../shared/api";
 import { CalendarHeader, CalendarMonth } from "../../shared/components/Calendar";
+import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { startOfDay } from "../../shared/utils/date";
 import { ProBottomNav } from "../components/ProBottomNav";
-import { proAgendaMock } from "../data/mocks";
+import { statusOf } from "../../shared/data/appointments";
+import { useBusinessData } from "../hooks/useBusinessData";
+import { appointmentsOn } from "../utils/metrics";
 
 // "Minha agenda" do profissional — reaproveita o CalendarHeader/CalendarMonth
 // já existentes (genéricos, recebidos por props), só com estado próprio.
@@ -20,9 +24,8 @@ export default function ProAgendaDashScreen() {
     changeProMonth(delta);
     setProMonthAnimKey((k) => k + 1);
   };
-  const getProDayAppointments = (date) =>
-    proAgendaMock[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`] || [];
-  const dayAppointments = getProDayAppointments(proSelectedDate);
+  const business = useBusinessData();
+  const dayAppointments = appointmentsOn(business.appointments, proSelectedDate);
   const canGoPrev =
     proViewMonth.getFullYear() > today.getFullYear() ||
     (proViewMonth.getFullYear() === today.getFullYear() && proViewMonth.getMonth() > today.getMonth());
@@ -78,7 +81,14 @@ export default function ProAgendaDashScreen() {
         >
           Atendimentos de {proSelectedDate.toLocaleDateString("pt-BR", { day: "2-digit", month: "long" })}
         </h2>
-        {dayAppointments.length === 0 ? (
+        {business.loading ? (
+          <SkeletonLoading count={2} />
+        ) : business.error ? (
+          <ErrorState
+            onRetry={business.retry}
+            message={errorMessage(business.error, "Não foi possível carregar a agenda.")}
+          />
+        ) : dayAppointments.length === 0 ? (
           <div
             style={{
               display: "flex",
@@ -105,7 +115,7 @@ export default function ProAgendaDashScreen() {
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
             {dayAppointments.map((a) => (
               <div
-                key={`${a.time}-${a.client}`}
+                key={a.id}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -140,7 +150,7 @@ export default function ProAgendaDashScreen() {
                       margin: 0,
                     }}
                   >
-                    {a.client}
+                    {a.clientName}
                   </p>
                   <p
                     style={{
@@ -151,6 +161,7 @@ export default function ProAgendaDashScreen() {
                     }}
                   >
                     {a.time} · {a.service}
+                    {a.staffName ? ` · ${a.staffName}` : ""}
                   </p>
                 </div>
                 <span
@@ -158,10 +169,10 @@ export default function ProAgendaDashScreen() {
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-xs)",
                     fontWeight: 700,
-                    color: a.status === "confirmado" ? colors.primaryText : colors.accent,
+                    color: statusOf(a).color,
                   }}
                 >
-                  {a.status === "confirmado" ? "✓ Confirmado" : "Aguardando"}
+                  {statusOf(a).label}
                 </span>
               </div>
             ))}

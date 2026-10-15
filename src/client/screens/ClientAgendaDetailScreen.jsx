@@ -1,29 +1,59 @@
-// Detalhe do agendamento + botão de segurança · mock · denúncia: futura POST /api/denuncias
+// Detalhe do agendamento, cancelamento e botão de segurança · API: kira-backend (agendamentos) · denúncia: futura POST /api/denuncias
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MessageCircle, XCircle } from "lucide-react";
 import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
 import { ReportButton } from "../../shared/components/Safety";
+import { api, errorMessage } from "../../shared/api";
+import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/ui";
-import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody } from "../../shared/theme";
-import { appointmentsMock } from "../data/mocks";
+import { statusOf } from "../../shared/data/appointments";
+import { ProPhoto } from "../components/ProfessionalCards";
+import { useMyAppointments, useMyReviews } from "../hooks/useProfessionals";
 
 export default function ClientAgendaDetailScreen() {
   const { selectedAppointmentId } = useScheduling();
   const { setScreen } = useSession();
-  const appointment = appointmentsMock.find((a) => a.id === selectedAppointmentId) || appointmentsMock[0];
-  const pro = mockProfessionals.find((p) => p.id === appointment.proId) || mockProfessionals[0];
+  const queryClient = useQueryClient();
+  const appointments = useMyAppointments();
+  const reviews = useMyReviews();
+  const cancel = useMutation({
+    mutationFn: () => api.appointments.cancel(selectedAppointmentId),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["appointments"] }),
+  });
+  const appointment = appointments.data?.find((a) => a.id === selectedAppointmentId);
+  if (!appointment) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
+        <Header onBack={() => setScreen("clientAgenda")} />
+        <div style={{ padding: "0 var(--space-24) var(--space-32)" }}>
+          {appointments.isLoading ? (
+            <SkeletonLoading count={2} />
+          ) : (
+            <ErrorState
+              onRetry={appointments.isError ? appointments.refetch : () => setScreen("clientAgenda")}
+              message={
+                appointments.isError
+                  ? errorMessage(appointments.error, "Não foi possível carregar o agendamento.")
+                  : "Agendamento não encontrado."
+              }
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+  const pro = { name: appointment.proName, photo: null };
   const canCancel = appointment.status === "proximo";
+  const rated = reviews.data?.some((r) => r.appointmentId === appointment.id) ?? true;
+  const status = statusOf(appointment);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientAgenda")} />
       <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "var(--space-12)", marginBottom: "var(--space-18)" }}>
-          <img
-            src={pro.photo}
-            alt={pro.name}
-            style={{ width: 60, height: 60, borderRadius: "var(--radius-2xl)", objectFit: "cover" }}
-          />
+          <ProPhoto pro={pro} size={60} radius="var(--radius-2xl)" />
           <div>
             <p
               style={{
@@ -44,7 +74,7 @@ export default function ClientAgendaDetailScreen() {
                 margin: 0,
               }}
             >
-              {pro.role}
+              {appointment.staffName ? `com ${appointment.staffName}` : ""}
             </p>
           </div>
         </div>
@@ -63,28 +93,30 @@ export default function ClientAgendaDetailScreen() {
         >
           {[
             ["Serviço", appointment.service],
-            ["Data", appointment.date],
+            ["Data", appointment.start.toLocaleDateString("pt-BR")],
             ["Horário", appointment.time],
-            ["Endereço", appointment.place],
-            ["Preço", `R$ ${appointment.price.toFixed(2)}`],
+            ["Duração", appointment.durationMinutes ? `${appointment.durationMinutes} min` : ""],
             ["Pagamento", appointment.payment],
-          ].map(([label, value]) => (
-            <div key={label} style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
-                {label}
-              </span>
-              <span
-                style={{
-                  fontFamily: fontBody,
-                  fontSize: "var(--font-size-xs)",
-                  fontWeight: 600,
-                  color: colors.foreground,
-                }}
-              >
-                {value}
-              </span>
-            </div>
-          ))}
+            ["Observações", appointment.notes],
+          ]
+            .filter(([, value]) => value)
+            .map(([label, value]) => (
+              <div key={label} style={{ display: "flex", justifyContent: "space-between" }}>
+                <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                  {label}
+                </span>
+                <span
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: "var(--font-size-xs)",
+                    fontWeight: 600,
+                    color: colors.foreground,
+                  }}
+                >
+                  {value}
+                </span>
+              </div>
+            ))}
           <div
             style={{
               display: "flex",
@@ -102,14 +134,10 @@ export default function ClientAgendaDetailScreen() {
                 fontFamily: fontBody,
                 fontSize: "var(--font-size-xs)",
                 fontWeight: 700,
-                color: appointment.status === "cancelado" ? colors.destructiveText : colors.primaryText,
+                color: status.color,
               }}
             >
-              {appointment.status === "proximo"
-                ? "✓ Confirmado"
-                : appointment.status === "concluido"
-                  ? "Concluído"
-                  : "Cancelado"}
+              {status.label}
             </span>
           </div>
         </div>
@@ -118,12 +146,26 @@ export default function ClientAgendaDetailScreen() {
           <SecondaryButton onClick={() => {}}>
             <MessageCircle size={15} /> Conversar com {pro.name.split(" ")[0]}
           </SecondaryButton>
-          {appointment.status === "concluido" && !appointment.rated && (
+          {appointment.status === "concluido" && !rated && (
             <PrimaryButton onClick={() => {}}>Avaliar atendimento</PrimaryButton>
+          )}
+          {cancel.isError && (
+            <p
+              role="alert"
+              style={{
+                fontFamily: fontBody,
+                fontSize: "var(--font-size-xs)",
+                color: colors.destructiveText,
+                margin: 0,
+              }}
+            >
+              {errorMessage(cancel.error, "Não foi possível cancelar agora.")}
+            </p>
           )}
           {canCancel && (
             <button
-              onClick={() => {}}
+              disabled={cancel.isPending}
+              onClick={() => cancel.mutate()}
               style={{
                 width: "100%",
                 padding: "var(--space-12)",
@@ -141,7 +183,7 @@ export default function ClientAgendaDetailScreen() {
                 gap: "var(--space-6)",
               }}
             >
-              <XCircle size={15} /> Cancelar agendamento
+              <XCircle size={15} /> {cancel.isPending ? "Cancelando..." : "Cancelar agendamento"}
             </button>
           )}
           <ReportButton agendamentoId={appointment.id} papel="CLIENTE" />

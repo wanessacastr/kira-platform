@@ -4,6 +4,19 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Alterado
+
+- Os dados falsos saíram do app: telas do cliente e do profissional usam o kira-backend (`VITE_API_URL`).
+- Login, cadastro de cliente e de profissional, agendamento e cancelamento chamam a API de verdade, com renovação do token.
+- Busca, Home, ranking e perfil do profissional usam os estúdios, serviços e avaliações do backend.
+- Painel, agenda, financeiro e analytics do profissional são calculados a partir dos agendamentos reais.
+- CEP consultado no ViaCEP.
+
+### Removido
+
+- Adaptador de mock, arquivos `data/mocks.js` e `shared/data/professionals.js`, horários gerados (`getDaySchedule`) e o mapa ilustrativo da Home.
+- Saldo, próximo repasse e gift cards de exemplo, que não têm backend.
+
 ## [0.6.0] - 2026-10-14
 
 ### Adicionado

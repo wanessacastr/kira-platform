@@ -1,15 +1,22 @@
-// Login simulado, sem autenticação real · API: nenhuma
+// Login com e-mail e senha · API: kira-backend (POST /api/auth/login)
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
+import { errorMessage } from "../api";
 import { Field, Header, PrimaryButton, inputStyle } from "../components/ui";
 import { colors, fontBody, fontDisplay } from "../theme";
 
 export default function LoginScreen() {
-  const { setScreen } = useSession();
+  const { login, setScreen } = useSession();
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const submit = useMutation({
+    mutationFn: () => login({ email: loginEmail, password: loginPassword }),
+    onSuccess: (session) => setScreen(session.tipo === "EMPRESA" ? "proHome" : "clientHome"),
+  });
+  const canSubmit = loginEmail.trim() && loginPassword && !submit.isPending;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
       <Header onBack={() => setScreen("splash")} />
@@ -72,7 +79,22 @@ export default function LoginScreen() {
             </button>
           </div>
         </Field>
-        <PrimaryButton onClick={() => setScreen("home")}>Entrar</PrimaryButton>
+        {submit.isError && (
+          <p
+            role="alert"
+            style={{
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-xs)",
+              color: colors.destructiveText,
+              margin: "0 0 var(--space-12)",
+            }}
+          >
+            {errorMessage(submit.error, "Não foi possível entrar agora.")}
+          </p>
+        )}
+        <PrimaryButton disabled={!canSubmit} onClick={() => submit.mutate()}>
+          {submit.isPending ? "Entrando..." : "Entrar"}
+        </PrimaryButton>
         <p
           style={{
             textAlign: "center",
