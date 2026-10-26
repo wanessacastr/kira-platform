@@ -30,6 +30,7 @@ export default function ClientSchedulingScreen() {
     selectedProId,
     setAgendaTab,
     setBookedSlot,
+    setSelectedAppointmentId,
     setScheduleTime,
     viewMonth,
   } = useScheduling();
@@ -96,7 +97,7 @@ export default function ClientSchedulingScreen() {
                 margin: 0,
               }}
             >
-              Agendamento confirmado!
+              Horário reservado!
             </h1>
             <p
               style={{
@@ -114,12 +115,20 @@ export default function ClientSchedulingScreen() {
             >
               <PrimaryButton
                 onClick={() => {
+                  setSelectedAppointmentId(null);
+                  setScreen("clientPaymentProcessing");
+                }}
+              >
+                Pagar com Pix
+              </PrimaryButton>
+              <SecondaryButton
+                onClick={() => {
                   setAgendaTab("proximo");
                   setScreen("clientAgenda");
                 }}
               >
                 Ver na agenda
-              </PrimaryButton>
+              </SecondaryButton>
               <SecondaryButton onClick={() => setScreen("clientHome")}>Voltar para o início</SecondaryButton>
             </div>
           </div>

@@ -28,6 +28,7 @@ export const clientPaths = area("/cliente", [
   ["clientAgenda", "agenda"],
   ["clientAgendaDetail", "agenda/detalhe"],
   ["clientBookingTracking", "agenda/acompanhar"],
+  ["clientPaymentProcessing", "agenda/pagamento"],
   ["clientProfile", "perfil"],
   ["clientProfileEdit", "perfil/editar"],
   ["clientAccountSecurity", "perfil/seguranca"],
