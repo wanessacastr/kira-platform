@@ -73,6 +73,7 @@ function Prototype() {
         ["Perfil: hist. pagamentos", "clientPaymentHistory"],
         ["Perfil: cupons", "clientCoupons"],
         ["Perfil: ajuda", "clientHelpSupport"],
+        ["Atendimento (chat)", "clientChat"],
         ["Perfil: avaliações", "clientReviews"],
         ["Perfil: favoritos", "clientFavorites"],
         ["Perfil: histórico", "clientHistory"],

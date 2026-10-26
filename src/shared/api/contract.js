@@ -35,6 +35,8 @@
  *   futuro: ViaCEP ou GET /enderecos/:cep
  * @property {{ save: (data: object) => Promise<{ ok: true }> }} profile
  *   futuro: PUT /clientes/me
+ * @property {import("./chatContract").ChatGateway} chat
+ *   futuro: webhook e eventos do n8n (ver chatContract.js)
  */
 
 export class ApiError extends Error {

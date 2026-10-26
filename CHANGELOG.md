@@ -4,6 +4,12 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado
+
+- Chat de atendimento em `/cliente/atendimento` com dados simulados: respostas da nossa inteligência artificial,
+  cartão de profissional, sugestão de horário, transferência para atendente, falha de envio e modo sem conexão.
+- Contrato `api.chat` pronto para conectar ao n8n (mensagens, transferência e eventos).
+
 ## [0.6.0] - 2026-10-14
 
 ### Adicionado
