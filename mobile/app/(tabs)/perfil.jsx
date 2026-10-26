@@ -1,6 +1,16 @@
 // Perfil do cliente: dados básicos e menu (ajuda e suporte abre o atendimento) · mock
 import { useRouter } from "expo-router";
-import { Bookmark, Calendar, CreditCard, HelpCircle, LogOut, ShieldCheck, Star, User } from "lucide-react-native";
+import {
+  Bookmark,
+  Calendar,
+  CreditCard,
+  HelpCircle,
+  LogOut,
+  ShieldAlert,
+  ShieldCheck,
+  Star,
+  User,
+} from "lucide-react-native";
 import { ScrollView, View } from "react-native";
 import { Card, GradientBox, Heading, ListRow, Stack, Text } from "../../src/components/primitives";
 import { Screen } from "../../src/components/ui";
@@ -19,7 +29,10 @@ const sections = (router) => [
   { title: "Pagamentos", items: [{ label: "Formas de pagamento", icon: CreditCard }] },
   {
     title: "Privacidade e segurança",
-    items: [{ label: "Consentimentos LGPD", icon: ShieldCheck, onPress: () => router.push("/consentimentos") }],
+    items: [
+      { label: "Consentimentos LGPD", icon: ShieldCheck, onPress: () => router.push("/consentimentos") },
+      { label: "Segurança e denúncia", icon: ShieldAlert, onPress: () => router.push("/seguranca") },
+    ],
   },
   {
     title: "Suporte",

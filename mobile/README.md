@@ -31,9 +31,14 @@ Provador virtual: referência, foto, consentimento LGPD, geração da prévia (a
 erro), profissionais compatíveis e, em Perfil, Consentimentos LGPD (apagar fotos e revogar). Fala com `api.tryOn`; hoje
 é um mock que devolve a própria foto.
 
+Segurança e denúncia: reportar problema (anônimo, entra na fila) e emergência (190 primeiro, registro na Kira sem
+anonimato e com suspensão preventiva do perfil). Entradas: Perfil, Segurança e denúncia, e o perfil da profissional.
+Fala com `api.reports`; hoje é um mock que devolve o protocolo (o primeiro envio falha de propósito).
+
 ## O que falta converter
 
-Cadastro de cliente e profissional, agenda, denúncia e emergência, e toda a área da profissional.
+Cadastro de cliente e profissional, agenda e toda a área da profissional. O painel da equipe que analisa as denúncias
+ainda não existe.
 
 ## Regras do projeto
 

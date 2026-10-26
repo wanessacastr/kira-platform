@@ -39,6 +39,8 @@
  *   futuro: webhook e eventos do n8n (ver chatContract.js)
  * @property {import("./tryOnContract").TryOnGateway} tryOn
  *   futuro: API da Kira e Cloudflare Workers AI (ver tryOnContract.js)
+ * @property {import("./reportContract").ReportGateway} reports
+ *   futuro: POST /api/denuncias (ver reportContract.js)
  */
 
 export class ApiError extends Error {

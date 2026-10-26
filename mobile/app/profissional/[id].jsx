@@ -2,7 +2,7 @@
 import { useScheduling } from "@kira/context/SchedulingContext";
 import { mockProfessionals } from "@kira/shared/data/professionals";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { ArrowLeft, BadgeCheck, Bookmark, MapPin, Star } from "lucide-react-native";
+import { ArrowLeft, BadgeCheck, Bookmark, Flag, MapPin, Star } from "lucide-react-native";
 import { Image, Pressable, ScrollView, View } from "react-native";
 import { Badge, Button, Chip, GradientBox, Heading, Stack, Text } from "../../src/components/primitives";
 import { Screen } from "../../src/components/ui";
@@ -130,6 +130,16 @@ export default function ProfessionalProfileScreen() {
               ))}
             </View>
           </Stack>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => router.push(`/denunciar?professionalId=${pro.id}`)}
+            style={{ flexDirection: "row", alignItems: "center", gap: 8, minHeight: 44 }}
+          >
+            <Flag size={15} color={colors.mutedForeground} />
+            <Text size="sm" weight={600} color={colors.mutedForeground}>
+              Reportar este perfil
+            </Text>
+          </Pressable>
         </View>
       </ScrollView>
       <View
