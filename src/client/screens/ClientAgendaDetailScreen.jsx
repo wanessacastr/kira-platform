@@ -1,4 +1,5 @@
-// Detalhe do agendamento, cancelamento e botão de segurança · API: kira-backend (agendamentos) · denúncia: futura POST /api/denuncias
+// Detalhe do agendamento, cancelamento, avaliação e botão de segurança · API: kira-backend (agendamentos, avaliações) · denúncia: futura POST /api/denuncias
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MessageCircle, XCircle } from "lucide-react";
 import { useScheduling } from "../../context/SchedulingContext";
@@ -9,7 +10,8 @@ import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody } from "../../shared/theme";
 import { statusOf } from "../../shared/data/appointments";
-import { ProPhoto } from "../components/ProfessionalCards";
+import { ProPhoto, RatingStars } from "../components/ProfessionalCards";
+import { ReviewForm } from "../components/ReviewForm";
 import { useMyAppointments, useMyReviews } from "../hooks/useProfessionals";
 
 export default function ClientAgendaDetailScreen() {
@@ -18,6 +20,7 @@ export default function ClientAgendaDetailScreen() {
   const queryClient = useQueryClient();
   const appointments = useMyAppointments();
   const reviews = useMyReviews();
+  const [reviewing, setReviewing] = useState(false);
   const cancel = useMutation({
     mutationFn: () => api.appointments.cancel(selectedAppointmentId),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["appointments"] }),
@@ -46,7 +49,9 @@ export default function ClientAgendaDetailScreen() {
   }
   const pro = { name: appointment.proName, photo: null };
   const canCancel = appointment.status === "proximo";
-  const rated = reviews.data?.some((r) => r.appointmentId === appointment.id) ?? true;
+  const myReview = reviews.data?.find((r) => r.appointmentId === appointment.id);
+  // Enquanto as avaliações carregam, não oferece avaliar (evita avaliar duas vezes)
+  const canReview = appointment.status === "concluido" && reviews.isSuccess && !myReview;
   const status = statusOf(appointment);
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
@@ -146,9 +151,49 @@ export default function ClientAgendaDetailScreen() {
           <SecondaryButton onClick={() => {}}>
             <MessageCircle size={15} /> Conversar com {pro.name.split(" ")[0]}
           </SecondaryButton>
-          {appointment.status === "concluido" && !rated && (
-            <PrimaryButton onClick={() => {}}>Avaliar atendimento</PrimaryButton>
+          {myReview && (
+            <div
+              style={{
+                padding: "var(--space-14)",
+                borderRadius: "var(--radius-2xl)",
+                border: `1px solid ${colors.border}`,
+                background: colors.card,
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <p
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: "var(--font-size-xs)",
+                    fontWeight: 700,
+                    color: colors.foreground,
+                    margin: 0,
+                  }}
+                >
+                  Sua avaliação
+                </p>
+                <RatingStars value={myReview.rating} size={14} />
+              </div>
+              {myReview.text && (
+                <p
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: "var(--font-size-xs)",
+                    color: colors.mutedForeground,
+                    margin: "var(--space-6) 0 0",
+                  }}
+                >
+                  {myReview.text}
+                </p>
+              )}
+            </div>
           )}
+          {canReview &&
+            (reviewing ? (
+              <ReviewForm appointmentId={appointment.id} onCancel={() => setReviewing(false)} />
+            ) : (
+              <PrimaryButton onClick={() => setReviewing(true)}>Avaliar atendimento</PrimaryButton>
+            ))}
           {cancel.isError && (
             <p
               role="alert"

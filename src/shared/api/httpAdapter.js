@@ -115,6 +115,14 @@ export const httpAdapter = {
       toAppointment(await request(`/api/agendamentos/${id}/cancelar/empresa`, { method: "PATCH" })),
   },
   reviews: {
+    // Só atendimento concluído e ainda não avaliado (o backend confere e devolve a mensagem)
+    create: async ({ appointmentId, rating, text }) =>
+      toReview(
+        await request("/api/avaliacoes/cliente", {
+          method: "POST",
+          body: { agendamentoId: appointmentId, nota: rating, comentario: text.trim() || null },
+        }),
+      ),
     listMine: async () => {
       const list = await request(`/api/avaliacoes/cliente/${currentUserId()}`);
       return list.map(toReview).filter((r) => r.author === "CLIENTE");
