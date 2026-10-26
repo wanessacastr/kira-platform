@@ -56,7 +56,7 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 
 ### Problemas no backend encontrados na integração
 
-- **Chat sem checagem de acesso:** `GET /api/mensagens/agendamento/{id}` e `PATCH /api/mensagens/{id}/lida` não conferem se quem pede é a cliente ou o estúdio do agendamento. Qualquer pessoa logada lê qualquer conversa. Precisa corrigir antes de o chat ir para o ar.
+- **Chat sem checagem de acesso (corrigido na `fix/conversa-so-participantes`):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`.
 - **Lista de comissões:** `GET /api/comissoes/funcionaria/{id}` devolve a entidade `ComissaoAgendamento` direto, com relações LAZY e `open-in-view: false`. A tendência é dar erro 500 quando houver comissão. O app usa só o total (`/total`) até o backend devolver um DTO.
 - **Painel conta só atendimentos concluídos:** o `/dashboard` não traz ranking de serviços nem avaliações. As telas de Analytics e Financeiro continuam precisando dos agendamentos para esses números.
 
@@ -67,5 +67,5 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 
 ## Para tudo funcionar de verdade
 
-1. **O backend precisa rodar com as branches novas.** A versão antiga, sem o id no login, faz as telas que precisam de login falharem. Para ter tudo, é preciso juntar a `feat/login-devolve-id` e a `feat/remarcar-antecedencia`.
+1. **O backend precisa rodar com as branches novas.** A versão antiga, sem o id no login, faz as telas que precisam de login falharem. Para ter tudo, é preciso juntar a `feat/login-devolve-id`, a `feat/remarcar-antecedencia` e a `fix/conversa-so-participantes`. A `main` do backend sozinha não compila: o `AgendamentoService` usa um método do repositório que só existe na `feat/remarcar-antecedencia`.
 2. **E-mail:** faltam `MAIL_USERNAME` e `MAIL_PASSWORD` no `.env` do backend. Sem eles, o e-mail de "esqueci a senha" e o de boas-vindas não chegam.
