@@ -2,13 +2,13 @@
 import { ApiError } from "./contract";
 import { BOOKING_ERRORS, BOOKING_STEPS, PAYMENT_STATES } from "./bookingContract";
 
-const defaultTiming = { latency: 400, step: 6000, review: 5000 };
+const defaultTiming = { latency: 400, step: 6000 };
 
 // etapas que avançam sozinhas depois que o pagamento é confirmado
 const AFTER_PAYMENT = [BOOKING_STEPS.READY, BOOKING_STEPS.IN_SERVICE, BOOKING_STEPS.DONE];
 
 /**
- * @param {{ latency: number, step: number, review: number }} [timing]
+ * @param {{ latency: number, step: number }} [timing]
  * @param {{ failFirst?: boolean, amount?: number }} [options] a primeira leitura falha, para exercitar o estado de erro
  * @returns {import("./bookingContract").BookingGateway}
  */
@@ -36,7 +36,7 @@ export function createMockBookings(timing = defaultTiming, { failFirst = true, a
     }, timing.step);
   };
 
-  const open = (id) => {
+  const open = (id, meta) => {
     if (store.has(id)) return store.get(id);
     const now = new Date().toISOString();
     const entry = {
@@ -47,7 +47,7 @@ export function createMockBookings(timing = defaultTiming, { failFirst = true, a
         payment: {
           method: "pix",
           state: PAYMENT_STATES.PENDING,
-          amount,
+          amount: meta?.amount ?? amount,
           // código de exemplo: o real vem do provedor de pagamento
           pixCode: `KIRA-PIX-EXEMPLO-${id}`,
         },
@@ -61,11 +61,11 @@ export function createMockBookings(timing = defaultTiming, { failFirst = true, a
   };
 
   return {
-    get: async (id) => {
+    get: async (id, meta) => {
       await wait(timing.latency);
       reads += 1;
       if (failFirst && reads === 1) throw new ApiError(BOOKING_ERRORS.UNAVAILABLE);
-      return open(id).booking;
+      return open(id, meta).booking;
     },
     subscribe: (id, onChange) => {
       const entry = open(id);
@@ -77,14 +77,32 @@ export function createMockBookings(timing = defaultTiming, { failFirst = true, a
       const entry = store.get(id);
       if (!entry) throw new ApiError(BOOKING_ERRORS.NOT_FOUND);
       if (entry.booking.payment.state !== PAYMENT_STATES.PENDING) return entry.booking;
+      // o aviso do cliente não prova nada: o pagamento fica em conferência até a equipe ou o provedor responder
       entry.booking = { ...entry.booking, payment: { ...entry.booking.payment, state: PAYMENT_STATES.REVIEW } };
       emit(entry);
-      setTimeout(() => {
-        entry.booking = { ...entry.booking, payment: { ...entry.booking.payment, state: PAYMENT_STATES.CONFIRMED } };
-        reach(entry, BOOKING_STEPS.PAYMENT);
-        advanceAfterPayment(entry);
-      }, timing.review);
       return entry.booking;
+    },
+    retryPayment: async (id) => {
+      await wait(timing.latency);
+      const entry = store.get(id);
+      if (!entry) throw new ApiError(BOOKING_ERRORS.NOT_FOUND);
+      if (entry.booking.payment.state !== PAYMENT_STATES.FAILED) throw new ApiError(BOOKING_ERRORS.RETRY_NOT_ALLOWED);
+      entry.booking = { ...entry.booking, payment: { ...entry.booking.payment, state: PAYMENT_STATES.PENDING } };
+      emit(entry);
+      return entry.booking;
+    },
+    // faz o papel da equipe ou do provedor de pagamento; só o mock tem isso
+    dev: {
+      resolvePayment: (id, outcome) => {
+        const entry = store.get(id);
+        if (!entry || entry.booking.payment.state !== PAYMENT_STATES.REVIEW) return;
+        const state = outcome === PAYMENT_STATES.CONFIRMED ? PAYMENT_STATES.CONFIRMED : PAYMENT_STATES.FAILED;
+        entry.booking = { ...entry.booking, payment: { ...entry.booking.payment, state } };
+        if (state === PAYMENT_STATES.CONFIRMED) {
+          reach(entry, BOOKING_STEPS.PAYMENT);
+          advanceAfterPayment(entry);
+        } else emit(entry);
+      },
     },
   };
 }
