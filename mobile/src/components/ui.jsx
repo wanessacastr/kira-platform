@@ -33,7 +33,7 @@ export const ScreenHeader = ({ onBack, children }) => (
   </View>
 );
 
-export const Field = ({ label, right, ...input }) => (
+export const Field = ({ label, right, inputStyle, ...input }) => (
   <Stack gap={6}>
     <Text size="xs" weight={600} color={colors.mutedForeground}>
       {label}
@@ -53,6 +53,7 @@ export const Field = ({ label, right, ...input }) => (
           color: colors.foreground,
           fontFamily: "DMSans_400Regular",
           fontSize: 16,
+          ...inputStyle,
         }}
         {...input}
       />
