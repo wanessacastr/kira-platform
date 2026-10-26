@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "Kira",
+    "slug": "kira",
+    "version": "0.1.0",
+    "scheme": "kira",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": { "supportsTablet": false, "bundleIdentifier": "br.com.kira.app" },
+    "android": { "package": "br.com.kira.app" },
+    "web": { "bundler": "metro", "output": "single" },
+    "plugins": ["expo-router", "expo-font"]
+  }
+}
