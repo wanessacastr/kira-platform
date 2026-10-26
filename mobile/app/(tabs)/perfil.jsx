@@ -17,7 +17,10 @@ const sections = (router) => [
     ],
   },
   { title: "Pagamentos", items: [{ label: "Formas de pagamento", icon: CreditCard }] },
-  { title: "Privacidade e segurança", items: [{ label: "Consentimentos LGPD", icon: ShieldCheck }] },
+  {
+    title: "Privacidade e segurança",
+    items: [{ label: "Consentimentos LGPD", icon: ShieldCheck, onPress: () => router.push("/consentimentos") }],
+  },
   {
     title: "Suporte",
     items: [{ label: "Ajuda e suporte", icon: HelpCircle, onPress: () => router.push("/ajuda") }],

@@ -11,6 +11,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 - Contrato `api.chat` pronto para conectar ao n8n (mensagens, transferência e eventos).
 - App React Native (Expo) em `mobile/` com abertura, login, início, busca, perfil da profissional, agendamento, ajuda e o
   chat de atendimento, reaproveitando a lógica do web pelo alias `@kira`.
+- Provador virtual no app, com consentimento LGPD, prévia simulada, exclusão de fotos e revogação, e contrato
+  `api.tryOn` pronto para a API real.
 
 ## [0.6.0] - 2026-10-14
 

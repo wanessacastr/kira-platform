@@ -37,6 +37,8 @@
  *   futuro: PUT /clientes/me
  * @property {import("./chatContract").ChatGateway} chat
  *   futuro: webhook e eventos do n8n (ver chatContract.js)
+ * @property {import("./tryOnContract").TryOnGateway} tryOn
+ *   futuro: API da Kira e Cloudflare Workers AI (ver tryOnContract.js)
  */
 
 export class ApiError extends Error {
