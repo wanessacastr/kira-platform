@@ -65,6 +65,7 @@ function Prototype() {
         ["Agenda", "clientAgenda"],
         ["Agenda: detalhe", "clientAgendaDetail"],
         ["Agenda: acompanhar", "clientBookingTracking"],
+        ["Agenda: pagamento", "clientPaymentProcessing"],
         ["Perfil (menu)", "clientProfile"],
         ["Perfil: editar", "clientProfileEdit"],
         ["Perfil: segurança", "clientAccountSecurity"],
