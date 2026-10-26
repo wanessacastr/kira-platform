@@ -111,6 +111,38 @@ export const toReview = (r) => ({
 
 export const toSlotTime = (slot) => formatTime(parseLocalDateTime(slot.dataHoraInicio));
 
+// ---------- Horário de funcionamento: DisponibilidadeResponse[] ↔ semana da tela ----------
+
+// Ordem da tela (segunda primeiro); `key` é o enum DiaSemana do backend
+export const weekDays = [
+  { key: "SEGUNDA", label: "Segunda" },
+  { key: "TERCA", label: "Terça" },
+  { key: "QUARTA", label: "Quarta" },
+  { key: "QUINTA", label: "Quinta" },
+  { key: "SEXTA", label: "Sexta" },
+  { key: "SABADO", label: "Sábado" },
+  { key: "DOMINGO", label: "Domingo" },
+];
+
+const DEFAULT_HOURS = { start: "09:00", end: "18:00" };
+
+// LocalTime vem como "09:00:00"; o <input type="time"> usa "09:00"
+export const toBusinessHours = (list) => {
+  const byDay = new Map(list.map((d) => [d.diaSemana, d]));
+  return weekDays.map(({ key }) => {
+    const d = byDay.get(key);
+    return d
+      ? { day: key, open: true, start: d.horaInicio.slice(0, 5), end: d.horaFim.slice(0, 5) }
+      : { day: key, open: false, ...DEFAULT_HOURS };
+  });
+};
+
+export const toBusinessHoursRequest = (week) => ({
+  dias: week
+    .filter((d) => d.open)
+    .map((d) => ({ diaSemana: d.day, horaInicio: `${d.start}:00`, horaFim: `${d.end}:00` })),
+});
+
 // ---------- Cadastro: formulário das telas → request do backend ----------
 
 const genderToApi = {

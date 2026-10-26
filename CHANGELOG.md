@@ -4,6 +4,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado
+
+- Tela de horário de funcionamento do profissional (dias e horas em que atende), com aviso no painel enquanto nenhum dia estiver aberto.
+
 ### Alterado
 
 - Os dados falsos saíram do app: telas do cliente e do profissional usam o kira-backend (`VITE_API_URL`).

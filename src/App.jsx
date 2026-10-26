@@ -95,6 +95,7 @@ function Prototype() {
         ["Painel", "proHome"],
         ["Agenda", "proAgendaDash"],
         ["Perfil (menu)", "proProfileMenu"],
+        ["Horário", "proBusinessHours"],
         ["Financeiro", "proFinance"],
         ["Analytics", "proAnalytics"],
         ["Gift Cards", "proGiftCards"],

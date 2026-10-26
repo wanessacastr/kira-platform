@@ -60,6 +60,7 @@ export const professionalPaths = area("/profissional", [
   ["proGiftCards", "gift-cards"],
   ["proLoyalty", "fidelidade"],
   ["proSecurity", "seguranca"],
+  ["proBusinessHours", "horario"],
   ["proHelp", "ajuda"],
   ["proSearch", "buscar"],
 ]);

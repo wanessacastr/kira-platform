@@ -1,6 +1,6 @@
 // Painel: métricas, receita da semana e próximos atendimentos · API: kira-backend (agendamentos, serviços e avaliações)
 import { useState } from "react";
-import { ChevronRight, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
+import { ChevronRight, Clock, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
 import { useSignup } from "../../context/SignupContext";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
@@ -8,7 +8,7 @@ import { ProBottomNav } from "../components/ProBottomNav";
 import { errorMessage } from "../../shared/api";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { ProStatCard, RevenueBarChart } from "../components/ProWidgets";
-import { useBusinessData } from "../hooks/useBusinessData";
+import { useBusinessData, useBusinessHours } from "../hooks/useBusinessData";
 import { appointmentsOn, averageRating, revenueDelta, upcoming, weeklyRevenue } from "../utils/metrics";
 
 // "Meu painel" — visão geral do profissional: estatísticas do dia,
@@ -24,6 +24,8 @@ export default function ProHomeScreen() {
   const rating = averageRating(business.reviews);
   const nextAppointments = upcoming(business.appointments);
   const displayName = auth?.nome || pForm.name;
+  const businessHours = useBusinessHours();
+  const noBusinessHours = businessHours.data?.every((d) => !d.open) ?? false;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
@@ -49,6 +51,39 @@ export default function ProHomeScreen() {
             onRetry={business.retry}
             message={errorMessage(business.error, "Não foi possível carregar o painel.")}
           />
+        )}
+        {noBusinessHours && (
+          <button
+            type="button"
+            onClick={() => setScreen("proBusinessHours")}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-12)",
+              textAlign: "left",
+              border: `1px solid ${colors.primary}`,
+              borderRadius: "var(--radius-2xl)",
+              background: colors.card,
+              padding: "var(--space-14) var(--space-16)",
+              marginBottom: "var(--space-18)",
+              cursor: "pointer",
+              fontFamily: fontBody,
+            }}
+          >
+            <Clock size={20} style={{ color: colors.primaryText, flexShrink: 0 }} />
+            <span style={{ flex: 1 }}>
+              <span
+                style={{ display: "block", fontSize: "var(--font-size-sm)", fontWeight: 700, color: colors.foreground }}
+              >
+                Defina seu horário de funcionamento
+              </span>
+              <span style={{ display: "block", fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                Sem dias abertos, os clientes não conseguem agendar com você.
+              </span>
+            </span>
+            <ChevronRight size={16} style={{ color: colors.mutedForeground, flexShrink: 0 }} />
+          </button>
         )}
         {business.loading ? (
           <SkeletonLoading count={3} />

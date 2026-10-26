@@ -35,6 +35,7 @@ import ProDocumentScreen from "./professional/screens/ProDocumentScreen";
 import ProDoneScreen from "./professional/screens/ProDoneScreen";
 import ProFinanceScreen from "./professional/screens/ProFinanceScreen";
 import ProGiftCardsScreen from "./professional/screens/ProGiftCardsScreen";
+import ProBusinessHoursScreen from "./professional/screens/ProBusinessHoursScreen";
 import ProHelpScreen from "./professional/screens/ProHelpScreen";
 import ProHomeScreen from "./professional/screens/ProHomeScreen";
 import ProLocationScreen from "./professional/screens/ProLocationScreen";
@@ -104,6 +105,7 @@ export const screens = {
   proGiftCards: ProGiftCardsScreen,
   proLoyalty: ProLoyaltyScreen,
   proSecurity: ProSecurityScreen,
+  proBusinessHours: ProBusinessHoursScreen,
   proHelp: ProHelpScreen,
   proSearch: ProSearchScreen,
   face: FaceScreen,

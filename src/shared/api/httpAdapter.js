@@ -3,6 +3,8 @@ import { ApiError } from "./contract";
 import { authStore, request } from "./http";
 import {
   toAppointment,
+  toBusinessHours,
+  toBusinessHoursRequest,
   toClientRegistration,
   toLocalDate,
   toLocalDateTime,
@@ -124,6 +126,18 @@ export const httpAdapter = {
       const list = await request(`/api/empresas/${id}/servicos`);
       return list.map((s) => ({ id: s.id, name: s.nome, price: Number(s.preco), active: s.ativo !== false }));
     },
+  },
+  businessHours: {
+    // Dia que não vem na lista está fechado
+    getMine: async () => toBusinessHours(await request(`/api/empresas/${currentUserId()}/disponibilidade`)),
+    // PUT troca a semana inteira de uma vez
+    saveMine: async (week) =>
+      toBusinessHours(
+        await request(`/api/empresas/${currentUserId()}/disponibilidade`, {
+          method: "PUT",
+          body: toBusinessHoursRequest(week),
+        }),
+      ),
   },
   address: {
     // ViaCEP: serviço público de CEP, sem chave

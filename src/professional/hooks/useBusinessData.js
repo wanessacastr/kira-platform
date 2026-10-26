@@ -20,3 +20,6 @@ export function useBusinessData() {
     retry: () => queries.filter((q) => q.isError).forEach((q) => q.refetch()),
   };
 }
+
+// Horário de funcionamento do estúdio logado (semana inteira, segunda primeiro)
+export const useBusinessHours = () => useQuery({ queryKey: ["businessHours"], queryFn: api.businessHours.getMine });

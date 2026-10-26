@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import {
   formatRelativeDay,
   toAppointment,
+  toBusinessHours,
+  toBusinessHoursRequest,
   toClientRegistration,
   toLocalDateTime,
   toProfessional,
@@ -135,6 +137,26 @@ describe("cadastro", () => {
       dataNascimento: null,
       tipoEstabelecimento: "ESTABELECIMENTO",
       servicos: [{ nome: "Corte", preco: "80", duracao: "45" }],
+    });
+  });
+});
+
+describe("horário de funcionamento", () => {
+  it("monta a semana a partir da segunda, com os dias ausentes fechados", () => {
+    const week = toBusinessHours([
+      { id: "d1", diaSemana: "SABADO", horaInicio: "08:00:00", horaFim: "12:00:00" },
+      { id: "d2", diaSemana: "SEGUNDA", horaInicio: "09:30:00", horaFim: "18:00:00" },
+    ]);
+    expect(week.map((d) => d.day)).toEqual(["SEGUNDA", "TERCA", "QUARTA", "QUINTA", "SEXTA", "SABADO", "DOMINGO"]);
+    expect(week[0]).toEqual({ day: "SEGUNDA", open: true, start: "09:30", end: "18:00" });
+    expect(week[1]).toEqual({ day: "TERCA", open: false, start: "09:00", end: "18:00" });
+    expect(week[5]).toEqual({ day: "SABADO", open: true, start: "08:00", end: "12:00" });
+  });
+
+  it("envia só os dias abertos, com segundos no horário", () => {
+    const week = toBusinessHours([]).map((d) => (d.day === "QUARTA" ? { ...d, open: true, end: "17:30" } : d));
+    expect(toBusinessHoursRequest(week)).toEqual({
+      dias: [{ diaSemana: "QUARTA", horaInicio: "09:00:00", horaFim: "17:30:00" }],
     });
   });
 });
