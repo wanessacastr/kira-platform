@@ -13,6 +13,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
   chat de atendimento, reaproveitando a lógica do web pelo alias `@kira`.
 - Provador virtual no app, com consentimento LGPD, prévia simulada, exclusão de fotos e revogação, e contrato
   `api.tryOn` pronto para a API real.
+- Canal de segurança no app, com denúncia anônima, emergência com ligação ao 190 e registro sem anonimato, e contrato
+  `api.reports` pronto para a API real.
 
 ## [0.6.0] - 2026-10-14
 
