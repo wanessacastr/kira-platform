@@ -109,6 +109,10 @@ export const httpAdapter = {
         }),
       ),
     cancel: async (id) => toAppointment(await request(`/api/agendamentos/${id}/cancelar`, { method: "PATCH" })),
+    // Ações do estúdio: o backend confere se o atendimento é do estúdio logado
+    complete: async (id) => toAppointment(await request(`/api/agendamentos/${id}/concluir`, { method: "PATCH" })),
+    cancelAsBusiness: async (id) =>
+      toAppointment(await request(`/api/agendamentos/${id}/cancelar/empresa`, { method: "PATCH" })),
   },
   reviews: {
     listMine: async () => {

@@ -1,9 +1,10 @@
-// Agenda do profissional com calendário · API: kira-backend (GET /api/agendamentos/empresa/{id})
+// Agenda do profissional com calendário, concluir e cancelar · API: kira-backend (GET /api/agendamentos/empresa/{id}, PATCH /concluir e /cancelar/empresa)
 import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Calendar, Clock } from "lucide-react";
 import { useProDashboard } from "../../context/ProDashboardContext";
 import { useSession } from "../../context/SessionContext";
-import { errorMessage } from "../../shared/api";
+import { api, errorMessage } from "../../shared/api";
 import { CalendarHeader, CalendarMonth } from "../../shared/components/Calendar";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
@@ -114,72 +115,163 @@ export default function ProAgendaDashScreen() {
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
             {dayAppointments.map((a) => (
-              <div
-                key={a.id}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "var(--space-12)",
-                  padding: "var(--space-12)",
-                  borderRadius: "var(--radius-2xl)",
-                  border: `1px solid ${colors.border}`,
-                  background: colors.card,
-                }}
-              >
-                <div
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "var(--radius-lg)",
-                    background: colors.muted,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <Clock size={17} color={colors.mutedForeground} />
-                </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p
-                    style={{
-                      fontFamily: fontBody,
-                      fontWeight: 700,
-                      fontSize: "var(--font-size-sm)",
-                      color: colors.foreground,
-                      margin: 0,
-                    }}
-                  >
-                    {a.clientName}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: fontBody,
-                      fontSize: "var(--font-size-xs)",
-                      color: colors.mutedForeground,
-                      margin: "var(--space-1) 0 0",
-                    }}
-                  >
-                    {a.time} · {a.service}
-                    {a.staffName ? ` · ${a.staffName}` : ""}
-                  </p>
-                </div>
-                <span
-                  style={{
-                    fontFamily: fontBody,
-                    fontSize: "var(--font-size-xs)",
-                    fontWeight: 700,
-                    color: statusOf(a).color,
-                  }}
-                >
-                  {statusOf(a).label}
-                </span>
-              </div>
+              <AppointmentCard key={a.id} appointment={a} />
             ))}
           </div>
         )}
       </div>
       <ProBottomNav active="proAgendaDash" onNavigate={goToProTab} />
+    </div>
+  );
+}
+
+const ACTIVE_STATUSES = ["PENDENTE", "CONFIRMADO", "REAGENDADO"];
+
+const actionButton = (tone) => ({
+  flex: 1,
+  padding: "var(--space-9) var(--space-12)",
+  borderRadius: "var(--radius-lg)",
+  fontFamily: fontBody,
+  fontSize: "var(--font-size-xs)",
+  fontWeight: 700,
+  cursor: "pointer",
+  ...(tone === "primary" && { border: "none", background: colors.primary, color: colors.primaryForeground }),
+  ...(tone === "destructive" && {
+    border: `1px solid hsl(var(--destructive-hsl) / 0.3)`,
+    background: "hsl(var(--destructive-hsl) / 0.06)",
+    color: colors.destructiveText,
+  }),
+  ...(tone === "neutral" && {
+    border: `1px solid ${colors.border}`,
+    background: colors.card,
+    color: colors.foreground,
+  }),
+});
+
+// Atendimento do dia. Ativo: concluir (depois que o horário começou) ou cancelar (com confirmação).
+function AppointmentCard({ appointment: a }) {
+  const queryClient = useQueryClient();
+  const [confirmingCancel, setConfirmingCancel] = useState(false);
+  const onSuccess = () => queryClient.invalidateQueries({ queryKey: ["appointments"] });
+  const complete = useMutation({ mutationFn: () => api.appointments.complete(a.id), onSuccess });
+  const cancel = useMutation({
+    mutationFn: () => api.appointments.cancelAsBusiness(a.id),
+    onSuccess: () => {
+      setConfirmingCancel(false);
+      return onSuccess();
+    },
+  });
+  const active = ACTIVE_STATUSES.includes(a.rawStatus);
+  const started = a.start <= new Date();
+  const busy = complete.isPending || cancel.isPending;
+  const failed = complete.error ?? cancel.error;
+  return (
+    <div
+      style={{
+        padding: "var(--space-12)",
+        borderRadius: "var(--radius-2xl)",
+        border: `1px solid ${colors.border}`,
+        background: colors.card,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-12)" }}>
+        <div
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: "var(--radius-lg)",
+            background: colors.muted,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexShrink: 0,
+          }}
+        >
+          <Clock size={17} color={colors.mutedForeground} />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontWeight: 700,
+              fontSize: "var(--font-size-sm)",
+              color: colors.foreground,
+              margin: 0,
+            }}
+          >
+            {a.clientName}
+          </p>
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-xs)",
+              color: colors.mutedForeground,
+              margin: "var(--space-1) 0 0",
+            }}
+          >
+            {a.time} · {a.service}
+            {a.staffName ? ` · ${a.staffName}` : ""}
+          </p>
+        </div>
+        <span
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            fontWeight: 700,
+            color: statusOf(a).color,
+          }}
+        >
+          {statusOf(a).label}
+        </span>
+      </div>
+      {active && (
+        <div style={{ display: "flex", gap: "var(--space-8)", marginTop: "var(--space-10)" }}>
+          {confirmingCancel ? (
+            <>
+              <button type="button" disabled={busy} onClick={() => cancel.mutate()} style={actionButton("destructive")}>
+                {cancel.isPending ? "Cancelando..." : "Confirmar cancelamento"}
+              </button>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={() => setConfirmingCancel(false)}
+                style={actionButton("neutral")}
+              >
+                Voltar
+              </button>
+            </>
+          ) : (
+            <>
+              {started && (
+                <button type="button" disabled={busy} onClick={() => complete.mutate()} style={actionButton("primary")}>
+                  {complete.isPending ? "Concluindo..." : "Concluir atendimento"}
+                </button>
+              )}
+              <button
+                type="button"
+                disabled={busy}
+                onClick={() => setConfirmingCancel(true)}
+                style={actionButton("destructive")}
+              >
+                Cancelar
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {failed && (
+        <p
+          role="alert"
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.destructiveText,
+            margin: "var(--space-8) 0 0",
+          }}
+        >
+          {errorMessage(failed, "Não foi possível atualizar o atendimento.")}
+        </p>
+      )}
     </div>
   );
 }

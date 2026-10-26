@@ -7,6 +7,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 ### Adicionado
 
 - Tela de horário de funcionamento do profissional (dias e horas em que atende), com aviso no painel enquanto nenhum dia estiver aberto.
+- Na agenda do profissional, concluir atendimento (depois do horário de início) e cancelar com confirmação.
 
 ### Alterado
 
