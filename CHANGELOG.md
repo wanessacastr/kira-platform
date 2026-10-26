@@ -15,6 +15,9 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
   `api.tryOn` pronto para a API real.
 - Canal de segurança no app, com denúncia anônima, emergência com ligação ao 190 e registro sem anonimato, e contrato
   `api.reports` pronto para a API real.
+- Acompanhamento do agendamento em `/cliente/agenda/acompanhar`, no estilo de acompanhar um pedido: status no topo,
+  linha do tempo (pedido enviado, profissional confirmou, pagamento confirmado, quase na hora, em atendimento,
+  concluído) e Pix com copiar código, aviso de pagamento e conferência. Contrato `api.bookings` pronto para a API real.
 
 ## [0.6.0] - 2026-10-14
 

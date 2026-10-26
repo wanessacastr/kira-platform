@@ -1,5 +1,5 @@
 // Detalhe do agendamento + botão de segurança · mock · denúncia: futura POST /api/denuncias
-import { MessageCircle, XCircle } from "lucide-react";
+import { MessageCircle, Route, XCircle } from "lucide-react";
 import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
 import { ReportButton } from "../../shared/components/Safety";
@@ -115,6 +115,11 @@ export default function ClientAgendaDetailScreen() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
+          {canCancel && (
+            <PrimaryButton onClick={() => setScreen("clientBookingTracking")}>
+              <Route size={15} aria-hidden="true" /> Acompanhar agendamento
+            </PrimaryButton>
+          )}
           <SecondaryButton onClick={() => {}}>
             <MessageCircle size={15} /> Conversar com {pro.name.split(" ")[0]}
           </SecondaryButton>

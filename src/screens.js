@@ -3,6 +3,7 @@ import ClientAccountSecurityScreen from "./client/screens/ClientAccountSecurityS
 import ClientAddressScreen from "./client/screens/ClientAddressScreen";
 import ClientAgendaDetailScreen from "./client/screens/ClientAgendaDetailScreen";
 import ClientAgendaScreen from "./client/screens/ClientAgendaScreen";
+import ClientBookingTrackingScreen from "./client/screens/ClientBookingTrackingScreen";
 import ClientChatScreen from "./client/screens/ClientChatScreen";
 import ClientCouponsScreen from "./client/screens/ClientCouponsScreen";
 import ClientDocumentScreen from "./client/screens/ClientDocumentScreen";
@@ -74,6 +75,7 @@ export const screens = {
   clientTryOnResult: ClientTryOnResultScreen,
   clientAgenda: ClientAgendaScreen,
   clientAgendaDetail: ClientAgendaDetailScreen,
+  clientBookingTracking: ClientBookingTrackingScreen,
   clientProfile: ClientProfileScreen,
   clientProfileEdit: ClientProfileEditScreen,
   clientAccountSecurity: ClientAccountSecurityScreen,

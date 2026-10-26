@@ -64,6 +64,7 @@ function Prototype() {
         ["Provador: resultado", "clientTryOnResult"],
         ["Agenda", "clientAgenda"],
         ["Agenda: detalhe", "clientAgendaDetail"],
+        ["Agenda: acompanhar", "clientBookingTracking"],
         ["Perfil (menu)", "clientProfile"],
         ["Perfil: editar", "clientProfileEdit"],
         ["Perfil: segurança", "clientAccountSecurity"],
