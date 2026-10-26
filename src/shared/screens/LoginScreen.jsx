@@ -1,4 +1,4 @@
-// Login com e-mail e senha · API: kira-backend (POST /api/auth/login)
+// Login com e-mail e senha e atalho para "esqueci a senha" · API: kira-backend (POST /api/auth/login)
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
@@ -79,6 +79,22 @@ export default function LoginScreen() {
             </button>
           </div>
         </Field>
+        <div style={{ textAlign: "right", margin: "calc(var(--space-6) * -1) 0 var(--space-14)" }}>
+          <button
+            type="button"
+            className="k-reset"
+            onClick={() => setScreen("forgotPassword")}
+            style={{
+              color: colors.primaryText,
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-xs)",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            Esqueci minha senha
+          </button>
+        </div>
         {submit.isError && (
           <p
             role="alert"

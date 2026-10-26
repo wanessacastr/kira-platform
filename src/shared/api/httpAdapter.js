@@ -45,6 +45,15 @@ export const httpAdapter = {
       request("/api/auth/registro/cliente", { method: "POST", body: toClientRegistration(form), auth: false }),
     registerProfessional: (form) =>
       request("/api/auth/registro/empresa", { method: "POST", body: toProfessionalRegistration(form), auth: false }),
+    // A resposta é a mesma exista ou não a conta: o backend não revela quais e-mails estão cadastrados
+    requestPasswordReset: (email) =>
+      request("/api/auth/recuperar-senha", { method: "POST", body: { email: email.trim() }, auth: false }),
+    resetPassword: ({ token, password }) =>
+      request("/api/auth/redefinir-senha", {
+        method: "POST",
+        body: { token: token.trim(), novaSenha: password },
+        auth: false,
+      }),
     logout: async () => {
       const refreshToken = authStore.get()?.refreshToken;
       authStore.set(null);

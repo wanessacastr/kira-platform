@@ -9,6 +9,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 - Tela de horário de funcionamento do profissional (dias e horas em que atende), com aviso no painel enquanto nenhum dia estiver aberto.
 - Na agenda do profissional, concluir atendimento (depois do horário de início) e cancelar com confirmação.
 - Avaliar atendimento concluído (nota de 1 a 5 e comentário) pelo detalhe do agendamento.
+- Esqueci a senha: link no login, pedido por e-mail e tela de nova senha (abre pelo link do e-mail ou com o código).
 
 ### Alterado
 

@@ -6,6 +6,8 @@ export const sharedPaths = {
   splash: "/",
   login: "/entrar",
   signup: "/criar-conta",
+  forgotPassword: "/esqueci-a-senha",
+  resetPassword: "/redefinir-senha",
   home: "/inicio",
 };
 

@@ -50,7 +50,9 @@ import ProSpecialtiesScreen from "./professional/screens/ProSpecialtiesScreen";
 import ProTermsScreen from "./professional/screens/ProTermsScreen";
 import FaceScreen from "./shared/screens/FaceScreen";
 import HomeScreen from "./shared/screens/HomeScreen";
+import ForgotPasswordScreen from "./shared/screens/ForgotPasswordScreen";
 import LoginScreen from "./shared/screens/LoginScreen";
+import ResetPasswordScreen from "./shared/screens/ResetPasswordScreen";
 import SignupScreen from "./shared/screens/SignupScreen";
 import SplashScreen from "./shared/screens/SplashScreen";
 
@@ -58,6 +60,8 @@ import SplashScreen from "./shared/screens/SplashScreen";
 export const screens = {
   splash: SplashScreen,
   login: LoginScreen,
+  forgotPassword: ForgotPasswordScreen,
+  resetPassword: ResetPasswordScreen,
   signup: SignupScreen,
   clientPersonal: ClientPersonalScreen,
   clientAddress: ClientAddressScreen,

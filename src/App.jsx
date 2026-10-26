@@ -41,6 +41,8 @@ function Prototype() {
         ["Splash", "splash"],
         ["Login", "login"],
         ["Escolher tipo", "signup"],
+        ["Esqueci a senha", "forgotPassword"],
+        ["Nova senha", "resetPassword"],
       ],
     },
     {
