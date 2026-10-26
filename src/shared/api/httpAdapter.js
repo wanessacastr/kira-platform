@@ -5,13 +5,21 @@ import {
   toAppointment,
   toBusinessHours,
   toBusinessHoursRequest,
+  toBusinessService,
   toClientRegistration,
+  toDashboard,
   toLocalDate,
   toLocalDateTime,
+  toMessage,
   toProfessional,
   toProfessionalRegistration,
   toReview,
+  toServiceRequest,
   toSlotTime,
+  toStaff,
+  toStaffRequest,
+  toTimeBlock,
+  toTimeBlockRequest,
 } from "./mappers";
 import { onlyDigits } from "../utils/format";
 
@@ -150,11 +158,92 @@ export const httpAdapter = {
     },
   },
   services: {
+    // Inclui os desativados (active: false): o agendamento antigo ainda aponta para eles
     listForMyBusiness: async () => {
-      const id = currentUserId();
-      const list = await request(`/api/empresas/${id}/servicos`);
-      return list.map((s) => ({ id: s.id, name: s.nome, price: Number(s.preco), active: s.ativo !== false }));
+      const list = await request(`/api/empresas/${currentUserId()}/servicos`);
+      return list.map(toBusinessService);
     },
+    create: async (service) =>
+      toBusinessService(
+        await request(`/api/empresas/${currentUserId()}/servicos`, { method: "POST", body: toServiceRequest(service) }),
+      ),
+    update: async ({ id, ...service }) =>
+      toBusinessService(
+        await request(`/api/empresas/${currentUserId()}/servicos/${id}`, {
+          method: "PUT",
+          body: toServiceRequest(service),
+        }),
+      ),
+    // DELETE só desativa: o serviço some da busca, mas continua no histórico
+    deactivate: (id) => request(`/api/empresas/${currentUserId()}/servicos/${id}`, { method: "DELETE" }),
+  },
+  // Funcionárias do estúdio logado; agenda, bloqueios e comissão conferem se a funcionária é do estúdio
+  staff: {
+    listForMyBusiness: async () => {
+      const list = await request(`/api/empresas/${currentUserId()}/funcionarias`);
+      return list.map(toStaff);
+    },
+    create: async (staff) =>
+      toStaff(
+        await request(`/api/empresas/${currentUserId()}/funcionarias`, { method: "POST", body: toStaffRequest(staff) }),
+      ),
+    update: async ({ id, ...staff }) =>
+      toStaff(
+        await request(`/api/empresas/${currentUserId()}/funcionarias/${id}`, {
+          method: "PUT",
+          body: toStaffRequest(staff),
+        }),
+      ),
+    deactivate: (id) => request(`/api/empresas/${currentUserId()}/funcionarias/${id}`, { method: "DELETE" }),
+    agendaDay: async ({ staffId, date }) => {
+      const list = await request(`/api/funcionarias/${staffId}/agenda/dia`, { query: { data: toLocalDate(date) } });
+      return list.map((a) => toAppointment(a)).sort((a, b) => a.start - b.start);
+    },
+    // Sete dias a partir de `start`
+    agendaWeek: async ({ staffId, start }) => {
+      const list = await request(`/api/funcionarias/${staffId}/agenda/semana`, {
+        query: { dataInicio: toLocalDate(start) },
+      });
+      return list.map((a) => toAppointment(a)).sort((a, b) => a.start - b.start);
+    },
+    listBlocks: async (staffId) => {
+      const list = await request(`/api/funcionarias/${staffId}/bloqueios`);
+      return list.map(toTimeBlock).sort((a, b) => a.start - b.start);
+    },
+    createBlock: async ({ staffId, ...block }) =>
+      toTimeBlock(
+        await request(`/api/funcionarias/${staffId}/bloqueios`, { method: "POST", body: toTimeBlockRequest(block) }),
+      ),
+    removeBlock: ({ staffId, id }) => request(`/api/funcionarias/${staffId}/bloqueios/${id}`, { method: "DELETE" }),
+    commissionTotal: async (staffId) => Number(await request(`/api/comissoes/funcionaria/${staffId}/total`)),
+  },
+  // Chat do agendamento (cliente e estúdio)
+  messages: {
+    listByAppointment: async (appointmentId) => {
+      const myId = authStore.get()?.id ?? null;
+      const list = await request(`/api/mensagens/agendamento/${appointmentId}`);
+      return list.map((m) => toMessage(m, myId));
+    },
+    send: async ({ appointmentId, text }) => {
+      const myId = currentUserId();
+      return toMessage(
+        await request(`/api/mensagens/remetente/${myId}`, {
+          method: "POST",
+          body: { agendamentoId: appointmentId, conteudo: text.trim() },
+        }),
+        myId,
+      );
+    },
+    markRead: (id) => request(`/api/mensagens/${id}/lida`, { method: "PATCH" }),
+  },
+  // Painel pronto do backend; sem período, vale do dia 1º do mês até hoje
+  dashboard: {
+    getMine: async ({ from = null, to = null } = {}) =>
+      toDashboard(
+        await request(`/api/empresas/${currentUserId()}/dashboard`, {
+          query: { dataInicio: from && toLocalDate(from), dataFim: to && toLocalDate(to) },
+        }),
+      ),
   },
   businessHours: {
     // Dia que não vem na lista está fechado

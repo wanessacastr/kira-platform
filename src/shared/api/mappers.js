@@ -111,6 +111,98 @@ export const toReview = (r) => ({
 
 export const toSlotTime = (slot) => formatTime(parseLocalDateTime(slot.dataHoraInicio));
 
+// ---------- Gestão do estúdio: serviços, funcionárias, bloqueios, mensagens e painel ----------
+
+// Serviço do próprio estúdio: inclui os desativados, com a flag `active`
+export const toBusinessService = (s) => ({ ...toService(s), active: s.ativo !== false });
+
+export const toServiceRequest = (s) => ({
+  nome: s.name.trim(),
+  descricao: s.description?.trim() || null,
+  duracaoMinutos: Number(s.durationMinutes),
+  preco: Number(s.price),
+});
+
+export const toStaff = (f) => ({
+  id: f.id,
+  name: f.nome,
+  photo: f.fotoUrl || null,
+  specialties: f.especialidades ?? "",
+  active: f.ativo !== false,
+  commissionPercent: f.comissaoPercentual != null ? Number(f.comissaoPercentual) : null,
+});
+
+export const toStaffRequest = (f) => ({
+  nome: f.name.trim(),
+  fotoUrl: f.photo || null,
+  especialidades: f.specialties?.trim() || null,
+  comissaoPercentual: f.commissionPercent === "" || f.commissionPercent == null ? null : Number(f.commissionPercent),
+});
+
+export const toTimeBlock = (b) => ({
+  id: b.id,
+  staffId: b.funcionariaId,
+  staffName: b.nomeFuncionaria,
+  start: parseLocalDateTime(b.dataHoraInicio),
+  end: parseLocalDateTime(b.dataHoraFim),
+  reason: b.motivo ?? "",
+});
+
+export const toTimeBlockRequest = ({ start, end, reason }) => ({
+  dataHoraInicio: toLocalDateTime(start),
+  dataHoraFim: toLocalDateTime(end),
+  motivo: reason?.trim() || null,
+});
+
+// `mine`: a mensagem foi enviada pelo usuário logado (lado da bolha no chat)
+export const toMessage = (m, myId = null) => ({
+  id: m.id,
+  appointmentId: m.agendamentoId,
+  senderId: m.remetenteId,
+  senderName: m.nomeRemetente,
+  text: m.conteudo,
+  read: Boolean(m.lida),
+  sentAt: parseLocalDateTime(m.dataEnvio),
+  mine: myId != null && m.remetenteId === myId,
+});
+
+// O painel usa java.time.DayOfWeek ("MONDAY"); a tela usa as chaves de `weekDays`
+const dayOfWeekToKey = {
+  MONDAY: "SEGUNDA",
+  TUESDAY: "TERCA",
+  WEDNESDAY: "QUARTA",
+  THURSDAY: "QUINTA",
+  FRIDAY: "SEXTA",
+  SATURDAY: "SABADO",
+  SUNDAY: "DOMINGO",
+};
+
+// Painel: só atendimentos concluídos no período; funcionária nula = atendido pelo próprio estúdio
+export const toDashboard = (d) => ({
+  revenue: Number(d.faturamentoTotal ?? 0),
+  appointments: d.totalAtendimentos,
+  uniqueClients: d.totalClientesUnicos,
+  returningClients: d.totalClientesRecorrentes,
+  returningPercent: d.percentualRecorrencia,
+  byStaff: (d.desempenhoPorFuncionaria ?? []).map((f) => ({
+    staffId: f.funcionariaId,
+    name: f.nome,
+    revenue: Number(f.faturamento ?? 0),
+    appointments: f.totalAtendimentos,
+  })),
+  topClients: (d.clientesRecorrentes ?? []).map((c) => ({
+    clientId: c.clienteId,
+    name: c.nome,
+    appointments: c.totalAtendimentos,
+    revenue: Number(c.faturamentoGerado ?? 0),
+  })),
+  byHour: (d.movimentoPorHora ?? []).map((h) => ({ hour: h.hora, appointments: h.totalAtendimentos })),
+  byWeekday: (d.movimentoPorDiaSemana ?? []).map((w) => ({
+    day: dayOfWeekToKey[w.diaSemana] ?? w.diaSemana,
+    appointments: w.totalAtendimentos,
+  })),
+});
+
 // ---------- Horário de funcionamento: DisponibilidadeResponse[] ↔ semana da tela ----------
 
 // Ordem da tela (segunda primeiro); `key` é o enum DiaSemana do backend

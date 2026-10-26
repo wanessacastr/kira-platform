@@ -66,6 +66,55 @@
  * @property {string} state
  */
 
+/**
+ * Funcionária do estúdio logado.
+ * @typedef {Object} Staff
+ * @property {string} id
+ * @property {string} name
+ * @property {string|null} photo
+ * @property {string} specialties          texto livre
+ * @property {boolean} active
+ * @property {number|null} commissionPercent
+ */
+
+/**
+ * Bloqueio de horário de uma funcionária (folga, almoço…).
+ * @typedef {Object} TimeBlock
+ * @property {string} id
+ * @property {string} staffId
+ * @property {string} staffName
+ * @property {Date} start
+ * @property {Date} end
+ * @property {string} reason
+ */
+
+/**
+ * Mensagem do chat de um agendamento.
+ * @typedef {Object} Message
+ * @property {string} id
+ * @property {string} appointmentId
+ * @property {string} senderId
+ * @property {string} senderName
+ * @property {string} text
+ * @property {boolean} read
+ * @property {Date} sentAt
+ * @property {boolean} mine                enviada pelo usuário logado
+ */
+
+/**
+ * Painel do estúdio (`/dashboard`): só atendimentos concluídos no período.
+ * @typedef {Object} Dashboard
+ * @property {number} revenue
+ * @property {number} appointments
+ * @property {number} uniqueClients
+ * @property {number} returningClients
+ * @property {number} returningPercent
+ * @property {{staffId: string|null, name: string|null, revenue: number, appointments: number}[]} byStaff
+ * @property {{clientId: string, name: string, appointments: number, revenue: number}[]} topClients
+ * @property {{hour: number, appointments: number}[]} byHour
+ * @property {{day: string, appointments: number}[]} byWeekday   chaves de `weekDays` ("SEGUNDA"…)
+ */
+
 export class ApiError extends Error {
   constructor(code, message, status = 0, details = null) {
     super(message ?? code);

@@ -5,11 +5,19 @@ import {
   toAppointment,
   toBusinessHours,
   toBusinessHoursRequest,
+  toBusinessService,
   toClientRegistration,
+  toDashboard,
   toLocalDateTime,
+  toMessage,
   toProfessional,
   toProfessionalRegistration,
+  toServiceRequest,
   toSlotTime,
+  toStaff,
+  toStaffRequest,
+  toTimeBlock,
+  toTimeBlockRequest,
 } from "./mappers";
 
 const studio = {
@@ -158,5 +166,92 @@ describe("horário de funcionamento", () => {
     expect(toBusinessHoursRequest(week)).toEqual({
       dias: [{ diaSemana: "QUARTA", horaInicio: "09:00:00", horaFim: "17:30:00" }],
     });
+  });
+});
+
+describe("gestão do estúdio", () => {
+  it("converte o serviço e mantém a flag de ativo", () => {
+    const s = toBusinessService({
+      id: "x",
+      nome: "Corte",
+      descricao: null,
+      duracaoMinutos: 45,
+      preco: "80.00",
+      ativo: false,
+    });
+    expect(s).toEqual({ id: "x", name: "Corte", description: "", durationMinutes: 45, price: 80, active: false });
+  });
+  it("monta o request do serviço com números e descrição vazia como nula", () => {
+    expect(toServiceRequest({ name: " Escova ", description: " ", durationMinutes: "30", price: "50" })).toEqual({
+      nome: "Escova",
+      descricao: null,
+      duracaoMinutos: 30,
+      preco: 50,
+    });
+  });
+  it("converte a funcionária e o request sem comissão", () => {
+    const f = toStaff({
+      id: "f1",
+      nome: "Bia",
+      fotoUrl: "",
+      especialidades: null,
+      ativo: true,
+      comissaoPercentual: "30.00",
+    });
+    expect(f).toEqual({ id: "f1", name: "Bia", photo: null, specialties: "", active: true, commissionPercent: 30 });
+    expect(toStaffRequest({ name: "Bia ", specialties: "", commissionPercent: "" })).toEqual({
+      nome: "Bia",
+      fotoUrl: null,
+      especialidades: null,
+      comissaoPercentual: null,
+    });
+  });
+  it("converte o bloqueio de horário nos dois sentidos", () => {
+    const b = toTimeBlock({
+      id: "b1",
+      funcionariaId: "f1",
+      nomeFuncionaria: "Bia",
+      dataHoraInicio: "2026-10-20T12:00:00",
+      dataHoraFim: "2026-10-20T13:00:00",
+      motivo: null,
+    });
+    expect(b.start).toEqual(new Date(2026, 9, 20, 12, 0));
+    expect(b.reason).toBe("");
+    expect(toTimeBlockRequest({ start: b.start, end: b.end, reason: " Almoço " })).toEqual({
+      dataHoraInicio: "2026-10-20T12:00:00",
+      dataHoraFim: "2026-10-20T13:00:00",
+      motivo: "Almoço",
+    });
+  });
+  it("marca como minha a mensagem enviada pelo usuário logado", () => {
+    const m = {
+      id: "m1",
+      agendamentoId: "ag1",
+      remetenteId: "c1",
+      nomeRemetente: "Ana",
+      conteudo: "Oi",
+      lida: null,
+      dataEnvio: "2026-10-20T09:00:00",
+    };
+    expect(toMessage(m, "c1")).toMatchObject({ mine: true, read: false, text: "Oi", senderName: "Ana" });
+    expect(toMessage(m, "s1").mine).toBe(false);
+  });
+  it("converte o painel e o dia da semana do java.time", () => {
+    const d = toDashboard({
+      faturamentoTotal: "150.50",
+      totalAtendimentos: 2,
+      desempenhoPorFuncionaria: [{ funcionariaId: null, nome: null, faturamento: "150.50", totalAtendimentos: 2 }],
+      totalClientesUnicos: 1,
+      totalClientesRecorrentes: 1,
+      percentualRecorrencia: 100,
+      clientesRecorrentes: [{ clienteId: "c1", nome: "Ana", totalAtendimentos: 2, faturamentoGerado: "150.50" }],
+      movimentoPorHora: [{ hora: 14, totalAtendimentos: 2 }],
+      movimentoPorDiaSemana: [{ diaSemana: "MONDAY", totalAtendimentos: 2 }],
+    });
+    expect(d.revenue).toBe(150.5);
+    expect(d.byStaff[0]).toEqual({ staffId: null, name: null, revenue: 150.5, appointments: 2 });
+    expect(d.topClients[0].revenue).toBe(150.5);
+    expect(d.byHour).toEqual([{ hour: 14, appointments: 2 }]);
+    expect(d.byWeekday).toEqual([{ day: "SEGUNDA", appointments: 2 }]);
   });
 });
