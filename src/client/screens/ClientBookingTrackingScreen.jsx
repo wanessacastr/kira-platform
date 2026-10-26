@@ -4,21 +4,20 @@ import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
 import { BOOKING_STEPS, PAYMENT_STATES } from "../../shared/api/bookingContract";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
-import { Header, SecondaryButton } from "../../shared/components/ui";
+import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/ui";
 import { mockProfessionals } from "../../shared/data/professionals";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { headline, progressOf } from "../booking/bookingContent";
 import { BookingTimeline } from "../components/booking/BookingTimeline";
-import { PaymentPanel } from "../components/booking/PaymentPanel";
-import { appointmentsMock } from "../data/mocks";
+import { resolveBookingTarget } from "../booking/bookingTarget";
 import { useBookingTracking } from "../hooks/useBookingTracking";
 
 export default function ClientBookingTrackingScreen() {
-  const { selectedAppointmentId } = useScheduling();
+  const { selectedAppointmentId, bookedSlot, selectedDate, selectedProId } = useScheduling();
   const { setScreen } = useSession();
-  const appointment = appointmentsMock.find((a) => a.id === selectedAppointmentId) || appointmentsMock[0];
-  const pro = mockProfessionals.find((p) => p.id === appointment.proId) || mockProfessionals[0];
-  const { status, booking, reload, reportPayment, paying, payError } = useBookingTracking(appointment.id);
+  const pro = mockProfessionals.find((p) => p.id === selectedProId) || mockProfessionals[0];
+  const target = resolveBookingTarget({ selectedAppointmentId, bookedSlot, selectedDate, pro });
+  const { status, booking, reload } = useBookingTracking(target.id, target.price);
   const awaitingPayment =
     booking && booking.step === BOOKING_STEPS.CONFIRMED && booking.payment.state !== PAYMENT_STATES.CONFIRMED;
 
@@ -50,7 +49,7 @@ export default function ClientBookingTrackingScreen() {
                   color: colors.mutedForeground,
                 }}
               >
-                {appointment.service} com {pro.name} · {appointment.date}, {appointment.time}
+                {target.service} com {target.proName} · {target.when}
               </p>
               <h1
                 style={{
@@ -81,7 +80,9 @@ export default function ClientBookingTrackingScreen() {
               </div>
             </div>
             {awaitingPayment && (
-              <PaymentPanel payment={booking.payment} paying={paying} error={payError} onReport={reportPayment} />
+              <PrimaryButton onClick={() => setScreen("clientPaymentProcessing")}>
+                {booking.payment.state === PAYMENT_STATES.PENDING ? "Pagar com Pix" : "Ver andamento do pagamento"}
+              </PrimaryButton>
             )}
             <BookingTimeline booking={booking} />
             <SecondaryButton onClick={() => setScreen("clientChat")}>
