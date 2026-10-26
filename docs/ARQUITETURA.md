@@ -28,6 +28,7 @@ Protótipo front-end em Vite + React. Não há backend: todo dado vem de mocks e
 | Denúncia e emergência (app) | Simulado                                   | `api.reports` no app (`mobile/`), protocolo e risco imediato       | Mock; futura `POST /api/denuncias`                           |
 | Denúncia e emergência       | Simulado                                   | `shared/components/Safety.jsx`                                     | Mock; futura `POST /api/denuncias`                           |
 | Acompanhar agendamento      | Simulado                                   | `api.bookings`, etapas e Pix na tela de acompanhamento             | Mock; futuros eventos e Pix conferido pela equipe            |
+| Pagamento Pix (processando) | Simulado                                   | `ClientPaymentProcessingScreen`, `api.bookings`, `paymentStage`    | Mock; futura confirmação do Pix pelo back-end ou provedor    |
 | CEP                         | Simulado                                   | `api.address.lookupCep` via `useCepLookup`                         | Mock (ViaCEP não integrado)                                  |
 | Verificação facial          | Simulado                                   | `FaceScreen`                                                       | Mock, nenhum dado biométrico é salvo                         |
 | Login e cadastro            | Sem backend                                | Telas de cadastro e login                                          | Mock, sem autenticação real                                  |

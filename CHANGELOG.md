@@ -18,6 +18,14 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 - Acompanhamento do agendamento em `/cliente/agenda/acompanhar`, no estilo de acompanhar um pedido: status no topo,
   linha do tempo (pedido enviado, profissional confirmou, pagamento confirmado, quase na hora, em atendimento,
   concluído) e Pix com copiar código, aviso de pagamento e conferência. Contrato `api.bookings` pronto para a API real.
+- Tela "Processando pagamento" em `/cliente/agenda/pagamento`, ligada ao fim do agendamento ("Pagar com Pix") e ao
+  acompanhamento, com os estados aguardando, aviso enviado, conferindo, confirmado, falha e nova tentativa.
+
+### Alterado
+
+- O fim do agendamento passou de "Agendamento confirmado!" para "Horário reservado!", pois ainda falta o pagamento.
+- No mock de `api.bookings`, o Pix deixou de ser confirmado por temporizador: o aviso do cliente deixa o pagamento em
+  conferência até uma resposta da equipe, simulada só em desenvolvimento.
 
 ## [0.6.0] - 2026-10-14
 
