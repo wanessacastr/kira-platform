@@ -3,6 +3,7 @@ import { recommendProfessionals } from "../../client/recommendation";
 import { mockProfessionals } from "../data/professionals";
 import { getDaySchedule } from "../utils/date";
 import { ApiError } from "./contract";
+import { mockBookings } from "./mockBookings";
 import { mockChat } from "./mockChat";
 import { mockReports } from "./mockReports";
 import { mockTryOn } from "./mockTryOn";
@@ -46,4 +47,5 @@ export const mockAdapter = {
   chat: mockChat,
   tryOn: mockTryOn,
   reports: mockReports,
+  bookings: mockBookings,
 };
