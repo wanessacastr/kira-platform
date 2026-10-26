@@ -41,6 +41,8 @@
  *   futuro: API da Kira e Cloudflare Workers AI (ver tryOnContract.js)
  * @property {import("./reportContract").ReportGateway} reports
  *   futuro: POST /api/denuncias (ver reportContract.js)
+ * @property {import("./bookingContract").BookingGateway} bookings
+ *   futuro: acompanhamento do agendamento e confirmação do Pix (ver bookingContract.js)
  */
 
 export class ApiError extends Error {
