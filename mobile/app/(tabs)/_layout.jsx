@@ -1,6 +1,6 @@
-// Abas do cliente: Início, Buscar e Perfil · API: nenhuma
+// Abas do cliente: Início, Buscar, Provador e Perfil · API: nenhuma
 import { Tabs } from "expo-router";
-import { Home, Search, User } from "lucide-react-native";
+import { Home, Search, User, Wand2 } from "lucide-react-native";
 import { colors, fonts } from "../../src/theme";
 
 const tab = (title, Icon) => ({
@@ -21,6 +21,7 @@ export default function TabsLayout() {
     >
       <Tabs.Screen name="index" options={tab("Início", Home)} />
       <Tabs.Screen name="buscar" options={tab("Buscar", Search)} />
+      <Tabs.Screen name="provador" options={tab("Provador", Wand2)} />
       <Tabs.Screen name="perfil" options={tab("Perfil", User)} />
     </Tabs>
   );

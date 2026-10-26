@@ -27,9 +27,13 @@ Trocar o mock pela API real em `src/shared/api` vale para o web e para o app ao 
 Abertura, login (simulado), início, busca, perfil da profissional, agendamento, ajuda e suporte e o chat de atendimento
 (carregando, boas-vindas, conversa, cartão de horário, transferência para atendente, falha de envio e sem conexão).
 
+Provador virtual: referência, foto, consentimento LGPD, geração da prévia (a primeira falha de propósito, para mostrar o
+erro), profissionais compatíveis e, em Perfil, Consentimentos LGPD (apagar fotos e revogar). Fala com `api.tryOn`; hoje
+é um mock que devolve a própria foto.
+
 ## O que falta converter
 
-Cadastro de cliente e profissional, Provador virtual, agenda, denúncia e emergência, e toda a área da profissional.
+Cadastro de cliente e profissional, agenda, denúncia e emergência, e toda a área da profissional.
 
 ## Regras do projeto
 
