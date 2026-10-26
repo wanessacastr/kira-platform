@@ -4,6 +4,7 @@ import { mockProfessionals } from "../data/professionals";
 import { getDaySchedule } from "../utils/date";
 import { ApiError } from "./contract";
 import { mockChat } from "./mockChat";
+import { mockTryOn } from "./mockTryOn";
 
 export const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -42,4 +43,5 @@ export const mockAdapter = {
     },
   },
   chat: mockChat,
+  tryOn: mockTryOn,
 };
