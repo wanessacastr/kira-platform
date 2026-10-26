@@ -118,6 +118,14 @@ export const httpAdapter = {
         }),
       ),
     cancel: async (id) => toAppointment(await request(`/api/agendamentos/${id}/cancelar`, { method: "PATCH" })),
+    // Mesmo serviço e profissional, novo início; o backend confere expediente e conflito de horário
+    reschedule: async ({ id, start }) =>
+      toAppointment(
+        await request(`/api/agendamentos/${id}/reagendar/cliente`, {
+          method: "PATCH",
+          body: { novaDataHoraInicio: toLocalDateTime(start) },
+        }),
+      ),
     // Ações do estúdio: o backend confere se o atendimento é do estúdio logado
     complete: async (id) => toAppointment(await request(`/api/agendamentos/${id}/concluir`, { method: "PATCH" })),
     cancelAsBusiness: async (id) =>

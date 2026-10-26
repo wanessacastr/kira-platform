@@ -1,7 +1,7 @@
-// Detalhe do agendamento, cancelamento, avaliação e botão de segurança · API: kira-backend (agendamentos, avaliações) · denúncia: futura POST /api/denuncias
+// Detalhe do agendamento, remarcar, cancelamento, avaliação e botão de segurança · API: kira-backend (agendamentos, avaliações) · denúncia: futura POST /api/denuncias
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { MessageCircle, XCircle } from "lucide-react";
+import { CalendarClock, MessageCircle, XCircle } from "lucide-react";
 import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
 import { ReportButton } from "../../shared/components/Safety";
@@ -206,6 +206,11 @@ export default function ClientAgendaDetailScreen() {
             >
               {errorMessage(cancel.error, "Não foi possível cancelar agora.")}
             </p>
+          )}
+          {canCancel && (
+            <SecondaryButton onClick={() => setScreen("clientReschedule")}>
+              <CalendarClock size={15} /> Remarcar horário
+            </SecondaryButton>
           )}
           {canCancel && (
             <button
