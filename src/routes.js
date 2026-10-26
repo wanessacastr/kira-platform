@@ -36,6 +36,7 @@ export const clientPaths = area("/cliente", [
   ["clientPaymentHistory", "perfil/historico-pagamentos"],
   ["clientCoupons", "perfil/cupons"],
   ["clientHelpSupport", "perfil/ajuda"],
+  ["clientChat", "atendimento"],
   ["clientReviews", "perfil/avaliacoes"],
   ["clientFavorites", "perfil/favoritos"],
   ["clientHistory", "perfil/historico"],
