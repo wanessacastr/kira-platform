@@ -1,6 +1,6 @@
 # Integração do Kira: frontend e backend
 
-Situação em 26/10/2026. Lista do que o app (kira-platform) já usa do backend (kira-backend).
+Situação em 27/10/2026. Lista do que o app (kira-platform) já usa do backend (kira-backend).
 
 ## Funcionando: frontend ligado ao backend
 
@@ -56,16 +56,45 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 
 ### Problemas no backend encontrados na integração
 
-- **Chat sem checagem de acesso (corrigido na `fix/conversa-so-participantes`):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`.
-- **Lista de comissões:** `GET /api/comissoes/funcionaria/{id}` devolve a entidade `ComissaoAgendamento` direto, com relações LAZY e `open-in-view: false`. A tendência é dar erro 500 quando houver comissão. O app usa só o total (`/total`) até o backend devolver um DTO.
-- **Painel conta só atendimentos concluídos:** o `/dashboard` não traz ranking de serviços nem avaliações. As telas de Analytics e Financeiro continuam precisando dos agendamentos para esses números.
+- **Chat sem checagem de acesso (corrigido na `fix/conversa-so-participantes`):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`. A correção ainda não está na `main` nem no GitHub.
+- **Lista de comissões (continua):** `GET /api/comissoes/funcionaria/{id}` devolve a entidade `ComissaoAgendamento` direto, com relações LAZY e `open-in-view: false`. A tendência é dar erro 500 quando houver comissão. O app usa só o total (`/total`) até o backend devolver um DTO.
+- **Painel conta só atendimentos concluídos (continua):** o `/dashboard` não traz ranking de serviços nem avaliações. As telas de Analytics e Financeiro continuam precisando dos agendamentos para esses números.
+
+## O backend tem, mas o app não usa
+
+- **Profissional remarcar:** `PATCH /api/agendamentos/{id}/reagendar/empresa`. Na agenda do profissional só há concluir e cancelar.
+- **Busca no servidor:** `/api/studios/busca`, `/cidade` e `/tipo`. O app traz a lista inteira e filtra no navegador, o que funciona enquanto houver poucos estúdios.
+- **Escolher a funcionária:** `GET /api/studios/{id}/funcionarias`. O agendamento não deixa a cliente escolher quem vai atender.
+- **Médias de avaliação:** `/api/studios/{id}/media` e `/api/avaliacoes/empresa/{id}/media`. O app calcula a média a partir da lista.
+- **Denúncias (só na `feat/canal-seguranca`):** `POST /api/denuncias` e as rotas de análise em `/api/admin/denuncias`. A branch parte de um commit antigo e ainda não foi juntada. O app tem a tela de denúncia, mas ela não envia nada. Os motivos também não batem: o app usa `endereco_invalido` e `risco_imediato`, e o backend espera `ENDERECO_FALSO`, `LOCAL_NAO_VALIDADO` e `PERIGO_DURANTE_ATENDIMENTO`.
 
 ## O app tem, mas o backend não
 
-- Editar o perfil, fotos, favoritas, denúncia e emergência, gift cards, fidelidade, cupons e formas de pagamento.
+- Editar o perfil, fotos, favoritas, emergência, gift cards, fidelidade, cupons e formas de pagamento.
 - **Documento e selfie do cadastro:** as fotos ficam só no navegador e não são enviadas. O backend não tem rota de upload nem campo de verificação, então o botão "Continuar para verificação facial" não verifica nada. Falta decidir entre verificação por um serviço externo (guardar só o resultado e descartar a selfie), revisão manual dos documentos ou esconder essas telas por enquanto.
+
+## Situação das branches do backend
+
+A `main` recebeu os PRs #1 a #5 em 26/10 (painel, Swagger, `.env`, horário de funcionamento, avisos do Sonar e permissão do `mvnw`) e **agora compila**. Mas ela ainda não tem o que o app precisa para funcionar inteiro. Essas mudanças estão numa pilha de branches, uma em cima da outra:
+
+| Branch                          | O que traz                                                     | No GitHub | Na `main` |
+| ------------------------------- | -------------------------------------------------------------- | --------- | --------- |
+| `feat/atendimento-empresa`      | Só o estúdio dono conclui ou cancela; sem erro 500 ao cancelar | Sim       | Não       |
+| `feat/seguranca-agendamentos`   | Confere o dono nas rotas de agendamento                        | Sim       | Não       |
+| `feat/seguranca-empresa`        | Confere o estúdio dono nas rotas do estabelecimento            | Sim       | Não       |
+| `feat/recuperar-senha`          | Link de redefinição no e-mail de "esqueci a senha"             | Sim       | Não       |
+| `feat/remarcar-antecedencia`    | Remarcar só até 2 horas antes                                  | Sim       | Não       |
+| `feat/login-devolve-id-pilha`   | Id do usuário no login e no refresh (em cima da pilha)         | **Não**   | Não       |
+| `fix/conversa-so-participantes` | Chat só para quem participa do agendamento                     | **Não**   | Não       |
+
+A `feat/login-devolve-id` que está no GitHub é a versão antiga, feita sobre um commit anterior à pilha. A que serve é a `feat/login-devolve-id-pilha`.
+
+Testado em 27/10: juntar a `feat/login-devolve-id-pilha` com a `fix/conversa-so-participantes` não dá conflito e passa em 240 dos 241 testes. O único que falha é o `contextLoads`, que precisa do banco. Juntar esse resultado na `main` dá conflito só em dois testes: `AgendamentoServiceTest` e `ServicoServiceTest`.
+
+No app, os 69 testes passam.
 
 ## Para tudo funcionar de verdade
 
-1. **O backend precisa rodar com as branches novas.** A versão antiga, sem o id no login, faz as telas que precisam de login falharem. Para ter tudo, é preciso juntar a `feat/login-devolve-id`, a `feat/remarcar-antecedencia` e a `fix/conversa-so-participantes`. A `main` do backend sozinha não compila: o `AgendamentoService` usa um método do repositório que só existe na `feat/remarcar-antecedencia`.
-2. **E-mail:** faltam `MAIL_USERNAME` e `MAIL_PASSWORD` no `.env` do backend. Sem eles, o e-mail de "esqueci a senha" e o de boas-vindas não chegam.
+1. **Subir e juntar as branches do backend.** Enviar ao GitHub a `feat/login-devolve-id-pilha` e a `fix/conversa-so-participantes`, juntar as duas e abrir o PR para a `main`, resolvendo o conflito nos dois testes. Até lá, o backend precisa rodar a partir dessa junção: com a `main` sozinha, o login não devolve o id e as telas que precisam de login falham.
+2. **E-mail:** continuam faltando `MAIL_USERNAME` e `MAIL_PASSWORD` no `.env` do backend. Sem eles, o e-mail de "esqueci a senha" e o de boas-vindas não chegam.
+3. **Telas que faltam no app:** chat do agendamento, gerenciar serviços, funcionárias e usar o painel do backend. As chamadas já estão prontas.
