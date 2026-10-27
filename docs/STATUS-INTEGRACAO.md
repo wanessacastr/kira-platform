@@ -56,7 +56,7 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 
 ### Problemas no backend encontrados na integração
 
-- **Chat sem checagem de acesso (corrigido na `fix/conversa-so-participantes`):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`. A correção ainda não está na `main` nem no GitHub.
+- **Chat sem checagem de acesso (corrigido na `fix/conversa-so-participantes`):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`. A correção está no PR #7 do backend, ainda não juntado na `main`.
 - **Lista de comissões (continua):** `GET /api/comissoes/funcionaria/{id}` devolve a entidade `ComissaoAgendamento` direto, com relações LAZY e `open-in-view: false`. A tendência é dar erro 500 quando houver comissão. O app usa só o total (`/total`) até o backend devolver um DTO.
 - **Painel conta só atendimentos concluídos (continua):** o `/dashboard` não traz ranking de serviços nem avaliações. As telas de Analytics e Financeiro continuam precisando dos agendamentos para esses números.
 
@@ -75,7 +75,7 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 
 ## Situação das branches do backend
 
-A `main` recebeu os PRs #1 a #5 em 26/10 (painel, Swagger, `.env`, horário de funcionamento, avisos do Sonar e permissão do `mvnw`) e **agora compila**. Mas ela ainda não tem o que o app precisa para funcionar inteiro. Essas mudanças estão numa pilha de branches, uma em cima da outra:
+A `main` recebeu os PRs #1 a #5 em 26/10 (painel, Swagger, `.env`, horário de funcionamento, avisos do Sonar e permissão do `mvnw`) e **agora compila**. Mas ela ainda não tem o que o app precisa para funcionar inteiro. Essas mudanças estão numa pilha de branches, uma em cima da outra, e todas entram juntas pela `feat/integracao-app` ([PR #7](https://github.com/IsabelaCristinaDev/kira-backend/pull/7)):
 
 | Branch                          | O que traz                                                     | No GitHub | Na `main` |
 | ------------------------------- | -------------------------------------------------------------- | --------- | --------- |
@@ -84,17 +84,17 @@ A `main` recebeu os PRs #1 a #5 em 26/10 (painel, Swagger, `.env`, horário de f
 | `feat/seguranca-empresa`        | Confere o estúdio dono nas rotas do estabelecimento            | Sim       | Não       |
 | `feat/recuperar-senha`          | Link de redefinição no e-mail de "esqueci a senha"             | Sim       | Não       |
 | `feat/remarcar-antecedencia`    | Remarcar só até 2 horas antes                                  | Sim       | Não       |
-| `feat/login-devolve-id-pilha`   | Id do usuário no login e no refresh (em cima da pilha)         | **Não**   | Não       |
-| `fix/conversa-so-participantes` | Chat só para quem participa do agendamento                     | **Não**   | Não       |
+| `feat/login-devolve-id-pilha`   | Id do usuário no login e no refresh (em cima da pilha)         | Sim       | Não       |
+| `fix/conversa-so-participantes` | Chat só para quem participa do agendamento                     | Sim       | Não       |
 
-A `feat/login-devolve-id` que está no GitHub é a versão antiga, feita sobre um commit anterior à pilha. A que serve é a `feat/login-devolve-id-pilha`.
+A `feat/login-devolve-id` é a versão antiga, feita sobre um commit anterior à pilha. A que serve é a `feat/login-devolve-id-pilha`. O PR #6 (`feat/atendimento-empresa`) também fica coberto pelo PR #7.
 
-Testado em 27/10: juntar a `feat/login-devolve-id-pilha` com a `fix/conversa-so-participantes` não dá conflito e passa em 240 dos 241 testes. O único que falha é o `contextLoads`, que precisa do banco. Juntar esse resultado na `main` dá conflito só em dois testes: `AgendamentoServiceTest` e `ServicoServiceTest`.
+A `feat/integracao-app` junta a `feat/login-devolve-id-pilha`, a `fix/conversa-so-participantes` e a `main`. O conflito com a `main` foi só em dois testes (`AgendamentoServiceTest` e `ServicoServiceTest`) e já está resolvido. Testado em 27/10: passa em 240 dos 241 testes. O único que falha é o `contextLoads`, que precisa do banco.
 
 No app, os 69 testes passam.
 
 ## Para tudo funcionar de verdade
 
-1. **Subir e juntar as branches do backend.** Enviar ao GitHub a `feat/login-devolve-id-pilha` e a `fix/conversa-so-participantes`, juntar as duas e abrir o PR para a `main`, resolvendo o conflito nos dois testes. Até lá, o backend precisa rodar a partir dessa junção: com a `main` sozinha, o login não devolve o id e as telas que precisam de login falham.
+1. **Juntar o [PR #7](https://github.com/IsabelaCristinaDev/kira-backend/pull/7) do backend.** Até lá, o backend precisa rodar a partir da branch `feat/integracao-app`: com a `main` sozinha, o login não devolve o id e as telas que precisam de login falham.
 2. **E-mail:** continuam faltando `MAIL_USERNAME` e `MAIL_PASSWORD` no `.env` do backend. Sem eles, o e-mail de "esqueci a senha" e o de boas-vindas não chegam.
 3. **Telas que faltam no app:** chat do agendamento, gerenciar serviços, funcionárias e usar o painel do backend. As chamadas já estão prontas.
