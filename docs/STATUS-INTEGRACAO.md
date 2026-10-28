@@ -1,6 +1,6 @@
 # Integração do Kira: frontend e backend
 
-Situação em 27/10/2026. Lista do que o app (kira-platform) já usa do backend (kira-backend).
+Situação em 28/10/2026. Lista do que o app (kira-platform) já usa do backend (kira-backend).
 
 ## Funcionando: frontend ligado ao backend
 
@@ -52,21 +52,25 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 | Chat do agendamento                   | `messages.listByAppointment`, `send`, `markRead`                                                                                                      | O botão "Conversar com…" ainda não faz nada              |
 | Gerenciar serviços depois do cadastro | `services.create`, `update`, `deactivate`                                                                                                             | Os serviços só são definidos no cadastro do profissional |
 | Funcionárias                          | `staff.listForMyBusiness`, `create`, `update`, `deactivate`, `agendaDay`, `agendaWeek`, `listBlocks`, `createBlock`, `removeBlock`, `commissionTotal` | Não há tela de funcionárias                              |
+| Profissional remarcar                 | `appointments.rescheduleAsBusiness`                                                                                                                   | A agenda do profissional só tem concluir e cancelar      |
+| Escolher a funcionária                | `professionals.listStaff`, `appointments.create({ staffId })`                                                                                         | O agendamento não mostra a escolha                       |
 | Painel pronto do backend              | `dashboard.getMine({ from, to })`                                                                                                                     | O app ainda calcula os números no navegador              |
 
 ### Problemas no backend encontrados na integração
 
 - **Chat sem checagem de acesso (corrigido):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`. A correção já está na `main` do backend.
 - **Lista de comissões (continua):** `GET /api/comissoes/funcionaria/{id}` devolve a entidade `ComissaoAgendamento` direto, com relações LAZY e `open-in-view: false`. A tendência é dar erro 500 quando houver comissão. O app usa só o total (`/total`) até o backend devolver um DTO.
+- **Funcionária no agendamento (novo):** o `POST /api/agendamentos` não confere se a funcionária é do estúdio, e o conflito de horário e os slots livres valem para o estúdio inteiro, não para cada funcionária. Com duas funcionárias, o estúdio ainda só aceita um atendimento por horário. Quando a tela usar a escolha, os horários mostrados continuarão sendo os do estúdio.
 - **Painel conta só atendimentos concluídos (continua):** o `/dashboard` não traz ranking de serviços nem avaliações. As telas de Analytics e Financeiro continuam precisando dos agendamentos para esses números.
 
 ## O backend tem, mas o app não usa
 
-- **Profissional remarcar:** `PATCH /api/agendamentos/{id}/reagendar/empresa`. Na agenda do profissional só há concluir e cancelar.
-- **Busca no servidor:** `/api/studios/busca`, `/cidade` e `/tipo`. O app traz a lista inteira e filtra no navegador, o que funciona enquanto houver poucos estúdios.
-- **Escolher a funcionária:** `GET /api/studios/{id}/funcionarias`. O agendamento não deixa a cliente escolher quem vai atender.
-- **Médias de avaliação:** `/api/studios/{id}/media` e `/api/avaliacoes/empresa/{id}/media`. O app calcula a média a partir da lista.
 - **Denúncias (só na `feat/canal-seguranca`):** `POST /api/denuncias` e as rotas de análise em `/api/admin/denuncias`. A branch parte de um commit antigo e ainda não foi juntada. O app tem a tela de denúncia, mas ela não envia nada. Os motivos também não batem: o app usa `endereco_invalido` e `risco_imediato`, e o backend espera `ENDERECO_FALSO`, `LOCAL_NAO_VALIDADO` e `PERIGO_DURANTE_ATENDIMENTO`.
+
+### Rotas que o app não usa de propósito
+
+- **Busca no servidor:** `/api/studios/busca`, `/cidade` e `/tipo` carregam todos os usuários e filtram em memória, como o app já faz, e não trazem os serviços. Trocar não deixa a busca mais rápida e perde os filtros por serviço, preço e nota. Vale trocar quando o backend filtrar no banco e paginar.
+- **Médias de avaliação:** `/api/studios/{id}/media` e `/api/avaliacoes/empresa/{id}/media`. A lista e o perfil do estúdio já usam o `mediaAvaliacoes` que vem no próprio estúdio. O painel do profissional calcula a média a partir das avaliações que ele já carrega para mostrar.
 
 ## O app tem, mas o backend não
 
@@ -88,5 +92,5 @@ Testes do backend: passam 240 dos 241. O único que falha é o `contextLoads`, q
 
 ## Para tudo funcionar de verdade
 
-1. **E-mail:** continuam faltando `MAIL_USERNAME` e `MAIL_PASSWORD` no `.env` do backend. Sem eles, o e-mail de "esqueci a senha" e o de boas-vindas não chegam.
-2. **Telas que faltam no app:** chat do agendamento, gerenciar serviços, funcionárias e usar o painel do backend. As chamadas já estão prontas.
+1. **E-mail:** `MAIL_USERNAME` e `MAIL_PASSWORD` já estão no `.env` do backend. Falta testar a troca de senha do começo ao fim (pedir o link, abrir o e-mail, criar a nova senha e entrar).
+2. **Telas que faltam no app:** chat do agendamento, gerenciar serviços, funcionárias, profissional remarcar, escolher a funcionária no agendamento e usar o painel do backend. As chamadas já estão prontas.

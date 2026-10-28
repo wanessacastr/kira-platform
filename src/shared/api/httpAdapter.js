@@ -87,6 +87,11 @@ export const httpAdapter = {
       const clientReviews = reviews.map(toReview).filter((r) => r.author === "CLIENTE");
       return { ...pro, reviewList: clientReviews };
     },
+    // Só as ativas: a cliente escolhe quem vai atender
+    listStaff: async (id) => {
+      const list = await request(`/api/studios/${id}/funcionarias`, { auth: false });
+      return list.map(toStaff);
+    },
   },
   availability: {
     // Dia sem expediente volta como 400 (regra de negócio): para a tela é só um dia sem horários
@@ -112,12 +117,14 @@ export const httpAdapter = {
       const list = await request(`/api/agendamentos/empresa/${currentUserId()}`);
       return list.map((a) => toAppointment(a)).sort((a, b) => a.start - b.start);
     },
-    create: async ({ proId, serviceId, start, payment = null, notes = null }) =>
+    // Sem `staffId`, o estúdio decide quem atende
+    create: async ({ proId, serviceId, staffId = null, start, payment = null, notes = null }) =>
       toAppointment(
         await request(`/api/agendamentos/cliente/${currentUserId()}`, {
           method: "POST",
           body: {
             empresaId: proId,
+            funcionariaId: staffId,
             servicoId: serviceId,
             dataHoraInicio: toLocalDateTime(start),
             formaPagamento: payment,
@@ -138,6 +145,14 @@ export const httpAdapter = {
     complete: async (id) => toAppointment(await request(`/api/agendamentos/${id}/concluir`, { method: "PATCH" })),
     cancelAsBusiness: async (id) =>
       toAppointment(await request(`/api/agendamentos/${id}/cancelar/empresa`, { method: "PATCH" })),
+    // Sem o limite de 2 horas da cliente
+    rescheduleAsBusiness: async ({ id, start }) =>
+      toAppointment(
+        await request(`/api/agendamentos/${id}/reagendar/empresa`, {
+          method: "PATCH",
+          body: { novaDataHoraInicio: toLocalDateTime(start) },
+        }),
+      ),
   },
   reviews: {
     // Só atendimento concluído e ainda não avaliado (o backend confere e devolve a mensagem)
