@@ -39,7 +39,7 @@ Front-end em Vite + React que consome o kira-backend (Spring Boot). Em desenvolv
 
 | Recurso                                             | Situação no app                                                                                            |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Edição do perfil                                    | Salva só na sessão atual (não há `PUT` de cliente)                                                         |
+| Edição do perfil                                    | Salva só na sessão atual; o backend já tem o `PUT` (PR #13), falta a tela usar                             |
 | Fotos (perfil, documentos, portfólio)               | Ficam no navegador; o cadastro não envia imagens                                                           |
 | Categoria e distância do estúdio                    | Categoria reconhecida por palavras nos serviços; distância não aparece (o estúdio não devolve coordenadas) |
 | Favoritas                                           | Guardadas só na sessão atual                                                                               |
@@ -48,6 +48,92 @@ Front-end em Vite + React que consome o kira-backend (Spring Boot). Em desenvolv
 | Gift cards, fidelidade, cupons, formas de pagamento | Telas sem dados                                                                                            |
 | Saldo e repasse                                     | Dependem de gateway de pagamento                                                                           |
 | Similaridade visual do Provador                     | O ranking usa procedimento e avaliação; não há análise de imagem                                           |
+
+## O que falta no backend
+
+Situação em 29/10/2026, na ordem em que vamos fazer. Cada item vira uma branch e um PR no kira-backend. Ao terminar, marcar o item aqui e atualizar o `STATUS-INTEGRACAO.md`.
+
+### 1. Terminar o que já tem PR aberto (feito em 29/10)
+
+- [x] **PR #11:** rota de admin protegida em todos os métodos; conta desativada perde o token e o refresh, some da vitrine e não recebe agendamento; serviços, funcionárias, horários e avaliações dela respondem 404.
+- [x] **PR #8:** o agendamento só aceita funcionária ativa do próprio estúdio.
+- [x] **PR #9:** a lista de comissões devolve DTO.
+- [x] **PR #10:** conflito de horário e horários livres por funcionária.
+
+### 2. Painel do profissional (feito em 29/10)
+
+- [x] **PR #12, `/dashboard` completo:** ticket médio, cancelados, taxa de conclusão, faturamento por dia, comparação com o período anterior, ranking de serviços com os clientes de cada um e resumo das avaliações (média e quantidade por nota).
+
+### 3. Perfil e fotos
+
+- [x] **PR #13, editar perfil:** `GET` e `PUT /api/clientes/{id}/perfil` e `/api/empresas/{id}/perfil`, só para o dono. E-mail, CPF e CNPJ não mudam por aqui.
+- [ ] **Upload de fotos:** perfil e portfólio, com armazenamento de arquivos e limite de tamanho e tipo.
+- [ ] **Verificação de documento e selfie:** decidir antes entre serviço externo (guardar só o resultado), revisão manual ou esconder as telas por enquanto.
+- [ ] **Coordenadas e categoria do estúdio:** latitude e longitude no cadastro (a partir do CEP) e categoria própria, para mostrar a distância e parar de adivinhar a categoria pelos serviços.
+
+### 4. Recursos da cliente
+
+- [ ] **Favoritas:** salvar, listar e remover estúdios favoritos.
+- [ ] **Contato de emergência:** cadastrar e listar.
+- [ ] **Busca no banco:** filtrar por nome, cidade, tipo, serviço, preço e nota no banco, com paginação e já trazendo os serviços. Só então o app troca a busca local pela do servidor.
+
+### 5. Pagamentos (depende de escolher o gateway)
+
+- [ ] **Formas de pagamento, saldo e repasse.**
+- [ ] **Cupons, gift cards e fidelidade.**
+
+### 6. Canal de segurança (adiado; detalhes em `CANAL-SEGURANCA.md`)
+
+- [ ] **Login de conta suspensa:** mensagem própria em vez de "Usuário inexistente ou senha inválida".
+- [ ] **Primeiro admin:** criar ao subir a aplicação, a partir de variáveis do `.env`. Sem admin, ninguém analisa denúncias nem recebe o e-mail de risco imediato.
+- [ ] **Juntar a `feat/canal-seguranca`:** está 32 commits atrás da `main`. Refazer o merge com a `main` atual, rodar os testes, commit, push e PR.
+- [ ] **Acompanhar a própria denúncia:** rota para quem denunciou ver o andamento.
+- [ ] **Suspensão separada do `ativo`:** campo próprio, para revogar a suspensão não reativar uma conta desativada por outro motivo.
+
+### 7. Operação
+
+- [ ] **E-mail:** testar a troca de senha do começo ao fim (pedir o link, abrir o e-mail, criar a senha e entrar).
+- [ ] **Teste `contextLoads`:** rodar sem depender de um banco local (por exemplo, Testcontainers).
+
+## O que falta no frontend
+
+Telas e ajustes do app para usar o que o backend já tem. Por enquanto só anotados aqui; nada disso foi feito.
+
+### Painel do profissional (backend pronto no PR #12)
+
+- [ ] **Conversão:** acrescentar ao `toDashboard` (`mappers.js`) os campos novos (`ticketMedio`, `totalCancelados`, `taxaConclusao`, `faturamentoPeriodoAnterior`, `variacaoFaturamento`, `faturamentoPorDia`, `rankingServicos`, `avaliacoes`), com teste.
+- [ ] **Início, Analytics e Financeiro:** trocar os cálculos de `professional/utils/metrics.js` pelo `api.dashboard.getMine({ from, to })`:
+  - `weeklyRevenue` e `monthlyRevenue` → `faturamentoPorDia`
+  - `revenueDelta` → `variacaoFaturamento` (o backend compara com o período anterior de mesmo tamanho, não com a semana anterior fixa)
+  - `analyticsSummary` → `ticketMedio`, `percentualRecorrencia` e `taxaConclusao`
+  - `appointmentsByWeekday` → `movimentoPorDiaSemana`
+  - `serviceRanking` e `serviceClientBreakdown` → `rankingServicos`
+  - `averageRating` e `ratingBreakdown` → `avaliacoes` (o backend manda a quantidade por nota; a porcentagem sai da quantidade dividida pelo total)
+- [ ] **Continua com a lista de agendamentos:** a agenda do dia (`appointmentsOn`) e os próximos atendimentos (`upcoming`), porque mostram cada atendimento.
+
+### Funcionárias (backend pronto nos PRs #8, #9 e #10)
+
+- [ ] **Tela de funcionárias** no perfil do profissional: listar, criar, editar e desativar (`api.staff.*`), com a agenda do dia e da semana, os bloqueios de horário e o total de comissões.
+- [ ] **Escolher a funcionária no agendamento:** mostrar `professionals.listStaff` e mandar o `staffId` no `appointments.create`.
+- [ ] **Horários livres da funcionária escolhida:** `api.availability.get` precisa mandar `funcionariaId` para `/disponibilidade/slots`. Sem ele, a tela mostra os horários em que alguma funcionária está livre.
+
+### Outras telas com a chamada já pronta
+
+- [ ] **Chat do agendamento:** ligar o botão "Conversar com…" a `api.messages.*`. Chamar `markRead` só nas mensagens com `mine: false`.
+- [ ] **Gerenciar serviços** depois do cadastro: criar, editar e desativar (`api.services.*`).
+- [ ] **Profissional remarcar:** botão na agenda do profissional com `appointments.rescheduleAsBusiness`.
+
+### Perfil (backend pronto no PR #13)
+
+- [ ] **Editar perfil da cliente** (`ClientProfileEditScreen`): carregar com `GET /api/clientes/{id}/perfil` e salvar com `PUT`. Hoje salva só na sessão. O `PUT` exige nome, telefone, data de nascimento e gênero, e troca todos os campos: mandar de volta o endereço e as coordenadas que vieram no `GET`, senão eles são apagados.
+- [ ] **E-mail na edição da cliente:** a tela tem o campo, mas o backend não troca o e-mail. Deixar só leitura ou tirar o campo.
+- [ ] **Editar perfil do profissional:** não há tela. Usar `GET` e `PUT /api/empresas/{id}/perfil` (nome, telefone, descrição, especialidades, endereço, coordenadas e tipo de estabelecimento).
+- [ ] **Nome na sessão:** depois de salvar, atualizar o `nome` guardado no `authStore`, que vem do login.
+
+### Depende do backend
+
+- [ ] **Fotos, favoritas, emergência, busca no servidor e pagamentos:** cada um quando o passo correspondente de "O que falta no backend" estiver pronto.
+- [ ] **Denúncia (adiada com o canal de segurança):** `api.reports.create` com a tradução dos motivos, ligar os botões de `Safety.jsx` e corrigir as mensagens (ver `CANAL-SEGURANCA.md`).
 
 ## Fluxo principal do Provador
 

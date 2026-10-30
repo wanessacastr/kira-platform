@@ -1,6 +1,6 @@
 # Integração do Kira: frontend e backend
 
-Situação em 28/10/2026. Lista do que o app (kira-platform) já usa do backend (kira-backend).
+Situação em 29/10/2026. Lista do que o app (kira-platform) já usa do backend (kira-backend).
 
 ## Funcionando: frontend ligado ao backend
 
@@ -59,9 +59,9 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 ### Problemas no backend encontrados na integração
 
 - **Chat sem checagem de acesso (corrigido):** antes, qualquer pessoa logada lia qualquer conversa. Com a correção, só a cliente e o estúdio do agendamento veem as mensagens, e só quem recebeu pode marcar como lida. Quem tentar marcar a própria mensagem recebe erro, então a tela deve chamar `markRead` só para mensagens com `mine: false`. A correção já está na `main` do backend.
-- **Lista de comissões (continua):** `GET /api/comissoes/funcionaria/{id}` devolve a entidade `ComissaoAgendamento` direto, com relações LAZY e `open-in-view: false`. A tendência é dar erro 500 quando houver comissão. O app usa só o total (`/total`) até o backend devolver um DTO.
-- **Funcionária no agendamento (novo):** o `POST /api/agendamentos` não confere se a funcionária é do estúdio, e o conflito de horário e os slots livres valem para o estúdio inteiro, não para cada funcionária. Com duas funcionárias, o estúdio ainda só aceita um atendimento por horário. Quando a tela usar a escolha, os horários mostrados continuarão sendo os do estúdio.
-- **Painel conta só atendimentos concluídos (continua):** o `/dashboard` não traz ranking de serviços nem avaliações. As telas de Analytics e Financeiro continuam precisando dos agendamentos para esses números.
+- **Lista de comissões (corrigido no PR #9):** `GET /api/comissoes/funcionaria/{id}` agora devolve DTO. O app ainda usa só o total (`/total`).
+- **Funcionária no agendamento (corrigido nos PRs #8 e #10):** o `POST /api/agendamentos` só aceita funcionária ativa do próprio estúdio. O conflito de horário e os slots livres passam a valer por funcionária: com duas funcionárias livres, o estúdio aceita dois atendimentos no mesmo horário. Os slots aceitam a funcionária escolhida (`funcionariaId`).
+- **Painel incompleto (corrigido no PR #12):** o `/dashboard` agora traz ranking de serviços, avaliações, faturamento por dia, ticket médio, taxa de conclusão e comparação com o período anterior. Falta o app usar esses campos (ver "O que falta no frontend" no `ARQUITETURA.md`).
 
 ## O backend tem, mas o app não usa
 
@@ -74,12 +74,12 @@ As chamadas já existem em `src/shared/api/httpAdapter.js` (com conversão e tes
 
 ## O app tem, mas o backend não
 
-- Editar o perfil, fotos, favoritas, emergência, gift cards, fidelidade, cupons e formas de pagamento.
+- Fotos, favoritas, emergência, gift cards, fidelidade, cupons e formas de pagamento.
 - **Documento e selfie do cadastro:** as fotos ficam só no navegador e não são enviadas. O backend não tem rota de upload nem campo de verificação, então o botão "Continuar para verificação facial" não verifica nada. Falta decidir entre verificação por um serviço externo (guardar só o resultado e descartar a selfie), revisão manual dos documentos ou esconder essas telas por enquanto.
 
 ## Situação do backend
 
-Desde 27/10, a `main` do backend tem tudo o que o app usa. O [PR #7](https://github.com/IsabelaCristinaDev/kira-backend/pull/7) juntou a pilha de branches que faltava:
+Desde 27/10, a `main` do backend tem tudo o que o app usa. Em 29/10 entraram os PRs #8, #9, #10, #11 #12 e #13 (funcionária, comissões, horário por funcionária, rota de admin, conta desativada, painel completo e editar perfil). A edição de perfil ainda não tem tela no app. O [PR #7](https://github.com/IsabelaCristinaDev/kira-backend/pull/7) juntou a pilha de branches que faltava:
 
 - Só o estúdio dono conclui ou cancela, sem erro 500 ao cancelar
 - Confere o dono nas rotas de agendamento e o estúdio dono nas rotas do estabelecimento
@@ -88,7 +88,7 @@ Desde 27/10, a `main` do backend tem tudo o que o app usa. O [PR #7](https://git
 - Id do usuário no login e no refresh
 - Chat só para quem participa do agendamento
 
-Testes do backend: passam 240 dos 241. O único que falha é o `contextLoads`, que precisa do banco. No app, os 69 testes passam.
+Testes do backend: passam os 300 (o `contextLoads` precisa do banco local no ar). No app, os 69 testes passam.
 
 ## Para tudo funcionar de verdade
 
