@@ -32,6 +32,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ### Alterado
 
+- A tela Buscar usa a busca do servidor, com filtros no banco e páginas sob demanda.
 - Os dados falsos saíram do app: telas do cliente e do profissional usam o kira-backend (`VITE_API_URL`).
 - Login, cadastro de cliente e de profissional, agendamento e cancelamento chamam a API de verdade, com renovação do token.
 - Busca, Home, ranking e perfil do profissional usam os estúdios, serviços e avaliações do backend.
