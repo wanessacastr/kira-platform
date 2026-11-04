@@ -49,7 +49,7 @@ Front-end em Vite + React que consome o kira-backend (Spring Boot). Em desenvolv
 | Denúncia e emergência                               | Só a interface (futura `POST /api/denuncias`)                                                                    |
 | Verificação facial                                  | Só a interface, nenhum dado biométrico é salvo                                                                   |
 | Gift cards, fidelidade, cupons, formas de pagamento | Telas sem dados                                                                                                  |
-| Saldo e repasse                                     | Dependem de gateway de pagamento                                                                                 |
+| Saldo e repasse                                     | Fora do produto: o pagamento é feito no estúdio                                                                  |
 | Similaridade visual do Provador                     | O ranking usa procedimento e avaliação; não há análise de imagem                                                 |
 
 ## O que falta no backend
@@ -82,10 +82,13 @@ Situação em 29/10/2026, na ordem em que vamos fazer. Cada item vira uma branch
 - [ ] **Editar contato de emergência:** não há rota; para corrigir, é preciso remover e cadastrar de novo. Criar se a tela precisar.
 - [ ] **Busca no banco:** filtrar por nome, cidade, tipo, serviço, preço e nota no banco, com paginação e já trazendo os serviços. Só então o app troca a busca local pela do servidor.
 
-### 5. Pagamentos (depende de escolher o gateway)
+### 5. Pagamentos
 
-- [ ] **Formas de pagamento, saldo e repasse.**
-- [ ] **Cupons, gift cards e fidelidade.**
+Decidido em 04/11: **a cliente paga no estúdio, e o sistema só registra.** Não há gateway, cobrança online, saldo nem repasse.
+
+- [ ] **Registrar ao concluir:** `PATCH /api/agendamentos/{id}/concluir` aceita `formaPagamento` (opcional; sem ela, fica a que veio no agendamento). Atendimento concluído conta como pago, como o Financeiro já faz. Falta o merge da branch `feat/pagamento-no-estudio` do backend. Essa decisão não cobre atendimento concluído sem pagamento.
+- [ ] **`StatusPagamento` no backend:** o enum não é usado e, com essa decisão, não faz falta. Decidir se sai.
+- [ ] **Cupons, gift cards e fidelidade:** não dependem mais de gateway. Decidir se continuam no produto.
 
 ### 6. Canal de segurança (fica por último, depois das outras pendências; detalhes em `CANAL-SEGURANCA.md`)
 
@@ -196,7 +199,7 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 
 **Decisões pendentes**
 
-- [ ] A notificação mostra o texto da mensagem (até 120 caracteres) ou só "Nova mensagem"? Hoje o backend envia o texto, e o service worker mostra o que vier. A decisão fica só no backend.
+- [x] A notificação mostra o texto da mensagem, até 120 caracteres (decidido em 04/11). É o que o backend já envia, então nada muda.
 - [ ] Computador compartilhado: a permissão é do navegador, não da conta. Quem entrar depois em um navegador já permitido passa a receber as notificações ali sem ser perguntado, até sair da conta. Decidir se a segunda conta deve confirmar.
 
 ### Painel do profissional (backend pronto no PR #12)
@@ -227,7 +230,9 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 - [ ] **Notificação de mensagem nova, como no Instagram:** lista de conversas, contador ao vivo e notificação com o app fechado (web push no web; push do celular quando o mobile chegar). E-mail não faz parte do chat.
 - [ ] **Conversa de agendamento cancelado no profissional:** a agenda do dia esconde os cancelados, então o estúdio não abre esse histórico.
 - [ ] **Gerenciar serviços** depois do cadastro: criar, editar e desativar (`api.services.*`).
-- [ ] **PR #12 do app (`feat/tela-processamento-pagamento`):** aberto desde 26/10 e, em 03/11, 43 commits atrás da `main`. Decidir se entra agora ou espera o gateway de pagamento.
+- [ ] **PR #12 do app (`feat/tela-processamento-pagamento`):** tela de processar pagamento, que não combina com o pagamento no estúdio. Decidir se o PR será fechado.
+- [ ] **Forma de pagamento ao concluir (tela):** ao concluir, perguntar como a cliente pagou (dinheiro, cartão de crédito, cartão de débito ou Pix) e chamar `api.appointments.complete(id, { payment })`. A integração está pronta; sem a pergunta, o atendimento é concluído sem registrar a forma.
+- [ ] **Textos de pagamento online (telas):** ajustar o que promete pagar pelo app: `PaymentPanel` e as etapas do acompanhamento (Pix), `ClientPaymentMethodsScreen` ("Adicione um cartão"), "Pagamento protegido" em `ProSecurityScreen` e o aviso de gateway em `ProFinanceScreen`.
 - [x] **Profissional remarcar:** botão na agenda abre `ProRescheduleScreen`, que divide o fluxo com a cliente (`shared/components/RescheduleScreen.jsx`).
 
 ### Perfil (backend pronto no PR #13)

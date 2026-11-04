@@ -80,8 +80,8 @@ As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `m
 ## O app tem, mas o backend não
 
 - **Chat com IA (atendimento):** tela pronta em `/cliente/atendimento`, com respostas simuladas (`api.chat`) e aviso de demonstração. Futuro: n8n. É outro chat, diferente do cliente–empresa (`api.messages`). Os cards de profissional usam dados de exemplo, então abrir o perfil de um deles dá erro.
-- **Acompanhar agendamento:** mostra o agendamento real, mas as etapas e o Pix são simulados (`api.bookings`), com aviso de demonstração.
-- Fotos, gift cards, fidelidade, cupons e formas de pagamento.
+- **Acompanhar agendamento:** mostra o agendamento real, mas as etapas e o Pix são simulados (`api.bookings`), com aviso de demonstração. O pagamento é feito no estúdio, então o Pix dessa tela não vai virar real (ver "Pagamentos" no `ARQUITETURA.md`).
+- Fotos, gift cards, fidelidade e cupons. Formas de pagamento online não existem: a cliente paga no estúdio, e o estúdio registra a forma ao concluir.
 - **Documento e selfie do cadastro:** as fotos ficam só no navegador e não são enviadas. O backend não tem rota de upload nem campo de verificação, então o botão "Continuar para verificação facial" não verifica nada. Falta decidir entre verificação por um serviço externo (guardar só o resultado e descartar a selfie), revisão manual dos documentos ou esconder essas telas por enquanto.
 
 ## Situação do backend
