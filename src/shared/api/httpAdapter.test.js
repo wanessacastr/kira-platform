@@ -222,3 +222,28 @@ describe("businessHours.get", () => {
     expect(fetch.mock.calls[0][1].headers.Authorization).toBeUndefined();
   });
 });
+
+describe("appointments.complete", () => {
+  const completed = {
+    id: "a1",
+    status: "CONCLUIDO",
+    dataHoraInicio: "2026-11-10T09:00:00",
+    formaPagamento: "DINHEIRO",
+  };
+
+  it("registra a forma de pagamento informada pelo estúdio", async () => {
+    const fetch = vi.fn().mockResolvedValue(json(200, completed));
+    vi.stubGlobal("fetch", fetch);
+    const result = await api.appointments.complete("a1", { payment: "DINHEIRO" });
+    expect(urls(fetch)[0]).toMatch(/\/api\/agendamentos\/a1\/concluir$/);
+    expect(fetch.mock.calls[0][1].method).toBe("PATCH");
+    expect(JSON.parse(fetch.mock.calls[0][1].body)).toEqual({ formaPagamento: "DINHEIRO" });
+    expect(result.payment).toBe("Dinheiro");
+  });
+  it("sem a forma, conclui sem mandar corpo", async () => {
+    const fetch = vi.fn().mockResolvedValue(json(200, completed));
+    vi.stubGlobal("fetch", fetch);
+    await api.appointments.complete("a1");
+    expect(fetch.mock.calls[0][1].body).toBeUndefined();
+  });
+});

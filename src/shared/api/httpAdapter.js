@@ -199,7 +199,14 @@ export const httpAdapter = {
         }),
       ),
     // Ações do estúdio: o backend confere se o atendimento é do estúdio logado
-    complete: async (id) => toAppointment(await request(`/api/agendamentos/${id}/concluir`, { method: "PATCH" })),
+    // O pagamento é feito no estúdio: `payment` registra como a cliente pagou. Sem ele, fica o que veio no agendamento.
+    complete: async (id, { payment = null } = {}) =>
+      toAppointment(
+        await request(`/api/agendamentos/${id}/concluir`, {
+          method: "PATCH",
+          ...(payment ? { body: { formaPagamento: payment } } : {}),
+        }),
+      ),
     cancelAsBusiness: async (id) =>
       toAppointment(await request(`/api/agendamentos/${id}/cancelar/empresa`, { method: "PATCH" })),
     // Sem o limite de 2 horas da cliente
