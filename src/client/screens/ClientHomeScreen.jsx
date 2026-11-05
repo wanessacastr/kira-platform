@@ -9,6 +9,7 @@ import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { CategoryChip } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { BottomNav } from "../components/BottomNav";
+import { MascotHelpButton } from "../components/chat/MascotHelpButton";
 import { ProPhoto, RecommendedProfessionalCard, ratingLabel } from "../components/ProfessionalCards";
 import { dashboardCategories } from "../data/options";
 import { useProfessionals } from "../hooks/useProfessionals";
@@ -16,7 +17,7 @@ import { useProfessionals } from "../hooks/useProfessionals";
 export default function ClientHomeScreen() {
   const { cForm } = useSignup();
   const { categoryFilter, setCategoryFilter } = useSearch();
-  const { goToTab, setScreen } = useSession();
+  const { goToTab, setScreen, openWithBack } = useSession();
   const { loadRanking, rankingError, rankingLoading, recommended } = useRanking();
   const { rankingSource, startTryOnFlow } = useTryOn();
   const { setBookedSlot, setSelectedProId } = useScheduling();
@@ -118,8 +119,11 @@ export default function ClientHomeScreen() {
         </button>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>
-        <div style={{ display: "flex", gap: "var(--space-8)", overflowX: "auto", padding: "0 0 var(--space-18)" }}>
+      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", padding: "0 var(--space-24) var(--space-24)" }}>
+        <div
+          className="k-hscroll"
+          style={{ display: "flex", gap: "var(--space-8)", overflowX: "auto", padding: "0 0 var(--space-18)" }}
+        >
           {dashboardCategories.map((cat) => (
             <CategoryChip
               key={cat.id}
@@ -152,6 +156,7 @@ export default function ClientHomeScreen() {
           return (
             <>
               <div
+                className="k-hscroll"
                 style={{
                   display: "flex",
                   gap: "var(--space-10)",
@@ -357,6 +362,7 @@ export default function ClientHomeScreen() {
           </div>
           <ChevronRight size={18} color={colors.primary} />
         </button>
+        <MascotHelpButton onOpen={() => openWithBack("clientChat", "clientHome")} />
       </div>
 
       <BottomNav active="clientHome" onNavigate={goToTab} />
