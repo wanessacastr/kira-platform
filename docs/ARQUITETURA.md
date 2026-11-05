@@ -155,6 +155,11 @@ A integração (chamadas e hooks) fica pronta para a tela usar. Quem faz a tela 
 
 **Telas já feitas, para revisar o visual:** remarcar (cliente e profissional), conversa do agendamento (cliente e profissional), botões "Remarcar" e "Conversar com…" na agenda do profissional e aviso de "Demonstração" no chat com IA e no acompanhamento.
 
+**Telas do pitch, já na `main` pelo PR #20 (conferido em 05/11/2026):** as telas novas (chat, checkout, Premium, FAQ e outras) entraram na `main`, mas parte delas ainda usa dados de exemplo.
+
+- [ ] Ligar ao backend as telas que usam dados de exemplo (16 arquivos importam `data/demo` ou `components/demo`), reaproveitando as integrações que já existem, como `useConversations()`.
+- [ ] Testar no navegador as telas ligadas ao backend.
+
 ### Notificação do navegador (backend pronto no PR #17)
 
 Para a notificação chegar com o app fechado, como no Instagram.
