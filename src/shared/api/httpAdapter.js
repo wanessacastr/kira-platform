@@ -22,6 +22,7 @@ import {
   toProfessional,
   toProfessionalRegistration,
   toReview,
+  toSearchedProfessional,
   toServiceRequest,
   toSlotTime,
   toStaff,
@@ -139,6 +140,28 @@ export const httpAdapter = {
       const studios = await request("/api/studios", { auth: false });
       const services = await Promise.all(studios.map((s) => listServices(s.id).catch(() => [])));
       return studios.map((s, i) => toProfessional(s, services[i]));
+    },
+    // Busca no servidor, em páginas. Com login de cliente, a distância vem das coordenadas do perfil.
+    search: async ({ text, category, type, maxPrice, minRating, maxDistanceKm, sort, page = 0, size = 20 }) => {
+      const result = await request("/api/studios/pesquisa", {
+        query: {
+          texto: text,
+          categoria: category,
+          tipo: type,
+          precoMaximo: maxPrice,
+          notaMinima: minRating,
+          distanciaMaximaKm: maxDistanceKm,
+          ordenacao: sort,
+          pagina: page,
+          tamanho: size,
+        },
+      });
+      return {
+        items: result.itens.map(toSearchedProfessional),
+        page: result.pagina,
+        total: result.totalItens,
+        totalPages: result.totalPaginas,
+      };
     },
     get: async (id) => {
       const [studio, services, reviews] = await Promise.all([

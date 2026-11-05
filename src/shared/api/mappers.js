@@ -79,6 +79,14 @@ export const toProfessional = (studio, services = [], reviews = null) => {
   };
 };
 
+// Item da busca no servidor: já traz serviços, preço, avaliações e distância
+/** @returns {import("./contract").Professional} */
+export const toSearchedProfessional = (item) => ({
+  ...toProfessional(item, item.servicos ?? []),
+  reviews: item.quantidadeAvaliacoes ?? 0,
+  distance: item.distanciaKm != null ? Math.round(item.distanciaKm * 10) / 10 : null,
+});
+
 /** @returns {import("./contract").Appointment} */
 export const toAppointment = (a, now = new Date()) => {
   const start = parseLocalDateTime(a.dataHoraInicio);

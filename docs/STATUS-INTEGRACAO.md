@@ -1,6 +1,6 @@
 # Integração do Kira: frontend e backend
 
-Situação em 03/11/2026. Lista do que o app web (kira-platform) já usa do backend (kira-backend). O sistema será web e mobile: a prioridade agora é terminar o web, e o app Expo (`mobile/`) será ligado ao backend depois (ver "Mobile" no `ARQUITETURA.md`).
+Situação em 04/11/2026. Lista do que o app web (kira-platform) já usa do backend (kira-backend). O sistema será web e mobile: a prioridade agora é terminar o web, e o app Expo (`mobile/`) será ligado ao backend depois (ver "Mobile" no `ARQUITETURA.md`).
 
 ## Funcionando: frontend ligado ao backend
 
@@ -17,7 +17,8 @@ Situação em 03/11/2026. Lista do que o app web (kira-platform) já usa do back
 
 | Função                                              | Onde fica no app                            |
 | --------------------------------------------------- | ------------------------------------------- |
-| Lista de estúdios, busca e ranking                  | Início e Buscar                             |
+| Lista de estúdios e ranking                         | Início                                      |
+| Busca no servidor, com filtros e páginas            | Buscar                                      |
 | Perfil do estúdio com serviços, preços e avaliações | Perfil do profissional                      |
 | Ver horários livres de um dia                       | Agendamento                                 |
 | Agendar                                             | Agendamento                                 |
@@ -57,7 +58,7 @@ As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `m
 | Escolher a funcionária                | `professionals.listStaff`, `appointments.create({ staffId })`                                                                                         | O agendamento não mostra a escolha; os horários livres já aceitam a funcionária (`availability.get({ staffId })`) |
 | Painel pronto do backend              | `dashboard.getMine({ from, to })`, pelo hook `useDashboard`                                                                                           | As telas ainda calculam os números no navegador (`metrics.js`)                                                    |
 | Editar perfil                         | `profile.getMine`, `saveMine`                                                                                                                         | A edição da cliente salva só na sessão, e o profissional não tem tela                                             |
-| Contatos de emergência                | `emergencyContacts.list`, `create`, `remove`                                                                                                          |
+| Contatos de emergência                | `emergencyContacts.list`, `create`, `remove`                                                                                                          | Não há tela de contatos                                                                                           |
 | Categoria do serviço                  | `services.create`, `update` e cadastro do profissional, com `category`                                                                                | Falta o campo na tela; sem ele, o backend deduz pelo nome                                                         |
 
 ### Problemas no backend encontrados na integração
@@ -74,7 +75,7 @@ As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `m
 
 ### Rotas que o app não usa de propósito
 
-- **Busca no servidor:** `/api/studios/busca`, `/cidade` e `/tipo` carregam todos os usuários e filtram em memória, como o app já faz, e não trazem os serviços. Trocar não deixa a busca mais rápida e perde os filtros por serviço, preço e nota. Vale trocar quando o backend filtrar no banco e paginar.
+- **Rotas antigas de busca:** `/api/studios/busca`, `/cidade` e `/tipo` carregam todos os usuários e filtram em memória, e não trazem os serviços. A tela Buscar usa `/api/studios/pesquisa` (PR #28), que filtra no banco e pagina.
 - **Médias de avaliação:** `/api/studios/{id}/media` e `/api/avaliacoes/empresa/{id}/media`. A lista e o perfil do estúdio já usam o `mediaAvaliacoes` que vem no próprio estúdio. O painel do profissional calcula a média a partir das avaliações que ele já carrega para mostrar.
 
 ## O app tem, mas o backend não
@@ -86,7 +87,7 @@ As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `m
 
 ## Situação do backend
 
-Desde 02/11, a `main` do backend tem tudo o que o app usa. Em 03/11 entraram os PRs #24 (CI) e #25 (validade da conexão ao vivo). Em 02/11 entraram os PRs #15 a #19 e #21 a #23 (chat em tempo real, resposta 401 que faz a sessão renovar, lista de conversas, notificações, horário só pelo dono, painel com concluídos, respostas de erro, teste com banco e rotas de avaliações). Em 29/10 entraram os PRs #8, #9, #10, #11, #12, #13 e #14 (funcionária, comissões, horário por funcionária, rota de admin, conta desativada, painel completo, editar perfil, categoria no serviço e coordenadas do estúdio). O filtro por categoria e a distância já funcionam no app; a edição de perfil e o campo de categoria ainda não têm tela. O [PR #7](https://github.com/IsabelaCristinaDev/kira-backend/pull/7) juntou a pilha de branches que faltava:
+Desde 02/11, a `main` do backend tem tudo o que o app usa. Em 04/11 entraram os PRs #26 (registros simultâneos do navegador), #27 (favoritas e contatos de emergência) e #28 (busca no banco). Em 03/11 entraram os PRs #24 (CI) e #25 (validade da conexão ao vivo). Em 02/11 entraram os PRs #15 a #19 e #21 a #23 (chat em tempo real, resposta 401 que faz a sessão renovar, lista de conversas, notificações, horário só pelo dono, painel com concluídos, respostas de erro, teste com banco e rotas de avaliações). Em 29/10 entraram os PRs #8, #9, #10, #11, #12, #13 e #14 (funcionária, comissões, horário por funcionária, rota de admin, conta desativada, painel completo, editar perfil, categoria no serviço e coordenadas do estúdio). O filtro por categoria e a distância já funcionam no app; a edição de perfil e o campo de categoria ainda não têm tela. O [PR #7](https://github.com/IsabelaCristinaDev/kira-backend/pull/7) juntou a pilha de branches que faltava:
 
 - Só o estúdio dono conclui ou cancela, sem erro 500 ao cancelar
 - Confere o dono nas rotas de agendamento e o estúdio dono nas rotas do estabelecimento

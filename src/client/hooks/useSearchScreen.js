@@ -1,40 +1,77 @@
-// Estado da tela de busca (carregamento, filtros, rolagem infinita, puxar para atualizar) · API: kira-backend (estúdios)
-import { useEffect, useRef, useState } from "react";
+// Estado da tela de busca (carregamento, filtros, rolagem infinita, puxar para atualizar) · API: kira-backend (api.professionals.search)
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearch } from "../../context/SearchContext";
+import { useSession } from "../../context/SessionContext";
+import { api } from "../../shared/api";
 import { defaultSearchFilters } from "../data/options";
-import { searchProfessionals } from "../utils/searchProfessionals";
-import { useProfessionals } from "./useProfessionals";
+import { toSearchParams } from "../utils/searchParams";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 20;
+const TYPING_PAUSE_MS = 300;
+
+// Um estúdio pode mudar de página entre uma chamada e outra: não mostra repetido
+export const uniqueById = (professionals) => [...new Map(professionals.map((p) => [p.id, p])).values()];
 
 export function useSearchScreen() {
+  const { auth } = useSession();
   const { searchQuery, categoryFilter, setCategoryFilter, appliedFilters, setAppliedFilters } = useSearch();
+  const [typedQuery, setTypedQuery] = useState(searchQuery);
   const [draftFilters, setDraftFilters] = useState(defaultSearchFilters);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
   const [filterModalMounted, setFilterModalMounted] = useState(false);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [refreshing, setRefreshing] = useState(false);
   const [pullDistance, setPullDistance] = useState(0);
   const searchListRef = useRef(null);
   const pullStartY = useRef(null);
 
-  // a lista vem do backend; a busca e os filtros são aplicados aqui, sem novo carregamento
-  const load = useProfessionals();
-  const searchLoading = load.isFetching;
-
-  const filteredProfessionals = searchProfessionals(load.data ?? [], {
-    query: searchQuery,
-    category: categoryFilter,
-    filters: appliedFilters,
-  });
-  const searchHasError = load.isError && !load.isFetching;
-
+  // Espera uma pausa na digitação para não chamar o backend a cada letra
   useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [searchQuery, categoryFilter, appliedFilters]);
+    const timer = setTimeout(() => setTypedQuery(searchQuery), TYPING_PAUSE_MS);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  const params = useMemo(
+    () => toSearchParams({ query: typedQuery, category: categoryFilter, filters: appliedFilters }),
+    [typedQuery, categoryFilter, appliedFilters],
+  );
+  const load = useInfiniteQuery({
+    // A conta faz parte da chave porque a distância depende de quem está logado
+    queryKey: ["professionals", "search", auth?.id ?? null, params],
+    queryFn: ({ pageParam }) => api.professionals.search({ ...params, page: pageParam, size: PAGE_SIZE }),
+    initialPageParam: 0,
+    getNextPageParam: (last) => (last.page + 1 < last.totalPages ? last.page + 1 : undefined),
+  });
+  const searchLoading = load.isFetching && !load.isFetchingNextPage;
+  const filteredProfessionals = useMemo(
+    () => uniqueById(load.data?.pages.flatMap((page) => page.items) ?? []),
+    [load.data],
+  );
+  // Falha em uma página seguinte mantém o que já carregou; rolar de novo tenta outra vez
+  const searchHasError = load.isError && !load.isFetching && !load.isFetchNextPageError;
+  const hasMore = !!load.hasNextPage;
+  // A tela mostra "Carregando mais…" quando há menos itens visíveis do que carregados. O último fica
+  // guardado até a próxima página chegar, e assim a tela não precisa saber da paginação.
+  const loadedCount = filteredProfessionals.length;
+  const visibleCount = hasMore ? loadedCount - 1 : loadedCount;
+
+  // Pede a próxima página quando o fim da lista aparece, seja qual for o elemento que rola (na moldura, é a
+  // janela). Depois de uma falha, só tenta de novo quando o fim sai e volta à tela, para não repetir sem parar.
+  const { fetchNextPage } = load;
+  useEffect(() => {
+    const end = searchListRef.current?.lastElementChild;
+    if (!end || !hasMore || searchLoading) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) fetchNextPage({ cancelRefetch: false });
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(end);
+    return () => observer.disconnect();
+  }, [hasMore, searchLoading, loadedCount, fetchNextPage]);
 
   const runSearchLoad = () => {
-    setVisibleCount(PAGE_SIZE);
     load.refetch();
   };
   const openFilterModal = () => {
@@ -55,12 +92,6 @@ export function useSearchScreen() {
     setAppliedFilters(defaultSearchFilters);
     setCategoryFilter("todos");
     closeFilterModal();
-  };
-  const handleSearchScroll = (e) => {
-    const el = e.target;
-    if (el.scrollHeight - el.scrollTop - el.clientHeight < 80) {
-      setVisibleCount((v) => Math.min(v + PAGE_SIZE, filteredProfessionals.length));
-    }
   };
   const handlePullStart = (e) => {
     if (searchListRef.current && searchListRef.current.scrollTop === 0) {
@@ -95,7 +126,6 @@ export function useSearchScreen() {
     handlePullEnd,
     handlePullMove,
     handlePullStart,
-    handleSearchScroll,
     openFilterModal,
     pullDistance,
     refreshing,

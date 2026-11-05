@@ -20,7 +20,8 @@ Front-end em Vite + React que consome o kira-backend (Spring Boot). Em desenvolv
 | Login, refresh e logout                                | `LoginScreen`, `SessionContext`, `http.js`                        | `POST /api/auth/login`, `/refresh`, `/logout`                                                                                                |
 | Esqueci a senha                                        | `ForgotPasswordScreen`, `ResetPasswordScreen`                     | `POST /api/auth/recuperar-senha`, `/redefinir-senha`                                                                                         |
 | Cadastro                                               | `ClientTermsScreen`, `ProTermsScreen`                             | `POST /api/auth/registro/cliente`, `/registro/empresa`                                                                                       |
-| Busca, Home e ranking                                  | `useProfessionals`, `useSearchScreen`, `useRanking`               | `GET /api/studios` + `GET /api/studios/{id}/servicos` (um por estúdio)                                                                       |
+| Busca                                                  | `useSearchScreen`, `api.professionals.search`                     | `GET /api/studios/pesquisa` (filtros e paginação no banco)                                                                                   |
+| Home e ranking                                         | `useProfessionals`, `useRanking`                                  | `GET /api/studios` + `GET /api/studios/{id}/servicos` (um por estúdio)                                                                       |
 | Perfil do profissional                                 | `ClientProfessionalProfileScreen`                                 | `GET /api/studios/{id}`, `/servicos`, `/avaliacoes`                                                                                          |
 | Horários livres                                        | `ClientSchedulingScreen`                                          | `GET /api/empresas/{id}/disponibilidade/slots?servicoId&data`                                                                                |
 | Agendar e cancelar                                     | `ClientSchedulingScreen`, `ClientAgendaDetailScreen`              | `POST /api/agendamentos/cliente/{id}`, `PATCH /api/agendamentos/{id}/cancelar`                                                               |
@@ -80,7 +81,7 @@ Situação em 29/10/2026, na ordem em que vamos fazer. Cada item vira uma branch
 - [x] **Favoritas:** salvar, listar e remover estúdios favoritos (PR #27).
 - [x] **Contato de emergência:** cadastrar, listar e remover, até 5 por cliente (PR #27). Por enquanto só ficam guardados: nada avisa essas pessoas.
 - [ ] **Editar contato de emergência:** não há rota; para corrigir, é preciso remover e cadastrar de novo. Criar se a tela precisar.
-- [ ] **Busca no banco:** filtrar por nome, cidade, tipo, serviço, preço e nota no banco, com paginação e já trazendo os serviços. Só então o app troca a busca local pela do servidor.
+- [x] **Busca no banco:** `GET /api/studios/pesquisa` filtra no banco, com paginação e já trazendo os serviços (PR #28). A tela Buscar do app já usa essa rota.
 
 ### 5. Pagamentos (depende de escolher o gateway)
 
@@ -91,7 +92,7 @@ Situação em 29/10/2026, na ordem em que vamos fazer. Cada item vira uma branch
 
 - [ ] **Login de conta suspensa:** mensagem própria em vez de "Usuário inexistente ou senha inválida".
 - [ ] **Primeiro admin:** criar ao subir a aplicação, a partir de variáveis do `.env`. Sem admin, ninguém analisa denúncias nem recebe o e-mail de risco imediato.
-- [ ] **Juntar a `feat/canal-seguranca`:** em 03/11 estava 79 commits atrás da `main`. A pasta `kira-backend-canal-seguranca` tem um merge sem commit, com os conflitos resolvidos: conferir se ainda serve ou refazer com a `main` atual, rodar os testes, commit, push e PR.
+- [ ] **Juntar a `feat/canal-seguranca`:** em 04/11 estava 90 commits atrás da `main`. A pasta `kira-backend-canal-seguranca` tem um merge sem commit, com os conflitos resolvidos: conferir se ainda serve ou refazer com a `main` atual, rodar os testes, commit, push e PR.
 - [ ] **Acompanhar a própria denúncia:** rota para quem denunciou ver o andamento.
 - [ ] **Suspensão separada do `ativo`:** campo próprio, para revogar a suspensão não reativar uma conta desativada por outro motivo.
 
@@ -142,7 +143,7 @@ A integração (chamadas e hooks) fica pronta para a tela usar. Quem faz a tela 
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | **Lista de conversas** (cliente e profissional)     | Nome e foto da outra parte, serviço, última mensagem, horário e quantidade de não lidas. Tocar abre a conversa (`clientConversation` ou `proConversation`) | Pronta: `useConversations()` traz `conversations`                                           |
 | **Número de não lidas no menu**                     | Total de mensagens não lidas                                                                                                                               | Pronta: `useConversations()` traz `totalUnread`, ao vivo                                    |
-| **Permitir notificações**                           | Botão para a pessoa autorizar as notificações do navegador                                                                                                 | Backend pronto; falta a integração (ver "Notificação do navegador")                         |
+| **Permitir notificações**                           | Botão para a pessoa autorizar as notificações do navegador                                                                                                 | Pronta: `api.notifications.enable()` (ver "Notificação do navegador")                       |
 | **Funcionárias** (profissional)                     | Listar, criar, editar e desativar, com agenda, bloqueios e comissões                                                                                       | Chamadas prontas (`api.staff.*`)                                                            |
 | **Escolher a funcionária no agendamento** (cliente) | Lista de funcionárias e os horários livres da escolhida                                                                                                    | Pronta: `professionals.listStaff`, `availability.get` e `appointments.create` com `staffId` |
 | **Gerenciar serviços** (profissional)               | Criar, editar e desativar serviços depois do cadastro                                                                                                      | Chamadas prontas (`api.services.*`)                                                         |
@@ -255,7 +256,10 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 
 ### Depende do backend
 
-- [ ] **Fotos, busca no servidor e pagamentos:** cada um quando o passo correspondente de "O que falta no backend" estiver pronto.
+- [ ] **Fotos e pagamentos:** cada um quando o passo correspondente de "O que falta no backend" estiver pronto.
+- [ ] **Início e ranking:** continuam com `useProfessionals`, que carrega todos os estúdios e chama `/servicos` de cada um. Trocar por `api.professionals.search` para não pesar com muitos estúdios.
+- [ ] **Filtro de modo de atendimento:** o backend não tem esse dado, então a escolha na tela de filtros não muda o resultado.
+- [ ] **Paginação na tela Buscar (ajuste de tela):** para não mudar a tela, `useSearchScreen` guarda o último item até a próxima página chegar (`visibleCount`) e observa o fim da lista sozinho. Quando alguém mexer nessa tela, dá para usar `hasMore` e tirar o `slice` e o `onScroll`, que não faz mais nada.
 - [ ] **Denúncia (por último, com o canal de segurança):** `api.reports.submit` real no web (hoje só existe o mock do Expo), com a tradução dos motivos, ligar os botões de `Safety.jsx` e corrigir as mensagens (ver `CANAL-SEGURANCA.md`).
 
 ## Pendências do chat
