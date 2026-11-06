@@ -2,6 +2,7 @@
 import {
   BadgeCheck,
   Bookmark,
+  Bell,
   Calendar,
   Clock,
   CreditCard,
@@ -10,6 +11,7 @@ import {
   HelpCircle,
   Home,
   MapPin,
+  MessageCircle,
   Scissors,
   Search,
   Settings,
@@ -69,6 +71,9 @@ export const clientProfileMenu = [
     title: "Minha atividade",
     items: [
       { label: "Meus agendamentos", icon: Calendar, go: "clientAgenda" },
+      { label: "Conversas", icon: MessageCircle, go: "clientConversations" },
+      { label: "Notificações", icon: Bell, go: "clientNotifications" },
+      { label: "Fidelidade Kira", icon: Gift, go: "clientLoyalty" },
       { label: "Minhas avaliações", icon: Star, go: "clientReviews" },
       { label: "Profissionais favoritos", icon: Bookmark, go: "clientFavorites" },
       { label: "Histórico", icon: Clock, go: "clientHistory" },

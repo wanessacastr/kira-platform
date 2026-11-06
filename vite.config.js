@@ -8,6 +8,18 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     plugins: [react()],
+    build: {
+      rollupOptions: {
+        output: {
+          // Bibliotecas que quase não mudam ficam em arquivos próprios e reaproveitam o cache do navegador
+          manualChunks: {
+            react: ["react", "react-dom", "react-router-dom"],
+            data: ["@tanstack/react-query"],
+            forms: ["react-hook-form", "@hookform/resolvers", "zod"],
+          },
+        },
+      },
+    },
     server: {
       proxy: {
         "/api": {

@@ -30,3 +30,7 @@ export const useDashboard = ({ from = null, to = null } = {}) =>
 
 // Horário de funcionamento do estúdio logado (semana inteira, segunda primeiro)
 export const useBusinessHours = () => useQuery({ queryKey: ["businessHours"], queryFn: api.businessHours.getMine });
+
+// Funcionárias do estúdio logado (inclui desativadas, marcadas com active: false)
+export const useBusinessStaff = () =>
+  useQuery({ queryKey: ["staff", "business"], queryFn: api.staff.listForMyBusiness });

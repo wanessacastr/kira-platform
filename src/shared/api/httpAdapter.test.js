@@ -270,3 +270,43 @@ describe("portfolio", () => {
     expect(fetch.mock.calls[0][1].method).toBe("DELETE");
   });
 });
+
+describe("foto de perfil e confirmação de agendamento", () => {
+  it("envia a foto de perfil como multipart e devolve o endereço completo", async () => {
+    entrar("c1");
+    const fetch = vi.fn().mockResolvedValue(json(200, { fotoUrl: "/api/arquivos/p.png" }));
+    vi.stubGlobal("fetch", fetch);
+    const url = await api.profile.setPhoto(new File(["x"], "p.png", { type: "image/png" }));
+    const [called, init] = fetch.mock.calls[0];
+    expect(String(called)).toContain("/api/perfil/foto");
+    expect(init.method).toBe("POST");
+    expect(init.body.get("arquivo").name).toBe("p.png");
+    expect(url).toContain("/api/arquivos/p.png");
+  });
+
+  it("remove a foto de perfil com DELETE", async () => {
+    entrar("c1");
+    const fetch = vi.fn().mockResolvedValue(new Response(null, { status: 204 }));
+    vi.stubGlobal("fetch", fetch);
+    await api.profile.removePhoto();
+    expect(fetch.mock.calls[0][1].method).toBe("DELETE");
+    expect(String(fetch.mock.calls[0][0])).toContain("/api/perfil/foto");
+  });
+
+  it("confirma o agendamento com PATCH em /confirmar", async () => {
+    entrar("e1");
+    const fetch = vi.fn().mockResolvedValue(
+      json(200, {
+        id: "a1",
+        status: "CONFIRMADO",
+        dataHoraInicio: "2026-11-10T09:00:00",
+        dataHoraFim: "2026-11-10T10:00:00",
+      }),
+    );
+    vi.stubGlobal("fetch", fetch);
+    const result = await api.appointments.confirm("a1");
+    expect(String(fetch.mock.calls[0][0])).toContain("/api/agendamentos/a1/confirmar");
+    expect(fetch.mock.calls[0][1].method).toBe("PATCH");
+    expect(result.rawStatus).toBe("CONFIRMADO");
+  });
+});

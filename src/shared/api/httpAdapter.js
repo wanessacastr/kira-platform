@@ -54,6 +54,7 @@ const availableSlots = async ({ proId, serviceId, staffId, date }) => {
 
 // As fotos vêm como /api/arquivos/...: no build, o endereço completo é o da API
 const fileUrl = (url) => (url?.startsWith("/") ? `${API_URL}${url}` : url);
+const withProfilePhoto = (profile) => ({ ...profile, photo: fileUrl(profile.photo) });
 const withFileUrl = (photo) => ({ ...photo, url: fileUrl(photo.url) });
 
 const isBusinessRule = (e) => e instanceof ApiError && e.code === "REGRA_DE_NEGOCIO";
@@ -138,7 +139,7 @@ export const httpAdapter = {
     list: async () => {
       const studios = await request("/api/studios", { auth: false });
       const services = await Promise.all(studios.map((s) => listServices(s.id).catch(() => [])));
-      return studios.map((s, i) => toProfessional(s, services[i]));
+      return studios.map((s, i) => withProfilePhoto(toProfessional(s, services[i])));
     },
     get: async (id) => {
       const [studio, services, reviews] = await Promise.all([
@@ -146,7 +147,7 @@ export const httpAdapter = {
         listServices(id),
         request(`/api/studios/${id}/avaliacoes`, { auth: false }),
       ]);
-      const pro = toProfessional(studio, services, reviews);
+      const pro = withProfilePhoto(toProfessional(studio, services, reviews));
       const clientReviews = reviews.map(toReview).filter((r) => r.author === "CLIENTE");
       return { ...pro, reviewList: clientReviews };
     },
@@ -217,6 +218,7 @@ export const httpAdapter = {
         }),
       ),
     // Ações do estúdio: o backend confere se o atendimento é do estúdio logado
+    confirm: async (id) => toAppointment(await request(`/api/agendamentos/${id}/confirmar`, { method: "PATCH" })),
     complete: async (id) => toAppointment(await request(`/api/agendamentos/${id}/concluir`, { method: "PATCH" })),
     cancelAsBusiness: async (id) =>
       toAppointment(await request(`/api/agendamentos/${id}/cancelar/empresa`, { method: "PATCH" })),
@@ -387,14 +389,24 @@ export const httpAdapter = {
   profile: {
     getMine: async () => {
       const { path, from } = profileRoute();
-      return from(await request(path));
+      return withProfilePhoto(from(await request(path)));
+    },
+    // Foto de perfil: multipart no campo "arquivo"; o backend devolve o endereço relativo
+    setPhoto: async (file) => {
+      const body = new FormData();
+      body.append("arquivo", file);
+      const { fotoUrl } = await request("/api/perfil/foto", { method: "POST", body });
+      return fileUrl(fotoUrl);
+    },
+    removePhoto: async () => {
+      await request("/api/perfil/foto", { method: "DELETE" });
     },
     // Recebe só o que mudou: o restante vem do perfil atual, para o PUT não apagar endereço e coordenadas
     saveMine: async (changes) => {
       const { path, from, to } = profileRoute();
       const current = from(await request(path));
       const body = to({ ...current, ...withoutStaleCoordinates(current, changes) });
-      const saved = from(await request(path, { method: "PUT", body }));
+      const saved = withProfilePhoto(from(await request(path, { method: "PUT", body })));
       // O nome da sessão vem do login: sem isso, o app mostraria o nome antigo até entrar de novo
       const auth = authStore.get();
       if (auth && auth.nome !== saved.name) authStore.set({ ...auth, nome: saved.name });

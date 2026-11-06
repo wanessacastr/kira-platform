@@ -1,4 +1,5 @@
 // Painel: métricas, receita da semana e próximos atendimentos · API: kira-backend (agendamentos, serviços e avaliações)
+import { HeaderShortcuts } from "../../shared/components/HeaderShortcuts";
 import { useState } from "react";
 import { ChevronRight, Clock, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
@@ -29,9 +30,14 @@ export default function ProHomeScreen() {
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
-        <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}>
-          Olá,
-        </p>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <p
+            style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}
+          >
+            Olá,
+          </p>
+          <HeaderShortcuts conversationsScreen="proConversations" notificationsScreen="proNotifications" />
+        </div>
         <h1
           style={{
             fontFamily: fontDisplay,
