@@ -4,6 +4,27 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado (telas ligadas ao backend)
+
+- Atalhos de conversas (com contador de não lidas) e notificações no Início de cliente e profissional, e entradas
+  nos menus de perfil: conversas, notificações, fidelidade, meus clientes e Plano Premium (antes as telas existiam sem
+  caminho até elas). O "voltar" dessas telas respeita de onde a pessoa veio.
+- Foto de perfil real (`POST`/`DELETE /api/perfil/foto`) e edição de perfil pelo backend para cliente e estúdio
+  (`ProfileEditor`); o e-mail fica só leitura. Início e Perfil passam a mostrar nome e foto do backend.
+- Confirmar agendamento pendente ou reagendado (`PATCH /api/agendamentos/{id}/confirmar`) na agenda do estúdio.
+- Telas "Meus serviços" (criar, editar, desativar, com categoria) e "Minha equipe" (criar, editar, desativar,
+  comissão), nos menus do profissional.
+- Testes de navegação (`navigation.test.jsx`): cada rota abre a tela certa, os layouts barram a conta errada e os menus
+  só apontam para telas com rota. Testes do adaptador para foto de perfil e confirmação. Total: 319 testes.
+
+### Alterado
+
+- Telas carregadas sob demanda (`React.lazy`) e bibliotecas em arquivos separados: o arquivo principal caiu de
+  703 kB para 138 kB.
+- Dependências: `react-router-dom` 7, `zod` 4 e `@hookform/resolvers` 5 (corrigem avisos de segurança); `jsdom` e
+  `@testing-library/react` para os testes de tela. Ficam os avisos só de desenvolvimento em `vite`/`vitest`
+  (`esbuild`, `tinypool`), que pedem troca de versão maior.
+
 ### Adicionado (camada visual, sem funcionalidade real)
 
 - Telas de demonstração: conversas e conversa (cliente e profissional), central de notificações, perguntas frequentes,
