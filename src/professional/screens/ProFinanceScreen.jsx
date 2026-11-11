@@ -187,13 +187,14 @@ export default function ProFinanceScreen() {
             >
               Formas de recebimento
             </h2>
-            <div style={{ display: "flex", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}>
               {Object.values(paymentLabels).map((m) => (
                 <span
                   key={m}
                   style={{
-                    padding: "var(--space-8) var(--space-12)",
+                    padding: "var(--space-9) var(--space-16)",
                     borderRadius: "var(--radius-pill)",
+                    whiteSpace: "nowrap",
                     background: colors.muted,
                     fontFamily: fontBody,
                     fontSize: "var(--font-size-xs)",
