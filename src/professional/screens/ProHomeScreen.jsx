@@ -28,22 +28,65 @@ export default function ProHomeScreen() {
   const noBusinessHours = businessHours.data?.every((d) => !d.open) ?? false;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
-      <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
-        <p style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}>
-          Olá,
-        </p>
-        <h1
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          gap: "var(--space-12)",
+          padding: "var(--space-20) var(--space-24) var(--space-4)",
+        }}
+      >
+        <div style={{ minWidth: 0 }}>
+          <p
+            style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}
+          >
+            Olá,
+          </p>
+          <h1
+            style={{
+              fontFamily: fontDisplay,
+              fontWeight: 700,
+              fontSize: "var(--font-size-2xl)",
+              color: colors.foreground,
+              margin: "var(--space-2) 0 var(--space-18)",
+            }}
+          >
+            {displayName ? displayName.split(" ")[0] : "Profissional"}{" "}
+            <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
+          </h1>
+        </div>
+        <button
+          type="button"
+          className="k-reset"
+          onClick={() => setScreen("proProfileMenu")}
+          aria-label="Abrir meu perfil"
           style={{
-            fontFamily: fontDisplay,
-            fontWeight: 700,
-            fontSize: "var(--font-size-2xl)",
-            color: colors.foreground,
-            margin: "var(--space-2) 0 var(--space-18)",
+            width: 46,
+            height: 46,
+            flexShrink: 0,
+            borderRadius: "var(--radius-round)",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: `2px solid ${colors.primary}`,
+            background: colors.muted,
+            cursor: "pointer",
           }}
         >
-          {displayName ? displayName.split(" ")[0] : "Profissional"}{" "}
-          <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
-        </h1>
+          {pForm.photo ? (
+            <img
+              src={pForm.photo}
+              alt=""
+              width={46}
+              height={46}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <User size={20} color={colors.mutedForeground} />
+          )}
+        </button>
       </div>
       <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>
         {business.error && (
@@ -159,7 +202,14 @@ export default function ProHomeScreen() {
                   marginTop: "var(--space-12)",
                 }}
               >
-                <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                <span
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: "var(--font-size-xs)",
+                    color: colors.mutedForeground,
+                    minWidth: 0,
+                  }}
+                >
                   {proHomeRevenueSel !== null
                     ? `${proWeeklyRevenue[proHomeRevenueSel].label} · R$ ${proWeeklyRevenue[proHomeRevenueSel].value.toLocaleString("pt-BR")}`
                     : "Toque em um dia para ver o valor"}
