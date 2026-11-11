@@ -191,15 +191,17 @@ export default function ProFinanceScreen() {
               Formas de recebimento
             </h2>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}>
-              {Object.values(paymentLabels).map((m) => (
-                <Chip
-                  key={m}
-                  active={paymentFilter === m}
-                  onClick={() => setPaymentFilter(paymentFilter === m ? null : m)}
-                >
-                  {m}
-                </Chip>
-              ))}
+              {Object.entries(paymentLabels)
+                .filter(([key]) => key !== "DINHEIRO")
+                .map(([, m]) => (
+                  <Chip
+                    key={m}
+                    active={paymentFilter === m}
+                    onClick={() => setPaymentFilter(paymentFilter === m ? null : m)}
+                  >
+                    {m}
+                  </Chip>
+                ))}
             </div>
 
             <h2
