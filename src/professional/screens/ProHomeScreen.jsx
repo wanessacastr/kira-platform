@@ -4,6 +4,7 @@ import { ChevronRight, Clock, CreditCard, ShieldCheck, Sparkles, Star, User } fr
 import { useSession } from "../../context/SessionContext";
 import { useSignup } from "../../context/SignupContext";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
+import { MascotHelpButton } from "../../client/components/chat/MascotHelpButton";
 import { ProBottomNav } from "../components/ProBottomNav";
 import { errorMessage } from "../../shared/api";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
@@ -403,6 +404,11 @@ export default function ProHomeScreen() {
           </div>
           <ChevronRight size={18} color={colors.primary} />
         </button>
+        <MascotHelpButton
+          onOpen={() => setScreen("proKiraIa")}
+          label="Abrir a Kira IA Pro, sua assistente profissional"
+          hint={["Oi! Sou a Kira ✨", "Sua assistente profissional!"]}
+        />
       </div>
       <ProBottomNav active="proHome" onNavigate={goToProTab} />
     </div>
