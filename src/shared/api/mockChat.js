@@ -117,9 +117,10 @@ export const planReply = (input, { agent, now = new Date() }) => {
  * Cria um gateway mock isolado (a conversa fica na memória, então voltar à tela retoma de onde parou).
  * Digite "erro" em uma mensagem para ver a falha de envio: a primeira tentativa falha e a repetição passa.
  * @param {typeof defaultTiming} [timing]
+ * @param {{ planner?: typeof planReply, afterHandoffCancel?: object[] }} [options] contexto de atendimento; sem opções, é a Kira da cliente
  * @returns {import("./chatContract").ChatGateway & { dispose: () => void }}
  */
-export function createMockChat(timing = defaultTiming) {
+export function createMockChat(timing = defaultTiming, { planner = planReply } = {}) {
   const listeners = new Set();
   const timers = new Set();
   const store = [];
@@ -197,7 +198,7 @@ export function createMockChat(timing = defaultTiming) {
 
   const reply = (input) => {
     if (handoff === HANDOFF_STATES.WAITING) return; // a assistente fica pausada até o atendente entrar
-    const plan = planReply(input, { agent });
+    const plan = planner(input, { agent });
     if (plan.handoff) {
       const spoke = speak([
         say(

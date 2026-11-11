@@ -3,6 +3,7 @@ import { ArrowLeft, Headset, Loader2, Sparkles } from "lucide-react";
 import { CHAT_AGENTS, HANDOFF_STATES } from "../../../shared/api/chatContract";
 import { Heading, Text } from "../../../shared/components/primitives";
 import { colors } from "../../../shared/theme";
+import { CHAT_CONTEXTS, chatContexts } from "../../../shared/chat/chatContexts";
 import { AgentAvatar } from "./AgentAvatar";
 
 const statusOf = ({ online, handoff, typing }) => {
@@ -11,7 +12,7 @@ const statusOf = ({ online, handoff, typing }) => {
   return { text: typing ? "digitando..." : "online", dot: null };
 };
 
-const stripOf = ({ agent, handoff }) => {
+const stripOf = ({ agent, handoff, aiText }) => {
   if (handoff === HANDOFF_STATES.WAITING) {
     return {
       Icon: Loader2,
@@ -29,14 +30,14 @@ const stripOf = ({ agent, handoff }) => {
   }
   return {
     Icon: Sparkles,
-    text: "Você está falando com a nossa inteligência artificial",
+    text: aiText,
     background: "var(--color-lilac)",
   };
 };
 
 // faixa abaixo do cabeçalho: cor e ícone diferentes para IA, espera e atendente
-export const AgentStrip = ({ agent, handoff }) => {
-  const { Icon, spin, text, background } = stripOf({ agent, handoff });
+export const AgentStrip = ({ agent, handoff, aiText = chatContexts[CHAT_CONTEXTS.CLIENT].strip }) => {
+  const { Icon, spin, text, background } = stripOf({ agent, handoff, aiText });
   return (
     <div
       style={{
@@ -56,7 +57,14 @@ export const AgentStrip = ({ agent, handoff }) => {
   );
 };
 
-export const ChatHeader = ({ agent, handoff, typing, online, onBack }) => {
+export const ChatHeader = ({
+  agent,
+  handoff,
+  typing,
+  online,
+  onBack,
+  content = chatContexts[CHAT_CONTEXTS.CLIENT],
+}) => {
   const human = agent === CHAT_AGENTS.HUMAN;
   const status = statusOf({ online, handoff, typing });
   const dot = status.dot ?? (human ? colors.primary : "var(--color-violet)");
@@ -95,7 +103,7 @@ export const ChatHeader = ({ agent, handoff, typing, online, onBack }) => {
         <AgentAvatar agent={agent} />
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-2)", minWidth: 0 }}>
           <Heading as="h1" size="lg" style={{ lineHeight: 1.15 }}>
-            {human ? "Equipe Kira" : "Kira"}
+            {human ? "Equipe Kira" : content.headerName}
           </Heading>
           <div style={{ display: "flex", alignItems: "center", gap: "var(--space-6)" }}>
             <span
@@ -108,7 +116,7 @@ export const ChatHeader = ({ agent, handoff, typing, online, onBack }) => {
           </div>
         </div>
       </div>
-      <AgentStrip agent={agent} handoff={handoff} />
+      <AgentStrip agent={agent} handoff={handoff} aiText={content.strip} />
     </header>
   );
 };
