@@ -7,8 +7,11 @@ export const ProStatCard = ({ label, value, icon: Icon }) => (
   <div
     style={{
       flex: 1,
+      minWidth: 0,
+      boxSizing: "border-box",
       display: "flex",
       flexDirection: "column",
+      justifyContent: "space-between",
       gap: "var(--space-6)",
       padding: "var(--space-14)",
       borderRadius: "var(--radius-2xl)",
@@ -16,11 +19,11 @@ export const ProStatCard = ({ label, value, icon: Icon }) => (
       background: colors.card,
     }}
   >
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-4)" }}>
       <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
         {label}
       </span>
-      {Icon && <Icon size={13} color={colors.primary} />}
+      {Icon && <Icon size={13} color={colors.primary} style={{ flexShrink: 0 }} />}
     </div>
     <span
       style={{ fontFamily: fontDisplay, fontWeight: 700, fontSize: "var(--font-size-lg)", color: colors.foreground }}

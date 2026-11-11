@@ -4,6 +4,7 @@ import { CheckCircle2, CreditCard } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
 import { errorMessage } from "../../shared/api";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
+import { Chip } from "../../shared/components/primitives";
 import { Header, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { ProStatCard, RevenueBarChart } from "../components/ProWidgets";
@@ -28,11 +29,13 @@ export default function ProFinanceScreen() {
   const { setScreen } = useSession();
   const [financePeriod, setFinancePeriod] = useState("semana");
   const [financeRevenueSel, setFinanceRevenueSel] = useState(null);
+  const [paymentFilter, setPaymentFilter] = useState(null); // forma de recebimento escolhida (null = todas)
   const business = useBusinessData();
   const proMonthlyRevenue = monthlyRevenue(business.appointments);
   const financeData = financePeriod === "semana" ? weeklyRevenue(business.appointments) : proMonthlyRevenue;
   const monthTotal = proMonthlyRevenue.reduce((sum, d) => sum + d.value, 0);
   const transactions = completed(business.appointments)
+    .filter((a) => !paymentFilter || a.payment === paymentFilter)
     .sort((a, b) => b.start - a.start)
     .slice(0, 10);
   const periodTotal = financeData.reduce((sum, d) => sum + d.value, 0);
@@ -187,23 +190,18 @@ export default function ProFinanceScreen() {
             >
               Formas de recebimento
             </h2>
-            <div style={{ display: "flex", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}>
-              {Object.values(paymentLabels).map((m) => (
-                <span
-                  key={m}
-                  style={{
-                    padding: "var(--space-8) var(--space-12)",
-                    borderRadius: "var(--radius-pill)",
-                    background: colors.muted,
-                    fontFamily: fontBody,
-                    fontSize: "var(--font-size-xs)",
-                    fontWeight: 600,
-                    color: colors.foreground,
-                  }}
-                >
-                  {m}
-                </span>
-              ))}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-8)", marginBottom: "var(--space-20)" }}>
+              {Object.entries(paymentLabels)
+                .filter(([key]) => key !== "DINHEIRO")
+                .map(([, m]) => (
+                  <Chip
+                    key={m}
+                    active={paymentFilter === m}
+                    onClick={() => setPaymentFilter(paymentFilter === m ? null : m)}
+                  >
+                    {m}
+                  </Chip>
+                ))}
             </div>
 
             <h2
@@ -234,7 +232,9 @@ export default function ProFinanceScreen() {
                     margin: 0,
                   }}
                 >
-                  Nenhum atendimento concluído ainda.
+                  {paymentFilter
+                    ? `Nenhum atendimento pago com ${paymentFilter}.`
+                    : "Nenhum atendimento concluído ainda."}
                 </p>
               )}
               {transactions.map((tx) => (

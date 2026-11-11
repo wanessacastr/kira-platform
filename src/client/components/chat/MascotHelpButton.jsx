@@ -6,7 +6,11 @@ import { AgentAvatar } from "./AgentAvatar";
 // Depois de um toque o navegador ainda dispara eventos de mouse; este intervalo evita o balão ficar preso
 const IGNORE_MOUSE_AFTER_TOUCH_MS = 700;
 
-export function MascotHelpButton({ onOpen }) {
+export function MascotHelpButton({
+  onOpen,
+  label = "Ajuda: conversar com a Kira",
+  hint: hintLines = ["Oi! Sou Kira ✨", "Bora descobrir sua próxima versão?"],
+}) {
   const [hint, setHint] = useState(false);
   const lastTouch = useRef(0);
 
@@ -32,7 +36,7 @@ export function MascotHelpButton({ onOpen }) {
       onTouchStart={touchStart}
       onTouchEnd={touchEnd}
       onTouchCancel={touchEnd}
-      aria-label="Ajuda: conversar com a Kira"
+      aria-label={label}
       data-hint={hint}
       style={{
         position: "sticky",
@@ -50,9 +54,9 @@ export function MascotHelpButton({ onOpen }) {
       }}
     >
       <span className="k-hint" data-open={hint} aria-hidden="true">
-        Oi! Sou Kira ✨
+        {hintLines[0]}
         <br />
-        Bora descobrir sua próxima versão?
+        {hintLines[1]}
       </span>
       <AgentAvatar agent={CHAT_AGENTS.AI} size={76} glow />
     </button>
