@@ -104,6 +104,7 @@ export default function ProHomeScreen() {
               role="presentation"
               style={{
                 width: "100%",
+                boxSizing: "border-box",
                 textAlign: "left",
                 border: `1px solid ${colors.border}`,
                 borderRadius: "var(--radius-3xl)",
@@ -178,6 +179,8 @@ export default function ProHomeScreen() {
                     display: "flex",
                     alignItems: "center",
                     gap: "var(--space-2)",
+                    flexShrink: 0,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   Ver gestão financeira <ChevronRight size={13} />
