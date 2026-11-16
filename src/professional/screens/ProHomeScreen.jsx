@@ -1,6 +1,7 @@
 // Painel: métricas, receita da semana e próximos atendimentos · API: kira-backend (agendamentos, serviços e avaliações)
 import { useState } from "react";
 import { ChevronRight, Clock, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
+import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
 import { useSignup } from "../../context/SignupContext";
 import { useMyProfile } from "../../shared/hooks/useMyProfile";
@@ -18,6 +19,7 @@ import { appointmentsOn, averageRating, revenueDelta, upcoming, weeklyRevenue } 
 // faturamento semanal (gráfico) e próximos atendimentos, como no folheto.
 export default function ProHomeScreen() {
   const { auth, goToProTab, setScreen } = useSession();
+  const { setSelectedAppointmentId } = useScheduling();
   const { pForm } = useSignup();
   const photo = useMyProfile().data?.photo || pForm.photo;
   const [proHomeRevenueSel, setProHomeRevenueSel] = useState(null);
@@ -300,9 +302,19 @@ export default function ProHomeScreen() {
                 </p>
               )}
               {nextAppointments.map((a) => (
-                <div
+                <button
+                  type="button"
                   key={a.id}
+                  aria-label={`Ver informações de ${a.clientName}`}
+                  onClick={() => {
+                    setSelectedAppointmentId(a.id);
+                    setScreen("proClientInfo");
+                  }}
                   style={{
+                    width: "100%",
+                    textAlign: "left",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
                     display: "flex",
                     alignItems: "center",
                     gap: "var(--space-12)",
@@ -350,7 +362,7 @@ export default function ProHomeScreen() {
                     </p>
                   </div>
                   <ChevronRight size={16} color={colors.mutedForeground} />
-                </div>
+                </button>
               ))}
             </div>
           </>
