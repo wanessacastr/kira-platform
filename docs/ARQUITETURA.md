@@ -44,9 +44,9 @@ Front-end em Vite + React que consome o kira-backend (Spring Boot). Em desenvolv
 
 | Recurso                                             | Situação no app                                                                                                  |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| Edição do perfil                                    | Salva só na sessão atual; `api.profile.saveMine` está pronta, falta a tela usar                                  |
-| Fotos (perfil, documentos, portfólio)               | Ficam no navegador; o cadastro não envia imagens                                                                 |
-| Categoria do serviço                                | O filtro e os cards de distância já usam os dados do backend; falta o campo de categoria no cadastro de serviços |
+| Edição do perfil                                    | Pronta: cliente e estúdio salvam pelo backend (`api.profile.saveMine`), com foto                                 |
+| Fotos                                               | Perfil e portfólio são reais (upload no backend). Documento, selfie e fotos do cadastro ainda ficam no navegador |
+| Categoria do serviço                                | Pronta: campo em "Meus serviços"                                                                                 |
 | Denúncia e emergência                               | Só a interface (futura `POST /api/denuncias`)                                                                    |
 | Verificação facial                                  | Só a interface, nenhum dado biométrico é salvo                                                                   |
 | Gift cards, fidelidade, cupons, formas de pagamento | Telas sem dados                                                                                                  |
@@ -71,7 +71,7 @@ Situação em 29/10/2026, na ordem em que vamos fazer. Cada item vira uma branch
 ### 3. Perfil e fotos
 
 - [x] **PR #13, editar perfil:** `GET` e `PUT /api/clientes/{id}/perfil` e `/api/empresas/{id}/perfil`, só para o dono. E-mail, CPF e CNPJ não mudam por aqui.
-- [ ] **Upload de fotos:** perfil e portfólio, com armazenamento de arquivos e limite de tamanho e tipo.
+- [x] **Upload de fotos de perfil e portfólio:** `POST`/`DELETE /api/perfil/foto` e portfólio do estúdio, com limite de tamanho e tipo. Falta enviar as fotos do cadastro (documento, selfie e fotos do trabalho).
 - [ ] **Verificação de documento e selfie:** decidir antes entre serviço externo (guardar só o resultado), revisão manual ou esconder as telas por enquanto.
 - [x] **PR #14, categoria no serviço e coordenadas na vitrine:** cada serviço tem `categoria` (deduzida pelo nome quando não vem), e o estúdio devolve `latitude` e `longitude`.
 - [ ] **Coordenadas a partir do CEP:** hoje só valem as do celular no cadastro. Calcular pelo CEP precisa de um serviço externo de geocodificação.
@@ -139,20 +139,14 @@ Telas e ajustes do app para usar o que o backend já tem.
 
 A integração (chamadas e hooks) fica pronta para a tela usar. Quem faz a tela só precisa cuidar do visual.
 
-| Tela                                                | O que precisa mostrar                                                                                                                                      | Integração                                                                                  |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Lista de conversas** (cliente e profissional)     | Nome e foto da outra parte, serviço, última mensagem, horário e quantidade de não lidas. Tocar abre a conversa (`clientConversation` ou `proConversation`) | Pronta: `useConversations()` traz `conversations`                                           |
-| **Número de não lidas no menu**                     | Total de mensagens não lidas                                                                                                                               | Pronta: `useConversations()` traz `totalUnread`, ao vivo                                    |
-| **Permitir notificações**                           | Botão para a pessoa autorizar as notificações do navegador                                                                                                 | Backend pronto; falta a integração (ver "Notificação do navegador")                         |
-| **Funcionárias** (profissional)                     | Listar, criar, editar e desativar, com agenda, bloqueios e comissões                                                                                       | Chamadas prontas (`api.staff.*`)                                                            |
-| **Escolher a funcionária no agendamento** (cliente) | Lista de funcionárias e os horários livres da escolhida                                                                                                    | Pronta: `professionals.listStaff`, `availability.get` e `appointments.create` com `staffId` |
-| **Gerenciar serviços** (profissional)               | Criar, editar e desativar serviços depois do cadastro                                                                                                      | Chamadas prontas (`api.services.*`)                                                         |
-| **Editar perfil do profissional**                   | Nome, telefone, descrição, especialidades, endereço e tipo de estabelecimento                                                                              | Pronta: `api.profile.getMine()` e `saveMine()`                                              |
-| **Editar perfil da cliente** (ajuste)               | A tela existe, mas salva só na sessão, e o e-mail deve ficar só leitura                                                                                    | Pronta: a tela precisa trocar o salvamento por `api.profile.saveMine()`                     |
-| **Filtro por categoria e distância**                | Feito na integração: o filtro usa a categoria, e os cards já mostram a distância                                                                           | Pronta                                                                                      |
-| **Escolher a categoria do serviço** (ajuste)        | Campo de categoria no cadastro de serviços                                                                                                                 | Pronta: enviar `category` em cada serviço                                                   |
-| **Painel, Analytics e Financeiro** (ajuste)         | Ticket médio, comparação com o período anterior, ranking e avaliações                                                                                      | Pronta: `useDashboard({ from, to })`                                                        |
-| **Denúncia** (por último)                           | Envio real, ligado ao backend                                                                                                                              | Depende do canal de segurança                                                               |
+| Tela                                                | O que precisa mostrar                                                                                                                | Integração                                                                                  |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| **Permitir notificações**                           | Botão para a pessoa autorizar as notificações do navegador                                                                           | Backend pronto; falta a integração (ver "Notificação do navegador")                         |
+| **Agenda, bloqueios e comissão por funcionária**    | Agenda do dia e da semana, bloqueios de horário e total de comissão (a lista, o cadastro e a desativação já estão em "Minha equipe") |
+| **Escolher a funcionária no agendamento** (cliente) | Lista de funcionárias e os horários livres da escolhida                                                                              | Pronta: `professionals.listStaff`, `availability.get` e `appointments.create` com `staffId` |
+| **Filtro por categoria e distância**                | Feito na integração: o filtro usa a categoria, e os cards já mostram a distância                                                     | Pronta                                                                                      |
+| **Painel, Analytics e Financeiro** (ajuste)         | Ticket médio, comparação com o período anterior, ranking e avaliações                                                                | Pronta: `useDashboard({ from, to })`                                                        |
+| **Denúncia** (por último)                           | Envio real, ligado ao backend                                                                                                        | Depende do canal de segurança                                                               |
 
 **Telas já feitas, para revisar o visual:** remarcar (cliente e profissional), conversa do agendamento (cliente e profissional), botões "Remarcar" e "Conversar com…" na agenda do profissional e aviso de "Demonstração" no chat com IA e no acompanhamento.
 
@@ -214,7 +208,7 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 
 ### Funcionárias (backend pronto nos PRs #8, #9 e #10)
 
-- [ ] **Tela de funcionárias** no perfil do profissional: listar, criar, editar e desativar (`api.staff.*`), com a agenda do dia e da semana, os bloqueios de horário e o total de comissões.
+- [x] **Tela de funcionárias** (Perfil → "Minha equipe"): listar, criar, editar e desativar (`api.staff.*`). Falta a agenda do dia e da semana, os bloqueios de horário e o total de comissão.
 - [ ] **Escolher a funcionária no agendamento:** mostrar `professionals.listStaff` e mandar o `staffId` no `appointments.create`. Decidido em 04/11: a escolha é da cliente e tem a opção "Sem preferência", que não manda o `staffId`. Nesse caso, o backend indica uma funcionária livre, e os horários mostrados são os de qualquer funcionária livre. Ao escolher uma funcionária, mostrar só os horários dela (`availability.get` com `staffId`). Em estúdio sem funcionárias, não mostrar a escolha.
 - [x] **Horários livres da funcionária escolhida:** `api.availability.get({ proId, serviceId, staffId, date })`. A tela precisa incluir a funcionária na chave da consulta.
 
@@ -227,16 +221,16 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 - [ ] **Áudio no chat:** gravar, enviar e ouvir mensagens de voz. Depende do armazenamento de arquivos do backend (o mesmo do upload de fotos).
 - [ ] **Notificação de mensagem nova, como no Instagram:** lista de conversas, contador ao vivo e notificação com o app fechado (web push no web; push do celular quando o mobile chegar). E-mail não faz parte do chat.
 - [ ] **Conversa de agendamento cancelado no profissional:** a agenda do dia esconde os cancelados, então o estúdio não abre esse histórico.
-- [ ] **Gerenciar serviços** depois do cadastro: criar, editar e desativar (`api.services.*`).
+- [x] **Gerenciar serviços** (Perfil → "Meus serviços"): criar, editar e desativar (`api.services.*`).
 - [ ] **PR #12 do app (`feat/tela-processamento-pagamento`):** aberto desde 26/10 e, em 03/11, 43 commits atrás da `main`. Decidir se entra agora ou espera o gateway de pagamento.
 - [x] **Profissional remarcar:** botão na agenda abre `ProRescheduleScreen`, que divide o fluxo com a cliente (`shared/components/RescheduleScreen.jsx`).
 
 ### Perfil (backend pronto no PR #13)
 
 - [x] **Chamadas de perfil:** `api.profile.getMine()` e `api.profile.saveMine(mudancas)`, pela conta logada. Salvar recebe só o que mudou, e o restante vem do perfil atual, então endereço e coordenadas não são apagados. O nome da sessão é atualizado junto.
-- [ ] **Editar perfil da cliente** (`ClientProfileEditScreen`): carregar com `GET /api/clientes/{id}/perfil` e salvar com `PUT`. Hoje salva só na sessão. O `PUT` exige nome, telefone, data de nascimento e gênero, e troca todos os campos: mandar de volta o endereço e as coordenadas que vieram no `GET`, senão eles são apagados.
+- [x] **Editar perfil da cliente** (`ClientProfileEditScreen`): carrega e salva pelo backend, com foto; e-mail só leitura. Endereço e coordenadas continuam como estão (o `saveMine` preserva).
 - [ ] **E-mail na edição da cliente:** a tela tem o campo, mas o backend não troca o e-mail. Deixar só leitura ou tirar o campo.
-- [ ] **Editar perfil do profissional:** não há tela. Usar `GET` e `PUT /api/empresas/{id}/perfil` (nome, telefone, descrição, especialidades, endereço, coordenadas e tipo de estabelecimento).
+- [x] **Editar perfil do profissional** (`ProProfileEditScreen`, Perfil → "Editar perfil"): nome, telefone, descrição e foto. Especialidades, endereço e tipo de estabelecimento seguem sem edição na tela.
 - [x] **Nome na sessão:** `saveMine` atualiza o `nome` do `authStore`.
 - [ ] **Trocar o endereço:** a tela deve mandar o endereço completo (o CEP preenche rua, bairro, cidade e estado), porque `saveMine` não confere se os campos combinam.
 - [ ] **Aviso em vermelho ao mudar a cidade:** na tela de editar perfil, mostrar uma mensagem em vermelho avisando a pessoa para atualizar o restante do endereço depois de mudar a cidade.
@@ -248,15 +242,15 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 - [x] **Conversão:** `category` em cada serviço e `latitude`/`longitude` no estúdio (`mappers.js`).
 - [x] **Filtro por categoria:** usa a categoria dos serviços (`client/utils/categories.js`). Serviços sem categoria continuam reconhecidos por palavras.
 - [x] **Distância:** `useProfessionals` calcula em linha reta entre a cliente (perfil) e o estúdio, e os cards já mostram. Sem coordenadas, fica sem distância.
-- [ ] **Escolher a categoria no cadastro de serviços** (tela): a integração já envia `category` no cadastro e em `api.services.*`; falta o campo na tela. Sem ela, o backend deduz pelo nome.
-- [ ] **Atualizar a distância depois de editar o perfil:** a tela que chamar `saveMine` deve invalidar a consulta `["profile", id]`.
+- [x] **Escolher a categoria no cadastro de serviços:** campo em "Meus serviços" (inclui "Automática", que deixa o backend deduzir pelo nome). O cadastro inicial do estúdio ainda não mostra o campo.
+- [x] **Atualizar a distância depois de editar o perfil:** salvar invalida a consulta `["profile"]`.
 - [ ] **Formato da distância:** os cards mostram `1.6 km`, com ponto; no Brasil o certo é `1,6 km` (ajuste de tela).
 - [ ] **Distância por trajeto:** hoje é em linha reta, então a real costuma ser maior.
 - [ ] **Filtro de 30 km:** agora vale de verdade; estúdios mais longe somem da lista por padrão. Avaliar esse valor com dados reais.
 
 ### Depende do backend
 
-- [ ] **Fotos, busca no servidor e pagamentos:** cada um quando o passo correspondente de "O que falta no backend" estiver pronto.
+- [ ] **Busca no servidor, fotos do cadastro e pagamentos:** cada um quando o passo correspondente de "O que falta no backend" estiver pronto.
 - [ ] **Denúncia (por último, com o canal de segurança):** `api.reports.submit` real no web (hoje só existe o mock do Expo), com a tradução dos motivos, ligar os botões de `Safety.jsx` e corrigir as mensagens (ver `CANAL-SEGURANCA.md`).
 
 ## Pendências do chat

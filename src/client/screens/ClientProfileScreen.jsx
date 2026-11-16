@@ -1,6 +1,7 @@
 // Menu do perfil do cliente · API: kira-backend (logout)
 import { LogOut, User } from "lucide-react";
 import { useSignup } from "../../context/SignupContext";
+import { useMyProfile } from "../../shared/hooks/useMyProfile";
 import { useSession } from "../../context/SessionContext";
 import { ProfileMenuRow, ProfileSection } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
@@ -10,6 +11,9 @@ import { clientProfileMenu } from "../data/options";
 // ---------- Perfil da cliente ----------
 export default function ClientProfileScreen() {
   const { cForm } = useSignup();
+  const profile = useMyProfile().data;
+  const name = profile?.name || cForm.name;
+  const photo = profile?.photo || cForm.photo;
   const { goToTab, logout, setScreen } = useSession();
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
@@ -36,8 +40,8 @@ export default function ClientProfileScreen() {
             flexShrink: 0,
           }}
         >
-          {cForm.photo ? (
-            <img src={cForm.photo} alt="Foto de perfil" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          {photo ? (
+            <img src={photo} alt="Foto de perfil" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           ) : (
             <User size={28} color={colors.primaryForeground} />
           )}
@@ -52,7 +56,7 @@ export default function ClientProfileScreen() {
               margin: 0,
             }}
           >
-            {cForm.name || "Cliente Kira"}
+            {name || "Cliente Kira"}
           </p>
           <p
             style={{
@@ -64,7 +68,7 @@ export default function ClientProfileScreen() {
             }}
           >
             @
-            {(cForm.name || "cliente")
+            {(name || "cliente")
               .toLowerCase()
               .replace(/\s+/g, "")
               .normalize("NFD")

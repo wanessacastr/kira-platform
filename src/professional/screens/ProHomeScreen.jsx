@@ -3,6 +3,8 @@ import { useState } from "react";
 import { ChevronRight, Clock, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
 import { useSignup } from "../../context/SignupContext";
+import { useMyProfile } from "../../shared/hooks/useMyProfile";
+import { HeaderShortcuts } from "../../shared/components/HeaderShortcuts";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { MascotHelpButton } from "../../client/components/chat/MascotHelpButton";
 import { ProBottomNav } from "../components/ProBottomNav";
@@ -17,6 +19,7 @@ import { appointmentsOn, averageRating, revenueDelta, upcoming, weeklyRevenue } 
 export default function ProHomeScreen() {
   const { auth, goToProTab, setScreen } = useSession();
   const { pForm } = useSignup();
+  const photo = useMyProfile().data?.photo || pForm.photo;
   const [proHomeRevenueSel, setProHomeRevenueSel] = useState(null);
   const business = useBusinessData();
   const proWeeklyRevenue = weeklyRevenue(business.appointments);
@@ -57,37 +60,40 @@ export default function ProHomeScreen() {
             <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
           </h1>
         </div>
-        <button
-          type="button"
-          className="k-reset"
-          onClick={() => setScreen("proProfileMenu")}
-          aria-label="Abrir meu perfil"
-          style={{
-            width: 46,
-            height: 46,
-            flexShrink: 0,
-            borderRadius: "var(--radius-round)",
-            overflow: "hidden",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            border: `2px solid ${colors.primary}`,
-            background: colors.muted,
-            cursor: "pointer",
-          }}
-        >
-          {pForm.photo ? (
-            <img
-              src={pForm.photo}
-              alt=""
-              width={46}
-              height={46}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            />
-          ) : (
-            <User size={20} color={colors.mutedForeground} />
-          )}
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)", flexShrink: 0 }}>
+          <HeaderShortcuts conversationsScreen="proConversations" notificationsScreen="proNotifications" />
+          <button
+            type="button"
+            className="k-reset"
+            onClick={() => setScreen("proProfileMenu")}
+            aria-label="Abrir meu perfil"
+            style={{
+              width: 46,
+              height: 46,
+              flexShrink: 0,
+              borderRadius: "var(--radius-round)",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: `2px solid ${colors.primary}`,
+              background: colors.muted,
+              cursor: "pointer",
+            }}
+          >
+            {photo ? (
+              <img
+                src={photo}
+                alt=""
+                width={46}
+                height={46}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            ) : (
+              <User size={20} color={colors.mutedForeground} />
+            )}
+          </button>
+        </div>
       </div>
       <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>
         {business.error && (
