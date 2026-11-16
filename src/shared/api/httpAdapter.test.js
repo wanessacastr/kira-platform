@@ -310,3 +310,40 @@ describe("foto de perfil e confirmação de agendamento", () => {
     expect(result.rawStatus).toBe("CONFIRMADO");
   });
 });
+
+describe("confirmação presencial (rotas ainda não existem no backend)", () => {
+  const stored = { codigo: "123456", expiraEm: "2026-11-10T10:10:00Z" };
+  it("gera o código com POST e usa o que o backend devolve", async () => {
+    const fetch = vi.fn().mockResolvedValue(json(200, stored));
+    vi.stubGlobal("fetch", fetch);
+    const token = await api.arrival.requestToken("a1");
+    expect(String(fetch.mock.calls[0][0])).toContain("/api/agendamentos/a1/token-chegada");
+    expect(fetch.mock.calls[0][1].method).toBe("POST");
+    expect(token.code).toBe("123456");
+    expect(token.expiresAt).toBeInstanceOf(Date);
+  });
+  it("sem código ativo (ou rota inexistente), getToken devolve null", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(json(404, { erro: "NAO_ENCONTRADO", mensagem: "x" })));
+    expect(await api.arrival.getToken("a1")).toBeNull();
+  });
+  it("outros erros de getToken seguem como erro", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(json(500, { erro: "ERRO", mensagem: "x" })));
+    await expect(api.arrival.getToken("a1")).rejects.toMatchObject({ status: 500 });
+  });
+  it("valida mandando o código e o agendamento, e devolve o agendamento atualizado", async () => {
+    const fetch = vi
+      .fn()
+      .mockResolvedValue(json(200, { id: "a1", status: "CHEGADA_CONFIRMADA", dataHoraInicio: "2026-11-10T10:00:00" }));
+    vi.stubGlobal("fetch", fetch);
+    const result = await api.arrival.validateToken({ appointmentId: "a1", code: "123456" });
+    expect(String(fetch.mock.calls[0][0])).toContain("/api/agendamentos/a1/chegada/validar");
+    expect(JSON.parse(fetch.mock.calls[0][1].body)).toEqual({ codigo: "123456" });
+    expect(result.rawStatus).toBe("CHEGADA_CONFIRMADA");
+  });
+  it("código incorreto chega como erro com o motivo do backend", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(json(400, { erro: "TOKEN_INVALIDO", mensagem: "x" })));
+    await expect(api.arrival.validateToken({ appointmentId: "a1", code: "000000" })).rejects.toMatchObject({
+      code: "TOKEN_INVALIDO",
+    });
+  });
+});

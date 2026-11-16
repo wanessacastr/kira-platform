@@ -31,10 +31,17 @@
  */
 
 /**
+ * Código de confirmação presencial · rotas ainda não existem no backend (ver docs/CONFIRMACAO-PRESENCIAL.md)
+ * @typedef {Object} ArrivalToken
+ * @property {string} code            6 dígitos, gerados pelo backend
+ * @property {Date|null} expiresAt    nula se o backend não informar validade
+ */
+
+/**
  * @typedef {Object} Appointment
  * @property {string} id
  * @property {"proximo"|"concluido"|"cancelado"} status   aba da agenda
- * @property {"PENDENTE"|"CONFIRMADO"|"CANCELADO"|"CONCLUIDO"|"REAGENDADO"} rawStatus
+ * @property {"PENDENTE"|"CONFIRMADO"|"CHEGADA_CONFIRMADA"|"CANCELADO"|"CONCLUIDO"|"REAGENDADO"} rawStatus
  * @property {string} proId
  * @property {string} proName
  * @property {string|null} staffId

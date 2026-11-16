@@ -4,6 +4,13 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado (confirmação presencial por código)
+
+- "Estou a caminho" no detalhe do agendamento (cliente) e "Confirmar chegada do cliente" na agenda (profissional), com
+  código de 6 dígitos gerado e conferido pelo backend. Camada `api.arrival`, status `CHEGADA_CONFIRMADA` e mensagens
+  para código incorreto, expirado e já utilizado. As rotas ainda não existem no backend: o app não simula sucesso nem
+  gera código (contrato em `docs/CONFIRMACAO-PRESENCIAL.md`).
+
 ### Adicionado (escolher a funcionária)
 
 - No agendamento da cliente, bloco "Com quem?" com "Sem preferência" e as funcionárias ativas do estúdio
