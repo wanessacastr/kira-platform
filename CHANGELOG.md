@@ -4,6 +4,15 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Corrigido (ajustes visuais da área do cliente)
+
+- Dados e privacidade lê o perfil real da conta (CPF mascarado) em vez do formulário de cadastro, que ficava vazio após
+  o login.
+- Consentimentos LGPD e Segurança da conta deixam de mostrar "Pendente" para quem já tem conta: sem a informação do
+  backend, aparece "Sem informação" / "Status indisponível".
+- Resultado do Provador mostra uma caixa "Sem imagem" quando não há foto ou referência, em vez de imagem quebrada.
+- Agendamento não encontrado oferece "Voltar para a agenda"; mascote da Home menor, cobrindo menos conteúdo.
+
 ### Adicionado (confirmação presencial por código)
 
 - "Estou a caminho" no detalhe do agendamento (cliente) e "Confirmar chegada do cliente" na agenda (profissional), com

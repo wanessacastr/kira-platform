@@ -42,10 +42,10 @@ export function MascotHelpButton({
         position: "sticky",
         bottom: "var(--space-4)",
         marginLeft: "auto",
-        marginRight: -20,
+        marginRight: -24,
         display: "flex",
-        width: 76,
-        height: 76,
+        width: 64,
+        height: 64,
         padding: 0,
         border: "none",
         borderRadius: "var(--radius-round)",
@@ -58,7 +58,7 @@ export function MascotHelpButton({
         <br />
         {hintLines[1]}
       </span>
-      <AgentAvatar agent={CHAT_AGENTS.AI} size={76} glow />
+      <AgentAvatar agent={CHAT_AGENTS.AI} size={64} glow />
     </button>
   );
 }

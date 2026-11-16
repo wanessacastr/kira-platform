@@ -11,6 +11,34 @@ import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { RecommendedProfessionalCard } from "../components/ProfessionalCards";
 
+// Sem foto/referência não há imagem para mostrar: caixa neutra em vez de imagem quebrada
+function ImageSlot({ src, alt }) {
+  if (!src) {
+    return (
+      <div
+        role="img"
+        aria-label={`${alt}: sem imagem`}
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "var(--space-8)",
+          background: colors.muted,
+          color: colors.mutedForeground,
+          fontFamily: fontBody,
+          fontSize: "var(--font-size-xs)",
+        }}
+      >
+        Sem imagem
+      </div>
+    );
+  }
+  return <img src={src} alt={alt} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />;
+}
+
 export default function ClientTryOnResultScreen() {
   const { goToPersonalizedRanking, tryOnClientPhoto, tryOnReference } = useTryOn();
   const { loadRanking, rankingError, rankingLoading, recommended } = useRanking();
@@ -59,11 +87,9 @@ export default function ClientTryOnResultScreen() {
             >
               Referência
             </p>
-            <img
-              src={tryOnReference}
-              alt="Referência"
-              style={{ width: "100%", aspectRatio: "1/1", borderRadius: "var(--radius-xl)", objectFit: "cover" }}
-            />
+            <div style={{ width: "100%", aspectRatio: "1/1", borderRadius: "var(--radius-xl)", overflow: "hidden" }}>
+              <ImageSlot src={tryOnReference} alt="Referência" />
+            </div>
           </div>
           <div style={{ flex: 1 }}>
             <p
@@ -87,12 +113,8 @@ export default function ClientTryOnResultScreen() {
                 position: "relative",
               }}
             >
-              <img
-                src={tryOnClientPhoto}
-                alt="Prévia do resultado"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-              {showAfter && (
+              <ImageSlot src={tryOnClientPhoto} alt="Prévia do resultado" />
+              {showAfter && tryOnClientPhoto && (
                 <div
                   style={{
                     position: "absolute",
