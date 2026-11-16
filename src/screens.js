@@ -22,6 +22,7 @@ const ClientCouponsScreen = lazy(() => import("./client/screens/ClientCouponsScr
 const ClientDocumentScreen = lazy(() => import("./client/screens/ClientDocumentScreen"));
 const ClientDoneScreen = lazy(() => import("./client/screens/ClientDoneScreen"));
 const ClientFavoritesScreen = lazy(() => import("./client/screens/ClientFavoritesScreen"));
+const ClientEmergencyContactsScreen = lazy(() => import("./client/screens/ClientEmergencyContactsScreen"));
 const ClientHelpSupportScreen = lazy(() => import("./client/screens/ClientHelpSupportScreen"));
 const ClientHistoryScreen = lazy(() => import("./client/screens/ClientHistoryScreen"));
 const ClientMapScreen = lazy(() => import("./client/screens/ClientMapScreen"));
@@ -131,6 +132,7 @@ export const screens = {
   clientChat: ClientChatScreen,
   clientReviews: ClientReviewsScreen,
   clientFavorites: ClientFavoritesScreen,
+  clientEmergencyContacts: ClientEmergencyContactsScreen,
   clientHistory: ClientHistoryScreen,
   clientProfessionalProfile: ClientProfessionalProfileScreen,
   clientScheduling: ClientSchedulingScreen,

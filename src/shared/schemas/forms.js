@@ -19,6 +19,12 @@ const confirmCheck = (d, ctx) => {
   if (d.password !== d.confirm) ctx.addIssue({ code: "custom", path: ["confirm"], message: "As senhas não coincidem" });
 };
 
+export const emergencyContactSchema = z.object({
+  name: z.string().refine((v) => v.trim().length >= 2, "Informe o nome"),
+  phone: phoneRule,
+  relationship: z.string().max(40, "Use até 40 caracteres").optional(),
+});
+
 export const profileEditSchema = z.object({ name: nameRule, email: emailRule, phone: phoneRule });
 
 export const clientPersonalSchema = z

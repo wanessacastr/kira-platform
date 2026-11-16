@@ -61,3 +61,6 @@ export const isValidCnpj = (cnpj) => {
   const d2 = calc(d.slice(0, 13), w2);
   return d2 === parseInt(d[13]);
 };
+
+// 1.6 → "1,6 km" (vírgula, como no Brasil)
+export const formatKm = (km) => `${Number(km).toFixed(1).replace(".", ",")} km`;

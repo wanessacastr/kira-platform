@@ -1,8 +1,45 @@
 // Modal de filtros da busca (preço, nota, distância, ordem) · API: nenhuma
 import { CheckCircle2, Star } from "lucide-react";
-import { PrimaryButton, SecondaryButton } from "../../shared/components/ui";
+import { useState } from "react";
+import { PrimaryButton, SecondaryButton, inputStyle } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { EscapeKey } from "../../shared/components/primitives";
+
+// Texto digitado → número (vírgula ou ponto) ou null quando vazio, que significa "sem limite"
+export const parseLimit = (text) => {
+  const clean = String(text).trim().replace(",", ".");
+  if (clean === "") return null;
+  const n = Number(clean);
+  return Number.isFinite(n) && n >= 0 ? n : undefined; // undefined = texto inválido, não muda o filtro
+};
+
+// Campo digitado de limite: vazio = "Sem limite"
+const LimitInput = ({ label, prefix, suffix, value, onChange }) => {
+  const [text, setText] = useState(value == null ? "" : String(value).replace(".", ","));
+  const handle = (e) => {
+    const next = e.target.value.replace(/[^\d.,]/g, "");
+    const parsed = parseLimit(next);
+    if (parsed === undefined) return;
+    setText(next);
+    onChange(parsed);
+  };
+  const side = { fontFamily: fontBody, fontSize: "var(--font-size-sm)", color: colors.mutedForeground };
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)" }}>
+      {prefix && <span style={side}>{prefix}</span>}
+      <input
+        aria-label={label}
+        value={text}
+        onChange={handle}
+        inputMode="decimal"
+        autoComplete="off"
+        placeholder="Sem limite"
+        style={{ ...inputStyle(false), flex: 1 }}
+      />
+      {suffix && <span style={side}>{suffix}</span>}
+    </div>
+  );
+};
 
 export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, onClear }) => {
   if (!open) return null;
@@ -67,29 +104,14 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
           Filtros
         </h2>
 
-        <p style={labelStyle}>Faixa de preço</p>
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-18)" }}>
-          <input
-            type="range"
-            min={0}
-            max={500}
-            step={10}
+        <p style={labelStyle}>Preço máximo</p>
+        <div style={{ marginBottom: "var(--space-18)" }}>
+          <LimitInput
+            label="Preço máximo em reais"
+            prefix="R$"
             value={draft.price}
-            onChange={(e) => setDraft((d) => ({ ...d, price: Number(e.target.value) }))}
-            style={{ flex: 1, accentColor: colors.primary }}
+            onChange={(price) => setDraft((d) => ({ ...d, price }))}
           />
-          <span
-            style={{
-              fontFamily: fontBody,
-              fontSize: "var(--font-size-xs)",
-              fontWeight: 600,
-              color: colors.foreground,
-              minWidth: 74,
-              textAlign: "right",
-            }}
-          >
-            até R$ {draft.price}
-          </span>
         </div>
 
         <p style={labelStyle}>Avaliação mínima</p>
@@ -125,28 +147,13 @@ export const FilterModal = ({ open, mounted, onClose, draft, setDraft, onApply, 
         </div>
 
         <p style={labelStyle}>Distância máxima</p>
-        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-10)", marginBottom: "var(--space-18)" }}>
-          <input
-            type="range"
-            min={1}
-            max={30}
-            step={1}
+        <div style={{ marginBottom: "var(--space-18)" }}>
+          <LimitInput
+            label="Distância máxima em quilômetros"
+            suffix="km"
             value={draft.maxDistance}
-            onChange={(e) => setDraft((d) => ({ ...d, maxDistance: Number(e.target.value) }))}
-            style={{ flex: 1, accentColor: colors.primary }}
+            onChange={(maxDistance) => setDraft((d) => ({ ...d, maxDistance }))}
           />
-          <span
-            style={{
-              fontFamily: fontBody,
-              fontSize: "var(--font-size-xs)",
-              fontWeight: 600,
-              color: colors.foreground,
-              minWidth: 56,
-              textAlign: "right",
-            }}
-          >
-            {draft.maxDistance} km
-          </span>
         </div>
 
         <p style={labelStyle}>Atendimento</p>

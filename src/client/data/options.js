@@ -9,6 +9,7 @@ import {
   Gift,
   Heart,
   HelpCircle,
+  Phone,
   Home,
   MapPin,
   MessageCircle,
@@ -49,7 +50,7 @@ export const categoryOptions = [
   { id: "massagem", label: "Massagem" },
 ];
 
-export const defaultSearchFilters = { price: 500, minRating: 0, maxDistance: 30, mode: "ambos", sort: "proximo" };
+export const defaultSearchFilters = { price: null, minRating: 0, maxDistance: null, mode: "ambos", sort: "proximo" };
 
 export const appointmentTabs = [
   { id: "proximo", label: "Próximos" },
@@ -93,6 +94,7 @@ export const clientProfileMenu = [
       { label: "Dados e privacidade", icon: ShieldCheck, go: "clientPrivacyData" },
       { label: "Consentimentos LGPD", icon: ShieldCheck, go: "clientLgpdConsents" },
       { label: "Segurança da conta", icon: BadgeCheck, go: "clientAccountSecurity" },
+      { label: "Contatos de emergência", icon: Phone, go: "clientEmergencyContacts" },
     ],
   },
   {

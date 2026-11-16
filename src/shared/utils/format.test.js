@@ -61,3 +61,12 @@ describe("formatadores", () => {
     expect(formatCnpj("11222333000181")).toBe("11.222.333/0001-81");
   });
 });
+
+describe("formatKm", () => {
+  it("usa vírgula e uma casa decimal", async () => {
+    const { formatKm } = await import("./format");
+    expect(formatKm(1.6)).toBe("1,6 km");
+    expect(formatKm(0)).toBe("0,0 km");
+    expect(formatKm(12.04)).toBe("12,0 km");
+  });
+});

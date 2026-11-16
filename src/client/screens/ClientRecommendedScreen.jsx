@@ -12,6 +12,7 @@ import { PrimaryButton, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody } from "../../shared/theme";
 import { CompatibilityBadge, ProPhoto, ratingLabel } from "../components/ProfessionalCards";
 import { useProfessionals } from "../hooks/useProfessionals";
+import { formatKm } from "../../shared/utils/format";
 import { categoryOptions } from "../data/options";
 import { recommendProfessionals } from "../recommendation";
 import { matchesCategory } from "../utils/categories";
@@ -26,7 +27,7 @@ const SORTS = [
 const reasonOf = (p) =>
   [
     p.role ? `${p.role}` : "Estúdio da plataforma",
-    p.distance != null ? `a ${p.distance.toFixed(1).replace(".", ",")} km de você` : null,
+    p.distance != null ? `a ${formatKm(p.distance)} de você` : null,
     p.rating != null
       ? `nota ${p.rating}${p.reviews != null ? ` (${p.reviews} avaliações)` : ""}`
       : "ainda sem avaliações",
@@ -157,7 +158,7 @@ export default function ClientRecommendedScreen() {
                     </span>
                     {p.distance != null && (
                       <span style={{ display: "flex", alignItems: "center", gap: "var(--space-2)" }}>
-                        <MapPin size={11} aria-hidden="true" /> {p.distance.toFixed(1).replace(".", ",")} km
+                        <MapPin size={11} aria-hidden="true" /> {formatKm(p.distance)}
                       </span>
                     )}
                     {p.price != null && <strong style={{ color: colors.primaryText }}>R$ {p.price}</strong>}
