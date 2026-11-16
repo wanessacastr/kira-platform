@@ -1,10 +1,12 @@
 // Painel: métricas, receita da semana e próximos atendimentos · API: kira-backend (agendamentos, serviços e avaliações)
-import { HeaderShortcuts } from "../../shared/components/HeaderShortcuts";
 import { useState } from "react";
 import { ChevronRight, Clock, CreditCard, ShieldCheck, Sparkles, Star, User } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
 import { useSignup } from "../../context/SignupContext";
+import { useMyProfile } from "../../shared/hooks/useMyProfile";
+import { HeaderShortcuts } from "../../shared/components/HeaderShortcuts";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
+import { MascotHelpButton } from "../../client/components/chat/MascotHelpButton";
 import { ProBottomNav } from "../components/ProBottomNav";
 import { errorMessage } from "../../shared/api";
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
@@ -17,6 +19,7 @@ import { appointmentsOn, averageRating, revenueDelta, upcoming, weeklyRevenue } 
 export default function ProHomeScreen() {
   const { auth, goToProTab, setScreen } = useSession();
   const { pForm } = useSignup();
+  const photo = useMyProfile().data?.photo || pForm.photo;
   const [proHomeRevenueSel, setProHomeRevenueSel] = useState(null);
   const business = useBusinessData();
   const proWeeklyRevenue = weeklyRevenue(business.appointments);
@@ -29,27 +32,68 @@ export default function ProHomeScreen() {
   const noBusinessHours = businessHours.data?.every((d) => !d.open) ?? false;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
-      <div style={{ padding: "var(--space-20) var(--space-24) var(--space-4)" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between",
+          gap: "var(--space-12)",
+          padding: "var(--space-20) var(--space-24) var(--space-4)",
+        }}
+      >
+        <div style={{ minWidth: 0 }}>
           <p
             style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground, margin: 0 }}
           >
             Olá,
           </p>
-          <HeaderShortcuts conversationsScreen="proConversations" notificationsScreen="proNotifications" />
+          <h1
+            style={{
+              fontFamily: fontDisplay,
+              fontWeight: 700,
+              fontSize: "var(--font-size-2xl)",
+              color: colors.foreground,
+              margin: "var(--space-2) 0 var(--space-18)",
+            }}
+          >
+            {displayName ? displayName.split(" ")[0] : "Profissional"}{" "}
+            <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
+          </h1>
         </div>
-        <h1
-          style={{
-            fontFamily: fontDisplay,
-            fontWeight: 700,
-            fontSize: "var(--font-size-2xl)",
-            color: colors.foreground,
-            margin: "var(--space-2) 0 var(--space-18)",
-          }}
-        >
-          {displayName ? displayName.split(" ")[0] : "Profissional"}{" "}
-          <Sparkles size={16} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
-        </h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)", flexShrink: 0 }}>
+          <HeaderShortcuts conversationsScreen="proConversations" notificationsScreen="proNotifications" />
+          <button
+            type="button"
+            className="k-reset"
+            onClick={() => setScreen("proProfileMenu")}
+            aria-label="Abrir meu perfil"
+            style={{
+              width: 46,
+              height: 46,
+              flexShrink: 0,
+              borderRadius: "var(--radius-round)",
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: `2px solid ${colors.primary}`,
+              background: colors.muted,
+              cursor: "pointer",
+            }}
+          >
+            {photo ? (
+              <img
+                src={photo}
+                alt=""
+                width={46}
+                height={46}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            ) : (
+              <User size={20} color={colors.mutedForeground} />
+            )}
+          </button>
+        </div>
       </div>
       <div style={{ flex: 1, overflowY: "auto", padding: "0 var(--space-24) var(--space-24)" }}>
         {business.error && (
@@ -110,6 +154,7 @@ export default function ProHomeScreen() {
               role="presentation"
               style={{
                 width: "100%",
+                boxSizing: "border-box",
                 textAlign: "left",
                 border: `1px solid ${colors.border}`,
                 borderRadius: "var(--radius-3xl)",
@@ -164,7 +209,14 @@ export default function ProHomeScreen() {
                   marginTop: "var(--space-12)",
                 }}
               >
-                <span style={{ fontFamily: fontBody, fontSize: "var(--font-size-xs)", color: colors.mutedForeground }}>
+                <span
+                  style={{
+                    fontFamily: fontBody,
+                    fontSize: "var(--font-size-xs)",
+                    color: colors.mutedForeground,
+                    minWidth: 0,
+                  }}
+                >
                   {proHomeRevenueSel !== null
                     ? `${proWeeklyRevenue[proHomeRevenueSel].label} · R$ ${proWeeklyRevenue[proHomeRevenueSel].value.toLocaleString("pt-BR")}`
                     : "Toque em um dia para ver o valor"}
@@ -184,6 +236,8 @@ export default function ProHomeScreen() {
                     display: "flex",
                     alignItems: "center",
                     gap: "var(--space-2)",
+                    flexShrink: 0,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   Ver gestão financeira <ChevronRight size={13} />
@@ -356,6 +410,11 @@ export default function ProHomeScreen() {
           </div>
           <ChevronRight size={18} color={colors.primary} />
         </button>
+        <MascotHelpButton
+          onOpen={() => setScreen("proKiraIa")}
+          label="Abrir a Kira IA Pro, sua assistente profissional"
+          hint={["Oi! Sou a Kira ✨", "Sua assistente profissional!"]}
+        />
       </div>
       <ProBottomNav active="proHome" onNavigate={goToProTab} />
     </div>

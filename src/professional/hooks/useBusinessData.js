@@ -15,6 +15,7 @@ export function useBusinessData() {
   return {
     appointments: (appointments.data ?? []).map((a) => ({ ...a, price: priceById.get(a.serviceId) ?? null })),
     reviews: reviews.data ?? [],
+    services: services.data ?? [],
     loading: queries.some((q) => q.isLoading),
     error: queries.find((q) => q.isError)?.error ?? null,
     retry: () => queries.filter((q) => q.isError).forEach((q) => q.refetch()),

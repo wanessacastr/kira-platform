@@ -3,11 +3,11 @@ import { WifiOff } from "lucide-react";
 import { CHAT_AGENTS } from "../../../shared/api/chatContract";
 import { Heading, Text } from "../../../shared/components/primitives";
 import { colors } from "../../../shared/theme";
-import { welcomeSuggestions } from "../../chat/chatContent";
+import { CHAT_CONTEXTS, chatContexts } from "../../../shared/chat/chatContexts";
 import { AgentAvatar } from "./AgentAvatar";
 import { QuickReplies } from "./QuickReplies";
 
-export const ChatWelcome = ({ onPick }) => (
+export const ChatWelcome = ({ onPick, content = chatContexts[CHAT_CONTEXTS.CLIENT] }) => (
   <div style={{ flex: 1, minHeight: 0, overflowY: "auto", display: "flex", flexDirection: "column" }}>
     {/* margin auto centraliza sem cortar o topo quando a tela é baixa (justify-content: center cortava) */}
     <div
@@ -23,25 +23,30 @@ export const ChatWelcome = ({ onPick }) => (
     >
       <AgentAvatar agent={CHAT_AGENTS.AI} size={80} />
       <Heading as="h2" size="3xl" style={{ lineHeight: 1.15 }}>
-        Oi, eu sou a Kira
+        {content.title}
       </Heading>
-      <Text size="base" color={colors.mutedForeground} style={{ maxWidth: 290, lineHeight: 1.5 }}>
-        Sou a nossa inteligência artificial e posso te ajudar a encontrar profissionais, agendar horários e tirar
-        dúvidas.
-      </Text>
-      <Text
-        size="xs"
-        weight={600}
-        color={colors.primaryText}
-        style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}
-      >
-        beleza, tecnologia, confiança
-      </Text>
-      <Text size="sm" weight={600} style={{ marginTop: "var(--space-8)" }}>
-        Por onde você quer começar?
-      </Text>
+      {content.lines.map((line) => (
+        <Text key={line} size="base" color={colors.mutedForeground} style={{ maxWidth: 290, lineHeight: 1.5 }}>
+          {line}
+        </Text>
+      ))}
+      {content.tagline && (
+        <Text
+          size="xs"
+          weight={600}
+          color={colors.primaryText}
+          style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}
+        >
+          {content.tagline}
+        </Text>
+      )}
+      {content.prompt && (
+        <Text size="sm" weight={600} style={{ marginTop: "var(--space-8)" }}>
+          {content.prompt}
+        </Text>
+      )}
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <QuickReplies options={welcomeSuggestions} onPick={onPick} indent={false} />
+        <QuickReplies options={content.shortcuts} onPick={onPick} indent={false} />
       </div>
     </div>
   </div>

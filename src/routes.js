@@ -88,6 +88,7 @@ export const professionalPaths = area("/profissional", [
   ["proConversations", "conversas"],
   ["proNotifications", "notificacoes"],
   ["proPremium", "premium"],
+  ["proKiraIa", "kira-ia"],
   ["proSearch", "buscar"],
 ]);
 

@@ -12,6 +12,7 @@ export const bubbleText = {
   lineHeight: 1.4,
   margin: 0,
   overflowWrap: "anywhere",
+  whiteSpace: "pre-line", // respeita as quebras de linha das respostas da Kira IA Pro
 };
 
 // keyframes e classes do chat; reduced-motion desliga tudo
