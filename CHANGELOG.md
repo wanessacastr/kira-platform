@@ -4,6 +4,12 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado (cliente do atendimento, no Início do profissional)
+
+- Os "Próximos atendimentos" do Início do profissional agora abrem uma tela só de leitura com o cliente e os dados do
+  atendimento (serviço, data, horário, duração, profissional, pagamento, observações e status). O backend só envia o
+  nome do cliente no agendamento; telefone e foto não são enviados ao estúdio.
+
 ### Adicionado (escolher a funcionária)
 
 - No agendamento da cliente, bloco "Com quem?" com "Sem preferência" e as funcionárias ativas do estúdio

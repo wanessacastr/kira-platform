@@ -47,6 +47,7 @@ const ClientTryOnResultScreen = lazy(() => import("./client/screens/ClientTryOnR
 const ProAddressScreen = lazy(() => import("./professional/screens/ProAddressScreen"));
 const ProAgendaDashScreen = lazy(() => import("./professional/screens/ProAgendaDashScreen"));
 const ProRescheduleScreen = lazy(() => import("./professional/screens/ProRescheduleScreen"));
+const ProClientInfoScreen = lazy(() => import("./professional/screens/ProClientInfoScreen"));
 const ProConversationScreen = lazy(() => import("./professional/screens/ProConversationScreen"));
 const ProAnalyticsScreen = lazy(() => import("./professional/screens/ProAnalyticsScreen"));
 const ProDocumentScreen = lazy(() => import("./professional/screens/ProDocumentScreen"));
@@ -146,6 +147,7 @@ export const screens = {
   proHome: ProHomeScreen,
   proAgendaDash: ProAgendaDashScreen,
   proReschedule: ProRescheduleScreen,
+  proClientInfo: ProClientInfoScreen,
   proConversation: ProConversationScreen,
   proProfileMenu: ProProfileMenuScreen,
   proKiraIa: ProKiraIaScreen,
