@@ -1,11 +1,14 @@
-// Processamento do pagamento: aguardando, processando e resultado demonstrativo · nenhum pagamento real acontece
+// Pagamento (demonstração): ao fim, confirma o agendamento · API: kira-backend (POST /api/agendamentos); nenhum pagamento real acontece
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CheckCircle2, Clock, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
 import { DemoBanner } from "../../shared/components/demo";
 import { Chip } from "../../shared/components/primitives";
 import { ScreenFrame } from "../../shared/components/ScreenFrame";
 import { PrimaryButton, SecondaryButton } from "../../shared/components/ui";
+import { api, errorMessage } from "../../shared/api";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 
 const STATES = [
@@ -34,6 +37,27 @@ const STATES = [
 
 export default function ClientPaymentProcessingScreen() {
   const { setScreen } = useSession();
+  const { selectedProId, selectedServiceId, selectedStaffId, selectedDate, scheduleTime, setBookedSlot } =
+    useScheduling();
+  const queryClient = useQueryClient();
+  // Com o gateway, isto passa a rodar quando o backend confirmar o pagamento (webhook)
+  const book = useMutation({
+    mutationFn: () => {
+      const [h, m] = scheduleTime.split(":").map(Number);
+      const start = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), h, m);
+      return api.appointments.create({
+        proId: selectedProId,
+        serviceId: selectedServiceId,
+        staffId: selectedStaffId,
+        start,
+      });
+    },
+    onSuccess: () => {
+      setBookedSlot(scheduleTime);
+      queryClient.invalidateQueries({ queryKey: ["appointments"] });
+      setScreen("clientScheduling");
+    },
+  });
   const [state, setState] = useState("waiting");
   const current = STATES.find((s) => s.id === state);
   const { Icon } = current;
@@ -105,8 +129,21 @@ export default function ClientPaymentProcessingScreen() {
           {current.text}
         </p>
       </div>
-      <PrimaryButton disabled={state !== "result"} onClick={() => setScreen("clientScheduling")}>
-        Voltar ao agendamento
+      {book.isError && (
+        <p
+          role="alert"
+          style={{
+            fontFamily: fontBody,
+            fontSize: "var(--font-size-xs)",
+            color: colors.destructiveText,
+            margin: "0 0 var(--space-12)",
+          }}
+        >
+          {errorMessage(book.error, "Não foi possível confirmar o agendamento.")}
+        </p>
+      )}
+      <PrimaryButton disabled={state !== "result" || book.isPending || !scheduleTime} onClick={() => book.mutate()}>
+        {book.isPending ? "Confirmando..." : "Confirmar agendamento"}
       </PrimaryButton>
       {state !== "result" && (
         <p

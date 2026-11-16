@@ -1,5 +1,5 @@
-// Agendamento: serviço, data, horário e confirmação · API: kira-backend (slots de disponibilidade e POST /api/agendamentos)
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+// Agendamento: serviço, funcionária, data e horário; segue para o pagamento · API: kira-backend (slots de disponibilidade)
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { useScheduling } from "../../context/SchedulingContext";
@@ -30,7 +30,6 @@ export default function ClientSchedulingScreen() {
     selectedServiceId,
     selectedStaffId,
     setAgendaTab,
-    setBookedSlot,
     setScheduleTime,
     setSelectedServiceId,
     setSelectedStaffId,
@@ -39,7 +38,6 @@ export default function ClientSchedulingScreen() {
   const { setScreen } = useSession();
   const today = startOfDay(new Date());
   const [monthAnimKey, setMonthAnimKey] = useState(0);
-  const queryClient = useQueryClient();
   const proQuery = useProfessional(selectedProId);
   const pro = proQuery.data;
   const isDayAvailable = useBookableDays(selectedProId);
@@ -62,31 +60,13 @@ export default function ClientSchedulingScreen() {
   const times = availability.data ?? [];
   const scheduleLoading = availability.isFetching;
   const scheduleError = availability.isError && !availability.isFetching;
-  const book = useMutation({
-    mutationFn: () => {
-      const [h, m] = scheduleTime.split(":").map(Number);
-      const start = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), h, m);
-      return api.appointments.create({
-        proId: selectedProId,
-        serviceId: selectedServiceId,
-        staffId: selectedStaffId,
-        start,
-      });
-    },
-    onSuccess: () => {
-      setBookedSlot(scheduleTime);
-      queryClient.invalidateQueries({ queryKey: ["appointments"] });
-    },
-  });
   const selectService = (id) => {
     setSelectedServiceId(id);
     setScheduleTime(null);
-    book.reset();
   };
   const selectStaff = (id) => {
     setSelectedStaffId(id);
     setScheduleTime(null);
-    book.reset();
   };
   const handleChangeMonth = (delta) => {
     changeMonth(delta);
@@ -334,27 +314,7 @@ export default function ClientSchedulingScreen() {
 
             {scheduleTime && (
               <div style={{ marginTop: "var(--space-20)" }}>
-                {book.isError && (
-                  <p
-                    role="alert"
-                    style={{
-                      fontFamily: fontBody,
-                      fontSize: "var(--font-size-xs)",
-                      color: colors.destructiveText,
-                      margin: "0 0 var(--space-12)",
-                    }}
-                  >
-                    {errorMessage(book.error, "Não foi possível confirmar o agendamento.")}
-                  </p>
-                )}
-                <PrimaryButton disabled={book.isPending} onClick={() => book.mutate()}>
-                  {book.isPending ? "Confirmando..." : "Confirmar agendamento"}
-                </PrimaryButton>
-                <div style={{ marginTop: "var(--space-10)" }}>
-                  <SecondaryButton onClick={() => setScreen("clientCheckout")}>
-                    Ver formas de pagamento (demonstração)
-                  </SecondaryButton>
-                </div>
+                <PrimaryButton onClick={() => setScreen("clientCheckout")}>Continuar para o pagamento</PrimaryButton>
               </div>
             )}
           </>
