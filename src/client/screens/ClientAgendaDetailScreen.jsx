@@ -10,6 +10,7 @@ import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/ui";
 import { colors, fontBody } from "../../shared/theme";
 import { statusOf } from "../../shared/data/appointments";
+import { ArrivalCode } from "../components/ArrivalCode";
 import { ProPhoto, RatingStars } from "../components/ProfessionalCards";
 import { ReviewForm } from "../components/ReviewForm";
 import { useMyAppointments, useMyReviews } from "../hooks/useProfessionals";
@@ -48,7 +49,7 @@ export default function ClientAgendaDetailScreen() {
     );
   }
   const pro = { name: appointment.proName, photo: null };
-  const canCancel = appointment.status === "proximo";
+  const canCancel = appointment.status === "proximo" && appointment.rawStatus !== "CHEGADA_CONFIRMADA";
   const myReview = reviews.data?.find((r) => r.appointmentId === appointment.id);
   // Enquanto as avaliações carregam, não oferece avaliar (evita avaliar duas vezes)
   const canReview = appointment.status === "concluido" && reviews.isSuccess && !myReview;
@@ -150,6 +151,7 @@ export default function ClientAgendaDetailScreen() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-10)" }}>
+          <ArrivalCode appointment={appointment} />
           {canCancel && (
             <PrimaryButton onClick={() => setScreen("clientBookingTracking")}>
               <Route size={15} aria-hidden="true" /> Acompanhar agendamento

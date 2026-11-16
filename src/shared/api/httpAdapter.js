@@ -3,6 +3,7 @@ import { ApiError, SESSION_ENDED, SESSION_ENDED_MESSAGE } from "./contract";
 import { API_URL, authStore, request } from "./http";
 import {
   toAppointment,
+  toArrivalToken,
   toBusinessHours,
   toBusinessHoursRequest,
   toBusinessService,
@@ -228,6 +229,30 @@ export const httpAdapter = {
         await request(`/api/agendamentos/${id}/reagendar/empresa`, {
           method: "PATCH",
           body: { novaDataHoraInicio: toLocalDateTime(start) },
+        }),
+      ),
+  },
+  // Confirmação presencial por código de 6 dígitos. O código nasce e é conferido no backend; o app não gera nem
+  // guarda nada. ROTAS AINDA NÃO EXISTEM no backend (contrato esperado em docs/CONFIRMACAO-PRESENCIAL.md).
+  arrival: {
+    // Cliente: gera o código do agendamento ("Estou a caminho")
+    requestToken: async (appointmentId) =>
+      toArrivalToken(await request(`/api/agendamentos/${appointmentId}/token-chegada`, { method: "POST" })),
+    // Cliente: código ainda ativo, ou null se não houver (ou se a rota não existir)
+    getToken: async (appointmentId) => {
+      try {
+        return toArrivalToken(await request(`/api/agendamentos/${appointmentId}/token-chegada`));
+      } catch (e) {
+        if (e instanceof ApiError && [404, 405, 501].includes(e.status)) return null;
+        throw e;
+      }
+    },
+    // Profissional: confere o código; devolve o agendamento já com CHEGADA_CONFIRMADA
+    validateToken: async ({ appointmentId, code }) =>
+      toAppointment(
+        await request(`/api/agendamentos/${appointmentId}/chegada/validar`, {
+          method: "POST",
+          body: { codigo: code },
         }),
       ),
   },

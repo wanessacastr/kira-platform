@@ -35,6 +35,7 @@ const statusTab = {
   PENDENTE: "proximo",
   CONFIRMADO: "proximo",
   REAGENDADO: "proximo",
+  CHEGADA_CONFIRMADA: "proximo",
   CONCLUIDO: "concluido",
   CANCELADO: "cancelado",
 };
@@ -78,6 +79,9 @@ export const toProfessional = (studio, services = [], reviews = null) => {
     services: active,
   };
 };
+
+/** @returns {import("./contract").ArrivalToken} */
+export const toArrivalToken = (t) => ({ code: String(t.codigo), expiresAt: t.expiraEm ? new Date(t.expiraEm) : null });
 
 /** @returns {import("./contract").Appointment} */
 export const toAppointment = (a, now = new Date()) => {

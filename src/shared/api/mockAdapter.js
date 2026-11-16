@@ -90,6 +90,16 @@ export const mockAdapter = {
       favoriteIds.delete(professionalId);
     },
   },
+  // Sem backend para a confirmação presencial: o mock não gera código nem simula validação
+  arrival: {
+    requestToken: async () => {
+      throw new ApiError("recurso_indisponivel", "Este recurso ainda não está disponível.", 501);
+    },
+    getToken: async () => null,
+    validateToken: async () => {
+      throw new ApiError("recurso_indisponivel", "Este recurso ainda não está disponível.", 501);
+    },
+  },
   emergencyContacts: {
     list: async () => {
       await wait(300);

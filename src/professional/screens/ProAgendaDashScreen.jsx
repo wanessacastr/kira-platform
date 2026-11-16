@@ -10,6 +10,7 @@ import { CalendarHeader, CalendarMonth } from "../../shared/components/Calendar"
 import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { startOfDay } from "../../shared/utils/date";
+import { ArrivalValidation } from "../components/ArrivalValidation";
 import { ProBottomNav } from "../components/ProBottomNav";
 import { statusOf } from "../../shared/data/appointments";
 import { useBusinessData } from "../hooks/useBusinessData";
@@ -127,7 +128,7 @@ export default function ProAgendaDashScreen() {
   );
 }
 
-const ACTIVE_STATUSES = ["PENDENTE", "CONFIRMADO", "REAGENDADO"];
+const ACTIVE_STATUSES = ["PENDENTE", "CONFIRMADO", "CHEGADA_CONFIRMADA", "REAGENDADO"];
 
 const actionButton = (tone) => ({
   flex: 1,
@@ -156,6 +157,7 @@ function AppointmentCard({ appointment: a }) {
   const { setScreen } = useSession();
   const queryClient = useQueryClient();
   const [confirmingCancel, setConfirmingCancel] = useState(false);
+  const [validatingArrival, setValidatingArrival] = useState(false);
   const onSuccess = () => queryClient.invalidateQueries({ queryKey: ["appointments"] });
   const confirm = useMutation({ mutationFn: () => api.appointments.confirm(a.id), onSuccess });
   const complete = useMutation({ mutationFn: () => api.appointments.complete(a.id), onSuccess });
@@ -258,6 +260,16 @@ function AppointmentCard({ appointment: a }) {
                   {complete.isPending ? "Concluindo..." : "Concluir atendimento"}
                 </button>
               )}
+              {a.rawStatus === "CONFIRMADO" && (
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() => setValidatingArrival(true)}
+                  style={actionButton("primary")}
+                >
+                  Confirmar chegada do cliente
+                </button>
+              )}
               <button
                 type="button"
                 disabled={busy}
@@ -281,6 +293,7 @@ function AppointmentCard({ appointment: a }) {
           )}
         </div>
       )}
+      {validatingArrival && <ArrivalValidation appointment={a} onClose={() => setValidatingArrival(false)} />}
       <button
         type="button"
         onClick={() => {
