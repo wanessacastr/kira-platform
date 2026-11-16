@@ -214,7 +214,7 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 
 ### Outras telas com a chamada já pronta
 
-- [ ] **Tela de contatos de emergência:** listar, cadastrar e remover (`api.emergencyContacts`). Mostrar as mensagens de erro do backend, como a do limite de 5.
+- [x] **Tela de contatos de emergência:** Perfil → "Contatos de emergência" lista, cadastra e remove (`api.emergencyContacts`, até 5), mostra as mensagens do backend, e o botão de emergência passa a oferecer "Ligar para" cada contato. O envio de alerta aos contatos (SMS ou push) não existe no backend.
 - [ ] **Aviso de falha ao favoritar:** se o backend falhar, a marcação volta sozinha, mas nenhuma mensagem explica o motivo.
 - [ ] **Favoritas salvas sem login:** ficam só na sessão e não passam para a conta ao entrar. Decidir se devem passar.
 - [x] **Chat cliente–empresa (do agendamento):** feito, com WebSocket. Sem a conexão, a conversa atualiza por consulta a cada 10 segundos.

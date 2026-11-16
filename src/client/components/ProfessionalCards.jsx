@@ -3,6 +3,7 @@ import { ChevronRight, Clock, MapPin, Sparkles, Star } from "lucide-react";
 import { SecondaryButton } from "../../shared/components/ui";
 import { statusOf } from "../../shared/data/appointments";
 import { colors, fontBody, gradientKira } from "../../shared/theme";
+import { formatKm } from "../../shared/utils/format";
 
 // Foto do estúdio ou, sem foto cadastrada, as iniciais do nome
 export const ProPhoto = ({ pro, size, radius = "var(--radius-xl)", style }) => {
@@ -104,7 +105,7 @@ export const ProfessionalCard = ({ pro, onClick }) => (
               color: colors.mutedForeground,
             }}
           >
-            <MapPin size={11} /> {pro.distance != null ? `${pro.distance} km` : pro.city}
+            <MapPin size={11} /> {pro.distance != null ? formatKm(pro.distance) : pro.city}
           </span>
         )}
       </div>
@@ -233,7 +234,7 @@ export const RecommendedProfessionalCard = ({ pro, onViewProfile }) => {
                   color: colors.mutedForeground,
                 }}
               >
-                <MapPin size={11} /> {pro.distance != null ? `${pro.distance} km` : pro.city}
+                <MapPin size={11} /> {pro.distance != null ? formatKm(pro.distance) : pro.city}
               </span>
             )}
           </div>

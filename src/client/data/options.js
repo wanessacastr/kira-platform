@@ -9,6 +9,7 @@ import {
   Gift,
   Heart,
   HelpCircle,
+  Phone,
   Home,
   MapPin,
   MessageCircle,
@@ -93,6 +94,7 @@ export const clientProfileMenu = [
       { label: "Dados e privacidade", icon: ShieldCheck, go: "clientPrivacyData" },
       { label: "Consentimentos LGPD", icon: ShieldCheck, go: "clientLgpdConsents" },
       { label: "Segurança da conta", icon: BadgeCheck, go: "clientAccountSecurity" },
+      { label: "Contatos de emergência", icon: Phone, go: "clientEmergencyContacts" },
     ],
   },
   {
