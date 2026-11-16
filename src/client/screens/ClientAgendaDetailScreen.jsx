@@ -37,6 +37,7 @@ export default function ClientAgendaDetailScreen() {
           ) : (
             <ErrorState
               onRetry={appointments.isError ? appointments.refetch : () => setScreen("clientAgenda")}
+              retryLabel={appointments.isError ? "Tentar novamente" : "Voltar para a agenda"}
               message={
                 appointments.isError
                   ? errorMessage(appointments.error, "Não foi possível carregar o agendamento.")

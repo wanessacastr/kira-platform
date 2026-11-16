@@ -99,7 +99,11 @@ export const EmptyState = ({ onClear }) => (
   </div>
 );
 
-export const ErrorState = ({ onRetry, message = "Não foi possível carregar os profissionais agora." }) => (
+export const ErrorState = ({
+  onRetry,
+  message = "Não foi possível carregar os profissionais agora.",
+  retryLabel = "Tentar novamente",
+}) => (
   <div
     style={{
       display: "flex",
@@ -128,7 +132,7 @@ export const ErrorState = ({ onRetry, message = "Não foi possível carregar os 
       {message}
     </p>
     <div style={{ width: "100%", maxWidth: 220 }}>
-      <PrimaryButton onClick={onRetry}>Tentar novamente</PrimaryButton>
+      <PrimaryButton onClick={onRetry}>{retryLabel}</PrimaryButton>
     </div>
   </div>
 );
