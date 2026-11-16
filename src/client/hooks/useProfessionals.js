@@ -31,6 +31,10 @@ export const useProfessional = (id) => {
   return { ...query, data };
 };
 
+// Funcionárias ativas do estúdio, para a cliente escolher quem vai atender
+export const useStudioStaff = (id) =>
+  useQuery({ queryKey: ["studioStaff", id], queryFn: () => api.professionals.listStaff(id), enabled: !!id });
+
 export const useMyAppointments = () =>
   useQuery({ queryKey: ["appointments", "mine"], queryFn: api.appointments.listMine });
 

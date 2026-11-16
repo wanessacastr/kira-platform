@@ -17,7 +17,7 @@ import { api, errorMessage } from "../../shared/api";
 import { useBookableDays } from "../../shared/hooks/useBookableDays";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { startOfDay } from "../../shared/utils/date";
-import { useProfessional } from "../hooks/useProfessionals";
+import { useProfessional, useStudioStaff } from "../hooks/useProfessionals";
 
 export default function ClientSchedulingScreen() {
   const {
@@ -28,10 +28,12 @@ export default function ClientSchedulingScreen() {
     selectedDate,
     selectedProId,
     selectedServiceId,
+    selectedStaffId,
     setAgendaTab,
     setBookedSlot,
     setScheduleTime,
     setSelectedServiceId,
+    setSelectedStaffId,
     viewMonth,
   } = useScheduling();
   const { setScreen } = useSession();
@@ -41,11 +43,20 @@ export default function ClientSchedulingScreen() {
   const proQuery = useProfessional(selectedProId);
   const pro = proQuery.data;
   const isDayAvailable = useBookableDays(selectedProId);
+  const staffQuery = useStudioStaff(selectedProId);
+  const staffList = staffQuery.data ?? [];
+  const staffMember = staffList.find((f) => f.id === selectedStaffId) ?? null;
   const service = pro?.services.find((s) => s.id === selectedServiceId) ?? null;
   // Horários livres do dia escolhido para o serviço escolhido
   const availability = useQuery({
-    queryKey: ["availability", selectedProId, selectedServiceId, selectedDate?.toDateString()],
-    queryFn: () => api.availability.get({ proId: selectedProId, serviceId: selectedServiceId, date: selectedDate }),
+    queryKey: ["availability", selectedProId, selectedServiceId, selectedStaffId, selectedDate?.toDateString()],
+    queryFn: () =>
+      api.availability.get({
+        proId: selectedProId,
+        serviceId: selectedServiceId,
+        staffId: selectedStaffId,
+        date: selectedDate,
+      }),
     enabled: !!selectedDate && !!selectedServiceId,
   });
   const times = availability.data ?? [];
@@ -55,7 +66,12 @@ export default function ClientSchedulingScreen() {
     mutationFn: () => {
       const [h, m] = scheduleTime.split(":").map(Number);
       const start = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), h, m);
-      return api.appointments.create({ proId: selectedProId, serviceId: selectedServiceId, start });
+      return api.appointments.create({
+        proId: selectedProId,
+        serviceId: selectedServiceId,
+        staffId: selectedStaffId,
+        start,
+      });
     },
     onSuccess: () => {
       setBookedSlot(scheduleTime);
@@ -64,6 +80,11 @@ export default function ClientSchedulingScreen() {
   });
   const selectService = (id) => {
     setSelectedServiceId(id);
+    setScheduleTime(null);
+    book.reset();
+  };
+  const selectStaff = (id) => {
+    setSelectedStaffId(id);
     setScheduleTime(null);
     book.reset();
   };
@@ -139,7 +160,7 @@ export default function ClientSchedulingScreen() {
                 margin: 0,
               }}
             >
-              {service?.name} com {pro.name} •{" "}
+              {service?.name} com {staffMember?.name ?? pro.name} •{" "}
               {selectedDate?.toLocaleDateString("pt-BR", { day: "2-digit", month: "long" })} às {bookedSlot}
             </p>
             <div
@@ -177,7 +198,7 @@ export default function ClientSchedulingScreen() {
                 margin: "0 0 var(--space-18)",
               }}
             >
-              Escolha o serviço, o dia e o horário do seu atendimento.
+              Escolha o serviço, quem vai atender, o dia e o horário.
             </p>
 
             <div style={{ display: "flex", gap: "var(--space-8)", flexWrap: "wrap", marginBottom: "var(--space-18)" }}>
@@ -190,6 +211,55 @@ export default function ClientSchedulingScreen() {
                 />
               ))}
             </div>
+
+            {(staffQuery.isLoading || staffQuery.isError || staffList.length > 0) && (
+              <div style={{ marginBottom: "var(--space-18)" }}>
+                <h2
+                  style={{
+                    fontFamily: fontDisplay,
+                    fontWeight: 700,
+                    fontSize: "var(--font-size-base)",
+                    color: colors.foreground,
+                    margin: "0 0 var(--space-10)",
+                  }}
+                >
+                  Com quem?
+                </h2>
+                {staffQuery.isLoading ? (
+                  <p
+                    style={{
+                      fontFamily: fontBody,
+                      fontSize: "var(--font-size-xs)",
+                      color: colors.mutedForeground,
+                      margin: 0,
+                    }}
+                  >
+                    Carregando a equipe...
+                  </p>
+                ) : staffQuery.isError ? (
+                  <ErrorState
+                    onRetry={() => staffQuery.refetch()}
+                    message="Não foi possível carregar a equipe. Você pode seguir sem preferência."
+                  />
+                ) : (
+                  <div style={{ display: "flex", gap: "var(--space-8)", flexWrap: "wrap" }}>
+                    <CategoryChip
+                      label="Sem preferência"
+                      active={selectedStaffId === null}
+                      onClick={() => selectStaff(null)}
+                    />
+                    {staffList.map((f) => (
+                      <CategoryChip
+                        key={f.id}
+                        label={f.name}
+                        active={f.id === selectedStaffId}
+                        onClick={() => selectStaff(f.id)}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
 
             <CalendarHeader
               monthDate={viewMonth}

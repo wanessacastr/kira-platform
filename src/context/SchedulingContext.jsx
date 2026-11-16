@@ -1,4 +1,4 @@
-// Agendamento: profissional, serviço, data, horário, aba da agenda e confirmação · API: nenhuma (horários vêm de api.availability)
+// Agendamento: profissional, serviço, funcionária, data, horário, aba da agenda e confirmação · API: nenhuma (horários vêm de api.availability)
 import { createContext, useContext, useState } from "react";
 import { startOfMonth } from "../shared/utils/date";
 
@@ -7,6 +7,7 @@ const SchedulingContext = createContext(null);
 export function SchedulingProvider({ children }) {
   const [selectedProId, setSelectedProId] = useState(null);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const [selectedStaffId, setSelectedStaffId] = useState(null); // null = sem preferência
   const [bookedSlot, setBookedSlot] = useState(null);
   const [viewMonth, setViewMonth] = useState(startOfMonth(new Date()));
   const [selectedDate, setSelectedDate] = useState(null);
@@ -23,6 +24,7 @@ export function SchedulingProvider({ children }) {
   const resetScheduling = () => {
     setBookedSlot(null);
     setSelectedServiceId(null);
+    setSelectedStaffId(null);
     setSelectedDate(null);
     setScheduleTime(null);
     setViewMonth(startOfMonth(new Date()));
@@ -33,6 +35,8 @@ export function SchedulingProvider({ children }) {
     setSelectedProId,
     selectedServiceId,
     setSelectedServiceId,
+    selectedStaffId,
+    setSelectedStaffId,
     bookedSlot,
     setBookedSlot,
     viewMonth,
