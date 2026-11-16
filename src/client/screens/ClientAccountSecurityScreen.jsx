@@ -12,6 +12,8 @@ export default function ClientAccountSecurityScreen() {
   const hasSelfie = !!cForm.selfiePhoto;
   const hasDocs = !!cForm.docFront && !!cForm.docBack;
   const verified = hasSelfie && hasDocs;
+  // Logado sem passar pelo cadastro nesta sessão: o backend não devolve o status de verificação.
+  const unknown = !hasSelfie && !hasDocs;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientProfile")} />
@@ -92,13 +94,17 @@ export default function ClientAccountSecurityScreen() {
                 margin: 0,
               }}
             >
-              <Clock size={16} /> Verificação pendente
+              <Clock size={16} /> {unknown ? "Status indisponível" : "Verificação pendente"}
             </p>
           )}
           <p
             style={{ fontSize: "var(--font-size-xs)", color: colors.mutedForeground, fontFamily: fontBody, margin: 0 }}
           >
-            {verified ? "Selfie e documento confirmados." : "Conclua a selfie e o documento para verificar sua conta."}
+            {verified
+              ? "Selfie e documento confirmados."
+              : unknown
+                ? "O status da verificação ainda não está disponível neste app. Você pode refazer a verificação facial."
+                : "Conclua a selfie e o documento para verificar sua conta."}
           </p>
         </div>
 
@@ -139,7 +145,7 @@ export default function ClientAccountSecurityScreen() {
                   color: item.done ? colors.primaryText : colors.mutedForeground,
                 }}
               >
-                {item.done ? "Concluído" : "Pendente"}
+                {item.done ? "Concluído" : unknown ? "Sem informação" : "Pendente"}
               </span>
             </div>
           ))}

@@ -1,4 +1,4 @@
-// Perfil: consentimentos LGPD · estático, lê aceite do cadastro
+// Perfil: consentimentos LGPD · só exibe o aceite da sessão de cadastro (o backend não devolve histórico)
 import { CheckCircle2, XCircle } from "lucide-react";
 import { useSignup } from "../../context/SignupContext";
 import { useSession } from "../../context/SessionContext";
@@ -34,6 +34,18 @@ export default function ClientLgpdConsentsScreen() {
         >
           Consentimentos aceitos durante o seu cadastro.
         </p>
+        {!(cForm.termsUse || cForm.termsPrivacy) && (
+          <p
+            style={{
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-xs)",
+              color: colors.mutedForeground,
+              margin: "0 0 var(--space-14)",
+            }}
+          >
+            O histórico de aceites ainda não está disponível neste app. O status aparece aqui logo após o cadastro.
+          </p>
+        )}
         <ProfileSection title="Termos aceitos">
           {[
             { label: "Termos de Uso", accepted: cForm.termsUse },
@@ -67,7 +79,7 @@ export default function ClientLgpdConsentsScreen() {
                   color: item.accepted ? colors.primaryText : colors.mutedForeground,
                 }}
               >
-                {item.accepted ? "Aceito" : "Pendente"}
+                {item.accepted ? "Aceito" : "Sem informação"}
               </span>
             </div>
           ))}
