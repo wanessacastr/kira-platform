@@ -25,6 +25,14 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
   `@testing-library/react` para os testes de tela. Ficam os avisos só de desenvolvimento em `vite`/`vitest`
   (`esbuild`, `tinypool`), que pedem troca de versão maior.
 
+### Adicionado (mapa dos profissionais)
+
+- Mapa real (Leaflet com OpenStreetMap, sem chave de API) com a posição dos estúdios, que o backend já envia como
+  latitude e longitude. Faixa na Home ("N perto de você", até 10 km; sem a posição da cliente, "N no mapa"), tela
+  própria em `/cliente/mapa` com cartão do profissional ao tocar no pino e botão "Ver no mapa" na Busca.
+- A biblioteca do mapa é carregada só quando o mapa aparece, fora do arquivo principal. Estúdio sem coordenadas não
+  aparece no mapa.
+
 ### Adicionado (camada visual, sem funcionalidade real)
 
 - Telas de demonstração: conversas e conversa (cliente e profissional), central de notificações, perguntas frequentes,

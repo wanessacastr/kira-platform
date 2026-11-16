@@ -24,6 +24,7 @@ const ClientDoneScreen = lazy(() => import("./client/screens/ClientDoneScreen"))
 const ClientFavoritesScreen = lazy(() => import("./client/screens/ClientFavoritesScreen"));
 const ClientHelpSupportScreen = lazy(() => import("./client/screens/ClientHelpSupportScreen"));
 const ClientHistoryScreen = lazy(() => import("./client/screens/ClientHistoryScreen"));
+const ClientMapScreen = lazy(() => import("./client/screens/ClientMapScreen"));
 const ClientHomeScreen = lazy(() => import("./client/screens/ClientHomeScreen"));
 const ClientLgpdConsentsScreen = lazy(() => import("./client/screens/ClientLgpdConsentsScreen"));
 const ClientLocationScreen = lazy(() => import("./client/screens/ClientLocationScreen"));
@@ -101,6 +102,7 @@ export const screens = {
   clientPreferences: ClientPreferencesScreen,
   clientHome: ClientHomeScreen,
   clientSearch: ClientSearchScreen,
+  clientMap: ClientMapScreen,
   clientTryOnReference: ClientTryOnReferenceScreen,
   clientTryOnPhoto: ClientTryOnPhotoScreen,
   clientTryOnResult: ClientTryOnResultScreen,

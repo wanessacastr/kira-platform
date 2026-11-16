@@ -15,6 +15,7 @@ import { MascotHelpButton } from "../components/chat/MascotHelpButton";
 import { ProPhoto, RecommendedProfessionalCard, ratingLabel } from "../components/ProfessionalCards";
 import { dashboardCategories } from "../data/options";
 import { useProfessionals } from "../hooks/useProfessionals";
+import { NearbyMapStrip } from "../components/NearbyMapStrip";
 
 export default function ClientHomeScreen() {
   const { cForm } = useSignup();
@@ -140,6 +141,12 @@ export default function ClientHomeScreen() {
             />
           ))}
         </div>
+
+        {professionals.data && (
+          <div style={{ marginBottom: "var(--space-20)" }}>
+            <NearbyMapStrip professionals={professionals.data} onOpen={() => setScreen("clientMap")} />
+          </div>
+        )}
 
         <h2
           style={{

@@ -242,6 +242,7 @@ Em 03/11, no Chromium com Playwright, com backend e banco descartáveis (scripts
 - [x] **Conversão:** `category` em cada serviço e `latitude`/`longitude` no estúdio (`mappers.js`).
 - [x] **Filtro por categoria:** usa a categoria dos serviços (`client/utils/categories.js`). Serviços sem categoria continuam reconhecidos por palavras.
 - [x] **Distância:** `useProfessionals` calcula em linha reta entre a cliente (perfil) e o estúdio, e os cards já mostram. Sem coordenadas, fica sem distância.
+- [x] **Mapa:** `ProfessionalsMap` (Leaflet + OpenStreetMap, carregado sob demanda) na faixa do Início e na tela `/cliente/mapa`. Só aparecem estúdios com latitude e longitude. A faixa mostra "N perto de você" (até 10 km) quando a cliente tem coordenadas, e "N no mapa" quando não tem. Os blocos de mapa usam os tiles públicos do OpenStreetMap (uso leve; para tráfego alto, trocar por um provedor próprio).
 - [x] **Escolher a categoria no cadastro de serviços:** campo em "Meus serviços" (inclui "Automática", que deixa o backend deduzir pelo nome). O cadastro inicial do estúdio ainda não mostra o campo.
 - [x] **Atualizar a distância depois de editar o perfil:** salvar invalida a consulta `["profile"]`.
 - [ ] **Formato da distância:** os cards mostram `1.6 km`, com ponto; no Brasil o certo é `1,6 km` (ajuste de tela).

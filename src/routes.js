@@ -23,6 +23,7 @@ export const clientPaths = area("/cliente", [
   ["clientPreferences", "preferencias"],
   ["clientHome", "inicio"],
   ["clientSearch", "buscar"],
+  ["clientMap", "mapa"],
   ["clientProfessionalProfile", "profissional"],
   ["clientScheduling", "agendamento"],
   ["clientTryOnReference", "provador/referencia"],

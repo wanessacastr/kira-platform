@@ -18,6 +18,7 @@ Situação em 03/11/2026. Lista do que o app web (kira-platform) já usa do back
 | Função                                              | Onde fica no app                            |
 | --------------------------------------------------- | ------------------------------------------- |
 | Lista de estúdios, busca e ranking                  | Início e Buscar                             |
+| Mapa dos estúdios (pinos pela latitude e longitude) | Início (faixa), Buscar → "Ver no mapa"      |
 | Perfil do estúdio com serviços, preços e avaliações | Perfil do profissional                      |
 | Ver horários livres de um dia                       | Agendamento                                 |
 | Agendar                                             | Agendamento                                 |
