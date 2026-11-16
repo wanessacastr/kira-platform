@@ -4,6 +4,16 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado (contatos de emergência)
+
+- Tela "Contatos de emergência" no Perfil da cliente: listar, cadastrar (nome, telefone, parentesco) e remover, até 5,
+  pela API que já existia. O botão de emergência oferece "Ligar para" cada contato, ou o atalho para cadastrar o
+  primeiro. Não há envio de alerta aos contatos: o backend não tem isso.
+
+### Alterado
+
+- Distância nos cards de profissional com vírgula (`1,6 km`), como no restante do app.
+
 ### Adicionado (escolher a funcionária)
 
 - No agendamento da cliente, bloco "Com quem?" com "Sem preferência" e as funcionárias ativas do estúdio

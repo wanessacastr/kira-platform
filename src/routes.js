@@ -54,6 +54,7 @@ export const clientPaths = area("/cliente", [
   ["clientChat", "atendimento"],
   ["clientReviews", "perfil/avaliacoes"],
   ["clientFavorites", "perfil/favoritos"],
+  ["clientEmergencyContacts", "perfil/contatos-emergencia"],
   ["clientHistory", "perfil/historico"],
 ]);
 

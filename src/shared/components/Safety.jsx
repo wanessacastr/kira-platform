@@ -11,6 +11,9 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { useSession } from "../../context/SessionContext";
+import { useEmergencyContacts } from "../../client/hooks/useEmergencyContacts";
+import { formatPhone, onlyDigits } from "../utils/format";
 import { colors, fontBody, fontDisplay } from "../theme";
 import { Field, SecondaryButton, inputStyle } from "./ui";
 import { EscapeKey } from "./primitives";
@@ -37,6 +40,9 @@ export const reportMotivoOptions = [
 // associada internamente (não é anônima perante a equipe), diferente do
 // fluxo padrão, justamente para permitir contato rápido.
 export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
+  const { auth, setScreen } = useSession();
+  const isClient = auth?.tipo === "CLIENTE";
+  const contacts = useEmergencyContacts({ enabled: isClient }).list.data ?? [];
   const handleRegister = () => {
     // POST /api/denuncias { tipoMotivo: "risco_imediato" }
     // Notifica a equipe na hora (sem fila) e suspende o perfil envolvido de
@@ -125,6 +131,60 @@ export const EmergencyFlow = ({ onClose, onRegisterInternally }) => {
         >
           <Phone size={17} /> Ligar para 190 agora
         </a>
+
+        {isClient && (
+          <div style={{ marginBottom: "var(--space-10)" }}>
+            {contacts.map((c) => (
+              <a
+                key={c.id}
+                href={`tel:${onlyDigits(c.phone)}`}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "var(--space-8)",
+                  minHeight: 44,
+                  padding: "0 var(--space-14)",
+                  marginBottom: "var(--space-8)",
+                  borderRadius: "var(--radius-xl)",
+                  border: `1px solid ${colors.border}`,
+                  color: colors.foreground,
+                  fontFamily: fontBody,
+                  fontWeight: 600,
+                  fontSize: "var(--font-size-sm)",
+                  textDecoration: "none",
+                }}
+              >
+                <Phone size={15} /> Ligar para {c.name}
+                <span style={{ marginLeft: "auto", color: colors.mutedForeground, fontWeight: 400 }}>
+                  {formatPhone(c.phone)}
+                </span>
+              </a>
+            ))}
+            {contacts.length === 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  setScreen("clientEmergencyContacts");
+                }}
+                style={{
+                  width: "100%",
+                  minHeight: 44,
+                  background: "none",
+                  border: `1px dashed ${colors.border}`,
+                  borderRadius: "var(--radius-xl)",
+                  color: colors.primaryText,
+                  fontFamily: fontBody,
+                  fontWeight: 600,
+                  fontSize: "var(--font-size-sm)",
+                  cursor: "pointer",
+                }}
+              >
+                Cadastrar contato de emergência
+              </button>
+            )}
+          </div>
+        )}
 
         <button
           onClick={handleRegister}
