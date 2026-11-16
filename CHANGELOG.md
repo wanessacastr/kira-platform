@@ -4,6 +4,12 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Adicionado (escolher a funcionária)
+
+- No agendamento da cliente, bloco "Com quem?" com "Sem preferência" e as funcionárias ativas do estúdio
+  (`GET /api/studios/{id}/funcionarias`). A escolha filtra os horários livres e vai no agendamento
+  (`funcionariaId`); sem escolha, o backend indica uma funcionária livre. Estúdio sem funcionárias não mostra o bloco.
+
 ### Adicionado (telas ligadas ao backend)
 
 - Atalhos de conversas (com contador de não lidas) e notificações no Início de cliente e profissional, e entradas

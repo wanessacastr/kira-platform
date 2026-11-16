@@ -54,15 +54,15 @@ Situação em 03/11/2026. Lista do que o app web (kira-platform) já usa do back
 
 As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `mappers.js`. Falta a tela usar.
 
-| Função                                | Chamadas (`api.…`)                                                                                                                                    | Situação na tela                                                                                                  |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Gerenciar serviços depois do cadastro | `services.create`, `update`, `deactivate`                                                                                                             | Tela pronta: Perfil → "Meus serviços" (criar, editar e desativar; o backend não reativa)                          |
-| Funcionárias                          | `staff.listForMyBusiness`, `create`, `update`, `deactivate`, `agendaDay`, `agendaWeek`, `listBlocks`, `createBlock`, `removeBlock`, `commissionTotal` | Tela pronta: Perfil → "Minha equipe" (criar, editar e desativar). Agenda, bloqueios e comissão ainda sem tela     |
-| Escolher a funcionária                | `professionals.listStaff`, `appointments.create({ staffId })`                                                                                         | O agendamento não mostra a escolha; os horários livres já aceitam a funcionária (`availability.get({ staffId })`) |
-| Painel pronto do backend              | `dashboard.getMine({ from, to })`, pelo hook `useDashboard`                                                                                           | As telas ainda calculam os números no navegador (`metrics.js`)                                                    |
-| Editar perfil                         | `profile.getMine`, `saveMine`                                                                                                                         | A edição da cliente salva só na sessão, e o profissional não tem tela                                             |
+| Função                                | Chamadas (`api.…`)                                                                                                                                    | Situação na tela                                                                                              |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Gerenciar serviços depois do cadastro | `services.create`, `update`, `deactivate`                                                                                                             | Tela pronta: Perfil → "Meus serviços" (criar, editar e desativar; o backend não reativa)                      |
+| Funcionárias                          | `staff.listForMyBusiness`, `create`, `update`, `deactivate`, `agendaDay`, `agendaWeek`, `listBlocks`, `createBlock`, `removeBlock`, `commissionTotal` | Tela pronta: Perfil → "Minha equipe" (criar, editar e desativar). Agenda, bloqueios e comissão ainda sem tela |
+| Escolher a funcionária                | `professionals.listStaff`, `appointments.create({ staffId })`                                                                                         | Feito: bloco "Com quem?" no agendamento; os horários livres e o agendamento usam a funcionária escolhida      |
+| Painel pronto do backend              | `dashboard.getMine({ from, to })`, pelo hook `useDashboard`                                                                                           | As telas ainda calculam os números no navegador (`metrics.js`)                                                |
+| Editar perfil                         | `profile.getMine`, `saveMine`                                                                                                                         | A edição da cliente salva só na sessão, e o profissional não tem tela                                         |
 | Contatos de emergência                | `emergencyContacts.list`, `create`, `remove`                                                                                                          |
-| Categoria do serviço                  | `services.create`, `update` e cadastro do profissional, com `category`                                                                                | Campo na tela "Meus serviços"; "Automática" deixa o backend deduzir pelo nome                                     |
+| Categoria do serviço                  | `services.create`, `update` e cadastro do profissional, com `category`                                                                                | Campo na tela "Meus serviços"; "Automática" deixa o backend deduzir pelo nome                                 |
 
 ### Problemas no backend encontrados na integração
 
@@ -104,6 +104,6 @@ Testes do backend: passam os 424 no CI do PR #27; na máquina, precisam do Docke
 ## Para tudo funcionar de verdade
 
 1. **E-mail:** `MAIL_USERNAME` e `MAIL_PASSWORD` já estão no `.env` do backend. Falta testar a troca de senha do começo ao fim (pedir o link, abrir o e-mail, criar a nova senha e entrar).
-2. **Telas que faltam no app:** escolher a funcionária no agendamento, agenda/bloqueios/comissão por funcionária e usar o painel do backend.
+2. **Telas que faltam no app:** agenda/bloqueios/comissão por funcionária e usar o painel do backend.
 3. **Integração que falta:** áudio no chat. A notificação do navegador está integrada; faltam o botão e o teste com o serviço de push real (ver "O que falta no frontend" no `ARQUITETURA.md`).
 4. **Hospedar o backend e o web:** hoje tudo roda só local.
