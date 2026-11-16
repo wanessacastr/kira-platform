@@ -1,6 +1,6 @@
 // Provador: resultado e botão Encontrar profissionais · ranking sobre os estúdios do kira-backend
 import { Sparkles } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useRanking, useTryOn } from "../../context/TryOnContext";
 import { useScheduling } from "../../context/SchedulingContext";
 import { useSession } from "../../context/SessionContext";
@@ -10,7 +10,6 @@ import { Header, PrimaryButton, SecondaryButton } from "../../shared/components/
 import { colors, fontBody, fontDisplay } from "../../shared/theme";
 import { CompatibilityRing } from "../components/CompatibilityRing";
 import { RecommendedProfessionalCard } from "../components/ProfessionalCards";
-import { recommendProfessionals } from "../recommendation";
 
 export default function ClientTryOnResultScreen() {
   const { goToPersonalizedRanking, tryOnClientPhoto, tryOnReference } = useTryOn();
@@ -18,14 +17,8 @@ export default function ClientTryOnResultScreen() {
   const { setBookedSlot, setSelectedProId } = useScheduling();
   const { setScreen } = useSession();
   const [showAfter, setShowAfter] = useState(true);
-  // Reaproveita o cálculo de recommendation.js: a compatibilidade mostrada é a do melhor profissional para esta referência
-  const best = useMemo(
-    () =>
-      tryOnReference
-        ? recommendProfessionals({ referenceImage: tryOnReference, generatedImage: tryOnClientPhoto, limit: 1 })[0]
-        : null,
-    [tryOnReference, tryOnClientPhoto],
-  );
+  // Nesta tela o ranking já é personalizado pela referência e vem ordenado: a compatibilidade mostrada é a do primeiro
+  const best = tryOnReference ? recommended[0] : null;
   const related = [...new Set(recommended.map((p) => p.category))];
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>

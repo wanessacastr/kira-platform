@@ -1,6 +1,7 @@
 // Home: busca, categorias, profissionais e TOP 3 recomendadas · API: kira-backend (estúdios)
 import { ChevronRight, MapPin, Search, Sparkles, Star, User, Wand2 } from "lucide-react";
 import { useSignup } from "../../context/SignupContext";
+import { useMyProfile } from "../../shared/hooks/useMyProfile";
 import { useSearch } from "../../context/SearchContext";
 import { useSession } from "../../context/SessionContext";
 import { useRanking, useTryOn } from "../../context/TryOnContext";
@@ -9,13 +10,18 @@ import { ErrorState, SkeletonLoading } from "../../shared/components/states";
 import { CategoryChip } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { BottomNav } from "../components/BottomNav";
+import { HeaderShortcuts } from "../../shared/components/HeaderShortcuts";
 import { MascotHelpButton } from "../components/chat/MascotHelpButton";
 import { ProPhoto, RecommendedProfessionalCard, ratingLabel } from "../components/ProfessionalCards";
 import { dashboardCategories } from "../data/options";
 import { useProfessionals } from "../hooks/useProfessionals";
+import { NearbyMapStrip } from "../components/NearbyMapStrip";
 
 export default function ClientHomeScreen() {
   const { cForm } = useSignup();
+  const profile = useMyProfile().data;
+  const name = profile?.name || cForm.name;
+  const photo = profile?.photo || cForm.photo;
   const { categoryFilter, setCategoryFilter } = useSearch();
   const { goToTab, setScreen, openWithBack } = useSession();
   const { loadRanking, rankingError, rankingLoading, recommended } = useRanking();
@@ -55,38 +61,37 @@ export default function ClientHomeScreen() {
                 margin: "var(--space-2) 0 0",
               }}
             >
-              Olá, {cForm.name ? cForm.name.split(" ")[0] : "bem-vinda"}{" "}
+              Olá, {name ? name.split(" ")[0] : "bem-vinda"}{" "}
               <Sparkles size={15} style={{ display: "inline", verticalAlign: "middle", color: colors.primaryText }} />
             </h1>
           </div>
-          <button
-            onClick={() => setScreen("clientProfile")}
-            aria-label="Meu perfil"
-            style={{
-              width: 42,
-              height: 42,
-              borderRadius: "var(--radius-round)",
-              overflow: "hidden",
-              border: `2px solid ${colors.border}`,
-              background: colors.muted,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              flexShrink: 0,
-              padding: 0,
-            }}
-          >
-            {cForm.photo ? (
-              <img
-                src={cForm.photo}
-                alt="Foto de perfil"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            ) : (
-              <User size={18} color={colors.mutedForeground} />
-            )}
-          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: "var(--space-8)" }}>
+            <HeaderShortcuts conversationsScreen="clientConversations" notificationsScreen="clientNotifications" />
+            <button
+              onClick={() => setScreen("clientProfile")}
+              aria-label="Meu perfil"
+              style={{
+                width: 42,
+                height: 42,
+                borderRadius: "var(--radius-round)",
+                overflow: "hidden",
+                border: `2px solid ${colors.border}`,
+                background: colors.muted,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                flexShrink: 0,
+                padding: 0,
+              }}
+            >
+              {photo ? (
+                <img src={photo} alt="Foto de perfil" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              ) : (
+                <User size={18} color={colors.mutedForeground} />
+              )}
+            </button>
+          </div>
         </div>
 
         <button
@@ -136,6 +141,12 @@ export default function ClientHomeScreen() {
             />
           ))}
         </div>
+
+        {professionals.data && (
+          <div style={{ marginBottom: "var(--space-20)" }}>
+            <NearbyMapStrip professionals={professionals.data} onOpen={() => setScreen("clientMap")} />
+          </div>
+        )}
 
         <h2
           style={{

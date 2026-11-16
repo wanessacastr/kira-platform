@@ -2,6 +2,7 @@
 import { LogOut, User } from "lucide-react";
 import { useSession } from "../../context/SessionContext";
 import { useSignup } from "../../context/SignupContext";
+import { useMyProfile } from "../../shared/hooks/useMyProfile";
 import { ProfileMenuRow, ProfileSection } from "../../shared/components/ui";
 import { colors, fontBody, fontDisplay, gradientKira } from "../../shared/theme";
 import { ProBottomNav } from "../components/ProBottomNav";
@@ -11,6 +12,9 @@ import { proProfileMenu } from "../data/navigation";
 export default function ProProfileMenuScreen() {
   const { goToProTab, logout, setScreen } = useSession();
   const { pForm } = useSignup();
+  const profile = useMyProfile().data;
+  const name = profile?.name || pForm.name;
+  const photo = profile?.photo || pForm.photo;
   return (
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <div
@@ -36,8 +40,8 @@ export default function ProProfileMenuScreen() {
             flexShrink: 0,
           }}
         >
-          {pForm.photo ? (
-            <img src={pForm.photo} alt="Foto de perfil" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          {photo ? (
+            <img src={photo} alt="Foto de perfil" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           ) : (
             <User size={28} color={colors.primaryForeground} />
           )}
@@ -52,7 +56,7 @@ export default function ProProfileMenuScreen() {
               margin: 0,
             }}
           >
-            {pForm.name || "Profissional Kira"}
+            {name || "Profissional Kira"}
           </p>
           <p
             style={{

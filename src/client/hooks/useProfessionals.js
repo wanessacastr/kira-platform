@@ -6,7 +6,7 @@ import { api } from "../../shared/api";
 import { distanceKm } from "../../shared/utils/geo";
 
 // Onde a cliente está, pelo perfil dela. Sem login ou sem coordenadas, não há distância.
-const useMyCoordinates = () => {
+export const useMyCoordinates = () => {
   const { auth } = useSession();
   return useQuery({
     queryKey: ["profile", auth?.id],

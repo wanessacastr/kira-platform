@@ -1,5 +1,5 @@
 // Busca com filtros, scroll infinito e pull-to-refresh · API: kira-backend (estúdios)
-import { Loader2 } from "lucide-react";
+import { Loader2, MapPin } from "lucide-react";
 import { useSearch } from "../../context/SearchContext";
 import { useSession } from "../../context/SessionContext";
 import { useScheduling } from "../../context/SchedulingContext";
@@ -43,17 +43,48 @@ export default function ClientSearchScreen() {
     <div style={{ display: "flex", flexDirection: "column", flex: 1, background: colors.background }}>
       <Header onBack={() => setScreen("clientHome")} />
       <div style={{ padding: "0 var(--space-24) var(--space-12)" }}>
-        <h1
+        <div
           style={{
-            fontFamily: fontDisplay,
-            fontWeight: 700,
-            fontSize: "var(--font-size-2xl)",
-            color: colors.foreground,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "var(--space-12)",
             margin: "0 0 var(--space-14)",
           }}
         >
-          Buscar
-        </h1>
+          <h1
+            style={{
+              fontFamily: fontDisplay,
+              fontWeight: 700,
+              fontSize: "var(--font-size-2xl)",
+              color: colors.foreground,
+              margin: 0,
+            }}
+          >
+            Buscar
+          </h1>
+          <button
+            type="button"
+            className="k-hit"
+            onClick={() => setScreen("clientMap")}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "var(--space-4)",
+              padding: "var(--space-8) var(--space-14)",
+              borderRadius: "var(--radius-round)",
+              border: `1px solid ${colors.border}`,
+              background: colors.card,
+              fontFamily: fontBody,
+              fontSize: "var(--font-size-xs)",
+              fontWeight: 600,
+              color: colors.primaryText,
+              cursor: "pointer",
+            }}
+          >
+            <MapPin size={13} /> Ver no mapa
+          </button>
+        </div>
         <SearchBar value={searchQuery} onChange={setSearchQuery} onFilterClick={openFilterModal} />
         <div
           className="k-hscroll"

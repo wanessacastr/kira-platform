@@ -157,6 +157,7 @@ function AppointmentCard({ appointment: a }) {
   const queryClient = useQueryClient();
   const [confirmingCancel, setConfirmingCancel] = useState(false);
   const onSuccess = () => queryClient.invalidateQueries({ queryKey: ["appointments"] });
+  const confirm = useMutation({ mutationFn: () => api.appointments.confirm(a.id), onSuccess });
   const complete = useMutation({ mutationFn: () => api.appointments.complete(a.id), onSuccess });
   const cancel = useMutation({
     mutationFn: () => api.appointments.cancelAsBusiness(a.id),
@@ -167,8 +168,9 @@ function AppointmentCard({ appointment: a }) {
   });
   const active = ACTIVE_STATUSES.includes(a.rawStatus);
   const started = a.start <= new Date();
-  const busy = complete.isPending || cancel.isPending;
-  const failed = complete.error ?? cancel.error;
+  const busy = confirm.isPending || complete.isPending || cancel.isPending;
+  const awaitingConfirmation = a.rawStatus === "PENDENTE" || a.rawStatus === "REAGENDADO";
+  const failed = confirm.error ?? complete.error ?? cancel.error;
   return (
     <div
       style={{
@@ -246,7 +248,12 @@ function AppointmentCard({ appointment: a }) {
             </>
           ) : (
             <>
-              {started && (
+              {awaitingConfirmation && (
+                <button type="button" disabled={busy} onClick={() => confirm.mutate()} style={actionButton("primary")}>
+                  {confirm.isPending ? "Confirmando..." : "Confirmar"}
+                </button>
+              )}
+              {started && !awaitingConfirmation && (
                 <button type="button" disabled={busy} onClick={() => complete.mutate()} style={actionButton("primary")}>
                   {complete.isPending ? "Concluindo..." : "Concluir atendimento"}
                 </button>

@@ -18,6 +18,7 @@ Situação em 03/11/2026. Lista do que o app web (kira-platform) já usa do back
 | Função                                              | Onde fica no app                            |
 | --------------------------------------------------- | ------------------------------------------- |
 | Lista de estúdios, busca e ranking                  | Início e Buscar                             |
+| Mapa dos estúdios (pinos pela latitude e longitude) | Início (faixa), Buscar → "Ver no mapa"      |
 | Perfil do estúdio com serviços, preços e avaliações | Perfil do profissional                      |
 | Ver horários livres de um dia                       | Agendamento                                 |
 | Agendar                                             | Agendamento                                 |
@@ -35,7 +36,11 @@ Situação em 03/11/2026. Lista do que o app web (kira-platform) já usa do back
 | ------------------------------------------------------------- | ----------------------------------- |
 | Painel: clientes do dia, receita da semana e nota             | Início                              |
 | Agenda com calendário                                         | Agenda                              |
-| Concluir, remarcar e cancelar atendimento                     | Agenda                              |
+| Confirmar, concluir, remarcar e cancelar atendimento          | Agenda                              |
+| Editar perfil e foto (nome, telefone, descrição)              | Perfil → "Editar perfil"            | Telas prontas para cliente e estúdio, com foto (`POST`/`DELETE /api/perfil/foto`). E-mail só leitura |
+| Gerenciar serviços (criar, editar, desativar, com categoria)  | Perfil → "Meus serviços"            |
+| Gerenciar funcionárias (criar, editar, desativar, comissão)   | Perfil → "Minha equipe"             |
+| Conversas e notificações                                      | Atalhos no Início e no Perfil       |
 | Chat com a cliente, em tempo real                             | Agenda → "Conversar com…"           |
 | Horário de funcionamento (dias e horas em que atende)         | Perfil → "Horário de funcionamento" |
 | Financeiro e analytics (calculados a partir dos agendamentos) | Financeiro / Analytics              |
@@ -52,13 +57,13 @@ As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `m
 
 | Função                                | Chamadas (`api.…`)                                                                                                                                    | Situação na tela                                                                                                  |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| Gerenciar serviços depois do cadastro | `services.create`, `update`, `deactivate`                                                                                                             | Os serviços só são definidos no cadastro do profissional                                                          |
-| Funcionárias                          | `staff.listForMyBusiness`, `create`, `update`, `deactivate`, `agendaDay`, `agendaWeek`, `listBlocks`, `createBlock`, `removeBlock`, `commissionTotal` | Não há tela de funcionárias                                                                                       |
+| Gerenciar serviços depois do cadastro | `services.create`, `update`, `deactivate`                                                                                                             | Tela pronta: Perfil → "Meus serviços" (criar, editar e desativar; o backend não reativa)                          |
+| Funcionárias                          | `staff.listForMyBusiness`, `create`, `update`, `deactivate`, `agendaDay`, `agendaWeek`, `listBlocks`, `createBlock`, `removeBlock`, `commissionTotal` | Tela pronta: Perfil → "Minha equipe" (criar, editar e desativar). Agenda, bloqueios e comissão ainda sem tela     |
 | Escolher a funcionária                | `professionals.listStaff`, `appointments.create({ staffId })`                                                                                         | O agendamento não mostra a escolha; os horários livres já aceitam a funcionária (`availability.get({ staffId })`) |
 | Painel pronto do backend              | `dashboard.getMine({ from, to })`, pelo hook `useDashboard`                                                                                           | As telas ainda calculam os números no navegador (`metrics.js`)                                                    |
 | Editar perfil                         | `profile.getMine`, `saveMine`                                                                                                                         | A edição da cliente salva só na sessão, e o profissional não tem tela                                             |
 | Contatos de emergência                | `emergencyContacts.list`, `create`, `remove`                                                                                                          |
-| Categoria do serviço                  | `services.create`, `update` e cadastro do profissional, com `category`                                                                                | Falta o campo na tela; sem ele, o backend deduz pelo nome                                                         |
+| Categoria do serviço                  | `services.create`, `update` e cadastro do profissional, com `category`                                                                                | Campo na tela "Meus serviços"; "Automática" deixa o backend deduzir pelo nome                                     |
 
 ### Problemas no backend encontrados na integração
 
@@ -81,7 +86,7 @@ As chamadas e as conversões já existem em `src/shared/api/httpAdapter.js` e `m
 
 - **Chat com IA (atendimento):** tela pronta em `/cliente/atendimento`, com respostas simuladas (`api.chat`) e aviso de demonstração. Futuro: n8n. É outro chat, diferente do cliente–empresa (`api.messages`). Os cards de profissional usam dados de exemplo, então abrir o perfil de um deles dá erro.
 - **Acompanhar agendamento:** mostra o agendamento real, mas as etapas e o Pix são simulados (`api.bookings`), com aviso de demonstração.
-- Fotos, gift cards, fidelidade, cupons e formas de pagamento.
+- Gift cards, fidelidade, cupons e formas de pagamento. Fotos de perfil e portfólio já são reais (upload no backend); as fotos do cadastro (documento, selfie e fotos do trabalho) ainda ficam só no navegador.
 - **Documento e selfie do cadastro:** as fotos ficam só no navegador e não são enviadas. O backend não tem rota de upload nem campo de verificação, então o botão "Continuar para verificação facial" não verifica nada. Falta decidir entre verificação por um serviço externo (guardar só o resultado e descartar a selfie), revisão manual dos documentos ou esconder essas telas por enquanto.
 
 ## Situação do backend
@@ -95,11 +100,11 @@ Desde 02/11, a `main` do backend tem tudo o que o app usa. Em 03/11 entraram os 
 - Id do usuário no login e no refresh
 - Chat só para quem participa do agendamento
 
-Testes do backend: passam os 424 no CI do PR #27; na máquina, precisam do Docker e do banco local no ar. No app, os 223 testes passam.
+Testes do backend: passam os 424 no CI do PR #27; na máquina, precisam do Docker e do banco local no ar. No app, os 319 testes passam (inclui os de navegação).
 
 ## Para tudo funcionar de verdade
 
 1. **E-mail:** `MAIL_USERNAME` e `MAIL_PASSWORD` já estão no `.env` do backend. Falta testar a troca de senha do começo ao fim (pedir o link, abrir o e-mail, criar a nova senha e entrar).
-2. **Telas que faltam no app:** lista de conversas e não lidas no menu, gerenciar serviços, funcionárias, escolher a funcionária no agendamento, editar perfil, campo de categoria e usar o painel do backend.
+2. **Telas que faltam no app:** escolher a funcionária no agendamento, agenda/bloqueios/comissão por funcionária e usar o painel do backend.
 3. **Integração que falta:** áudio no chat. A notificação do navegador está integrada; faltam o botão e o teste com o serviço de push real (ver "O que falta no frontend" no `ARQUITETURA.md`).
 4. **Hospedar o backend e o web:** hoje tudo roda só local.
