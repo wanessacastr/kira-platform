@@ -4,6 +4,11 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ## [Não lançado]
 
+### Alterado (filtros da busca)
+
+- Preço máximo e distância máxima agora são campos digitados (aceitam vírgula) e começam em "Sem limite", em vez de
+  barras que paravam em R$ 500 e 30 km. Campo vazio = sem limite; `0` conta como limite.
+
 ### Adicionado (contatos de emergência)
 
 - Tela "Contatos de emergência" no Perfil da cliente: listar, cadastrar (nome, telefone, parentesco) e remover, até 5,

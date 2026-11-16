@@ -50,7 +50,7 @@ export const categoryOptions = [
   { id: "massagem", label: "Massagem" },
 ];
 
-export const defaultSearchFilters = { price: 500, minRating: 0, maxDistance: 30, mode: "ambos", sort: "proximo" };
+export const defaultSearchFilters = { price: null, minRating: 0, maxDistance: null, mode: "ambos", sort: "proximo" };
 
 export const appointmentTabs = [
   { id: "proximo", label: "Próximos" },
