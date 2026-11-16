@@ -8,7 +8,10 @@ import { useSelfieCamera } from "../hooks/useSelfieCamera";
 
 export default function ClientSelfieScreen() {
   const { cForm, setCField } = useSignup();
-  const { setScreen } = useSession();
+  const { auth, setScreen } = useSession();
+  // Conta já criada (veio de Segurança): voltar para lá em vez de seguir o cadastro, que criaria a conta de novo
+  const next = auth ? "clientAccountSecurity" : "clientTerms";
+  const previous = auth ? "clientAccountSecurity" : "clientDocument";
   const {
     cSelfieCanvasRef,
     cSelfieError,
@@ -25,7 +28,7 @@ export default function ClientSelfieScreen() {
       <Header
         onBack={() => {
           stopClientSelfieCamera();
-          setScreen("clientDocument");
+          setScreen(previous);
         }}
       />
       <div style={{ flex: 1, padding: "0 var(--space-24) var(--space-32)", overflowY: "auto" }}>
@@ -132,7 +135,7 @@ export default function ClientSelfieScreen() {
           )}
           {cForm.selfiePhoto && (
             <>
-              <PrimaryButton onClick={() => setScreen("clientTerms")}>Confirmar selfie</PrimaryButton>
+              <PrimaryButton onClick={() => setScreen(next)}>Confirmar selfie</PrimaryButton>
               <SecondaryButton onClick={retakeClientSelfie}>Tirar novamente</SecondaryButton>
             </>
           )}

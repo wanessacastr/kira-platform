@@ -48,6 +48,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e
 
 ### Corrigido
 
+- Resultado do Provador deixava de abrir (erro ao calcular a compatibilidade): agora usa o primeiro da lista já
+  ordenada pela referência.
+- "Refazer verificação facial" em Segurança levava ao fim do cadastro e tentaria criar a conta de novo: com a conta
+  já criada, a selfie volta para Segurança.
 - Quadro do celular com largura responsiva e altura definida (tela cheia em celulares), para a rolagem interna, a barra
   inferior e o botão Agendar ficarem sempre visíveis e sem estouro lateral de 320px a 1440px.
 - Perfil da profissional: avatar inteiro sobre o cabeçalho, fotos enquadradas pelo rosto e portfólio proporcional.
