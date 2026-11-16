@@ -43,3 +43,27 @@ describe("searchProfessionals", () => {
     expect(ids(r)).not.toContain("a");
   });
 });
+
+describe("preço e distância sem limite ou digitados", () => {
+  const pro = (id, price, distance) => ({ id, name: id, role: "", description: "", services: [], price, distance });
+  const lista = [pro("barato", 40, 1), pro("caro", 900, 80), pro("semDados", null, null)];
+  it("por padrão não há limite: um serviço de R$ 900 a 80 km aparece", () => {
+    expect(defaultSearchFilters.price).toBeNull();
+    expect(defaultSearchFilters.maxDistance).toBeNull();
+    expect(ids(searchProfessionals(lista, base))).toContain("caro");
+  });
+  it("com o preço digitado, corta os mais caros", () => {
+    const r = searchProfessionals(lista, { ...base, filters: { ...defaultSearchFilters, price: 100 } });
+    expect(ids(r)).toEqual(expect.arrayContaining(["barato", "semDados"]));
+    expect(ids(r)).not.toContain("caro");
+  });
+  it("com a distância digitada, corta os mais longe", () => {
+    const r = searchProfessionals(lista, { ...base, filters: { ...defaultSearchFilters, maxDistance: 5 } });
+    expect(ids(r)).not.toContain("caro");
+    expect(ids(r)).toContain("barato");
+  });
+  it("preço zero é um limite de verdade, não 'sem limite'", () => {
+    const r = searchProfessionals(lista, { ...base, filters: { ...defaultSearchFilters, price: 0 } });
+    expect(ids(r)).toEqual(["semDados"]);
+  });
+});

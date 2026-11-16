@@ -9,9 +9,10 @@ export function searchProfessionals(professionals, { query, category, filters })
     .filter((p) => {
       if (!matchesCategory(p, category)) return false;
       if (q && !professionalText(p).includes(q)) return false;
-      if (p.price != null && p.price > filters.price) return false;
+      // preço e distância nulos = sem limite
+      if (filters.price != null && p.price != null && p.price > filters.price) return false;
       if (filters.minRating > 0 && (p.rating ?? 0) < filters.minRating) return false;
-      if (p.distance != null && p.distance > filters.maxDistance) return false;
+      if (filters.maxDistance != null && p.distance != null && p.distance > filters.maxDistance) return false;
       if (filters.mode !== "ambos" && p.mode && p.mode !== "ambos" && p.mode !== filters.mode) return false;
       return true;
     })
